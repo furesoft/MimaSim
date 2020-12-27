@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\filmee24\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\filmee24\\.nuget\\packages"
+    ]
+  }
+}

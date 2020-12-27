@@ -1,0 +1,30 @@
+VM:
+	Mikroprogramme ausführen
+	instruktionen ausführen
+
+
+GUI:
+	Controls für verschiedene Einheiten:
+		- Speicher
+		- Register
+		- ALU
+		- BUS -> flache Rectangles
+		- Taktgeber
+		- Steuerwerk
+
+
+	Bus:
+		rot -> kein Strom
+		grün -> Strom
+
+	control hover ->
+		popup mit informationen oder zoom was genau passiert
+
+	verschiedene Tabs:
+		1. Prozessor
+		2. Konfiguration
+			- Speichergröße
+			- Takt
+		3. Programmcode -> wird als simpler assembly code geschrieben
+			- Beispielprogramme
+		4. Instructionset doku
