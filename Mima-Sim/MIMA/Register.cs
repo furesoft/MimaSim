@@ -1,12 +1,18 @@
 ﻿namespace MimaSim.MIMA
 {
-    public struct Register
+    public class Register
     {
+        public Bus Bus = new Bus();
+
         private TinyInt _value;
 
         public Register(TinyInt value)
         {
             _value = value;
+        }
+
+        public Register()
+        {
         }
 
         public void SetValue(TinyInt value)

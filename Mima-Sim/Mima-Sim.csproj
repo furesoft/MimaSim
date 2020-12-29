@@ -6,6 +6,12 @@
     <AssemblyName>MimaSim</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <AvaloniaXaml Remove="MimaTest\**" />
+    <Compile Remove="MimaTest\**" />
+    <EmbeddedResource Remove="MimaTest\**" />
+    <None Remove="MimaTest\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
   </ItemGroup>

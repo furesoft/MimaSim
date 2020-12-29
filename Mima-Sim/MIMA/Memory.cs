@@ -2,6 +2,9 @@
 {
     public class Memory
     {
+        public Bus DataBus = new Bus();
+        public Bus AddressBus = new Bus();
+
         private TinyInt[] _values;
 
         public Memory(int length)

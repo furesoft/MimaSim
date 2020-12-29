@@ -1,9 +1,3 @@
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.exe
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.deps.json
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.runtimeconfig.json
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.runtimeconfig.dev.json
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.dll
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Mima-Sim.pdb
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Avalonia.Animation.dll
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Avalonia.Base.dll
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\Avalonia.Controls.dll
@@ -73,6 +67,12 @@ C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.AssemblyInfo.cs
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.csproj.CoreCompileInputs.cache
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.csproj.CopyComplete
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.dll
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.pdb
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.genruntimeconfig.cache
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.exe
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.deps.json
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.runtimeconfig.json
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.runtimeconfig.dev.json
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.dll
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\MimaSim.pdb
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\MimaSim.dll
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\MimaSim.pdb
