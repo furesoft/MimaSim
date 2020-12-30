@@ -3,19 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:w="clr-namespace:MimaSim.Controls.Wrappers;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaControl">
   <Border BorderBrush="Black" BorderThickness="1">
     <Canvas>
 
       <c:ClockControl Canvas.Top="10" Canvas.Left="10" Width="35" Height="35" />
-
-      <c:AluControl Canvas.Top="15" Canvas.Left="250" />
-
-      <c:RegisterControl Canvas.Top="140" Canvas.Left="245" Register="X" />
-      <c:RegisterControl Canvas.Top="140" Canvas.Left="297" Register="Y" />
-      <c:RegisterControl Canvas.Top="200" Canvas.Left="250" Register="Z" />
-
+      <w:AluWrapperControl Canvas.Top="10" Canvas.Left="150" />
       <c:MemoryControl Canvas.Top="250" Canvas.Left="250" />
     </Canvas>
   </Border>
