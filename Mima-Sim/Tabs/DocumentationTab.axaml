@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Tabs.DocumentationTab">
   <Grid>
@@ -9,13 +11,15 @@
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
       <TextBlock Text="Sprache" FontSize="22" VerticalAlignment="Center" />
 
-      <ComboBox Name="languageSelectorCb" SelectedIndex="0" Margin="5,0,0,0">
+      <ComboBox x:Name="languageSelectorCb" SelectedIndex="0" Margin="5,0,0,0">
         <ComboBoxItem>Maschinencode</ComboBoxItem>
         <ComboBoxItem>Assemblycode</ComboBoxItem>
         <ComboBoxItem>Hochsprache</ComboBoxItem>
       </ComboBox>
     </StackPanel>
 
-    <Grid Name="markdownRenderPanel"></Grid>
+    <Grid x:Name="markdownRenderPanel">
+      <TextBlock x:Name="content" Text="{me:SelectDocumentMarkupExtension languageSelectorCb, content}" />
+    </Grid>
   </Grid>
 </UserControl>
