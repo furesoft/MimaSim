@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MemoryControl" Width="100" Height="75">
   <Grid ColumnDefinitions="20,*,20" RowDefinitions="*,20">
@@ -10,7 +11,7 @@
       <TextBlock Text="Speicher" TextAlignment="Center" VerticalAlignment="Center" />
     </Border>
 
-    <c:BusControl Width="20" State="None" Name="AdressBus" Grid.Row="1" Grid.Column="0" />
-    <c:BusControl Width="20"  State="None" Name="DataBus" Grid.Row="1" Grid.Column="2" />
+    <c:BusControl b:BusRegistry.Id="memory_adress" Width="20" State="None" Name="AdressBus" Grid.Row="1" Grid.Column="0" />
+    <c:BusControl b:BusRegistry.Id="memory_data" Width="20"  State="None" Name="DataBus" Grid.Row="1" Grid.Column="2" />
   </Grid>
 </UserControl>

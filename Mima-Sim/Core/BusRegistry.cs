@@ -1,4 +1,5 @@
-﻿using MimaSim.Controls;
+﻿using Avalonia.Controls;
+using MimaSim.Controls;
 using System.Collections.Generic;
 
 namespace MimaSim.Core
@@ -7,6 +8,16 @@ namespace MimaSim.Core
     {
         private static Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
         private static Dictionary<string, BusMap> _maps = new Dictionary<string, BusMap>();
+
+        public static void SetId(BusControl target, string id)
+        {
+            RegisterBus(id, target);
+        }
+
+        public static string GetId(BusControl target)
+        {
+            return null;
+        }
 
         public static void RegisterBus(string id, BusControl control)
         {
