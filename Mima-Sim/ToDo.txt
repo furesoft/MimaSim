@@ -1,7 +1,7 @@
 VM:
 	Mikroprogramme ausführen
 	instruktionen ausführen
-
+	3 parser modi (raw, assembly, high (c-like language)
 
 GUI:
 	Controls für verschiedene Einheiten:

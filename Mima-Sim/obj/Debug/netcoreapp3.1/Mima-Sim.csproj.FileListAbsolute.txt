@@ -62,7 +62,6 @@ C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\runti
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Drawing.Common.dll
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Drawing.Common.dll
-C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.csprojAssemblyReference.cache
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.AssemblyInfoInputs.cache
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.AssemblyInfo.cs
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.csproj.CoreCompileInputs.cache
