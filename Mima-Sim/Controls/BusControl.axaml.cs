@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 
@@ -15,6 +16,26 @@ namespace MimaSim.Controls
         }
 
         private BusState _state;
+
+        private Orientation _orientation;
+
+        public Orientation Orientation
+        {
+            get { return _orientation; }
+            set
+            {
+                _orientation = value;
+
+                if (_orientation == Orientation.Horizontal)
+                {
+                    Height = 25;
+                }
+                else if (_orientation == Orientation.Vertical)
+                {
+                    Width = 25;
+                }
+            }
+        }
 
         public BusState State
         {
