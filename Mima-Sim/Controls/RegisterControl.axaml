@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="50" Height="25"
              x:Class="MimaSim.Controls.RegisterControl">
 
-  <Border BorderBrush="Black" BorderThickness="1" Width="100" Height="35">
+  <Border BorderBrush="Black" BorderThickness="1">
     <Grid Background="LightGray">
-      <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="22" />
+      <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" />
     </Grid>
   </Border>
 </UserControl>
