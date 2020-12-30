@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Tabs.ExecutionTab">
   <Grid RowDefinitions="150,*">
-    <TextBox Grid.Row="0" MinWidth="150" MinHeight="50" />
-    <c:MimaControl Grid.Row="1" />
+    <c:ProgramEditorControl Grid.Row="0" />
+    <c:MimaControl Grid.Row="1" Height="300" HorizontalAlignment="Center" Width="500" />
   </Grid>
 </UserControl>

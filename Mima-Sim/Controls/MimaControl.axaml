@@ -5,12 +5,18 @@
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaControl">
-  <StackPanel Spacing="2">
-    <c:ClockControl />
-    <c:RegisterControl Register="X" />
-    <c:RegisterControl Register="Y" />
-    <c:RegisterControl Register="Z" />
-    <c:AluControl />
-    <c:MemoryControl />
-  </StackPanel>
+  <Border BorderBrush="Black" BorderThickness="1">
+    <Canvas>
+
+      <c:ClockControl Canvas.Top="10" Canvas.Left="10" Width="35" Height="35" />
+
+      <c:AluControl Canvas.Top="15" Canvas.Left="250" />
+
+      <c:RegisterControl Canvas.Top="140" Canvas.Left="245" Register="X" />
+      <c:RegisterControl Canvas.Top="140" Canvas.Left="297" Register="Y" />
+      <c:RegisterControl Canvas.Top="200" Canvas.Left="250" Register="Z" />
+
+      <c:MemoryControl Canvas.Top="250" Canvas.Left="250" />
+    </Canvas>
+  </Border>
 </UserControl>

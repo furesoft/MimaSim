@@ -1,0 +1,23 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Controls.ProgramEditorControl">
+  <Grid ColumnDefinitions="*,100,*" RowDefinitions="35,*,35">
+    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MaxWidth="150" HorizontalAlignment="Left">
+      <ComboBoxItem>Maschinencode</ComboBoxItem>
+      <ComboBoxItem>Assembly</ComboBoxItem>
+      <ComboBoxItem>Hochsprache</ComboBoxItem>
+    </ComboBox>
+
+    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MaxWidth="150" HorizontalAlignment="Right">
+      <ComboBoxItem>Fibonacci</ComboBoxItem>
+    </ComboBox>
+
+    <TextBox MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" />
+
+    <Button Grid.Row="2" Grid.Column="2">Ausführen</Button>
+  </Grid>
+</UserControl>

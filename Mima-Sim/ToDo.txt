@@ -4,30 +4,18 @@
 	
 3 parser modi (raw, assembly, high (c-like language)
 
-deploy as linŭ and windows standalone executable
+deploy as linux and windows standalone executable
 
 GUI:
 	Controls für verschiedene Einheiten:
-		- Speicher
-		- Register
-		- ALU
-		- BUS -> flache Rectangles
-		- Taktgeber
 		- Steuerwerk
+	WrapperContainer für Componentent mit Bus,Register und Componente
 
-
-	Bus:
-		rot -> kein Strom
-		grün -> Strom
+	
 
 	control hover ->
 		popup mit informationen oder zoom was genau passiert
 
-	verschiedene Tabs:
-		1. Prozessor
-		2. Konfiguration
-			- Speichergröße
-			- Takt
-		3. Programmcode -> wird als simpler assembly code geschrieben
-			- Beispielprogramme
-		4. Instructionset doku
+
+		
+		

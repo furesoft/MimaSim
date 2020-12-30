@@ -5,7 +5,7 @@
 
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Mima_Sim.MainWindow"
-        Title="Mima_Sim">
+        Title="Mima_Sim" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="600" MinWidth="1000" MinHeight="600">
   <StackPanel Spacing="2">
     <TabControl Name="content" />
   </StackPanel>

@@ -11,7 +11,7 @@ namespace MimaSim.Tabs
             this.InitializeComponent();
         }
 
-        public string Title => "Ausführung";
+        public string Title => "Prozessor";
 
         public int Index => 1;
 
