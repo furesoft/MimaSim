@@ -1,10 +1,13 @@
-VM:
-	Mikroprogramme ausführen
-	instruktionen ausführen
-	3 parser modi (raw, assembly, high (c-like language)
+ï»¿VM:
+	Mikroprogramme ausfÃ¼hren
+	instruktionen ausfÃ¼hren
+	
+3 parser modi (raw, assembly, high (c-like language)
+
+deploy as linÅ­ and windows standalone executable
 
 GUI:
-	Controls für verschiedene Einheiten:
+	Controls fÃ¼r verschiedene Einheiten:
 		- Speicher
 		- Register
 		- ALU
@@ -15,7 +18,7 @@ GUI:
 
 	Bus:
 		rot -> kein Strom
-		grün -> Strom
+		grÃ¼n -> Strom
 
 	control hover ->
 		popup mit informationen oder zoom was genau passiert
@@ -23,7 +26,7 @@ GUI:
 	verschiedene Tabs:
 		1. Prozessor
 		2. Konfiguration
-			- Speichergröße
+			- SpeichergrÃ¶ÃŸe
 			- Takt
 		3. Programmcode -> wird als simpler assembly code geschrieben
 			- Beispielprogramme

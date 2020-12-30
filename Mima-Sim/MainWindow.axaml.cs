@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using MimaSim.Core;
 
 namespace Mima_Sim
 {
@@ -17,6 +18,10 @@ namespace Mima_Sim
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+
+            var contentGrid = this.FindControl<TabControl>("content");
+
+            TabSwitcher.Initialize(contentGrid);
         }
     }
 }
