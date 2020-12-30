@@ -4,5 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Tabs.DocumentationTab">
-  Dokumentation
+  <Grid>
+    <TextBlock Text="Dokumentation" TextAlignment="Center" FontSize="33" FontStyle="Oblique" FontWeight="Bold" />
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+      <TextBlock Text="Sprache" FontSize="22" VerticalAlignment="Center" />
+
+      <ComboBox Name="languageSelectorCb" SelectedIndex="0" Margin="5,0,0,0">
+        <ComboBoxItem>Maschinencode</ComboBoxItem>
+        <ComboBoxItem>Assemblycode</ComboBoxItem>
+        <ComboBoxItem>Hochsprache</ComboBoxItem>
+      </ComboBox>
+    </StackPanel>
+
+    <Grid Name="markdownRenderPanel"></Grid>
+  </Grid>
 </UserControl>
