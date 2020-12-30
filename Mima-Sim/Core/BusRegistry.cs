@@ -14,6 +14,14 @@ namespace MimaSim.Core
             RegisterBus(id, target);
         }
 
+        public static void SetData(string id, object value)
+        {
+            if (!_ids.ContainsKey(id))
+            {
+                _ids[id].Tag = value;
+            }
+        }
+
         public static string GetId(BusControl target)
         {
             return null;

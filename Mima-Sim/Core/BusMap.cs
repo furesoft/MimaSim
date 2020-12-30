@@ -5,7 +5,6 @@ using System.Text;
 
 namespace MimaSim.Core
 {
-
     public class BusMap : List<string>
     {
         public void Activate()
@@ -13,6 +12,14 @@ namespace MimaSim.Core
             foreach (var id in this)
             {
                 BusRegistry.ActivateBus(id);
+            }
+        }
+
+        public void SetData(object value)
+        {
+            foreach (var id in this)
+            {
+                BusRegistry.SetData(id, value);
             }
         }
 
