@@ -10,5 +10,7 @@
     <c:RegisterControl Register="X" />
     <c:RegisterControl Register="Y" />
     <c:RegisterControl Register="Z" />
+
+    <c:BusControl State="Recieving" />
   </StackPanel>
 </Window>
