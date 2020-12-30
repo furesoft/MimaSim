@@ -12,7 +12,8 @@ GUI:
 		In der Registry kann ich mehrere RegistryMaps definieren. Eine map enthält alle ids von Bussen die sie braucht.
 		Wenn ein Bus aktiviert wird, werden alle Busse der map aktiviert bzw deaktiviert
 		- in und output busse werden seperat behandeln in einigen komponenten, damit Dinge berechnet werden können
-
+		Bus kann sich mit attached property registrieren
+		BusRegistry.BusID="sample_output_bus"
 
 	Controls für verschiedene Einheiten:
 		- Steuerwerk
