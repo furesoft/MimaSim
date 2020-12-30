@@ -13,6 +13,8 @@ namespace MimaSim.Tabs
 
         public string Title => "Ausführung";
 
+        public int Index => 1;
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

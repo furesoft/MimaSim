@@ -7,13 +7,12 @@ namespace MimaSim.Core
 {
     public static class TabSwitcher
     {
-        private static Dictionary<string, Control> _tabs = new Dictionary<string, Control>();
         public static TabControl Parent;
+        private static List<TabItem> _items = new List<TabItem>();
 
         public static void Initialize(TabControl parent)
         {
             Parent = parent;
-            var items = new List<Control>();
 
             var types = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -27,13 +26,25 @@ namespace MimaSim.Core
 
                     tab.Header = instance.Title;
                     tab.Content = instance;
+                    tab.Tag = instance.Index;
 
-                    items.Add(tab);
+                    _items.Add(tab);
                 }
             }
             parent.TabStripPlacement = Dock.Top;
 
-            parent.Items = items;
+            _items.Sort(new Comparison<TabItem>((f, s) =>
+            {
+                if ((int)f.Tag < (int)s.Tag)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }));
+            parent.Items = _items;
         }
     }
 }

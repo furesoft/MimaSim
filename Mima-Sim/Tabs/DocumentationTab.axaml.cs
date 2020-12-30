@@ -13,6 +13,8 @@ namespace MimaSim.Tabs
 
         public string Title => "Doku";
 
+        public int Index => 2;
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
