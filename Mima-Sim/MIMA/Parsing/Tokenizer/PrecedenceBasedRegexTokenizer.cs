@@ -1,0 +1,49 @@
+﻿using MimaSim.MIMA.Tokenizer;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace MimaSim.MIMA.Parsing.Tokenizer
+{
+    public class PrecedenceBasedRegexTokenizer
+    {
+        private List<TokenDefinition> _tokenDefinitions;
+
+        public PrecedenceBasedRegexTokenizer()
+        {
+            _tokenDefinitions = new List<TokenDefinition>();
+        }
+
+        public IEnumerable<Token> Tokenize(string src)
+        {
+            var tokenMatches = FindTokenMatches(src);
+
+            var groupedByIndex = tokenMatches.GroupBy(x => x.StartIndex)
+                .OrderBy(x => x.Key)
+                .ToList();
+
+            TokenMatch lastMatch = null;
+            for (int i = 0; i < groupedByIndex.Count; i++)
+            {
+                var bestMatch = groupedByIndex[i].OrderBy(x => x.Precedence).First();
+                if (lastMatch != null && bestMatch.StartIndex < lastMatch.EndIndex)
+                    continue;
+
+                yield return new Token(bestMatch.TokenType, bestMatch.Value);
+
+                lastMatch = bestMatch;
+            }
+
+            yield return new Token(TokenKind.EndOfFile, string.Empty);
+        }
+
+        private List<TokenMatch> FindTokenMatches(string src)
+        {
+            var tokenMatches = new List<TokenMatch>();
+
+            foreach (var tokenDefinition in _tokenDefinitions)
+                tokenMatches.AddRange(tokenDefinition.FindMatches(src).ToList());
+
+            return tokenMatches;
+        }
+    }
+}
