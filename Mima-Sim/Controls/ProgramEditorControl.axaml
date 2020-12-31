@@ -5,7 +5,7 @@
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.ProgramEditorControl">
-  <Grid ColumnDefinitions="*,100,*" RowDefinitions="35,*,35">
+  <Grid ColumnDefinitions="*,150,*" RowDefinitions="35,*,35">
     <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MaxWidth="150" HorizontalAlignment="Left">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
