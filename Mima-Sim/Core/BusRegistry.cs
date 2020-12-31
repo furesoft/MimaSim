@@ -59,6 +59,7 @@ namespace MimaSim.Core
         public static void DeactivateBus(string id)
         {
             ChangeBusState(id, BusState.None);
+            SetData(id, null);
         }
 
         public static BusMap GetBusMap(string id)
