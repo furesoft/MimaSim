@@ -2,11 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
+        xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MimaSim.MainWindow"
-        Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="525" MinWidth="1000" MinHeight="525">
-  <StackPanel Spacing="2">
-    <TabControl Name="content" Margin="5" />
-  </StackPanel>
+        Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
+  <DockPanel>
+    <TabControl Name="content" Margin="5" DockPanel.Dock="Top" Height="530" />
+    <c:FooterControl DockPanel.Dock="Bottom" Height="25" />
+  </DockPanel>
 </Window>
