@@ -11,7 +11,7 @@
 
       <c:ClockControl Canvas.Top="10" Canvas.Left="10" Width="35" Height="35" />
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="150" />
-      <c:MemoryControl Canvas.Top="20" Canvas.Left="300" />
+      <w:MemoryWrapper Canvas.Top="20" Canvas.Left="300" />
     </Canvas>
   </Border>
 </UserControl>

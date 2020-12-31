@@ -1,0 +1,18 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Controls.Wrappers.MemoryWrapper" Width="118" Height="120">
+  <Canvas>
+    <c:MemoryControl Canvas.Left="7" />
+
+    <c:BusControl b:BusRegistry.Id="memory_adresss2" Width="25" Height="25" Canvas.Top="95" Canvas.Left="5" State="None" />
+    <c:BusControl b:BusRegistry.Id="memory_data2" Width="25" Height="25" Canvas.Top="95" Canvas.Left="84" State="None" />
+
+    <c:RegisterControl Register="AR" Canvas.Top="75" />
+    <c:RegisterControl Register="DR" Canvas.Top="75" Canvas.Left="79" />
+  </Canvas>
+</UserControl>
