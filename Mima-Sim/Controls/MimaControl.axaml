@@ -8,9 +8,7 @@
              x:Class="MimaSim.Controls.MimaControl">
   <Border BorderBrush="Black" BorderThickness="1">
     <Canvas>
-
-      <c:ClockControl Canvas.Top="10" Canvas.Left="10" Width="35" Height="35" />
-      <c:ControlUnitControl Canvas.Top="45" Canvas.Left="10" />
+      <w:ControlUnitWrapper Canvas.Top="45" Canvas.Left="10" />
 
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="150" />
       <w:MemoryWrapper Canvas.Top="20" Canvas.Left="300" />
