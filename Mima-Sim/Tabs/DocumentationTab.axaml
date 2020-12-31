@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"
              x:Class="MimaSim.Tabs.DocumentationTab">
   <Grid RowDefinitions="*,*">
     <TextBlock Grid.Row="0" Text="Dokumentation" TextAlignment="Center" FontSize="33" FontStyle="Oblique" FontWeight="Bold" />
