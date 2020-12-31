@@ -2,14 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" MinWidth="125" MinHeight="160">
+             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" MinWidth="150" MinHeight="180">
   <Canvas>
+    <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="25" Height="20" Canvas.Top="3" Canvas.Left="7" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_input_x2" Width="25" Height="25" Canvas.Top="150" Canvas.Left="5" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="25" Height="25" Canvas.Top="150" Canvas.Left="57" State="None" />
 
     <c:AluControl Canvas.Top="13" Canvas.Left="5" />
     <c:RegisterControl Canvas.Top="0" Canvas.Left="26" Register="Z" />
-
     <c:RegisterControl Canvas.Top="128" Canvas.Left="0" Register="X" />
     <c:RegisterControl Canvas.Top="128" Canvas.Left="52" Register="Y" />
   </Canvas>
