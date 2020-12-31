@@ -6,17 +6,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.ProgramEditorControl">
   <Grid ColumnDefinitions="*,150,*" RowDefinitions="35,*,35">
-    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MaxWidth="150" HorizontalAlignment="Left">
+    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" Width="110" HorizontalAlignment="Left">
+      <ComboBoxItem>Fibonacci</ComboBoxItem>
+    </ComboBox>
+
+    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" Width="110" HorizontalAlignment="Right">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
       <ComboBoxItem>Hochsprache</ComboBoxItem>
     </ComboBox>
 
-    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MaxWidth="150" HorizontalAlignment="Right">
-      <ComboBoxItem>Fibonacci</ComboBoxItem>
-    </ComboBox>
-
-    <TextBox MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" />
+    <TextBox MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
 
     <Button Grid.Row="2" Grid.Column="2">Ausführen</Button>
   </Grid>
