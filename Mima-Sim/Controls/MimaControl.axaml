@@ -11,7 +11,7 @@
       <w:ControlUnitWrapper Canvas.Top="20" Canvas.Left="10" />
 
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="190" />
-      <w:MemoryWrapper Canvas.Top="20" Canvas.Left="350" />
+      <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
     </Canvas>
   </Border>
 </UserControl>

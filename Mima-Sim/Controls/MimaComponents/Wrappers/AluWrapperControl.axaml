@@ -5,15 +5,17 @@
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" Width="128" Height="180">
+             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" Width="133" Height="180">
   <Canvas>
-    <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="50" Height="15" Canvas.Top="5" Canvas.Left="0" State="None" />
-    <c:BusControl b:BusRegistry.Id="alu_input_x2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="35" State="None" />
-    <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="87" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="60" Height="15" Canvas.Top="5" Canvas.Left="0" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_output_to_base" Width="15" Height="170" Canvas.Top="5" Canvas.Left="0" State="None" />
 
-    <c:AluControl Canvas.Top="13" Canvas.Left="30" />
-    <c:RegisterControl Canvas.Top="0" Canvas.Left="51" Register="Z" />
-    <c:RegisterControl Canvas.Top="128" Canvas.Left="25" Register="X" />
-    <c:RegisterControl Canvas.Top="128" Canvas.Left="77" Register="Y" />
+    <c:BusControl b:BusRegistry.Id="alu_input_x2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="40" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="92" State="None" />
+
+    <c:AluControl Canvas.Top="13" Canvas.Left="35" />
+    <c:RegisterControl Canvas.Top="0" Canvas.Left="56" Register="Z" />
+    <c:RegisterControl Canvas.Top="128" Canvas.Left="30" Register="X" />
+    <c:RegisterControl Canvas.Top="128" Canvas.Left="82" Register="Y" />
   </Canvas>
 </UserControl>
