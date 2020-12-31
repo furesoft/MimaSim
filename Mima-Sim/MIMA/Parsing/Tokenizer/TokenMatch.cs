@@ -1,9 +1,4 @@
-﻿using MimaSim.MIMA.Tokenizer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MimaSim.MIMA.Parsing.Tokenizer
+﻿namespace MimaSim.MIMA.Parsing.Tokenizer
 {
     public class TokenMatch
     {

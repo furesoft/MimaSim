@@ -2,7 +2,7 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace Mima_Sim
+namespace MimaSim
 {
     public class App : Application
     {

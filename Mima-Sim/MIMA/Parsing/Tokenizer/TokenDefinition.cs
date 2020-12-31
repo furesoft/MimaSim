@@ -1,10 +1,7 @@
-﻿using MimaSim.MIMA.Parsing.Tokenizer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace MimaSim.MIMA.Tokenizer
+namespace MimaSim.MIMA.Parsing.Tokenizer
 {
     public class TokenDefinition
     {

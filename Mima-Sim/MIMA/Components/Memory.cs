@@ -1,4 +1,4 @@
-﻿namespace MimaSim.MIMA
+﻿namespace MimaSim.MIMA.Components
 {
     public class Memory
     {

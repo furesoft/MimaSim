@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MimaSim.Core;
 
-namespace Mima_Sim
+namespace MimaSim
 {
     public class MainWindow : Window
     {

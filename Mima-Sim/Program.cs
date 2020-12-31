@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Logging.Serilog;
 
-namespace Mima_Sim
+namespace MimaSim
 {
     internal class Program
     {
