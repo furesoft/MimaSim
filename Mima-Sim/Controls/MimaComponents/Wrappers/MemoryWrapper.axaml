@@ -9,8 +9,8 @@
   <Canvas>
     <c:MemoryControl Canvas.Left="7" />
 
-    <c:BusControl b:BusRegistry.Id="memory_adresss2" Width="25" Height="25" Canvas.Top="95" Canvas.Left="5" State="None" />
-    <c:BusControl b:BusRegistry.Id="memory_data2" Width="25" Height="25" Canvas.Top="95" Canvas.Left="84" State="None" />
+    <c:BusControl b:BusRegistry.Id="memory_adresss2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="10" State="None" />
+    <c:BusControl b:BusRegistry.Id="memory_data2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="89" State="None" />
 
     <c:RegisterControl Register="AR" Canvas.Top="75" />
     <c:RegisterControl Register="DR" Canvas.Top="75" Canvas.Left="79" />

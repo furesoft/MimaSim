@@ -11,7 +11,7 @@
       <TextBlock Text="Speicher" TextAlignment="Center" VerticalAlignment="Center" />
     </Border>
 
-    <c:BusControl b:BusRegistry.Id="memory_adress" Width="20" State="None" Name="AdressBus" Grid.Row="1" Grid.Column="0" />
-    <c:BusControl b:BusRegistry.Id="memory_data" Width="20"  State="None" Name="DataBus" Grid.Row="1" Grid.Column="2" />
+    <c:BusControl b:BusRegistry.Id="memory_adress" Width="15" State="None" Name="AdressBus" Grid.Row="1" Grid.Column="0" />
+    <c:BusControl b:BusRegistry.Id="memory_data" Width="15"  State="None" Name="DataBus" Grid.Row="1" Grid.Column="2" />
   </Grid>
 </UserControl>
