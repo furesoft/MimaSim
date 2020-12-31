@@ -3,10 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:MimaSim.Controls.Popups;assembly=MimaSim"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="35" Height="25"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="35" Height="25" Tag="Some Value"
              x:Class="MimaSim.Controls.RegisterControl">
 
-  <Border BorderBrush="Black" BorderThickness="1">
+  <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="{Binding ElementName=register, Path=Tag}">
     <Grid Background="LightGray">
       <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" />
 

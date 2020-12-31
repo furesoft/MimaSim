@@ -9,7 +9,7 @@
              x:Class="MimaSim.Controls.Wrappers.ControlUnitWrapper">
 
   <Canvas>
-    <c:ClockControl Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" />
+    <c:ClockControl Name="clock" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" Tag="2.4Ghz" />
 
     <c:ControlUnitControl Canvas.Top="0" Canvas.Left="0" Width="100" Height="220" />
 

@@ -8,12 +8,6 @@ deploy as linux and windows standalone executable
 
 GUI:
 	
-
-	Controls für verschiedene Einheiten:
-		- Steuerwerk
-	WrapperContainer für Componentent mit Bus,Register und Componente
-
-	
-
 	control hover ->
 		popup mit informationen oder zoom was genau passiert
+	control click -> content dialog mit optionen
