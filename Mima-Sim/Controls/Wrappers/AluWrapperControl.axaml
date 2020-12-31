@@ -5,7 +5,7 @@
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" MinWidth="150" MinHeight="180">
+             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" Width="93" Height="180">
   <Canvas>
     <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="25" Height="20" Canvas.Top="3" Canvas.Left="7" State="None" />
     <c:BusControl b:BusRegistry.Id="alu_input_x2" Width="25" Height="25" Canvas.Top="150" Canvas.Left="5" State="None" />
