@@ -5,12 +5,15 @@
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             Width="100" Height="200"
+             Width="100" Height="300"
              x:Class="MimaSim.Controls.Wrappers.ControlUnitWrapper">
 
   <Canvas>
     <c:ClockControl Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" />
 
     <c:ControlUnitControl Canvas.Top="0" Canvas.Left="0" Width="100" Height="200" />
+
+    <c:BusControl b:BusRegistry.Id="controlunit_ir" Canvas.Left="10" Canvas.Top="200" Width="15" Height="25" State="None" />
+    <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="75" Canvas.Top="200" Width="15" Height="25" State="None" />
   </Canvas>
 </UserControl>
