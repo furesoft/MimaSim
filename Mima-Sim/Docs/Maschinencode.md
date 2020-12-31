@@ -5,12 +5,12 @@ Der Maschinencode wird direkt in Hexadezimalzahlen geschrieben. Es werden jeweil
 Beispiel:
 
 ```
-2A 00 46 03
-10 A4 05 43
+2A 00 46 03 00 
+10 A4 05 43 41
 ```
 
 Instruktionen
 
-|Befehl|Argumente|
-|-------|---------|
-|mov    |2A       |
+|Befehl |Opcode|Argumente|Anzahl Argumente|
+|-------|------|---------|----------------|
+|mov    |2A    |Register und/oder Speicherstelle |2|
