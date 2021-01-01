@@ -6,7 +6,7 @@
              x:Class="MimaSim.Controls.FooterControl">
   <Grid Margin="5,0,5,0">
     <TextBlock Text="Mima-Architektur Simulator" HorizontalAlignment="Left" />
-
+    <TextBlock Text="Programmaktualisierung verfügbar. Klicken um Update zu installieren" VerticalAlignment="Top" Foreground="Red" IsVisible="False" HorizontalAlignment="Center" />
     <TextBlock Text="© 2020 Chris Anders" HorizontalAlignment="Right" />
   </Grid>
 </UserControl>
