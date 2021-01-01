@@ -77,3 +77,4 @@ C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\MimaSim.dll
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\MimaSim.pdb
 C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.genruntimeconfig.cache
+C:\Users\filmee24\Documents\Projektarbeit\Mima-Sim\obj\Debug\netcoreapp3.1\Mima-Sim.csprojAssemblyReference.cache

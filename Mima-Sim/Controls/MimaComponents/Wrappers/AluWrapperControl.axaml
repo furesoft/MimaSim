@@ -8,7 +8,9 @@
              x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" Width="133" Height="180">
   <Canvas>
     <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="60" Height="15" Canvas.Top="5" Canvas.Left="0" State="None" />
-    <c:BusControl b:BusRegistry.Id="alu_output_to_base" Width="15" Height="170" Canvas.Top="5" Canvas.Left="0" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_output_to_base_part" Width="15" Height="75" Canvas.Top="5" Canvas.Left="0" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_command_to_base_part" Width="35" Height="15" Canvas.Top="80" Canvas.Left="0" State="None" />
+    <c:BusControl b:BusRegistry.Id="alu_command_part_to_base" Width="15" Height="90" Canvas.Top="82" Canvas.Left="0" State="None" />
 
     <c:BusControl b:BusRegistry.Id="alu_input_x2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="40" State="None" />
     <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="92" State="None" />
