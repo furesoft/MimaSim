@@ -1,6 +1,8 @@
 ﻿using Avalonia.Controls;
 using MimaSim.Controls;
+using MimaSim.Properties;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace MimaSim.Core
 {
@@ -8,6 +10,33 @@ namespace MimaSim.Core
     {
         private static Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
         private static Dictionary<string, BusMap> _maps = new Dictionary<string, BusMap>();
+
+        static BusRegistry()
+        {
+            LoadMapsFromConfig();
+        }
+
+        public static void LoadMapsFromConfig()
+        {
+            var content = Resources.BusMap;
+            var doc = new XmlDocument();
+            doc.LoadXml(content);
+
+            var root = doc.DocumentElement;
+
+            foreach (XmlNode item in root.ChildNodes)
+            {
+                var mapid = item.Attributes["id"].Value;
+                var map = new BusMap();
+
+                foreach (XmlNode child in item.ChildNodes)
+                {
+                    map.Add(child.Attributes["key"].Value);
+                }
+
+                RegisterBusMap(mapid, map);
+            }
+        }
 
         public static void SetId(BusControl target, string id)
         {

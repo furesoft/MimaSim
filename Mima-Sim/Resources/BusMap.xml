@@ -1,2 +1,10 @@
 <buslist>
+	<map id="memory->x">
+		<item key="memory_data2" />
+		<item key="base_control_to_mem_dr" />
+		<item key="base_control_to_mem_ar" />
+		<item key="base_control_to_mem_ar" />
+		<item key="base_control_to_alu_x" />
+		<item key="base_control_to_alu_y" />
+	</map>
 </buslist>
