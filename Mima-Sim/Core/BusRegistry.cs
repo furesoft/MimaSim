@@ -83,6 +83,14 @@ namespace MimaSim.Core
             ChangeBusState(id, BusState.Recieving);
         }
 
+        public static void DeactivateAllMaps()
+        {
+            foreach (var map in _maps)
+            {
+                map.Value.Deactivate();
+            }
+        }
+
         private static void ChangeBusState(string id, BusState state)
         {
             if (_ids.ContainsKey(id))

@@ -1,7 +1,4 @@
-﻿using MimaSim.Controls;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace MimaSim.Core
 {
@@ -9,6 +6,8 @@ namespace MimaSim.Core
     {
         public void Activate()
         {
+            BusRegistry.DeactivateAllMaps();
+
             foreach (var id in this)
             {
                 BusRegistry.ActivateBus(id);

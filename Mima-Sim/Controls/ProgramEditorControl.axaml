@@ -3,12 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:core="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.ProgramEditorControl">
   <Grid ColumnDefinitions="*,150,*" RowDefinitions="35,*,35">
     <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" Width="110" HorizontalAlignment="Left">
       <ComboBoxItem>Fibonacci</ComboBoxItem>
     </ComboBox>
+
+    <Button Content="ActivateBus" CommandParameter="memory->x" Command="{core:ActivateMapCommandMarkupExtension}" Grid.Column="1" />
 
     <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" Width="110" HorizontalAlignment="Right">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
