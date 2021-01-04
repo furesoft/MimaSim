@@ -15,7 +15,7 @@ namespace MimaSim.Tabs
 
         private void ExecutionTab_Initialized(object sender, System.EventArgs e)
         {
-            BusRegistry.GetBusMap("memory->y").Activate();
+            BusRegistry.GetBusMap("control->adr").Activate();
         }
 
         public string Title => "Prozessor";
