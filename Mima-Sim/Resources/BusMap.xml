@@ -1,10 +1,18 @@
 <buslist>
-	<map id="memory->x">
-		<item key="memory_data2" />
-		<item key="base_control_to_mem_dr" />
-		<item key="base_control_to_mem_ar" />
-		<item key="base_control_to_mem_ar" />
-		<item key="base_control_to_alu_x" />
-		<item key="base_control_to_alu_y" />
-	</map>
+  <map id="full_main_bus">
+    <item key="base_control_to_alu_out" />
+    <item key="base_control_to_mem_dr" />
+    <item key="base_control_to_mem_ar" />
+    <item key="base_control_to_mem_ar" />
+    <item key="base_control_to_alu_x" />
+    <item key="base_control_to_alu_y" />
+  </map>
+  <map id="memory->x" inherits="full_main_bus">
+    <item key="memory_data2" />
+    <item key="alu_input_x2" />
+  </map>
+  <map id="memory->y" inherits="full_main_bus">
+    <item key="memory_data2" />
+    <item key="alu_input_y2" />
+  </map>
 </buslist>

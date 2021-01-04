@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using MimaSim.Controls;
+﻿using MimaSim.Controls;
 using MimaSim.Properties;
 using System.Collections.Generic;
 using System.Xml;
@@ -28,6 +27,13 @@ namespace MimaSim.Core
             {
                 var mapid = item.Attributes["id"].Value;
                 var map = new BusMap();
+
+                if (item.HasAttribute("inherits"))
+                {
+                    var basemap = GetBusMap(item.Attributes["inherits"].Value);
+
+                    map.AddRange(basemap);
+                }
 
                 foreach (XmlNode child in item.ChildNodes)
                 {
@@ -93,7 +99,7 @@ namespace MimaSim.Core
 
         public static BusMap GetBusMap(string id)
         {
-            if (!_maps.ContainsKey(id))
+            if (_maps.ContainsKey(id))
             {
                 return _maps[id];
             }
