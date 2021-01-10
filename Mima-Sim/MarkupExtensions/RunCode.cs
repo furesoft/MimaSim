@@ -18,7 +18,7 @@ namespace MimaSim.MarkupExtensions
             //ToDo: Get Emitter based on language selection
             return new DelegateCommand(_ =>
            {
-               if (_ is TextBox txtBox)
+               if (_ is TextBox txtBox && !string.IsNullOrEmpty(txtBox.Text))
                {
                    var parser = new RawParser();
                    var ast = (CallNode)parser.Parse(txtBox.Text);
