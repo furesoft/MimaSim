@@ -11,3 +11,5 @@ GUI:
 	control hover ->
 		popup mit informationen oder zoom was genau passiert
 	control click -> content dialog mit optionen
+
+	Popup for Raw View
