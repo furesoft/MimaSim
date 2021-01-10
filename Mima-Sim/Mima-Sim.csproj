@@ -29,7 +29,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\AST\" />
     <Folder Include="MIMA\VM\" />
-    <Folder Include="MIMA\Parsing\Parsers\" />
   </ItemGroup>
 </Project>

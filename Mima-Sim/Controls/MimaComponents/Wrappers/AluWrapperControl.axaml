@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             x:Class="MimaSim.Controls.Wrappers.AluWrapperControl" Width="133" Height="180">
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
+             x:Class="MimaSim.Controls.MimaComponents.Wrappers.AluWrapperControl" Width="133" Height="180">
   <Canvas>
     <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="60" Height="15" Canvas.Top="5" Canvas.Left="0" State="None" />
     <c:BusControl b:BusRegistry.Id="alu_output_to_base_part" Width="15" Height="75" Canvas.Top="5" Canvas.Left="0" State="None" />

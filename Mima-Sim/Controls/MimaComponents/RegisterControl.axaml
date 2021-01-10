@@ -2,9 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:p="clr-namespace:MimaSim.Controls.Popups;assembly=MimaSim"
+             xmlns:p="clr-namespace:MimaSim.Controls.MimaComponents.Popups;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="35" Height="25" Tag="Some Value"
-             x:Class="MimaSim.Controls.RegisterControl">
+             x:Class="MimaSim.Controls.MimaComponents.RegisterControl">
 
   <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="{Binding ElementName=register, Path=Tag}">
     <Grid Background="LightGray">

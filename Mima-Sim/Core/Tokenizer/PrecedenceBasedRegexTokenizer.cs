@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MimaSim.MIMA.Parsing.Tokenizer
+namespace MimaSim.Core.Tokenizer
 {
     public class PrecedenceBasedRegexTokenizer
     {
@@ -10,6 +10,11 @@ namespace MimaSim.MIMA.Parsing.Tokenizer
         public PrecedenceBasedRegexTokenizer()
         {
             _tokenDefinitions = new List<TokenDefinition>();
+        }
+
+        public void AddDefinition(TokenKind kind, string pattern, int precedence = 1)
+        {
+            _tokenDefinitions.Add(new TokenDefinition(kind, pattern, precedence));
         }
 
         public IEnumerable<Token> Tokenize(string src)

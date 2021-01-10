@@ -1,9 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
-namespace MimaSim.Controls
+namespace MimaSim.Controls.MimaComponents
 {
     public class RegisterControl : UserControl
     {

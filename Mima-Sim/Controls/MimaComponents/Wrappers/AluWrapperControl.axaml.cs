@@ -1,8 +1,7 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace MimaSim.Controls.Wrappers
+namespace MimaSim.Controls.MimaComponents.Wrappers
 {
     public class AluWrapperControl : UserControl
     {

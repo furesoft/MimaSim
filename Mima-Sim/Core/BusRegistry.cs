@@ -1,4 +1,4 @@
-﻿using MimaSim.Controls;
+﻿using MimaSim.Controls.MimaComponents;
 using MimaSim.Properties;
 using System.Collections.Generic;
 using System.Xml;

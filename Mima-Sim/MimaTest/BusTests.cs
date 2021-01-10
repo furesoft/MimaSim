@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
 using System.Diagnostics;
 

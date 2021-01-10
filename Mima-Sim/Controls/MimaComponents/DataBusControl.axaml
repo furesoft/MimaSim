@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MimaSim.Controls.DataBusControl">
+             x:Class="MimaSim.Controls.MimaComponents.DataBusControl">
   <StackPanel Orientation="Horizontal">
     <c:BusControl b:BusRegistry.Id="base_control_to_alu_out" Height="25" Width="95" State="None" />
     <c:BusControl b:BusRegistry.Id="base_control_to_alu_x" Height="25" Width="40" State="None" />

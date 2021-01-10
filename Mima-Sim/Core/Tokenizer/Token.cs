@@ -1,4 +1,4 @@
-﻿namespace MimaSim.MIMA.Parsing.Tokenizer
+﻿namespace MimaSim.Core.Tokenizer
 {
     public sealed class Token
     {

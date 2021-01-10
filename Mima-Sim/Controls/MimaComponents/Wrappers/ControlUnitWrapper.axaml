@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
              Width="100" Height="300"
-             x:Class="MimaSim.Controls.Wrappers.ControlUnitWrapper">
+             x:Class="MimaSim.Controls.MimaComponents.Wrappers.ControlUnitWrapper">
 
   <Canvas>
     <c:ClockControl Name="clock" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" Tag="2.4Ghz" />

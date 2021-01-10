@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MimaSim.MIMA.Parsing.Tokenizer
+namespace MimaSim.Core.Tokenizer
 {
     public sealed class TokenEnumerator
     {

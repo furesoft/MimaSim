@@ -1,11 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using MimaSim.Core;
 
-namespace MimaSim.Controls
+namespace MimaSim.Controls.MimaComponents
 {
     public enum BusState { None, Recieving }
 

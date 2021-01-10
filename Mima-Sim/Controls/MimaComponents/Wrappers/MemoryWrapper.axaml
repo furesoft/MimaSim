@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
-             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MimaSim.Controls.Wrappers.MemoryWrapper" Width="118" Height="120">
+             x:Class="MimaSim.Controls.MimaComponents.Wrappers.MemoryWrapper" Width="118" Height="120">
   <Canvas>
     <c:MemoryControl Canvas.Left="7" />
 

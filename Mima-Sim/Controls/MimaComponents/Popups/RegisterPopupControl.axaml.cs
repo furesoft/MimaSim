@@ -1,8 +1,7 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace MimaSim.Controls.Popups
+namespace MimaSim.Controls.MimaComponents.Popups
 {
     public class RegisterPopupControl : UserControl
     {

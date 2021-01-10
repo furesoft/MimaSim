@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MimaSim.MIMA.Components
+﻿namespace MimaSim.MIMA.Components
 {
     public class ControlUnit
     {
