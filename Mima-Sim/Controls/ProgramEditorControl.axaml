@@ -12,8 +12,6 @@
       <ComboBoxItem>Fibonacci</ComboBoxItem>
     </ComboBox>
 
-    <Button Content="ActivateBus" CommandParameter="cu->accu" Command="{core:ActivateMapCommandMarkupExtension}" Grid.Column="1" />
-
     <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" Width="110" HorizontalAlignment="Right">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
