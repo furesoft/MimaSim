@@ -4,9 +4,6 @@ namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
-        public Register AR = new Register("AR");
-        public Register DR = new Register("DR");
-
         private TinyInt[] _values;
 
         public Memory(int length)

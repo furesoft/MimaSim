@@ -7,9 +7,12 @@
 deploy as linux and windows standalone executable
 
 GUI:
-	
+	add styles to make code easier to maintain
+
 	control hover ->
 		popup mit informationen 
 	control click -> content dialog mit optionen
+
+	replace textbox with button with custom style, to make it clickable for customization
 
 	Popup for Raw View

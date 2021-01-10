@@ -13,7 +13,7 @@
     <c:BusControl b:BusRegistry.Id="memory_adresss2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="10" State="None" />
     <c:BusControl b:BusRegistry.Id="memory_data2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="89" State="None" />
 
-    <c:RegisterControl Register="AR" Canvas.Top="75" Tag="{me:GetRegisterValue}" />
-    <c:RegisterControl Register="DR" Canvas.Top="75" Canvas.Left="79" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Register="SAR" Canvas.Top="75" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Register="SDR" Canvas.Top="75" Canvas.Left="79" Tag="{me:GetRegisterValue}" />
   </Canvas>
 </UserControl>
