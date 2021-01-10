@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MimaSim.Core.AST.Nodes
 {
@@ -12,6 +13,10 @@ namespace MimaSim.Core.AST.Nodes
 
         public List<IAstNode> Args { get; set; }
         public string Name { get; set; }
+        public bool IsEmpty
+        {
+            get { return !Args.Any(); }
+        }
 
         public override string ToString()
         {

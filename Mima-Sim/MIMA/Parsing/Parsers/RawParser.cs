@@ -12,6 +12,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
             tokenizer.AddDefinition(TokenKind.HexLiteral, "[0-9a-dA-D]{2}");
+            tokenizer.AddDefinition(TokenKind.Undefined, ".+");
 
             var tokens = tokenizer.Tokenize(input);
             var enumerator = new TokenEnumerator(tokens);
@@ -30,6 +31,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 if (token.Kind == TokenKind.HexLiteral)
                 {
                     _nodes.Add(NodeFactory.Literal(Convert.ToByte(token.Contents, 16)));
+                }
+                else if (token.Kind == TokenKind.EndOfFile)
+                {
+                    break;
                 }
             } while (token.Kind != TokenKind.EndOfFile);
 
