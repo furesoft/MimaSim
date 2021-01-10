@@ -4,17 +4,19 @@ namespace MimaSim.MIMA.Components
 {
     public class CPU
     {
+        public static CPU Instance = new CPU();
+
         public Bus DataBus = new Bus();
 
-        public Register SAR = new Register();
-        public Register SDR = new Register();
+        public Register SAR = new Register("SAR");
+        public Register SDR = new Register("SDR");
 
-        public Register Accumulator = new Register();
-        public Register One = new Register(1);
+        public Register Accumulator = new Register("Accumulator");
+        public Register One = new Register("One", 1);
 
-        public Register X = new Register();
-        public Register Y = new Register();
-        public Register Z = new Register();
+        public Register X = new Register("X");
+        public Register Y = new Register("Y");
+        public Register Z = new Register("Z");
 
         public Memory Memory = new Memory((int)Math.Pow(2, 24));
 
