@@ -1,4 +1,6 @@
-﻿using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Markup.Xaml;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.MIMA;
 using System;
@@ -13,10 +15,15 @@ namespace MimaSim.MarkupExtensions
 
             if (ipv.TargetObject is RegisterControl rc)
             {
-                return RegisterMap.GetRegisterValue(rc.Register);
+                RegisterMap.GetRegister(rc.Register).Bus.Subscribe(_ =>
+                {
+                    ToolTip.SetTip(rc, _);
+                });
+
+                return RegisterMap.GetRegister(rc.Register).GetValue();
             }
 
-            return "empty";
+            return "0";
         }
     }
 }

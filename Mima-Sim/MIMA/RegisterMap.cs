@@ -15,14 +15,14 @@ namespace MimaSim.MIMA
             }
         }
 
-        public static TinyInt GetRegisterValue(string name)
+        public static Register GetRegister(string name)
         {
             if (_map.ContainsKey(name))
             {
-                return _map[name].GetValue();
+                return _map[name];
             }
 
-            return TinyInt.Invalid;
+            return null;
         }
     }
 }

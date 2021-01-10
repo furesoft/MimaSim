@@ -11,7 +11,7 @@ namespace MimaSim.MIMA.Components
         public Register SAR = new Register("SAR");
         public Register SDR = new Register("SDR");
 
-        public Register Accumulator = new Register("Accumulator");
+        public Register Accumulator = new Register("Accumulator", 42);
         public Register One = new Register("One", 1);
 
         public Register X = new Register("X");
@@ -29,6 +29,23 @@ namespace MimaSim.MIMA.Components
         public CPU()
         {
             ALU = new ALU(this);
+        }
+
+        public bool Step()
+        {
+            return false;
+        }
+
+        public void Run()
+        {
+            while (!Step())
+            {
+            }
+        }
+
+        //Hack for Init all Fields
+        public void Init()
+        {
         }
     }
 }

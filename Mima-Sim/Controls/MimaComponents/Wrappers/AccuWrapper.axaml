@@ -9,6 +9,6 @@
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.AccuWrapper" Width="100" Height="75">
   <Canvas>
     <c:BusControl Canvas.Top="0" Canvas.Left="40" Width="15" Height="30" State="None" b:BusRegistry.Id="base_to_accu" />
-    <c:RegisterControl Register="Akkumulator" Canvas.Top="25" Canvas.Left="0" Width="100" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Register="Accumulator" Canvas.Top="25" Canvas.Left="0" Width="100" Tag="{me:GetRegisterValue}" />
   </Canvas>
 </UserControl>

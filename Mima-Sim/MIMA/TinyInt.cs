@@ -18,5 +18,15 @@
         {
             return new TinyInt(value);
         }
+
+        public override string ToString()
+        {
+            if (HasValue)
+            {
+                return Value.ToString();
+            }
+
+            return "null";
+        }
     }
 }
