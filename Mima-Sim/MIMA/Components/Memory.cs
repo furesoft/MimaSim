@@ -1,4 +1,6 @@
-﻿namespace MimaSim.MIMA.Components
+﻿using System;
+
+namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
@@ -10,6 +12,18 @@
         public Memory(int length)
         {
             _values = new TinyInt[length];
+        }
+
+        public Memory(TinyInt[] parent)
+        {
+            _values = parent;
+        }
+
+        public void Expand(int length)
+        {
+            TinyInt[] buffer = new TinyInt[length];
+
+            Array.Copy(_values, buffer, _values.Length);
         }
 
         public TinyInt GetValue(TinyInt address)
