@@ -9,7 +9,7 @@ deploy as linux and windows standalone executable
 GUI:
 	
 	control hover ->
-		popup mit informationen oder zoom was genau passiert
+		popup mit informationen 
 	control click -> content dialog mit optionen
 
 	Popup for Raw View

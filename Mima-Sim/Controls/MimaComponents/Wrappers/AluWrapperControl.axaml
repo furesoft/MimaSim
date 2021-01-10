@@ -17,7 +17,7 @@
     <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="25" Canvas.Top="150" Canvas.Left="92" State="None" />
 
     <c:AluControl Canvas.Top="13" Canvas.Left="35" />
-    <c:RegisterControl Canvas.Top="0" Canvas.Left="56" Register="Z" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Canvas.Top="0" Canvas.Left="56" Register="Z" Tag="{me:GetRegisterValue Description='OutputRegister'}" />
     <c:RegisterControl Canvas.Top="128" Canvas.Left="30" Register="X" Tag="{me:GetRegisterValue}" />
     <c:RegisterControl Canvas.Top="128" Canvas.Left="82" Register="Y" Tag="{me:GetRegisterValue}" />
   </Canvas>

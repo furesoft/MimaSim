@@ -19,6 +19,7 @@ namespace MimaSim.MarkupExtensions
                    new RawSourceTextTranslator().ToRaw(txtBox.Text); //ToDo: select source translator based on selection
 
                    CPU.Instance.Step();
+                   CPU.Instance.Clock.SetFrequency(2500);
                }
            });
         }

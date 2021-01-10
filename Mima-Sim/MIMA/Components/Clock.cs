@@ -7,6 +7,8 @@ namespace MimaSim.MIMA.Components
     {
         private short _frequency;
 
+        public event Action<object> FrequencyChanged;
+
         public Clock(short frequency)
         {
             _frequency = frequency;
@@ -23,6 +25,7 @@ namespace MimaSim.MIMA.Components
         {
             _frequency = frequency;
             _timer.Interval = frequency;
+            FrequencyChanged?.Invoke(frequency);
         }
 
         public short Frequency => _frequency;
