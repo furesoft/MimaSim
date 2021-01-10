@@ -5,6 +5,6 @@
         public Register IAR = new Register("IAR");
         public Register IR = new Register("IR");
 
-        public Bus AkkuBus = new Bus();
+        public Bus AccuBus = new Bus();
     }
 }

@@ -26,6 +26,8 @@ namespace MimaSim.MarkupExtensions
 
                    ast.Visit(visitor);
 
+                   RegisterMap.GetRegister("IAR").SetValue(0xFF);
+
                    Debug.WriteLine(visitor.GetRaw());
 
                    CPU.Instance.Step();

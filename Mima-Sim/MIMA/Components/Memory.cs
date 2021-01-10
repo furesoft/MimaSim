@@ -2,8 +2,8 @@
 {
     public class Memory
     {
-        public Bus DataBus = new Bus();
-        public Bus AddressBus = new Bus();
+        public Register AR = new Register("AR");
+        public Register DR = new Register("DR");
 
         private TinyInt[] _values;
 
