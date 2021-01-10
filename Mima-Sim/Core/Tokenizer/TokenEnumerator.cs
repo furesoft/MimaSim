@@ -9,7 +9,7 @@ namespace MimaSim.Core.Tokenizer
         public TokenEnumerator(IEnumerable<Token> tokenStream)
         {
             _tokens = tokenStream.ToArray();
-            pos = -1;
+            pos = 0;
         }
 
         private Token[] _tokens;
@@ -41,7 +41,6 @@ namespace MimaSim.Core.Tokenizer
         /// </summary>
         public Token Peek(int offset = 0)
         {
-            pos++;
             return _tokens[pos + offset];
         }
 

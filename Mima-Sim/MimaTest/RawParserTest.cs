@@ -9,7 +9,7 @@ namespace MimaTest
         [TestMethod]
         public void SimpleTest_Should_Pass()
         {
-            var input = "4A 2D 30 A2 2A 90";
+            var input = "2A 90 2A 90 2A 90";
             var parser = new RawParser();
             var ast = parser.Parse(input);
         }
