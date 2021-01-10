@@ -1,14 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MimaSim.Core;
-using MimaSim.Core.AST.Nodes;
-using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Parsing.SourceTranslators;
-using MimaSim.MIMA.Visitors;
 using System;
-using System.Diagnostics;
 
 namespace MimaSim.MarkupExtensions
 {
@@ -21,9 +16,7 @@ namespace MimaSim.MarkupExtensions
            {
                if (_ is TextBox txtBox && !string.IsNullOrEmpty(txtBox.Text))
                {
-                   new RawSourceTextTranslator().ToRaw(txtBox.Text);
-
-                   RegisterMap.GetRegister("IAR").SetValue(0xFF);
+                   new RawSourceTextTranslator().ToRaw(txtBox.Text); //ToDo: select source translator based on selection
 
                    CPU.Instance.Step();
                }
