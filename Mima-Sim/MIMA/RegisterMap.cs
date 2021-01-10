@@ -17,7 +17,7 @@ namespace MimaSim.MIMA
 
         public static TinyInt GetRegisterValue(string name)
         {
-            if (!_map.ContainsKey(name))
+            if (_map.ContainsKey(name))
             {
                 return _map[name].GetValue();
             }
