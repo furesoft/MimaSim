@@ -12,6 +12,12 @@
     <None Remove="MimaTest\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaXaml Remove="Styles.axaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Styles.axaml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
   </ItemGroup>
