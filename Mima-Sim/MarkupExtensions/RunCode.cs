@@ -5,6 +5,7 @@ using MimaSim.Core.AST.Nodes;
 using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
 using MimaSim.MIMA.Parsing.Parsers;
+using MimaSim.MIMA.Parsing.SourceTranslators;
 using MimaSim.MIMA.Visitors;
 using System;
 using System.Diagnostics;
@@ -20,15 +21,9 @@ namespace MimaSim.MarkupExtensions
            {
                if (_ is TextBox txtBox && !string.IsNullOrEmpty(txtBox.Text))
                {
-                   var parser = new RawParser();
-                   var ast = (CallNode)parser.Parse(txtBox.Text);
-                   var visitor = new RawParserVisitor();
-
-                   ast.Visit(visitor);
+                   new RawSourceTextTranslator().ToRaw(txtBox.Text);
 
                    RegisterMap.GetRegister("IAR").SetValue(0xFF);
-
-                   Debug.WriteLine(visitor.GetRaw());
 
                    CPU.Instance.Step();
                }
