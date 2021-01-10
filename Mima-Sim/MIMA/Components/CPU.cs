@@ -26,6 +26,8 @@ namespace MimaSim.MIMA.Components
 
         public ALU ALU;
 
+        public byte[] Program { get; internal set; }
+
         public CPU()
         {
             ALU = new ALU(this);

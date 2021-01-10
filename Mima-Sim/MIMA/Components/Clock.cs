@@ -33,5 +33,15 @@ namespace MimaSim.MIMA.Components
         public event Action Tick;
 
         private Timer _timer;
+
+        public void Start()
+        {
+            _timer.Start();
+        }
+
+        public void Stop()
+        {
+            _timer.Stop();
+        }
     }
 }
