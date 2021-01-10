@@ -16,6 +16,10 @@
     <item key="base_control_to_alu_x" />
     <item key="base_control_to_alu_y" />
   </map>
+  <map id="cu->accu" inherits="alu_main_bus">
+    <item key="base_to_accu" />
+    <item key="base_control_to_alu_x" />
+  </map>
   <map id="memory->x" inherits="full_main_bus">
     <item key="memory_data2" />
     <item key="alu_input_x2" />

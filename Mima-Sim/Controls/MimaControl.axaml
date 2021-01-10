@@ -14,6 +14,8 @@
       <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
 
       <c:DataBusControl Height="25" Canvas.Top="192" Canvas.Left="110" />
+
+      <w:AccuWrapper Canvas.Top="218" Canvas.Left="190" />
     </Canvas>
   </Border>
 </UserControl>
