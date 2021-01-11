@@ -10,8 +10,5 @@
     <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Grid.Row="0">
       <Button Classes="clickable">Speicher</Button>
     </Border>
-
-    <c:BusControl b:BusRegistry.Id="memory_adress" Width="15" State="None" Name="AdressBus" Grid.Row="1" Grid.Column="0" />
-    <c:BusControl b:BusRegistry.Id="memory_data" Width="15"  State="None" Name="DataBus" Grid.Row="1" Grid.Column="2" />
   </Grid>
 </UserControl>

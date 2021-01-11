@@ -8,12 +8,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.MemoryWrapper" Width="118" Height="120">
   <Canvas>
-    <c:MemoryControl Canvas.Left="7" />
+    <c:MemoryControl Canvas.Top="20" />
 
     <c:BusControl b:BusRegistry.Id="memory_adresss2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="10" State="None" />
-    <c:BusControl b:BusRegistry.Id="memory_data2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="89" State="None" />
+    <c:BusControl b:BusRegistry.Id="memory_data2" Width="15" Height="25" Canvas.Top="95" Canvas.Left="77" State="None" />
 
     <c:RegisterControl Register="SAR" Canvas.Top="75" Tag="{me:GetRegisterValue}" />
-    <c:RegisterControl Register="SDR" Canvas.Top="75" Canvas.Left="79" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Register="SDR" Canvas.Top="75" Canvas.Left="65" Tag="{me:GetRegisterValue}" />
   </Canvas>
 </UserControl>
