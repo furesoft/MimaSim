@@ -37,7 +37,7 @@ namespace MimaSim.MarkupExtensions
                 }
                 else
                 {
-                    return null;
+                    return "Kein Inhalt";
                 }
 
                 return sb.ToString();
