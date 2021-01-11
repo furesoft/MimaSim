@@ -7,8 +7,8 @@ namespace MimaSim.Core
 {
     public static class BusRegistry
     {
-        private static Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
-        private static Dictionary<string, BusMap> _maps = new Dictionary<string, BusMap>();
+        private static readonly Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
+        private static readonly Dictionary<string, BusMap> _maps = new Dictionary<string, BusMap>();
 
         static BusRegistry()
         {

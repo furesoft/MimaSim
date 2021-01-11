@@ -18,10 +18,7 @@ namespace MimaSim.MarkupExtensions
 
             if (ipv.TargetObject is RegisterControl rc)
             {
-                RegisterMap.GetRegister(rc.Register).Bus.Subscribe(_ =>
-                {
-                    ToolTip.SetTip(rc, _);
-                });
+                RegisterMap.GetRegister(rc.Register).Bus.Subscribe(_ => ToolTip.SetTip(rc, _));
 
                 var sb = new StringBuilder();
 

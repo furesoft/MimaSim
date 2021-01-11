@@ -32,9 +32,8 @@ namespace MimaSim.MarkupExtensions
                        var item = (ComboBoxItem)cbLanguage.SelectedItem;
 
                        var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), item.Content.ToString()));
-                       var raw = translator.ToRaw(txtBox.Text); //ToDo: select source translator based on selection
 
-                       CPU.Instance.Program = raw;
+                       CPU.Instance.Program = translator.ToRaw(txtBox.Text);
                        RegisterMap.GetRegister("IAR").SetValue(0);
 
                        CPU.Instance.Clock.Start();
