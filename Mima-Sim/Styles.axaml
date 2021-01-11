@@ -6,6 +6,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Style Selector="c|RegisterControl">
     <Setter Property="Background" Value="LightGray" />
-    <Setter Property="Tag" Value="{me:GetRegisterValue}" />
+  </Style>
+
+  <Style Selector="Button.clickable">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="Button.clickable:pointerover">
+    <Setter Property="Cursor" Value="Hand" />
   </Style>
 </Styles>

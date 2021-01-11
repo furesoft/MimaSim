@@ -5,7 +5,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              Name="clock"
              x:Class="MimaSim.Controls.MimaComponents.ClockControl" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}">
+
   <Border BorderBrush="Black" BorderThickness="1">
-    <TextBlock Text="Takt" TextAlignment="Center" VerticalAlignment="Center" />
+    <Button Classes="clickable">Takt</Button>
   </Border>
 </UserControl>
