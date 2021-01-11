@@ -11,8 +11,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
-            tokenizer.AddDefinition(TokenKind.HexLiteral, "[0-9a-dA-D]{2}");
-            tokenizer.AddDefinition(TokenKind.Undefined, ".+");
+            tokenizer.AddDefinition(TokenKind.HexLiteral, "[0-9a-fA-F]{2}");
 
             var tokens = tokenizer.Tokenize(input);
             var enumerator = new TokenEnumerator(tokens);
