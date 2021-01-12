@@ -11,8 +11,6 @@
           <Grid>
             <ContentPresenter Content="{TemplateBinding Content}" />
             <Rectangle IsVisible="{TemplateBinding IsOpened}" Fill="Gray" Opacity="0.5">
-              <Rectangle.Fill>
-              </Rectangle.Fill>
             </Rectangle>
           </Grid>
 

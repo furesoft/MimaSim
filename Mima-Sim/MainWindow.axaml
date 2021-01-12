@@ -7,7 +7,7 @@
         x:Class="MimaSim.MainWindow"
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
 
-  <c:ContentDialog IsOpened="True">
+  <c:ContentDialog IsOpened="False">
     <c:ContentDialog.DialogContent>
       hello world content
     </c:ContentDialog.DialogContent>

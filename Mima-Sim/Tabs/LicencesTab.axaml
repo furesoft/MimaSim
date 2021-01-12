@@ -9,6 +9,5 @@
     <TextBlock Text="Benutzerinterface: AvaloniaUI" />
     <TextBlock Text="Icons: ?" />
     <TextBlock Text="MarkdownRenderer: ?" />
-    <ToggleButton Name="opened" Content="Open Dialog" />
   </StackPanel>
 </UserControl>
