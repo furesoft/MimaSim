@@ -13,10 +13,12 @@ GUI:
 		popup mit informationen 
 	control click -> content dialog mit optionen
 
-	replace textbox with button with custom style, to make it clickable for customization
-
 	Popup for Raw View
 
-	convert to mvvm?
+	convert to mvvm
 
-	DialogControl to prevent for writing all stuff again like buttons
+	DialogControl:ContentControl to prevent for writing all stuff again like buttons
+		CancelEnable: bool
+		Command: ICommand
+		CommandText: string
+		Header: string
