@@ -13,6 +13,7 @@
         <Button Content="Close" />
       </StackPanel>
     </c:ContentDialog.DialogContent>
+
     <DockPanel>
       <TabControl Name="content" Margin="5" DockPanel.Dock="Top" />
 

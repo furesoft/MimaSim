@@ -26,6 +26,14 @@
             }
         }
 
+        public static void Open()
+        {
+            if (_host != null)
+            {
+                _host.IsOpened = true;
+            }
+        }
+
         public static void Close()
         {
             if (_host != null)
