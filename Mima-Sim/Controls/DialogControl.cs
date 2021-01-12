@@ -49,7 +49,7 @@ namespace MimaSim.Controls
             get { return GetValue<ICommand>(CommandProperty); }
             set
             {
-                SetValue(CommandProperty, value);
+                SetValue(CommandProperty, value.Aggregate(CancelCommand)); // Combine Submit with Cancel to close dialog after submit
             }
         }
 
