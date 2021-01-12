@@ -9,7 +9,7 @@
 
   <c:ContentDialog c:DialogService.IsHost="True">
     <c:ContentDialog.DialogContent>
-      <c:DialogControl Header="Error" CancelEnabled="False" CommandText="OK">
+      <c:DialogControl Header="Error" IsCancelEnabled="True" CommandText="OK">
         Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
       </c:DialogControl>
     </c:ContentDialog.DialogContent>

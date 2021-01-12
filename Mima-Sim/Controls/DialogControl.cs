@@ -12,8 +12,8 @@ namespace MimaSim.Controls
         public static StyledProperty<ICommand> CancelCommandProperty =
             AvaloniaProperty.Register<DialogControl, ICommand>(nameof(CancelCommand));
 
-        public static StyledProperty<bool> CancelEnableProperty =
-                    AvaloniaProperty.Register<DialogControl, bool>("CancelEnabled");
+        public static StyledProperty<bool> IsCancelEnabledProperty =
+                    AvaloniaProperty.Register<DialogControl, bool>(nameof(IsCancelEnabled));
 
         public static StyledProperty<ICommand> CommandProperty =
             AvaloniaProperty.Register<DialogControl, ICommand>(nameof(Command));
@@ -38,10 +38,10 @@ namespace MimaSim.Controls
             CancelCommand = new DelegateCommand(_ => DialogService.Close());
         }
 
-        public bool CancelEnabled
+        public bool IsCancelEnabled
         {
-            get { return GetValue<bool>(CancelEnableProperty); }
-            set { SetValue(CancelEnableProperty, value); }
+            get { return GetValue<bool>(IsCancelEnabledProperty); }
+            set { SetValue(IsCancelEnabledProperty, value); }
         }
 
         public ICommand Command
