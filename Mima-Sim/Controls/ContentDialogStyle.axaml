@@ -8,7 +8,17 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Grid>
-          <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          <Grid>
+            <ContentPresenter Content="{TemplateBinding Content}" />
+            <Rectangle IsVisible="{TemplateBinding IsOpened}" Fill="Gray" Opacity="0.5">
+              <Rectangle.Fill>
+              </Rectangle.Fill>
+            </Rectangle>
+          </Grid>
+
+          <Border Margin="50" BorderBrush="Black" BorderThickness="1" IsVisible="{TemplateBinding IsOpened}" Background="White">
+            <ContentPresenter  Content="{TemplateBinding DialogContent}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
         </Grid>
       </ControlTemplate>
     </Setter>

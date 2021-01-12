@@ -6,11 +6,15 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MimaSim.MainWindow"
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
-  <DockPanel>
-    <TabControl Name="content" Margin="5" DockPanel.Dock="Top" />
-    <c:ContentDialog>
-      hello world
-    </c:ContentDialog>
-    <c:FooterControl DockPanel.Dock="Bottom" Height="25" VerticalAlignment="Bottom" />
-  </DockPanel>
+
+  <c:ContentDialog IsOpened="True">
+    <c:ContentDialog.DialogContent>
+      hello world content
+    </c:ContentDialog.DialogContent>
+    <DockPanel>
+      <TabControl Name="content" Margin="5" DockPanel.Dock="Top" />
+
+      <c:FooterControl DockPanel.Dock="Bottom" Height="25" VerticalAlignment="Bottom" />
+    </DockPanel>
+  </c:ContentDialog>
 </Window>
