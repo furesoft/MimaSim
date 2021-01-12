@@ -17,4 +17,4 @@ GUI:
 
 	Popup for Raw View
 
-	splitview for executiontab grid
+	convert to mvvm?

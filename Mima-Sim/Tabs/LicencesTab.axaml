@@ -7,7 +7,6 @@
              x:Class="MimaSim.Tabs.LicencesTab">
   <StackPanel Spacing="2">
     <TextBlock Text="Benutzerinterface: AvaloniaUI" />
-    <TextBlock Text="Icons: ?" />
     <TextBlock Text="MarkdownRenderer: ?" />
   </StackPanel>
 </UserControl>
