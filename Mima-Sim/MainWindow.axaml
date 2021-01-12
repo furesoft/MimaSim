@@ -8,6 +8,11 @@
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
 
   <c:ContentDialog c:DialogService.IsHost="True">
+    <c:ContentDialog.DialogContent>
+      <c:DialogControl Header="Error" CancelEnabled="False" CommandText="OK">
+        Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
+      </c:DialogControl>
+    </c:ContentDialog.DialogContent>
     <DockPanel>
       <TabControl Name="content" Margin="5" DockPanel.Dock="Top" />
 

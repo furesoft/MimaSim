@@ -17,7 +17,7 @@ namespace MimaSim.ViewModels
 
         public ExecutionTabModel()
         {
-            _openErrorPopupCommand = new DelegateCommand(_ => DialogService.Open(new ErrorPopupControl()));
+            _openErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
         }
     }
 }

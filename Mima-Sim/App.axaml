@@ -5,6 +5,7 @@
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
     <StyleInclude Source="avares://MimaSim/Styles.axaml" />
-    <StyleInclude Source="avares://MimaSim/Controls/ContentDialogStyle.axaml" />
+    <StyleInclude Source="avares://MimaSim/Styles/ContentDialogStyle.axaml" />
+    <StyleInclude Source="avares://MimaSim/Styles/DialogControlStyle.axaml" />
   </Application.Styles>
 </Application>

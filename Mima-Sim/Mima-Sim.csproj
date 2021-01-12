@@ -13,12 +13,14 @@
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Remove="Controls\ContentDialogStyle.axaml" />
+    <AvaloniaXaml Remove="Controls\DialogControlStyle.axaml" />
     <AvaloniaXaml Remove="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Include="Controls\ContentDialogStyle.axaml">
+    <AvaloniaResource Include="Styles\ContentDialogStyle.axaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaResource>
+    <AvaloniaResource Include="Styles\DialogControlStyle.axaml" />
     <AvaloniaResource Include="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>

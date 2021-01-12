@@ -14,9 +14,7 @@
             </Rectangle>
           </Grid>
 
-          <Border Margin="50" BorderBrush="Black" BorderThickness="1" IsVisible="{TemplateBinding IsOpened}" Background="White">
-            <ContentPresenter  Content="{TemplateBinding DialogContent}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-          </Border>
+          <ContentPresenter  Content="{TemplateBinding DialogContent}" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{TemplateBinding IsOpened}" />
         </Grid>
       </ControlTemplate>
     </Setter>
