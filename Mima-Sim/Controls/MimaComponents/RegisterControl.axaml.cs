@@ -11,7 +11,7 @@ namespace MimaSim.Controls.MimaComponents
 
         public string Register
         {
-            get { return GetValue(RegisterProperty); }
+            get { return (string)GetValue(RegisterProperty); }
             set { SetValue(RegisterProperty, value); }
         }
 

@@ -18,8 +18,10 @@
     <AvaloniaResource Include="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.12" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
+    <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-rc1" />
+    <PackageReference Include="NetSparkle.New" Version="2.0.0-preview20210111001" />
+    <PackageReference Include="NetSparkleUpdater.UI.Avalonia" Version="2.0.0-preview20210111001" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

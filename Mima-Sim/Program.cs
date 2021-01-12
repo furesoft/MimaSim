@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
 
 namespace MimaSim
 {
@@ -15,6 +14,6 @@ namespace MimaSim
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .LogToDebug();
+                .LogToTrace();
     }
 }
