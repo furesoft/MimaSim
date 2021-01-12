@@ -1,4 +1,6 @@
-﻿namespace MimaSim.Controls
+﻿using MimaSim.Controls.MimaComponents.Popups;
+
+namespace MimaSim.Controls
 {
     public static class DialogService
     {
@@ -24,6 +26,11 @@
                 _host.DialogContent = content;
                 _host.IsOpened = true;
             }
+        }
+
+        public static void OpenError(string message)
+        {
+            Open(new ErrorPopupControl() { Tag = message });
         }
 
         public static void Open()
