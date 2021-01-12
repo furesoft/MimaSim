@@ -18,3 +18,5 @@ GUI:
 	Popup for Raw View
 
 	convert to mvvm?
+
+	DialogControl to prevent for writing all stuff again like buttons

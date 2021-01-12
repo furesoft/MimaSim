@@ -10,10 +10,6 @@
   <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="{Binding ElementName=register, Path=Tag}">
     <Grid>
       <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" />
-
-      <Popup x:Name="popup" PlacementMode="Bottom" PlacementTarget="{Binding ElementName=register}" IsOpen="False">
-        <p:RegisterPopupControl />
-      </Popup>
     </Grid>
   </Border>
 </UserControl>

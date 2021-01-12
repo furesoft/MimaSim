@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MimaSim.ViewModels"
-             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              DataContext="{vm:ExecutionTabModel}"
              x:Class="MimaSim.Tabs.ExecutionTab">
