@@ -12,9 +12,13 @@
     <None Remove="MimaTest\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaXaml Remove="Controls\ContentDialogStyle.axaml" />
     <AvaloniaXaml Remove="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Include="Controls\ContentDialogStyle.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaResource>
     <AvaloniaResource Include="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>

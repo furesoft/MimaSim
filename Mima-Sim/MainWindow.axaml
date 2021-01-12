@@ -8,6 +8,9 @@
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
   <DockPanel>
     <TabControl Name="content" Margin="5" DockPanel.Dock="Top" />
+    <c:ContentDialog>
+      hello world
+    </c:ContentDialog>
     <c:FooterControl DockPanel.Dock="Bottom" Height="25" VerticalAlignment="Bottom" />
   </DockPanel>
 </Window>
