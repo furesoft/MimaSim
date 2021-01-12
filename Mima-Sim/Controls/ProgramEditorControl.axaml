@@ -21,6 +21,6 @@
     <TextBox Name="srcTB" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
 
     <Button Grid.Row="2" Grid.Column="2" Command="{me:RunCode languageCb}" CommandParameter="{Binding ElementName=srcTB}">Ausführen</Button>
-    <Button Grid.Row="2" Grid.Column="0">Raw</Button>
+    <Button Grid.Row="2" Grid.Column="0" Command="{Binding OpenErrorPopupCommand}">Raw</Button>
   </Grid>
 </UserControl>
