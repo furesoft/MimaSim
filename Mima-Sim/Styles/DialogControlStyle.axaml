@@ -13,8 +13,8 @@
             <ContentPresenter Content="{TemplateBinding Content}" Margin="3" Grid.Row="1" />
 
             <StackPanel Orientation="Horizontal" Spacing="5" Grid.Row="3" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-              <Button Foreground="{StaticResource ThemeForegroundBrush}" IsCancel="True" IsVisible="{TemplateBinding IsCancelEnabled}" Content="Abbrechen" Command="{TemplateBinding CancelCommand}" />
-              <Button Foreground="{StaticResource ThemeForegroundBrush}" IsDefault="True" Content="{TemplateBinding CommandText}" Command="{TemplateBinding Command}" MinWidth="75" />
+              <Button Foreground="{StaticResource ThemeForegroundBrush}"  IsVisible="{TemplateBinding IsCancelEnabled}" Content="Abbrechen" Command="{TemplateBinding CancelCommand}" />
+              <Button Foreground="{StaticResource ThemeForegroundBrush}"  Content="{TemplateBinding CommandText}" Command="{TemplateBinding Command}" MinWidth="75" />
             </StackPanel>
           </Grid>
         </Border>
