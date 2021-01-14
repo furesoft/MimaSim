@@ -7,6 +7,6 @@
              x:Class="MimaSim.Controls.MimaComponents.ClockControl" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}">
 
   <Border BorderBrush="Black" BorderThickness="1">
-    <Button Classes="clickable">Takt</Button>
+    <Button Classes="clickable" Command="{Binding OpenClockSettingsCommand}">Takt</Button>
   </Border>
 </UserControl>

@@ -6,6 +6,8 @@
 
 deploy as linux and windows standalone executable
 
+easter eggs: wie funny fehlermeldungen oder statusmeldungen im footer
+
 GUI:
 	add styles to make code easier to maintain
 

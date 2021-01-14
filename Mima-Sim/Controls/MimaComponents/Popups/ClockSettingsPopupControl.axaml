@@ -1,0 +1,14 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MimaSim.ViewModels"
+             xmlns:c="clr-namespace:MimaSim.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Controls.MimaComponents.Popups.ClockSettingsPopupControl">
+  <c:DialogControl IsCancelEnabled="False" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}" DataContext="{vm:ClockSettingsPopupViewModel}">
+    <Grid>
+      <TextBlock Text="Hello World. This is something new to me. I would like you to read my introduction. I have no idea what to do." />
+    </Grid>
+  </c:DialogControl>
+</UserControl>
