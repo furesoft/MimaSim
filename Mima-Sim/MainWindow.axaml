@@ -8,7 +8,7 @@
         x:Class="MimaSim.MainWindow" DataContext="{vm:ExecutionTabModel}"
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
 
-  <c:ContentDialog c:DialogService.IsHost="True">
+  <c:ContentDialog c:DialogService.IsHost="True" DataContext="{vm:ExecutionTabModel}">
     <c:ContentDialog.DialogContent>
       <c:DialogControl Header="Error" IsCancelEnabled="True" CommandText="OK" Command="{Binding TestCommand}">
         Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
