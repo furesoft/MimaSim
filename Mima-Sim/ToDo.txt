@@ -24,3 +24,5 @@ GUI:
 		Command: ICommand
 		CommandText: string
 		Header: string
+
+make icon for the executable
