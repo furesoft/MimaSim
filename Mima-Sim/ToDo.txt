@@ -9,6 +9,7 @@ deploy as linux and windows standalone executable
 easter eggs: wie funny fehlermeldungen oder statusmeldungen im footer
 
 GUI:
+	use latex instead of markdown https://github.com/verybadcat/CSharpMath
 	add styles to make code easier to maintain
 
 	control hover ->
