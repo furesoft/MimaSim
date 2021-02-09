@@ -360,3 +360,4 @@ Mima-Sim/obj/Debug/netcoreapp3.1/Avalonia/
 Mima-Sim/obj/Debug/netcoreapp3.1/
 
 Mima-Sim/bin/Debug/netcoreapp3.1/
+*.cache
