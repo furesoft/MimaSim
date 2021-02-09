@@ -34,7 +34,10 @@
     <Setter Property="HorizontalAlignment" Value="Center" />
   </Style>
 
-  <Style Selector="controls|ExecutionBar Button.clickable:pointerover">
+  <Style Selector="Button:pointerover">
+    <Setter Property="Cursor" Value="Hand" />
+  </Style>
+  <Style Selector="ToggleButton:pointerover">
     <Setter Property="Cursor" Value="Hand" />
   </Style>
 
