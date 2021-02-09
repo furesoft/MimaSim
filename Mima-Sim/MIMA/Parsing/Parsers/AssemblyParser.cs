@@ -12,14 +12,29 @@ namespace MimaSim.MIMA.Parsing.Parsers
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
-            tokenizer.AddDefinition(TokenKind.AddressLiteral, "&[0-9a-fA-F]{1,6}", 2);
-            tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 2);
-            tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 1);
+
+            tokenizer.AddDefinition(TokenKind.Comma, ",", 1);
+            tokenizer.AddDefinition(TokenKind.AddressLiteral, "&[0-9a-fA-F]{1,6}", 3);
+            tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
+            tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 2);
+            tokenizer.AddDefinition(TokenKind.Mnemnonic, GetMnemnonicPattern(), 2);
+
+            tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
             var tokens = tokenizer.Tokenize(input);
             var enumerator = new TokenEnumerator(tokens);
 
             return ParseInstructionBlock(enumerator);
+        }
+
+        private string GetMnemnonicPattern()
+        {
+            var names = Enum.GetNames(typeof(Mnemnonics));
+            var namesLowered = names.Select(_ => _.ToLower());
+
+            var allNames = names.Concat(namesLowered);
+
+            return string.Join("|", allNames);
         }
 
         private string GetRegisterPattern()
@@ -35,6 +50,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
         private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
         {
             //ToDo: implement assembly parser
+            var token = enumerator.Read();
+
             return NodeFactory.Call("{}", null);
         }
     }
