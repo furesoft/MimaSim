@@ -8,9 +8,4 @@
 
     <FluentTheme Mode="Light" />
   </Application.Styles>
-
-  <Application.Resources>
-    <Image Source="/Resources/Icons/play.png" x:Key="play" />
-    <Image Source="/Resources/Icons/pause.png" x:Key="pause" />
-  </Application.Resources>
 </Application>
