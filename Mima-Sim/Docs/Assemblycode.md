@@ -17,3 +17,5 @@ Möchte man auf einer Adresse im Speicher verweisen:
 ```mov A2, &42```
 
 Der Wert A2 wird an die Speicherstelle 42 geschrieben
+
+Es kann jederzeit Code durch /* .. */ kommentiert werden, wobei .. ein beliebiger Kommentar ist
