@@ -17,8 +17,8 @@
     <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="35" Canvas.Top="138" Canvas.Left="87" State="None" />
 
     <c:AluControl Canvas.Top="13" Canvas.Left="35" />
-    <c:RegisterControl Canvas.Top="13" Canvas.Left="56" Register="Z" Tag="{me:GetRegisterValue Description='OutputRegister'}" />
-    <c:RegisterControl Canvas.Top="113" Canvas.Left="35" Register="X" Tag="{me:GetRegisterValue}" />
-    <c:RegisterControl Canvas.Top="113" Canvas.Left="77" Register="Y" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Canvas.Top="13" Canvas.Left="56" Register="Z" me:RegisterConnector.IsConnected="True" />
+    <c:RegisterControl Canvas.Top="113" Canvas.Left="35" Register="X" me:RegisterConnector.IsConnected="True" />
+    <c:RegisterControl Canvas.Top="113" Canvas.Left="77" Register="Y" me:RegisterConnector.IsConnected="True" />
   </Canvas>
 </UserControl>

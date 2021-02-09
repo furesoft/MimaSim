@@ -17,7 +17,7 @@
     <c:BusControl b:BusRegistry.Id="controlunit_ir" Canvas.Left="10" Canvas.Top="220" Width="15" Height="25" State="None" />
     <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="75" Canvas.Top="220" Width="15" Height="25" State="None" />
 
-    <c:RegisterControl Register="IR" Canvas.Left="0" Canvas.Top="245" Tag="{me:GetRegisterValue}" />
-    <c:RegisterControl Register="IAR" Canvas.Left="65" Canvas.Top="245" Tag="{me:GetRegisterValue}" />
+    <c:RegisterControl Register="IR" Canvas.Left="0" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
+    <c:RegisterControl Register="IAR" Canvas.Left="65" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
   </Canvas>
 </UserControl>

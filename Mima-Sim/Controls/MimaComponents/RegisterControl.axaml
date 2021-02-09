@@ -5,9 +5,9 @@
              xmlns:me="clr-namespace:MimaSim.MarkupExtensions"
              xmlns:p="clr-namespace:MimaSim.Controls.MimaComponents.Popups;assembly=MimaSim"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="35" Height="25"
-             x:Class="MimaSim.Controls.MimaComponents.RegisterControl" Tag="[Not Registered]">
+             x:Class="MimaSim.Controls.MimaComponents.RegisterControl">
 
-  <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="{Binding ElementName=register, Path=Tag}">
+  <Border BorderBrush="Black" BorderThickness="1">
     <Grid>
       <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center" />
     </Grid>

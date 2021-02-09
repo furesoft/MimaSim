@@ -24,5 +24,13 @@ namespace MimaSim.MIMA
 
             return null;
         }
+
+        public static void InitAllRegisters()
+        {
+            foreach (var reg in _map)
+            {
+                reg.Value.SetValue(0);
+            }
+        }
     }
 }
