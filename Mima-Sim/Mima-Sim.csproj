@@ -19,8 +19,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\cpu.png" />
+    <None Remove="Resources\Icons\pause.png" />
+    <None Remove="Resources\Icons\play.png" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Include="Resources\Icons\pause.png" />
+    <AvaloniaResource Include="Resources\Icons\play.png" />
     <AvaloniaResource Include="Styles\ContentDialogStyle.axaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaResource>
