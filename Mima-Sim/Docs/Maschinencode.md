@@ -37,3 +37,4 @@ Instruktionen
 |cmpne  |4B    |Konstante|1|Prüft ob Wert im Accumulator nicht gleich ist|
 |cmplt  |4C    |Konstante|1|Prüft ob Wert im Accumulator kleiner ist|
 |cmpgt  |4D    |Konstante|1|Prüft ob Wert im Accumulator größer ist|
+|add    |5A    |Konstante|1|Addiert das Argument mit dem Accumulator und speichert das Ergebnis im Accumulator|
