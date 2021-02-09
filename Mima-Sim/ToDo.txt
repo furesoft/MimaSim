@@ -6,10 +6,9 @@
 
 deploy as linux and windows standalone executable
 
-easter eggs: wie funny fehlermeldungen oder statusmeldungen im footer
-
 GUI:
-	use latex instead of markdown https://github.com/verybadcat/CSharpMath
+	move menubar to left and add icons
+
 	add styles to make code easier to maintain
 
 	control hover ->
@@ -19,11 +18,3 @@ GUI:
 	Popup for Raw View
 
 	convert to mvvm
-
-	DialogControl:ContentControl to prevent for writing all stuff again like buttons
-		CancelEnable: bool
-		Command: ICommand
-		CommandText: string
-		Header: string
-
-make icon for the executable
