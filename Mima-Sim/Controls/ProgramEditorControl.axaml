@@ -8,11 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.ProgramEditorControl">
   <Grid ColumnDefinitions="AUTO,*,AUTO" RowDefinitions="35,*">
-    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-      <ComboBoxItem>Fibonacci</ComboBoxItem>
-    </ComboBox>
-
-    <c:ExecutionBar Grid.Column="1" Grid.Row="0" />
+    <c:ExecutionBar Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" />
 
     <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
@@ -20,6 +16,10 @@
       <ComboBoxItem>Hochsprache</ComboBoxItem>
     </ComboBox>
 
-    <TextBox Name="srcTB" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
+    <TextBox Name="srcTB" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5">
+      2A 00 00 42 02 /* Setze X */
+      2A 00 00 08 03 /* Setze Y */
+      5A /* Addiere beide zahlen */
+    </TextBox>
   </Grid>
 </UserControl>
