@@ -22,18 +22,17 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\filmee24\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://packages.stride3d.net/nuget": {},
           "https://www.myget.org/F/avalonia-ci/api/v2": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "netcoreapp5",
             "projectReferences": {}
           }
         },
@@ -44,24 +43,16 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "netcoreapp5",
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[0.10.0-rc1, )"
+              "version": "[0.10.0, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[0.10.0-rc1, )"
-            },
-            "NetSparkle.New": {
-              "target": "Package",
-              "version": "[2.0.0-preview20210111001, )"
-            },
-            "NetSparkleUpdater.UI.Avalonia": {
-              "target": "Package",
-              "version": "[2.0.0-preview20210111001, )"
+              "version": "[0.10.0, )"
             }
           },
           "imports": [
@@ -101,18 +92,17 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\filmee24\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://packages.stride3d.net/nuget": {},
           "https://www.myget.org/F/avalonia-ci/api/v2": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "netcoreapp5",
             "projectReferences": {
               "C:\\Users\\filmee24\\Documents\\Projektarbeit\\Mima-Sim\\Mima-Sim.csproj": {
                 "projectPath": "C:\\Users\\filmee24\\Documents\\Projektarbeit\\Mima-Sim\\Mima-Sim.csproj"
@@ -127,8 +117,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "netcoreapp5",
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
