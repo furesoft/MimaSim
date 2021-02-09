@@ -1,4 +1,5 @@
-﻿using MimaSim.Core;
+﻿using MimaSim.Commands;
+using MimaSim.Core;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -16,7 +17,7 @@ namespace MimaSim.ViewModels
 
         public ClockSettingsPopupViewModel()
         {
-            SetClockSettings = new DelegateCommand(_ => { Debug.WriteLine("OK Called"); });
+            SetClockSettings = new DialogCommand(_ => { Debug.WriteLine("OK Called"); });
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using System.Xml;
+﻿using System.Xml;
 
 namespace MimaSim.Core
 {
@@ -16,15 +15,6 @@ namespace MimaSim.Core
             }
 
             return false;
-        }
-
-        public static ICommand Aggregate(this ICommand cmd, ICommand nextCommand)
-        {
-            return new DelegateCommand(_ =>
-            {
-                cmd.Execute(_);
-                nextCommand.Execute(_);
-            });
         }
     }
 }

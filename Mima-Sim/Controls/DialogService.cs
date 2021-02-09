@@ -1,4 +1,10 @@
-﻿using MimaSim.Controls.MimaComponents.Popups;
+﻿using Avalonia.Controls;
+using MimaSim.Commands;
+using MimaSim.Controls.MimaComponents.Popups;
+using MimaSim.Core;
+using MimaSim.ViewModels;
+using System;
+using System.Windows.Input;
 
 namespace MimaSim.Controls
 {
@@ -28,6 +34,13 @@ namespace MimaSim.Controls
             }
         }
 
+        public static void Open(Control content, BaseViewModel viewModel)
+        {
+            content.DataContext = viewModel;
+
+            Open(content);
+        }
+
         public static void OpenError(string message)
         {
             Open(new ErrorPopupControl() { Tag = message });
@@ -47,6 +60,14 @@ namespace MimaSim.Controls
             {
                 _host.IsOpened = false;
             }
+        }
+
+        public static ICommand CreateCommand(Control content, BaseViewModel viewModel)
+        {
+            return new DelegateCommand(_ =>
+            {
+                DialogService.Open(content, viewModel);
+            });
         }
     }
 }

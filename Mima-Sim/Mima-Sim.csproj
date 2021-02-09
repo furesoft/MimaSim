@@ -52,6 +52,5 @@
   <ItemGroup>
     <Folder Include="Core\AST\" />
     <Folder Include="MIMA\VM\" />
-    <Folder Include="Commands\" />
   </ItemGroup>
 </Project>

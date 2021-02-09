@@ -1,8 +1,6 @@
 ﻿using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
-using System;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
@@ -17,14 +15,6 @@ namespace MimaSim.ViewModels
             set { _openErrorPopupCommand = value; Raise(); }
         }
 
-        private ICommand _testCommand;
-
-        public ICommand TestCommand
-        {
-            get { return _testCommand; }
-            set { _testCommand = value; Raise(); }
-        }
-
         private ICommand _openClockSettingsCommand;
 
         public ICommand OpenClockSettingsCommand
@@ -36,13 +26,8 @@ namespace MimaSim.ViewModels
         public ExecutionTabModel()
         {
             OpenErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
-            TestCommand = new DelegateCommand(_ =>
-            {
-                Debug.WriteLine("TestCommand Executed. Will Close Application!");
-                Environment.Exit(0);
-            });
 
-            OpenClockSettingsCommand = new DelegateCommand(_ => DialogService.Open(new ClockSettingsPopupControl()));
+            OpenClockSettingsCommand = DialogService.CreateCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
         }
     }
 }

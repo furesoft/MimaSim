@@ -6,7 +6,7 @@
              xmlns:c="clr-namespace:MimaSim.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.ClockSettingsPopupControl">
-  <c:DialogControl IsCancelEnabled="False" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}" DataContext="{vm:ClockSettingsPopupViewModel}">
+  <c:DialogControl IsCancelEnabled="False" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}">
     <Grid>
       <TextBlock Text="Hello World. This is something new to me. I would like you to read my introduction. I have no idea what to do." />
     </Grid>
