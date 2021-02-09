@@ -9,7 +9,7 @@
 
   <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="{Binding ElementName=register, Path=Tag}">
     <Grid>
-      <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" />
+      <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center" />
     </Grid>
   </Border>
 </UserControl>

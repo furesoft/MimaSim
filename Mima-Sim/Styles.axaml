@@ -8,14 +8,22 @@
     <Setter Property="Background" Value="LightGray" />
   </Style>
 
+  <Style Selector="Button.base">
+    <Setter Property="MinWidth" Value="75" />
+    <Setter Property="MinHeight" Value="35" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+  </Style>
+
   <Style Selector="Button.clickable">
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid>
-          <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
-        </Grid>
+        <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Content}" TextAlignment="Center" />
       </ControlTemplate>
     </Setter>
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
   </Style>
 
   <Style Selector="Button.clickable:pointerover">
