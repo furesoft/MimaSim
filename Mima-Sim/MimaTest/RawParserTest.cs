@@ -2,6 +2,8 @@
 using MimaSim.Core.AST.Nodes;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Visitors;
+using System;
+using System.Linq;
 
 namespace MimaTest
 {
@@ -13,7 +15,20 @@ namespace MimaTest
         {
             var input = "2A 90 2A 90 2A 90";
             var parser = new RawParser();
-            var ast = parser.Parse(input);
+            var ast = (CallNode)parser.Parse(input);
+
+            Assert.AreEqual(ast.Args.Count, 6);
+            Assert.AreEqual(input, string.Join(' ', ast.Args.Select(_ =>
+            {
+                if (_ is LiteralNode ln)
+                {
+                    return ((byte)ln.Value).ToString("x");
+                }
+                else
+                {
+                    return "0";
+                }
+            })).ToUpper());
         }
 
         [TestMethod]
