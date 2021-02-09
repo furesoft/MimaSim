@@ -21,12 +21,14 @@
     <None Remove="Resources\cpu.png" />
     <None Remove="Resources\Icons\pause.png" />
     <None Remove="Resources\Icons\play.png" />
+    <None Remove="Resources\Icons\raw.png" />
     <None Remove="Resources\Icons\step.png" />
     <None Remove="Resources\Icons\stop.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Resources\Icons\pause.png" />
     <AvaloniaResource Include="Resources\Icons\play.png" />
+    <AvaloniaResource Include="Resources\Icons\raw.png" />
     <AvaloniaResource Include="Resources\Icons\step.png" />
     <AvaloniaResource Include="Resources\Icons\stop.png" />
     <AvaloniaResource Include="Styles\ContentDialogStyle.axaml">

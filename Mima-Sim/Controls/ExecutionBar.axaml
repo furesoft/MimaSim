@@ -20,7 +20,7 @@
     </Button>
     <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
     <Button ToolTip.Tip="Maschinencode anzeigen">
-      <Image Source="/Resources/Icons/play.png" Width="20" Height="20" />
+      <Image Source="/Resources/Icons/raw.png" Width="20" Height="20" />
     </Button>
   </StackPanel>
 </UserControl>
