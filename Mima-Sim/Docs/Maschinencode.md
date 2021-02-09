@@ -5,8 +5,9 @@ Der Maschinencode wird direkt in Hexadezimalzahlen geschrieben. Es werden jeweil
 Beispiel:
 
 ```
-2A 00 46 03 00 /* Do Something */
-10 A4 05 43 41
+2A 00 00 42 02 /* Setze X */
+2A 00 00 08 03 /* Setze Y */
+5A /* Addiere beide zahlen */
 ```
 
 Es kann jederzeit Code durch /* .. */ kommentiert werden, wobei .. ein beliebiger Kommentar ist
@@ -39,4 +40,4 @@ Instruktionen
 |cmpne  |4B    |Konstante|1|Prüft ob Wert im Accumulator nicht gleich ist|
 |cmplt  |4C    |Konstante|1|Prüft ob Wert im Accumulator kleiner ist|
 |cmpgt  |4D    |Konstante|1|Prüft ob Wert im Accumulator größer ist|
-|add    |5A    |Konstante|1|Addiert das Argument mit dem Accumulator und speichert das Ergebnis im Accumulator|
+|add    |5A    |Konstante|0|Addiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|
