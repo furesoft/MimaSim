@@ -26,5 +26,6 @@
         OpenParen,
         Exclamation,
         Operator,
+        AddressLiteral,
     }
 }
