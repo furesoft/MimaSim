@@ -9,8 +9,31 @@ Beispiel:
 10 A4 05 43 41
 ```
 
+Registerzuordnungen:
+Modus: ```r = read, w = write, rw = readwrite```
+
+|Register|Byte|Modus|
+|--------|----|-----|
+|Accumulator|01|rw|
+|X|02|rw|
+|Y|03|rw|
+|Z|04|rw|
+|IR|05|r|
+|IAR|06|rw|
+|SAR|07|rw|
+|SDR|08|rw|
+
 Instruktionen
 
-|Befehl |Opcode|Argumente|Anzahl Argumente|
-|-------|------|---------|----------------|
-|mov    |2A    |Register und/oder Speicherstelle |2|
+|Befehl |Opcode|Argumente|Anzahl Argumente|Beschreibung|
+|-------|------|---------|----------------|------------|
+|mov    |2A    |Register und/oder Speicherstelle |2|Werte verschieben|
+|loadi  |2B    |Konstante|1|Lädt eine Konstante in das Register Accumulator|
+|jmp    |3A    |Absolute Adresse|1|Springt zur Adresse|
+|jmpr   |3B    |Relative Adresse|1|Springt soweit vor/zurück wie im Argument angegeben|
+|jmpc   |3C    |Absolute Adresse|1|Springt, wenn Accumulator 1 ist zur Adresse|
+|jmpa   |3D    |Speicheradresse|1|Lädt Adresse aus dem Speicher und springt zu der Adresse, wie im Speicher angegeben|
+|cmpe   |4A    |Konstante             |1|Prüft ob Wert im Accumulator gleich wie Konstante ist|
+|cmpne  |4B    |Konstante|1|Prüft ob Wert im Accumulator nicht gleich ist|
+|cmplt  |4C    |Konstante|1|Prüft ob Wert im Accumulator kleiner ist|
+|cmpgt  |4D    |Konstante|1|Prüft ob Wert im Accumulator größer ist|
