@@ -1,5 +1,6 @@
 ﻿using MimaSim.Commands;
 using MimaSim.Core;
+using MimaSim.MIMA.Components;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -18,6 +19,12 @@ namespace MimaSim.ViewModels
         public ClockSettingsPopupViewModel()
         {
             SetClockSettings = new DialogCommand(_ => { Debug.WriteLine("OK Called"); });
+        }
+
+        public short Frequency
+        {
+            get { return CPU.Instance.Clock.Frequency; }
+            set { CPU.Instance.Clock.SetFrequency(value); }
         }
     }
 }
