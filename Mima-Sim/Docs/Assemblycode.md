@@ -6,10 +6,10 @@ Aufbau eines Befehls:
 Mnemnonic Argument1, Argument2
 ```
 
-Ein Beispiel lädt die Konstante 42 in das Register Accumulator:
+Ein Beispiel lädt die Konstante 0x42 in das Register Accumulator:
 
 ```
-mov 42, Accumulator
+mov 0x42, Accumulator
 ```
 
 Möchte man auf einer Adresse im Speicher verweisen:
