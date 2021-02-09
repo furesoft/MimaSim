@@ -8,7 +8,7 @@
              x:Class="MimaSim.Controls.MimaComponents.Popups.ClockSettingsPopupControl">
   <c:DialogControl IsCancelEnabled="False" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}">
     <Grid>
-      <TextBlock Text="Hello World. This is something new to me. I would like you to read my introduction. I have no idea what to do." />
+      <TextBlock Text="Taktgeber" Classes="popupHeader" />
     </Grid>
   </c:DialogControl>
 </UserControl>
