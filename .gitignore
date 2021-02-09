@@ -349,16 +349,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-obj/Debug/netcoreapp3.1/RecipeBookGenerator.assets.cache
-
-obj/Debug/netcoreapp3.1/RecipeBookGenerator.csprojAssemblyReference.cache
-
-BookGenerator.Library/obj/Debug/netstandard2.1/
-
-Mima-Sim/obj/Debug/netcoreapp3.1/Avalonia/
-
-Mima-Sim/obj/Debug/netcoreapp3.1/
-
-Mima-Sim/bin/Debug/netcoreapp3.1/
-*.cache
-*.cache
+[Dd]ebug/
+[Rr]elease/
+[Oo]bj/
