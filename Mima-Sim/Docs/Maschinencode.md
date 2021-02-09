@@ -40,4 +40,5 @@ Instruktionen
 |cmpne  |4B    |Konstante|1|Prüft ob Wert im Accumulator nicht gleich ist|
 |cmplt  |4C    |Konstante|1|Prüft ob Wert im Accumulator kleiner ist|
 |cmpgt  |4D    |Konstante|1|Prüft ob Wert im Accumulator größer ist|
-|add    |5A    |Konstante|0|Addiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|
+|add    |5A    |-|0|Addiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|
+|sub    |5A    |-|0|Subtrahiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|

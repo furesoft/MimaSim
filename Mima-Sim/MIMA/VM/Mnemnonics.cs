@@ -13,5 +13,6 @@
         CMPLT = 0x4C,
         CMPGT = 0x4D,
         ADD = 0x5A,
+        SUB = 0x5B,
     }
 }
