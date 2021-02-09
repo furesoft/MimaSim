@@ -8,11 +8,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.ProgramEditorControl">
   <Grid ColumnDefinitions="AUTO,*,AUTO" RowDefinitions="35,*,35">
-    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Left">
+    <ComboBox x:Name="examplesCb" Grid.Row="0" Grid.Column="0" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Left" VerticalAlignment="Bottom">
       <ComboBoxItem>Fibonacci</ComboBoxItem>
     </ComboBox>
 
-    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Right">
+    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
       <ComboBoxItem>Hochsprache</ComboBoxItem>

@@ -6,13 +6,10 @@
              xmlns:c="clr-namespace:MimaSim.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.ClockSettingsPopupControl">
-  <c:DialogControl IsCancelEnabled="False" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}">
+  <c:DialogControl IsCancelEnabled="True" CommandText="OK" Command="{Binding SetClockSettings, Mode=TwoWay}" Header="Taktgeber">
     <StackPanel>
-      <TextBlock Text="Taktgeber" Classes="popupHeader" />
-      <StackPanel>
-        <TextBlock Text="Frequenz" />
-        <NumericUpDown Value="{Binding Frequency, Mode=TwoWay}" />
-      </StackPanel>
+      <TextBlock Text="Frequenz" />
+      <NumericUpDown Value="{Binding Frequency, Mode=TwoWay}" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>

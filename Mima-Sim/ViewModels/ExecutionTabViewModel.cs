@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
-    public class ExecutionTabModel : BaseViewModel
+    public class ExecutionTabViewModel : BaseViewModel
     {
         private ICommand _openErrorPopupCommand;
 
@@ -23,7 +23,7 @@ namespace MimaSim.ViewModels
             set { _openClockSettingsCommand = value; Raise(); }
         }
 
-        public ExecutionTabModel()
+        public ExecutionTabViewModel()
         {
             OpenErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
 

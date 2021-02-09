@@ -10,8 +10,7 @@
   </Application.Styles>
 
   <Application.Resources>
-    <Image Source="/Resources/Icons/cpu.png" x:Key="cpu" />
-    <Image Source="/Resources/Icons/information.png" x:Key="help" />
-    <Image Source="/Resources/Icons/research.png" x:Key="licence" />
+    <Image Source="/Resources/Icons/play.png" x:Key="play" />
+    <Image Source="/Resources/Icons/pause.png" x:Key="pause" />
   </Application.Resources>
 </Application>

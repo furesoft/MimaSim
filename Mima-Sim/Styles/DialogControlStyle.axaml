@@ -11,12 +11,13 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border CornerRadius="3" MinHeight="{TemplateBinding MinHeight}" Margin="5" BorderBrush="Black" BorderThickness="1"  Background="White">
-          <Grid RowDefinitions="10,*,10,30" Margin="5,0,5,5">
-            <ContentPresenter Content="{TemplateBinding Content}" Margin="3" Grid.Row="1" />
+          <Grid RowDefinitions="10,AUTO,*,10,30" Margin="5,0,5,5">
+            <TextBlock Classes="popupHeader" Text="{TemplateBinding Header}" Grid.Row="1" />
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="3" Grid.Row="2" />
 
-            <StackPanel Orientation="Horizontal" Spacing="5" Grid.Row="3" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-              <Button Classes="base" IsCancel="True"  IsVisible="{TemplateBinding IsCancelEnabled}" Content="Abbrechen" Command="{TemplateBinding CancelCommand}" />
-              <Button Classes="base"  IsDefault="True"  Content="{TemplateBinding CommandText, Mode=TwoWay}" Command="{TemplateBinding Command}" />
+            <StackPanel Orientation="Horizontal" Spacing="5" Grid.Row="4" Margin="2,2,2,10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+              <Button Classes="base" VerticalContentAlignment="Bottom" IsCancel="True"  IsVisible="{TemplateBinding IsCancelEnabled}" Content="Abbrechen" Command="{TemplateBinding CancelCommand}" />
+              <Button Classes="base" VerticalContentAlignment="Bottom" IsDefault="True"  Content="{TemplateBinding CommandText, Mode=TwoWay}" Command="{TemplateBinding Command}" />
             </StackPanel>
           </Grid>
         </Border>
