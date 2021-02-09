@@ -26,11 +26,12 @@
   <Style Selector="Button.clickable">
     <Setter Property="Template">
       <ControlTemplate>
-        <TextBlock HorizontalAlignment="Center" Text="{TemplateBinding Content}" TextAlignment="Center" />
+        <TextBlock Text="{TemplateBinding Content}" TextAlignment="Center" />
       </ControlTemplate>
     </Setter>
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
   </Style>
 
   <Style Selector="Button.clickable:pointerover">
