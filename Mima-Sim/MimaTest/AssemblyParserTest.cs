@@ -9,7 +9,7 @@ namespace MimaTest
         [TestMethod]
         public void Tokenize_Should_Pass()
         {
-            var input = "&C0FFEE";
+            var input = "/* hello world. My name is mov */mov 0x42, X";
             var parser = new AssemblyParser();
 
             var result = parser.Parse(input);
