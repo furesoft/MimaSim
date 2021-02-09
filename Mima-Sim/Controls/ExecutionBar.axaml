@@ -6,16 +6,16 @@
              mc:Ignorable="d" d:DesignWidth="175" d:DesignHeight="50"
              x:Class="MimaSim.Controls.ExecutionBar">
   <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-    <ToggleButton ToolTip.Tip="Ausführen" Command="{me:RunCode languageCb}" CommandParameter="{Binding ElementName=srcTB}">
+    <ToggleButton Name="playpauseBtn" ToolTip.Tip="Ausführen" Command="{me:RunCode languageCb}" CommandParameter="{Binding ElementName=srcTB}">
       <Grid>
         <Image Classes="tbunchecked" Source="/Resources/Icons/play.png" Width="20" Height="20" />
         <Image Classes="tbchecked" Source="/Resources/Icons/pause.png" Width="20" Height="20" />
       </Grid>
     </ToggleButton>
-    <Button ToolTip.Tip="Schritt ausführen">
+    <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}">
       <Image Source="/Resources/Icons/step.png" Width="20" Height="20" />
     </Button>
-    <Button ToolTip.Tip="Stoppen">
+    <Button ToolTip.Tip="Stoppen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}">
       <Image Source="/Resources/Icons/stop.png" Width="20" Height="20" />
     </Button>
     <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
