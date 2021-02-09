@@ -2,17 +2,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:me="clr-namespace:MimaSim.MarkupExtensions"
+             mc:Ignorable="d" d:DesignWidth="175" d:DesignHeight="50"
              x:Class="MimaSim.Controls.ExecutionBar">
-  <StackPanel Orientation="Horizontal">
-    <Button>
-      <Image Source="{DynamicResource play}" Width="20" Height="20" />
+  <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+    <ToggleButton ToolTip.Tip="Ausführen" Command="{me:RunCode languageCb}" CommandParameter="{Binding ElementName=srcTB}">
+      <Grid>
+        <Image Classes="tbunchecked" Source="/Resources/Icons/play.png" Width="20" Height="20" />
+        <Image Classes="tbchecked" Source="/Resources/Icons/pause.png" Width="20" Height="20" />
+      </Grid>
+    </ToggleButton>
+    <Button ToolTip.Tip="Schritt ausführen">
+      <Image Source="/Resources/Icons/step.png" Width="20" Height="20" />
     </Button>
-    <Button>
-      Step
+    <Button ToolTip.Tip="Stoppen">
+      <Image Source="/Resources/Icons/stop.png" Width="20" Height="20" />
     </Button>
-    <Button>
-      Stop
+    <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
+    <Button ToolTip.Tip="Maschinencode anzeigen">
+      <Image Source="/Resources/Icons/play.png" Width="20" Height="20" />
     </Button>
   </StackPanel>
 </UserControl>
