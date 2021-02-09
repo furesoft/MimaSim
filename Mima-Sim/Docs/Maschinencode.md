@@ -5,9 +5,11 @@ Der Maschinencode wird direkt in Hexadezimalzahlen geschrieben. Es werden jeweil
 Beispiel:
 
 ```
-2A 00 46 03 00 
+2A 00 46 03 00 /* Do Something */
 10 A4 05 43 41
 ```
+
+Es kann jederzeit Code durch /* .. */ kommentiert werden, wobei .. ein beliebiger Kommentar ist
 
 Registerzuordnungen:
 Modus: ```r = read, w = write, rw = readwrite```
