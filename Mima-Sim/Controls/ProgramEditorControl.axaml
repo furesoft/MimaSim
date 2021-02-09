@@ -12,6 +12,8 @@
       <ComboBoxItem>Fibonacci</ComboBoxItem>
     </ComboBox>
 
+    <c:ExecutionBar Grid.Column="1" Grid.Row="0" />
+
     <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
@@ -21,6 +23,5 @@
     <TextBox Name="srcTB" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
 
     <Button Classes="base" Grid.Row="2" Grid.Column="0" Command="{Binding OpenErrorPopupCommand}">Raw</Button>
-    <Button Classes="base" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Command="{me:RunCode languageCb}" CommandParameter="{Binding ElementName=srcTB}">Ausführen</Button>
   </Grid>
 </UserControl>
