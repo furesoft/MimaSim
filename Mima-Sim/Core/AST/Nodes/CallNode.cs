@@ -5,18 +5,22 @@ namespace MimaSim.Core.AST.Nodes
 {
     public struct CallNode : IAstNode
     {
-        public CallNode(string name, List<IAstNode> args)
+        public CallNode(string name, object type, List<IAstNode> args)
         {
             Name = name;
             Args = args;
+            Type = type;
         }
 
         public List<IAstNode> Args { get; set; }
         public string Name { get; set; }
+
         public bool IsEmpty
         {
             get { return !Args.Any(); }
         }
+
+        public object Type { get; set; }
 
         public override string ToString()
         {
