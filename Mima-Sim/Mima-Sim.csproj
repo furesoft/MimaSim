@@ -18,6 +18,14 @@
     <AvaloniaXaml Remove="Styles.axaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\cpu.png" />
+    <None Remove="Resources\Icons\information.png" />
+    <None Remove="Resources\Icons\research.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\Icons\cpu.png" />
+    <AvaloniaResource Include="Resources\Icons\information.png" />
+    <AvaloniaResource Include="Resources\Icons\research.png" />
     <AvaloniaResource Include="Styles\ContentDialogStyle.axaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaResource>
