@@ -25,42 +25,30 @@ namespace MimaSim.Core.Tokenizer
             this.pos = pos;
         }
 
-        /// <summary>
-        /// Advances through the source document by adding
-        /// the given offset to the position index.
-        /// </summary>
         private void Advance(int Offset)
         {
             pos += Offset;
         }
 
-        /// <summary>
-        /// Reads a single token from the source document,
-        /// without updating the current position in the
-        /// source document.
-        /// </summary>
         public Token Peek(int offset = 0)
         {
             return _tokens[pos + offset];
         }
 
-        /// <summary>
-        /// Reads a single token from the source document.
-        /// The current position in the source document
-        /// is updated.
-        /// </summary>
         public Token Read()
         {
             var result = Peek();
+
+            if (result.Kind == TokenKind.Comment)
+            {
+                Advance(1);
+                result = Peek();
+            }
+
             Advance(1);
             return result;
         }
 
-        /// <summary>
-        /// Reads a single token from the source document,
-        /// and updates the current position. The token's
-        /// kind must match the given token kind.
-        /// </summary>
         public Token Read(TokenKind Kind)
         {
             var result = Read();
