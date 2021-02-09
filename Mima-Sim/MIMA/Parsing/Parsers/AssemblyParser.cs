@@ -35,7 +35,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
         {
             //ToDo: implement assembly parser
-            return NodeFactory.Call("{}");
+            return NodeFactory.Call("{}", null);
         }
     }
 }
