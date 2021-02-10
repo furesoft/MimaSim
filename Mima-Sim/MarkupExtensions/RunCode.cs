@@ -44,6 +44,10 @@ namespace MimaSim.MarkupExtensions
                            CPU.Instance.Clock.Stop();
                        }
                    }
+                   else
+                   {
+                       DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
+                   }
                });
             }
 
