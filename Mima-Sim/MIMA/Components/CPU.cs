@@ -33,8 +33,15 @@ namespace MimaSim.MIMA.Components
             ALU = new ALU(this);
         }
 
+        public void Fetch()
+        {
+            var address = ControlUnit.IAR.GetValue();
+        }
+
         public bool Step()
         {
+            //fetch mnemnonic
+
             return false;
         }
 
