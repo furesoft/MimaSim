@@ -5,7 +5,7 @@
         xmlns:vm="clr-namespace:MimaSim.ViewModels"
         xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
-        x:Class="MimaSim.MainWindow" DataContext="{vm:ExecutionTabViewModel}"
+        x:Class="MimaSim.MainWindow" DataContext="{vm:ExecutionTabViewModel}" Icon="avares://MimaSim/Icon.ico"
         Title="Mima Simulator" WindowStartupLocation="CenterScreen" WindowState="Normal" MaxWidth="1000" MaxHeight="555" MinWidth="1000" MinHeight="555">
 
   <c:ContentDialog c:DialogService.IsHost="True">
