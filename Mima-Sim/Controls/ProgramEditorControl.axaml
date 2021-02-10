@@ -10,7 +10,7 @@
   <Grid ColumnDefinitions="AUTO,*,AUTO" RowDefinitions="35,*">
     <c:ExecutionBar Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" />
 
-    <ComboBox Grid.Row="0" Grid.Column="2" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom" SelectedItem="{Binding SelectedLanguage}" SelectedIndex="0">
+    <ComboBox Name="languageCB" Grid.Row="0" Grid.Column="2" MinWidth="110" HorizontalAlignment="Right" VerticalAlignment="Bottom" SelectedItem="{Binding SelectedLanguage}">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
       <ComboBoxItem>Hochsprache</ComboBoxItem>
