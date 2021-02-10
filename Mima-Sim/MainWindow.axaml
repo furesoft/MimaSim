@@ -15,9 +15,9 @@
       </c:DialogControl>
     </c:ContentDialog.DialogContent>
     <DockPanel>
-      <TabControl Name="content" DockPanel.Dock="Top" TabStripPlacement="Left" />
+      <TabControl Name="content" DockPanel.Dock="Top" />
 
-      <c:FooterControl DockPanel.Dock="Bottom" Height="25" VerticalAlignment="Bottom" />
+      <c:FooterControl DockPanel.Dock="Bottom" Height="40" VerticalAlignment="Bottom" />
     </DockPanel>
   </c:ContentDialog>
 </Window>

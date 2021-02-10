@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:MimaSim.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Controls.OtherPopups.LicensesPopupControl">
+  <c:DialogControl CommandText="OK" Header="Lizenzen" Command="{Binding CloseCommand}">
+    <StackPanel>
+      <TextBlock Text="Benutzerinterface: AvaloniaUI" />
+      <TextBlock Text="TextRendering: CSharpMath.Avalonia" />
+    </StackPanel>
+  </c:DialogControl>
+</UserControl>

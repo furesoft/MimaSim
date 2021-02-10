@@ -2,12 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:MimaSim.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="35" DataContext="{vm:FooterViewModel}"
              x:Class="MimaSim.Controls.FooterControl">
   <Grid Margin="5,0,5,0">
-    <TextBlock Text="Mima-Architektur Simulator" HorizontalAlignment="Left" />
+    <TextBlock Text="Mima-Architektur Simulator" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
-    <TextBlock Text="Programmaktualisierung verfügbar. Klicken um Update zu installieren" VerticalAlignment="Top" Foreground="Red" IsVisible="False" HorizontalAlignment="Center" />
-    <TextBlock Text="© 2020/2021 Chris Anders" HorizontalAlignment="Right" />
+    <Button Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Height="35" Width="100" Command="{Binding OpenLicenseCommand}">
+      <TextBlock Text="Lizenzen" TextAlignment="Center" VerticalAlignment="Bottom" />
+    </Button>
+
+    <TextBlock Text="© 2020/2021 Chris Anders" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
   </Grid>
 </UserControl>
