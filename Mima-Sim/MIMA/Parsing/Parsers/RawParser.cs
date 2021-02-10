@@ -37,7 +37,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 }
             } while (token.Kind != TokenKind.EndOfFile);
 
-            return NodeFactory.Call("{}", null, _nodes.ToArray());
+            return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
         }
     }
 }

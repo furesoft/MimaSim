@@ -12,7 +12,7 @@ namespace MimaSim.MIMA.Parsing.SourceTranslators
             var parser = new RawParser();
             var ast = (CallNode)parser.Parse(input);
 
-            if (ast.IsEmpty)
+            if (ast.IsEmpty || ast.Type == null)
             {
                 hasErrors = true;
                 return new byte[0];
