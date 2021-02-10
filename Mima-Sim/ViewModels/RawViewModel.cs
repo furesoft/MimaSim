@@ -1,7 +1,9 @@
-﻿using MimaSim.Core;
+﻿using MimaSim.Controls;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 using System;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
@@ -15,9 +17,19 @@ namespace MimaSim.ViewModels
             set { _raw = value; Raise(); }
         }
 
+        private ICommand _closeCommand;
+
+        public ICommand CloseCommand
+        {
+            get { return _closeCommand; }
+            set { _closeCommand = value; Raise(); }
+        }
+
         public RawViewModel()
         {
             Raw = GetRawString();
+
+            CloseCommand = new DelegateCommand(_ => DialogService.Close());
         }
 
         private string GetRawString()

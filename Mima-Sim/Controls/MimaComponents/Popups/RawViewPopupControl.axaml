@@ -5,7 +5,7 @@
              xmlns:c="clr-namespace:MimaSim.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" MinWidth="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.RawViewPopupControl">
-  <c:DialogControl CommandText="OK" Header="Maschinencode">
+  <c:DialogControl CommandText="OK" Header="Maschinencode" Command="{Binding CloseCommand}">
     <StackPanel>
       <TextBox Text="{Binding Raw}" IsReadOnly="True" MinWidth="100" MinHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" />
     </StackPanel>
