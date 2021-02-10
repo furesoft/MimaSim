@@ -1,4 +1,5 @@
-﻿using MimaSim.Controls;
+﻿using MimaSim.Commands;
+using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
 using MimaSim.MIMA.Components;
@@ -31,6 +32,9 @@ namespace MimaSim.ViewModels
             OpenClockSettingsCommand = DialogService.CreateCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
 
             StepCommand = new DelegateCommand(_ => CPU.Instance.Step());
+            StopCommand = new DelegateCommand(_ => CPU.Instance.Clock.Stop());
+
+            ViewRawCommand = new DelegateCommand(_ => DialogService.Open(new RawViewPopupControl(), new RawViewModel()));
         }
 
         private string _source;
@@ -63,6 +67,22 @@ namespace MimaSim.ViewModels
         {
             get { return _stepCommand; }
             set { _stepCommand = value; Raise(); }
+        }
+
+        private ICommand _stopCommand;
+
+        public ICommand StopCommand
+        {
+            get { return _stopCommand; }
+            set { _stopCommand = value; Raise(); }
+        }
+
+        private ICommand _viewRawCommand;
+
+        public ICommand ViewRawCommand
+        {
+            get { return _viewRawCommand; }
+            set { _viewRawCommand = value; Raise(); }
         }
     }
 }

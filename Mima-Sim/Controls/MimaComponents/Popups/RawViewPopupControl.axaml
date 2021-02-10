@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:MimaSim.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" MinWidth="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.RawViewPopupControl">
   <c:DialogControl CommandText="OK" Header="Maschinencode">
     <StackPanel>
-      <TextBox IsReadOnly="True" MinWidth="100" MinHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" />
+      <TextBox Text="{Binding Raw}" IsReadOnly="True" MinWidth="100" MinHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>
