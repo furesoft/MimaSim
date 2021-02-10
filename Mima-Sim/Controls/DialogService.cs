@@ -43,7 +43,7 @@ namespace MimaSim.Controls
 
         public static void OpenError(string message)
         {
-            Open(new ErrorPopupControl() { Tag = message });
+            Open(new ErrorPopupControl(), new ErrorPopupViewModel { Message = message });
         }
 
         public static void Open()

@@ -2,7 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="popup"
+             xmlns:c="clr-namespace:MimaSim.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.ErrorPopupControl">
-  <TextBlock Text="{Binding ElementName=popup, Path=Tag}" FontSize="{StaticResource FontSizeLarge}" Foreground="{StaticResource ErrorBrush}" />
+  <c:DialogControl CommandText="OK" Header="Fehler" Command="{Binding CloseCommand}">
+    <TextBlock Text="{Binding Message}" FontSize="22" />
+  </c:DialogControl>
 </UserControl>
