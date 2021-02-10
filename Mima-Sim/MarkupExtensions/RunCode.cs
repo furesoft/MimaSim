@@ -1,42 +1,48 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Markup.Xaml;
+using MimaSim.Controls;
 using MimaSim.Core;
 using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.Parsing.SourceTranslators;
+using MimaSim.ViewModels;
 using System;
 
 namespace MimaSim.MarkupExtensions
 {
     public class RunCode : MarkupExtension
     {
-        public string LangaugeSelector { get; set; }
-
-        public RunCode(string langaugeSelector)
-        {
-            LangaugeSelector = langaugeSelector;
-        }
-
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             var ipvt = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
-            var root = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
-            if (ipvt.TargetObject is Button btn)
+
+            if (ipvt.TargetObject is ToggleButton btn)
             {
                 return new DelegateCommand(_ =>
                {
-                   if (_ is TextBox txtBox && !string.IsNullOrEmpty(txtBox.Text))
+                   var dataContext = (ExecutionTabViewModel)btn.DataContext;
+
+                   if (!string.IsNullOrEmpty(dataContext.Source))
                    {
-                       var rootObj = (Control)root.RootObject;
-                       var cbLanguage = rootObj.Find<ComboBox>(LangaugeSelector);
-                       var item = (ComboBoxItem)cbLanguage.SelectedItem;
+                       if (dataContext.RunMode)
+                       {
+                           var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)dataContext.SelectedLanguage).Content.ToString()));
 
-                       var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), item.Content.ToString()));
+                           CPU.Instance.Program = translator.ToRaw(dataContext.Source, out var hasError);
 
-                       CPU.Instance.Program = translator.ToRaw(txtBox.Text);
-                       RegisterMap.GetRegister("IAR").SetValue(0);
+                           if (hasError)
+                           {
+                               DialogService.OpenError("Der Programmcode enthält einige Fehler. Code kann nicht übersetzt werden.");
+                           }
 
-                       CPU.Instance.Clock.Start();
+                           RegisterMap.GetRegister("IAR").SetValue(0);
+
+                           CPU.Instance.Clock.Start();
+                       }
+                       else
+                       {
+                           CPU.Instance.Clock.Stop();
+                       }
                    }
                });
             }

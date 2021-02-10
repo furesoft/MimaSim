@@ -2,6 +2,6 @@
 {
     public interface ISourceTextTranslator
     {
-        byte[] ToRaw(string input);
+        byte[] ToRaw(string input, out bool containsErrors);
     }
 }

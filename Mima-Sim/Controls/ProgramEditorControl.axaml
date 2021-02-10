@@ -10,16 +10,12 @@
   <Grid ColumnDefinitions="AUTO,*,AUTO" RowDefinitions="35,*">
     <c:ExecutionBar Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" />
 
-    <ComboBox x:Name="languageCb" Grid.Row="0" Grid.Column="2" SelectedIndex="0" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+    <ComboBox Grid.Row="0" Grid.Column="2" MinWidth="110" HorizontalAlignment="Right"  VerticalAlignment="Bottom" SelectedItem="{Binding SelectedLanguage}" SelectedIndex="0">
       <ComboBoxItem>Maschinencode</ComboBoxItem>
       <ComboBoxItem>Assembly</ComboBoxItem>
       <ComboBoxItem>Hochsprache</ComboBoxItem>
     </ComboBox>
 
-    <TextBox Name="srcTB" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5">
-      2A 00 00 42 02 /* Setze X */
-      2A 00 00 08 03 /* Setze Y */
-      5A /* Addiere beide zahlen */
-    </TextBox>
+    <TextBox Text="{Binding Source}" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
   </Grid>
 </UserControl>
