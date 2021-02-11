@@ -6,15 +6,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.MemoryPopupControl">
   <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Speicher">
-    <DataGrid>
-      <DataGrid.Columns>
-        <DataGridTextColumn Header="Adresse"
-                            Binding="{Binding FirstName}"
-                            Width="2*" />
-        <DataGridTextColumn Header="Wert"
-                            Binding="{Binding LastName}"
-                            Width="2*" />
-      </DataGrid.Columns>
-    </DataGrid>
+    <ScrollViewer>
+      <ItemsPresenter Items="{Binding MemoryCells}">
+        <ItemsPresenter.DataTemplates>
+          <DataTemplate>
+            <Border BorderBrush="Black" BorderThickness="1">
+              <Grid Margin="2">
+                <TextBlock Text="{Binding Address}" HorizontalAlignment="Left" />
+
+                <TextBlock Text="{Binding Value}" HorizontalAlignment="Right" />
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ItemsPresenter.DataTemplates>
+      </ItemsPresenter>
+    </ScrollViewer>
   </c:DialogControl>
 </UserControl>
