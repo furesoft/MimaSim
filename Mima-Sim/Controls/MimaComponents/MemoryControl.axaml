@@ -8,7 +8,7 @@
              x:Class="MimaSim.Controls.MimaComponents.MemoryControl" Width="100" Height="75">
   <Grid ColumnDefinitions="20,*,20" RowDefinitions="*,20">
     <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Grid.Row="0">
-      <Button Classes="clickable">Speicher</Button>
+      <Button Classes="clickable" Command="{Binding OpenMemoryPopupCommand}">Speicher</Button>
     </Border>
   </Grid>
 </UserControl>

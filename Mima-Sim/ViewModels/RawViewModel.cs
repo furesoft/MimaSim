@@ -27,8 +27,6 @@ namespace MimaSim.ViewModels
 
         public RawViewModel()
         {
-            Raw = GetRawString();
-
             CloseCommand = new DelegateCommand(_ => DialogService.Close());
         }
 
@@ -40,6 +38,11 @@ namespace MimaSim.ViewModels
             {
                 return (_).ToString("x");
             })).ToUpper();
+        }
+
+        public override void OnOpen()
+        {
+            Raw = GetRawString();
         }
     }
 }

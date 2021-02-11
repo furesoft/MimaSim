@@ -25,6 +25,14 @@ namespace MimaSim.ViewModels
             set { _openClockSettingsCommand = value; Raise(); }
         }
 
+        private ICommand _openMemoryPopupCommand;
+
+        public ICommand OpenMemoryPopupCommand
+        {
+            get { return _openMemoryPopupCommand; }
+            set { _openMemoryPopupCommand = value; Raise(); }
+        }
+
         public ExecutionTabViewModel()
         {
             OpenErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
@@ -34,7 +42,8 @@ namespace MimaSim.ViewModels
             StepCommand = new DelegateCommand(_ => CPU.Instance.Step());
             StopCommand = new DelegateCommand(_ => CPU.Instance.Clock.Stop());
 
-            ViewRawCommand = new DelegateCommand(_ => DialogService.Open(new RawViewPopupControl(), new RawViewModel()));
+            ViewRawCommand = DialogService.CreateCommand(new RawViewPopupControl(), new RawViewModel());
+            OpenMemoryPopupCommand = DialogService.CreateCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
         }
 
         private string _source;
