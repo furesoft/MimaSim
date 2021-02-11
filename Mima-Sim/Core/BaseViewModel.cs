@@ -22,5 +22,9 @@ namespace MimaSim.Core
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public virtual void OnOpen()
+        {
+        }
     }
 }
