@@ -9,7 +9,6 @@ namespace MimaSim.ViewModels
 {
     public class RawPopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        private ICommand _closeCommand;
         private string _raw;
 
         public RawPopupViewModel()
