@@ -62,10 +62,11 @@ namespace MimaSim.Controls
             }
         }
 
-        public static ICommand CreateCommand(Control content, BaseViewModel viewModel)
+        public static ICommand CreateOpenCommand(Control content, BaseViewModel viewModel)
         {
             return new DelegateCommand(_ =>
             {
+                viewModel.OnOpen();
                 DialogService.Open(content, viewModel);
             });
         }
