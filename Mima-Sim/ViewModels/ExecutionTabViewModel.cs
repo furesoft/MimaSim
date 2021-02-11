@@ -15,7 +15,6 @@ namespace MimaSim.ViewModels
         private bool _runMode;
         private object _selectedLanguage;
         private string _source;
-        private ICommand _viewRawCommand;
 
         public ExecutionTabViewModel()
         {
@@ -40,6 +39,7 @@ namespace MimaSim.ViewModels
 
                         if (hasError)
                         {
+                            RunMode = false;
                             DialogService.OpenError("Der Programmcode enthält einige Fehler. Code kann nicht übersetzt werden.");
                         }
 
@@ -54,6 +54,7 @@ namespace MimaSim.ViewModels
                 }
                 else
                 {
+                    RunMode = false;
                     DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
                 }
             });
