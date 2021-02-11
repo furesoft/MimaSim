@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="175" d:DesignHeight="50"
              x:Class="MimaSim.Controls.ExecutionBar">
   <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-    <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode}" ToolTip.Tip="Ausführen" Command="{me:RunCode}">
+    <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode}" ToolTip.Tip="Ausführen" Command="{Binding RunCodeCommand}">
       <Grid>
         <Image Classes="tbunchecked" Source="/Resources/Icons/play.png" Width="20" Height="20" />
         <Image Classes="tbchecked" Source="/Resources/Icons/pause.png" Width="20" Height="20" />

@@ -1,9 +1,7 @@
 ﻿using Avalonia.Controls;
-using MimaSim.Commands;
 using MimaSim.Controls.MimaComponents.Popups;
-using MimaSim.Core;
 using MimaSim.ViewModels;
-using System;
+using ReactiveUI;
 using System.Windows.Input;
 
 namespace MimaSim.Controls
@@ -34,7 +32,7 @@ namespace MimaSim.Controls
             }
         }
 
-        public static void Open(Control content, BaseViewModel viewModel)
+        public static void Open(Control content, ReactiveObject viewModel)
         {
             content.DataContext = viewModel;
 
@@ -62,12 +60,11 @@ namespace MimaSim.Controls
             }
         }
 
-        public static ICommand CreateOpenCommand(Control content, BaseViewModel viewModel)
+        public static ICommand CreateOpenCommand(Control content, ReactiveObject viewModel)
         {
-            return new DelegateCommand(_ =>
+            return ReactiveCommand.Create(() =>
             {
-                viewModel.OnOpen();
-                DialogService.Open(content, viewModel);
+                Open(content, viewModel);
             });
         }
     }

@@ -1,6 +1,4 @@
-﻿using MimaSim.Core.AST;
-
-namespace MimaSim.Core
+﻿namespace MimaSim.Core
 {
     public enum LanguageName
     {

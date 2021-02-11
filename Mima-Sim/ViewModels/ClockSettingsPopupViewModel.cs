@@ -1,20 +1,16 @@
 ﻿using MimaSim.Commands;
-using MimaSim.Core;
 using MimaSim.MIMA.Components;
+using ReactiveUI;
 using System.Diagnostics;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
-    public class ClockSettingsPopupViewModel : BaseViewModel
+    public class ClockSettingsPopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        private ICommand _setClockSettingsCommand;
+        public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
-        public ICommand SetClockSettings
-        {
-            get { return _setClockSettingsCommand; }
-            set { _setClockSettingsCommand = value; Raise(); }
-        }
+        public ICommand SetClockSettings { get; set; }
 
         public ClockSettingsPopupViewModel()
         {
@@ -24,7 +20,7 @@ namespace MimaSim.ViewModels
         public short Frequency
         {
             get { return CPU.Instance.Clock.Frequency; }
-            set { CPU.Instance.Clock.SetFrequency(value); }
+            set { CPU.Instance.Clock.SetFrequency(value); this.RaisePropertyChanged(); }
         }
     }
 }

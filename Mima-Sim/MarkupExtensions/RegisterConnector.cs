@@ -1,10 +1,6 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Data;
-using Avalonia.Markup.Xaml;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.MIMA;
-using System;
-using System.Text;
 
 namespace MimaSim.MarkupExtensions
 {

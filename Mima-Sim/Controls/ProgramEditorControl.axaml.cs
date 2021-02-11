@@ -1,9 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using MimaSim.ViewModels;
 
 namespace MimaSim.Controls
 {
-    public class ProgramEditorControl : UserControl
+    public class ProgramEditorControl : ReactiveUserControl<ExecutionTabViewModel>
     {
         public ProgramEditorControl()
         {

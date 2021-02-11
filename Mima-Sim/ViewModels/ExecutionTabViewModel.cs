@@ -1,49 +1,64 @@
-﻿using MimaSim.Commands;
+﻿using Avalonia.Controls;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
+using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
+using ReactiveUI;
+using System;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
-    public class ExecutionTabViewModel : BaseViewModel
+    public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     {
-        private ICommand _openErrorPopupCommand;
+        public ICommand RunCodeCommand { get; set; }
+        public ICommand OpenErrorPopupCommand { get; set; }
 
-        public ICommand OpenErrorPopupCommand
-        {
-            get { return _openErrorPopupCommand; }
-            set { _openErrorPopupCommand = value; Raise(); }
-        }
+        public ICommand OpenClockSettingsCommand { get; set; }
 
-        private ICommand _openClockSettingsCommand;
-
-        public ICommand OpenClockSettingsCommand
-        {
-            get { return _openClockSettingsCommand; }
-            set { _openClockSettingsCommand = value; Raise(); }
-        }
-
-        private ICommand _openMemoryPopupCommand;
-
-        public ICommand OpenMemoryPopupCommand
-        {
-            get { return _openMemoryPopupCommand; }
-            set { _openMemoryPopupCommand = value; Raise(); }
-        }
+        public ICommand OpenMemoryPopupCommand { get; set; }
 
         public ExecutionTabViewModel()
         {
-            OpenErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
+            OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
 
             OpenClockSettingsCommand = DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
 
-            StepCommand = new DelegateCommand(_ => CPU.Instance.Step());
-            StopCommand = new DelegateCommand(_ => CPU.Instance.Clock.Stop());
+            StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
+            StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
 
-            ViewRawCommand = DialogService.CreateOpenCommand(new RawViewPopupControl(), new RawViewModel());
+            ViewRawCommand = DialogService.CreateOpenCommand(new RawViewPopupControl(), new RawPopupViewModel());
             OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
+
+            RunCodeCommand = ReactiveCommand.Create(() =>
+            {
+                if (!string.IsNullOrEmpty(Source))
+                {
+                    if (RunMode)
+                    {
+                        var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
+                        CPU.Instance.Program = translator.ToRaw(Source, out var hasError);
+
+                        if (hasError)
+                        {
+                            DialogService.OpenError("Der Programmcode enthält einige Fehler. Code kann nicht übersetzt werden.");
+                        }
+
+                        RegisterMap.GetRegister("IAR").SetValue(0);
+
+                        CPU.Instance.Clock.Start();
+                    }
+                    else
+                    {
+                        CPU.Instance.Clock.Stop();
+                    }
+                }
+                else
+                {
+                    DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
+                }
+            });
         }
 
         private string _source;
@@ -51,7 +66,7 @@ namespace MimaSim.ViewModels
         public string Source
         {
             get { return _source; }
-            set { _source = value; Raise(); }
+            set { _source = value; this.RaiseAndSetIfChanged(ref _source, value); }
         }
 
         private object _selectedLanguage;
@@ -59,39 +74,25 @@ namespace MimaSim.ViewModels
         public object SelectedLanguage
         {
             get { return _selectedLanguage; }
-            set { _selectedLanguage = value; Raise(); }
+            set { _selectedLanguage = value; this.RaiseAndSetIfChanged(ref _selectedLanguage, value); }
         }
 
-        private bool _pauseMode;
+        private bool _runMode;
 
         public bool RunMode
         {
-            get { return _pauseMode; }
-            set { _pauseMode = value; Raise(); }
+            get { return _runMode; }
+            set { _runMode = value; this.RaiseAndSetIfChanged(ref _runMode, value); }
         }
 
-        private ICommand _stepCommand;
+        public ICommand StepCommand { get; set; }
 
-        public ICommand StepCommand
-        {
-            get { return _stepCommand; }
-            set { _stepCommand = value; Raise(); }
-        }
-
-        private ICommand _stopCommand;
-
-        public ICommand StopCommand
-        {
-            get { return _stopCommand; }
-            set { _stopCommand = value; Raise(); }
-        }
+        public ICommand StopCommand { get; set; }
 
         private ICommand _viewRawCommand;
 
-        public ICommand ViewRawCommand
-        {
-            get { return _viewRawCommand; }
-            set { _viewRawCommand = value; Raise(); }
-        }
+        public ICommand ViewRawCommand { get; set; }
+
+        public ViewModelActivator Activator => new ViewModelActivator();
     }
 }

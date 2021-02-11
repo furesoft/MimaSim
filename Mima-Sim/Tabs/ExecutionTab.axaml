@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:MimaSim.ViewModels"
              xmlns:c="clr-namespace:MimaSim.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             DataContext="{vm:ExecutionTabViewModel}" Tag="{DynamicResource cpu}"
+             Tag="{DynamicResource cpu}"
              x:Class="MimaSim.Tabs.ExecutionTab">
   <Grid ColumnDefinitions="450,*">
     <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" />

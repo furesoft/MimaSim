@@ -6,7 +6,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.MemoryPopupControl">
   <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Speicher">
-    <StackPanel>
-    </StackPanel>
+    <DataGrid>
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Adresse"
+                            Binding="{Binding FirstName}"
+                            Width="2*" />
+        <DataGridTextColumn Header="Wert"
+                            Binding="{Binding LastName}"
+                            Width="2*" />
+      </DataGrid.Columns>
+    </DataGrid>
   </c:DialogControl>
 </UserControl>

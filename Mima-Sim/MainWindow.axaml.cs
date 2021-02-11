@@ -1,24 +1,23 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 using MimaSim.Core;
+using ReactiveUI;
 
 namespace MimaSim
 {
-    public class MainWindow : Window
+    public class MainWindow : ReactiveWindow<object>
     {
         public MainWindow()
         {
-            InitializeComponent();
-        }
+            this.WhenActivated(disposables =>
+            {
+                var tabControl = this.FindControl<TabControl>("content");
 
-        private void InitializeComponent()
-        {
+                TabSwitcher.Initialize(tabControl);
+            });
+
             AvaloniaXamlLoader.Load(this);
-
-            var contentGrid = this.FindControl<TabControl>("content");
-
-            TabSwitcher.Initialize(contentGrid);
         }
     }
 }

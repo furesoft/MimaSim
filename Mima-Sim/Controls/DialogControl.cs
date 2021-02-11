@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
-using MimaSim.Core;
+using ReactiveUI;
 using System;
 using System.Windows.Input;
 
@@ -35,7 +35,7 @@ namespace MimaSim.Controls
 
         public DialogControl()
         {
-            CancelCommand = new DelegateCommand(_ => DialogService.Close());
+            CancelCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
 
         public bool IsCancelEnabled

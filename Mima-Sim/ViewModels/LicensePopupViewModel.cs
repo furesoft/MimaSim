@@ -1,22 +1,18 @@
 ﻿using MimaSim.Controls;
-using MimaSim.Core;
+using ReactiveUI;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
-    public class LicensePopupViewModel : BaseViewModel
+    public class LicensePopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        private ICommand _closeCommand;
+        public ICommand CloseCommand { get; set; }
 
-        public ICommand CloseCommand
-        {
-            get { return _closeCommand; }
-            set { _closeCommand = value; Raise(); }
-        }
+        public ViewModelActivator Activator => new ViewModelActivator();
 
         public LicensePopupViewModel()
         {
-            CloseCommand = new DelegateCommand(_ => DialogService.Close());
+            CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
     }
 }

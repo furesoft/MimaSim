@@ -1,10 +1,10 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using MimaSim.ViewModels;
 
 namespace MimaSim.Controls
 {
-    public class ExecutionBar : UserControl
+    public class ExecutionBar : ReactiveUserControl<ExecutionTabViewModel>
     {
         public ExecutionBar()
         {

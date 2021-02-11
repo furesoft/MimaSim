@@ -1,10 +1,10 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using MimaSim.ViewModels;
 
 namespace MimaSim.Controls.MimaComponents.Popups
 {
-    public class ClockSettingsPopupControl : UserControl
+    public class ClockSettingsPopupControl : ReactiveUserControl<ClockSettingsPopupViewModel>
     {
         public ClockSettingsPopupControl()
         {

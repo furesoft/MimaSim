@@ -1,14 +1,14 @@
 ﻿using MimaSim.Controls;
-using MimaSim.Core;
+using ReactiveUI;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
 {
-    public class ErrorPopupViewModel : BaseViewModel
+    public class ErrorPopupViewModel : ReactiveObject, IActivatableViewModel
     {
         public ErrorPopupViewModel()
         {
-            CloseCommand = new DelegateCommand(_ => DialogService.Close());
+            CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
 
         private string _message;
@@ -16,15 +16,11 @@ namespace MimaSim.ViewModels
         public string Message
         {
             get { return _message; }
-            set { _message = value; Raise(); }
+            set { this.RaiseAndSetIfChanged(ref _message, value); }
         }
 
-        private ICommand _closeCommand;
+        public ICommand CloseCommand { get; set; }
 
-        public ICommand CloseCommand
-        {
-            get { return _closeCommand; }
-            set { _closeCommand = value; Raise(); }
-        }
+        public ViewModelActivator Activator => new ViewModelActivator();
     }
 }
