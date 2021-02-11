@@ -8,7 +8,6 @@
   <c:DialogControl CommandText="OK" Header="Lizenzen" Command="{Binding CloseCommand}">
     <StackPanel>
       <TextBlock Text="Benutzerinterface: AvaloniaUI" />
-      <TextBlock Text="TextRendering: CSharpMath.Avalonia" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>
