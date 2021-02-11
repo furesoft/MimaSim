@@ -11,9 +11,8 @@ namespace MimaSim.Tabs
             this.InitializeComponent();
         }
 
-        public string Title => "Dokumentation";
-
         public int Index => 2;
+        public string Title => "Dokumentation";
 
         private void InitializeComponent()
         {

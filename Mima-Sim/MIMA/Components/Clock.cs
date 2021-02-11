@@ -7,7 +7,7 @@ namespace MimaSim.MIMA.Components
     {
         private short _frequency;
 
-        public event Action<object> FrequencyChanged;
+        private Timer _timer;
 
         public Clock(short frequency)
         {
@@ -16,10 +16,11 @@ namespace MimaSim.MIMA.Components
             _timer.Elapsed += _timer_Elapsed;
         }
 
-        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Tick?.Invoke();
-        }
+        public event Action<object> FrequencyChanged;
+
+        public event Action Tick;
+
+        public short Frequency => _frequency;
 
         public void SetFrequency(short frequency)
         {
@@ -27,12 +28,6 @@ namespace MimaSim.MIMA.Components
             _timer.Interval = frequency;
             FrequencyChanged?.Invoke(frequency);
         }
-
-        public short Frequency => _frequency;
-
-        public event Action Tick;
-
-        private Timer _timer;
 
         public void Start()
         {
@@ -42,6 +37,11 @@ namespace MimaSim.MIMA.Components
         public void Stop()
         {
             _timer.Stop();
+        }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Tick?.Invoke();
         }
     }
 }

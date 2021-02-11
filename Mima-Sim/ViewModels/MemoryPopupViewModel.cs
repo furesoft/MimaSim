@@ -6,13 +6,12 @@ namespace MimaSim.ViewModels
 {
     public class MemoryPopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        public ICommand CloseCommand { get; set; }
-
-        public ViewModelActivator Activator => new ViewModelActivator();
-
         public MemoryPopupViewModel()
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
+
+        public ViewModelActivator Activator => new ViewModelActivator();
+        public ICommand CloseCommand { get; set; }
     }
 }

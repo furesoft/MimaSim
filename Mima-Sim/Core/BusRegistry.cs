@@ -15,6 +15,40 @@ namespace MimaSim.Core
             LoadMapsFromConfig();
         }
 
+        public static void ActivateBus(string id)
+        {
+            ChangeBusState(id, BusState.Recieving);
+        }
+
+        public static void DeactivateAllMaps()
+        {
+            foreach (var map in _maps)
+            {
+                map.Value.Deactivate();
+            }
+        }
+
+        public static void DeactivateBus(string id)
+        {
+            ChangeBusState(id, BusState.None);
+            SetData(id, null);
+        }
+
+        public static BusMap GetBusMap(string id)
+        {
+            if (_maps.ContainsKey(id))
+            {
+                return _maps[id];
+            }
+
+            return null;
+        }
+
+        public static string GetId(BusControl target)
+        {
+            return null;
+        }
+
         public static void LoadMapsFromConfig()
         {
             var content = Resources.BusMap;
@@ -44,24 +78,6 @@ namespace MimaSim.Core
             }
         }
 
-        public static void SetId(BusControl target, string id)
-        {
-            RegisterBus(id, target);
-        }
-
-        public static void SetData(string id, object value)
-        {
-            if (!_ids.ContainsKey(id))
-            {
-                _ids[id].Tag = value;
-            }
-        }
-
-        public static string GetId(BusControl target)
-        {
-            return null;
-        }
-
         public static void RegisterBus(string id, BusControl control)
         {
             if (!_ids.ContainsKey(id))
@@ -78,17 +94,17 @@ namespace MimaSim.Core
             }
         }
 
-        public static void ActivateBus(string id)
+        public static void SetData(string id, object value)
         {
-            ChangeBusState(id, BusState.Recieving);
+            if (!_ids.ContainsKey(id))
+            {
+                _ids[id].Tag = value;
+            }
         }
 
-        public static void DeactivateAllMaps()
+        public static void SetId(BusControl target, string id)
         {
-            foreach (var map in _maps)
-            {
-                map.Value.Deactivate();
-            }
+            RegisterBus(id, target);
         }
 
         private static void ChangeBusState(string id, BusState state)
@@ -97,22 +113,6 @@ namespace MimaSim.Core
             {
                 _ids[id].State = state;
             }
-        }
-
-        public static void DeactivateBus(string id)
-        {
-            ChangeBusState(id, BusState.None);
-            SetData(id, null);
-        }
-
-        public static BusMap GetBusMap(string id)
-        {
-            if (_maps.ContainsKey(id))
-            {
-                return _maps[id];
-            }
-
-            return null;
         }
     }
 }

@@ -7,11 +7,6 @@ namespace MimaSim.Core.AST
     {
         public static volatile IPrinter Default = new DefaultPrinter();
 
-        public static IDisposable Scoped(IPrinter printer)
-        {
-            return new ScopedPrinter(printer);
-        }
-
         public static string Print(IAstNode value)
         {
             if (value is LiteralNode lit)
@@ -28,6 +23,11 @@ namespace MimaSim.Core.AST
             }
 
             return string.Empty;
+        }
+
+        public static IDisposable Scoped(IPrinter printer)
+        {
+            return new ScopedPrinter(printer);
         }
     }
 }

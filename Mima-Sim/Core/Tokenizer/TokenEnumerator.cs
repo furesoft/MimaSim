@@ -6,18 +6,14 @@ namespace MimaSim.Core.Tokenizer
 {
     public sealed class TokenEnumerator
     {
+        private Token[] _tokens;
+
+        private int pos;
+
         public TokenEnumerator(IEnumerable<Token> tokenStream)
         {
             _tokens = tokenStream.ToArray();
             pos = 0;
-        }
-
-        private Token[] _tokens;
-        private int pos;
-
-        public int BackTrackPos()
-        {
-            return pos;
         }
 
         public void BackTrack(int pos)
@@ -25,9 +21,9 @@ namespace MimaSim.Core.Tokenizer
             this.pos = pos;
         }
 
-        private void Advance(int Offset)
+        public int BackTrackPos()
         {
-            pos += Offset;
+            return pos;
         }
 
         public Token Peek(int offset = 0)
@@ -58,6 +54,11 @@ namespace MimaSim.Core.Tokenizer
                     "', got '" + result.Contents + "'.");
 
             return result;
+        }
+
+        private void Advance(int Offset)
+        {
+            pos += Offset;
         }
     }
 }

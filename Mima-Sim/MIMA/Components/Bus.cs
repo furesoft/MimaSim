@@ -6,9 +6,10 @@ namespace MimaSim.MIMA.Components
     {
         private event Action<object> DataRecieved;
 
-        public void Subscribe(Action<object> callback)
+        public void Connect(Bus bus)
         {
-            DataRecieved += callback;
+            Subscribe(bus.DataRecieved);
+            bus.Subscribe(DataRecieved);
         }
 
         public void Send(object data)
@@ -21,10 +22,9 @@ namespace MimaSim.MIMA.Components
             bus.Send(data);
         }
 
-        public void Connect(Bus bus)
+        public void Subscribe(Action<object> callback)
         {
-            Subscribe(bus.DataRecieved);
-            bus.Subscribe(DataRecieved);
+            DataRecieved += callback;
         }
     }
 }

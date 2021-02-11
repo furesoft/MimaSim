@@ -13,13 +13,13 @@ namespace MimaSim.Core.AST.Nodes
         }
 
         public List<IAstNode> Args { get; set; }
-        public string Name { get; set; }
 
         public bool IsEmpty
         {
             get { return !Args.Any(); }
         }
 
+        public string Name { get; set; }
         public object Type { get; set; }
 
         public override string ToString()

@@ -6,21 +6,21 @@ namespace MimaSim.ViewModels
 {
     public class ErrorPopupViewModel : ReactiveObject, IActivatableViewModel
     {
+        private string _message;
+
         public ErrorPopupViewModel()
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
 
-        private string _message;
+        public ViewModelActivator Activator => new ViewModelActivator();
+
+        public ICommand CloseCommand { get; set; }
 
         public string Message
         {
             get { return _message; }
             set { this.RaiseAndSetIfChanged(ref _message, value); }
         }
-
-        public ICommand CloseCommand { get; set; }
-
-        public ViewModelActivator Activator => new ViewModelActivator();
     }
 }

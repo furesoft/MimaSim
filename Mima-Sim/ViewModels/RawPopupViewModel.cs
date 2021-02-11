@@ -9,19 +9,8 @@ namespace MimaSim.ViewModels
 {
     public class RawPopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        private string _raw;
-
-        public string Raw
-        {
-            get { return _raw; }
-            set { _raw = value; this.RaiseAndSetIfChanged(ref _raw, value); }
-        }
-
         private ICommand _closeCommand;
-
-        public ICommand CloseCommand { get; set; }
-
-        public ViewModelActivator Activator => new ViewModelActivator();
+        private string _raw;
 
         public RawPopupViewModel()
         {
@@ -36,6 +25,16 @@ namespace MimaSim.ViewModels
                     .Create(() => { /* handle deactivation */ })
                     .DisposeWith(disposables);
             });
+        }
+
+        public ViewModelActivator Activator => new ViewModelActivator();
+
+        public ICommand CloseCommand { get; set; }
+
+        public string Raw
+        {
+            get { return _raw; }
+            set { _raw = value; this.RaiseAndSetIfChanged(ref _raw, value); }
         }
 
         private string GetRawString()

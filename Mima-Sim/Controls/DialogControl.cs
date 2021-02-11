@@ -12,9 +12,6 @@ namespace MimaSim.Controls
         public static StyledProperty<ICommand> CancelCommandProperty =
             AvaloniaProperty.Register<DialogControl, ICommand>(nameof(CancelCommand));
 
-        public static StyledProperty<bool> IsCancelEnabledProperty =
-                    AvaloniaProperty.Register<DialogControl, bool>(nameof(IsCancelEnabled));
-
         public static StyledProperty<ICommand> CommandProperty =
             AvaloniaProperty.Register<DialogControl, ICommand>(nameof(Command));
 
@@ -24,6 +21,14 @@ namespace MimaSim.Controls
         public static StyledProperty<string> HeaderProperty =
                     AvaloniaProperty.Register<DialogControl, string>(nameof(Header));
 
+        public static StyledProperty<bool> IsCancelEnabledProperty =
+                                            AvaloniaProperty.Register<DialogControl, bool>(nameof(IsCancelEnabled));
+
+        public DialogControl()
+        {
+            CancelCommand = ReactiveCommand.Create(() => DialogService.Close());
+        }
+
         public ICommand CancelCommand
         {
             get { return GetValue<ICommand>(CancelCommandProperty); }
@@ -31,17 +36,6 @@ namespace MimaSim.Controls
             {
                 SetValue(CancelCommandProperty, value);
             }
-        }
-
-        public DialogControl()
-        {
-            CancelCommand = ReactiveCommand.Create(() => DialogService.Close());
-        }
-
-        public bool IsCancelEnabled
-        {
-            get { return GetValue<bool>(IsCancelEnabledProperty); }
-            set { SetValue(IsCancelEnabledProperty, value); }
         }
 
         public ICommand Command
@@ -69,6 +63,12 @@ namespace MimaSim.Controls
             {
                 SetValue(HeaderProperty, value);
             }
+        }
+
+        public bool IsCancelEnabled
+        {
+            get { return GetValue<bool>(IsCancelEnabledProperty); }
+            set { SetValue(IsCancelEnabledProperty, value); }
         }
 
         Type IStyleable.StyleKey => typeof(DialogControl);

@@ -11,9 +11,9 @@ namespace MimaSim.Commands
             Command = command;
         }
 
-        public Action<object> Command { get; set; }
-
         public event EventHandler CanExecuteChanged;
+
+        public Action<object> Command { get; set; }
 
         public bool CanExecute(object parameter)
         {

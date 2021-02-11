@@ -9,14 +9,14 @@ namespace MimaSim.Controls.MimaComponents
 
     public class BusControl : UserControl
     {
+        private Orientation _orientation;
+
+        private BusState _state;
+
         public BusControl()
         {
             this.InitializeComponent();
         }
-
-        private BusState _state;
-
-        private Orientation _orientation;
 
         public Orientation Orientation
         {

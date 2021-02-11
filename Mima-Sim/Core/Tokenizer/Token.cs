@@ -16,26 +16,24 @@
             Length = Contents.Length;
         }
 
-        public int Length { get; set; }
-
-        public TokenKind Kind { get; private set; }
-
-        public string Contents { get; private set; }
-
-        public override string ToString()
-        {
-            return "(" + Kind + ", \"" + Contents + "\")";
-        }
-
         public static Token EndOfFile
         {
             get { return new Token(TokenKind.EndOfFile, ""); }
         }
 
+        public string Contents { get; private set; }
+        public TokenKind Kind { get; private set; }
+        public int Length { get; set; }
+
         public static bool IsTrivia(TokenKind Kind)
         {
             return Kind == TokenKind.Whitespace
                 || Kind == TokenKind.Comment;
+        }
+
+        public override string ToString()
+        {
+            return "(" + Kind + ", \"" + Contents + "\")";
         }
     }
 }

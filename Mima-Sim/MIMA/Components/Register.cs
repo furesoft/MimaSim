@@ -17,15 +17,15 @@
             RegisterMap.AddRegister(name, this);
         }
 
+        public TinyInt GetValue()
+        {
+            return _value;
+        }
+
         public void SetValue(TinyInt value)
         {
             _value = value;
             Bus.Send(value);
-        }
-
-        public TinyInt GetValue()
-        {
-            return _value;
         }
     }
 }

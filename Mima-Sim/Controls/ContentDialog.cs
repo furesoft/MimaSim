@@ -7,13 +7,17 @@ namespace MimaSim.Controls
 {
     public class ContentDialog : ContentControl, IStyleable
     {
-        Type IStyleable.StyleKey => typeof(ContentDialog);
-
         public static StyledProperty<object> DialogContentProperty =
             AvaloniaProperty.Register<ContentDialog, object>("DialogContent");
 
         public static StyledProperty<bool> IsOpenedProperty =
             AvaloniaProperty.Register<ContentDialog, bool>("IsOpened");
+
+        public object DialogContent
+        {
+            get { return GetValue(DialogContentProperty); }
+            set { SetValue(DialogContentProperty, value); }
+        }
 
         public bool IsOpened
         {
@@ -21,10 +25,6 @@ namespace MimaSim.Controls
             set { SetValue(IsOpenedProperty, value); }
         }
 
-        public object DialogContent
-        {
-            get { return GetValue(DialogContentProperty); }
-            set { SetValue(DialogContentProperty, value); }
-        }
+        Type IStyleable.StyleKey => typeof(ContentDialog);
     }
 }

@@ -12,12 +12,10 @@ namespace MimaSim.ViewModels
 {
     public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     {
-        public ICommand RunCodeCommand { get; set; }
-        public ICommand OpenErrorPopupCommand { get; set; }
-
-        public ICommand OpenClockSettingsCommand { get; set; }
-
-        public ICommand OpenMemoryPopupCommand { get; set; }
+        private bool _runMode;
+        private object _selectedLanguage;
+        private string _source;
+        private ICommand _viewRawCommand;
 
         public ExecutionTabViewModel()
         {
@@ -61,23 +59,11 @@ namespace MimaSim.ViewModels
             });
         }
 
-        private string _source;
-
-        public string Source
-        {
-            get { return _source; }
-            set { _source = value; this.RaiseAndSetIfChanged(ref _source, value); }
-        }
-
-        private object _selectedLanguage;
-
-        public object SelectedLanguage
-        {
-            get { return _selectedLanguage; }
-            set { _selectedLanguage = value; this.RaiseAndSetIfChanged(ref _selectedLanguage, value); }
-        }
-
-        private bool _runMode;
+        public ViewModelActivator Activator => new ViewModelActivator();
+        public ICommand OpenClockSettingsCommand { get; set; }
+        public ICommand OpenErrorPopupCommand { get; set; }
+        public ICommand OpenMemoryPopupCommand { get; set; }
+        public ICommand RunCodeCommand { get; set; }
 
         public bool RunMode
         {
@@ -85,14 +71,21 @@ namespace MimaSim.ViewModels
             set { _runMode = value; this.RaiseAndSetIfChanged(ref _runMode, value); }
         }
 
+        public object SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set { _selectedLanguage = value; this.RaiseAndSetIfChanged(ref _selectedLanguage, value); }
+        }
+
+        public string Source
+        {
+            get { return _source; }
+            set { _source = value; this.RaiseAndSetIfChanged(ref _source, value); }
+        }
+
         public ICommand StepCommand { get; set; }
 
         public ICommand StopCommand { get; set; }
-
-        private ICommand _viewRawCommand;
-
         public ICommand ViewRawCommand { get; set; }
-
-        public ViewModelActivator Activator => new ViewModelActivator();
     }
 }

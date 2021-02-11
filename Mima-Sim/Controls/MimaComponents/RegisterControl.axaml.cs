@@ -9,15 +9,15 @@ namespace MimaSim.Controls.MimaComponents
         public static AvaloniaProperty<string> RegisterProperty =
                 AvaloniaProperty.Register<RegisterControl, string>("Register");
 
+        public RegisterControl()
+        {
+            this.InitializeComponent();
+        }
+
         public string Register
         {
             get { return (string)GetValue(RegisterProperty); }
             set { SetValue(RegisterProperty, value); }
-        }
-
-        public RegisterControl()
-        {
-            this.InitializeComponent();
         }
 
         private void InitializeComponent()

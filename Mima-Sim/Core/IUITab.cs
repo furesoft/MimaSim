@@ -2,7 +2,7 @@
 {
     public interface IUITab
     {
-        string Title { get; }
         int Index { get; }
+        string Title { get; }
     }
 }

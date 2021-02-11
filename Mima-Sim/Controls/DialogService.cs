@@ -10,12 +10,20 @@ namespace MimaSim.Controls
     {
         private static ContentDialog _host;
 
-        public static void SetIsHost(ContentDialog target, bool value)
+        public static void Close()
         {
-            if (value)
+            if (_host != null)
             {
-                _host = target;
+                _host.IsOpened = false;
             }
+        }
+
+        public static ICommand CreateOpenCommand(Control content, ReactiveObject viewModel)
+        {
+            return ReactiveCommand.Create(() =>
+            {
+                Open(content, viewModel);
+            });
         }
 
         public static bool GetIsHost(ContentDialog target)
@@ -39,11 +47,6 @@ namespace MimaSim.Controls
             Open(content);
         }
 
-        public static void OpenError(string message)
-        {
-            Open(new ErrorPopupControl(), new ErrorPopupViewModel { Message = message });
-        }
-
         public static void Open()
         {
             if (_host != null)
@@ -52,20 +55,17 @@ namespace MimaSim.Controls
             }
         }
 
-        public static void Close()
+        public static void OpenError(string message)
         {
-            if (_host != null)
-            {
-                _host.IsOpened = false;
-            }
+            Open(new ErrorPopupControl(), new ErrorPopupViewModel { Message = message });
         }
 
-        public static ICommand CreateOpenCommand(Control content, ReactiveObject viewModel)
+        public static void SetIsHost(ContentDialog target, bool value)
         {
-            return ReactiveCommand.Create(() =>
+            if (value)
             {
-                Open(content, viewModel);
-            });
+                _host = target;
+            }
         }
     }
 }
