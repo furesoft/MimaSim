@@ -2,6 +2,9 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using MimaSim.MIMA.Components;
+using ReactiveUI;
+using Splat;
+using System.Reflection;
 
 namespace MimaSim
 {
@@ -20,6 +23,8 @@ namespace MimaSim
             {
                 desktop.MainWindow = new MainWindow();
             }
+
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
             base.OnFrameworkInitializationCompleted();
         }

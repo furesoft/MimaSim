@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using MimaSim.Core;
@@ -18,6 +19,10 @@ namespace MimaSim
             });
 
             AvaloniaXamlLoader.Load(this);
+
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
     }
 }

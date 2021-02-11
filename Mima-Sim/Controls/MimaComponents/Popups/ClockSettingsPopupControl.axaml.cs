@@ -1,6 +1,7 @@
 ﻿using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using MimaSim.ViewModels;
+using ReactiveUI;
 
 namespace MimaSim.Controls.MimaComponents.Popups
 {
@@ -8,6 +9,10 @@ namespace MimaSim.Controls.MimaComponents.Popups
     {
         public ClockSettingsPopupControl()
         {
+            DataContext = new ClockSettingsPopupViewModel();
+
+            this.WhenActivated(disposables => { /* Handle view activation etc. */ });
+
             this.InitializeComponent();
         }
 

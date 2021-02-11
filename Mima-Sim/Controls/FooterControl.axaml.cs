@@ -1,6 +1,7 @@
 ﻿using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using MimaSim.ViewModels;
+using ReactiveUI;
 
 namespace MimaSim.Controls
 {
@@ -8,6 +9,10 @@ namespace MimaSim.Controls
     {
         public FooterControl()
         {
+            DataContext = new FooterViewModel();
+
+            this.WhenActivated(disposables => { /* Handle view activation etc. */ });
+
             this.InitializeComponent();
         }
 

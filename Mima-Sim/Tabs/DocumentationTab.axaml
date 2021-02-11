@@ -19,7 +19,7 @@
     </StackPanel>
 
     <Grid Grid.Row="1" x:Name="markdownRenderPanel">
-      <TextBlock Margin="5" x:Name="content" TextWrapping="Wrap" Text="{me:SelectDocumentMarkupExtension languageSelectorCb, content}" />
+      <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" Margin="5" x:Name="content" Text="{me:SelectDocumentMarkupExtension languageSelectorCb, content}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" />
     </Grid>
   </Grid>
 </UserControl>
