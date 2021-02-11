@@ -37,13 +37,13 @@ namespace MimaSim.ViewModels
         {
             OpenErrorPopupCommand = new DelegateCommand(_ => DialogService.Open());
 
-            OpenClockSettingsCommand = DialogService.CreateCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
+            OpenClockSettingsCommand = DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
 
             StepCommand = new DelegateCommand(_ => CPU.Instance.Step());
             StopCommand = new DelegateCommand(_ => CPU.Instance.Clock.Stop());
 
-            ViewRawCommand = DialogService.CreateCommand(new RawViewPopupControl(), new RawViewModel());
-            OpenMemoryPopupCommand = DialogService.CreateCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
+            ViewRawCommand = DialogService.CreateOpenCommand(new RawViewPopupControl(), new RawViewModel());
+            OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
         }
 
         private string _source;
