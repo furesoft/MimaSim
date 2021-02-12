@@ -45,6 +45,8 @@ namespace MimaSim.MIMA.Components
             if (nextInstuctionAddress < Program.Length)
             {
                 var instruction = Program[nextInstuctionAddress];
+
+                BusRegistry.ActivateBus("controlunit_iar");
                 SetRegister(Registers.IAR, (ushort)(nextInstuctionAddress + 1));
 
                 return instruction;
@@ -106,6 +108,8 @@ namespace MimaSim.MIMA.Components
         {
             if (Instructions.ContainsKey(instruction))
             {
+                BusRegistry.DeactivateBus("controlunit_iar");
+
                 return Instructions[instruction].Invoke(this);
             }
             else
