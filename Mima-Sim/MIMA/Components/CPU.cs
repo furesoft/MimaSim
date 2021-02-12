@@ -2,6 +2,8 @@
 using MimaSim.MIMA.VM;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace MimaSim.MIMA.Components
 {
@@ -15,7 +17,7 @@ namespace MimaSim.MIMA.Components
         public ControlUnit ControlUnit = new ControlUnit();
         public Bus DataBus = new Bus();
 
-        public Dictionary<OpCodes, IInstruction> Instructions;
+        public Dictionary<OpCodes, IInstruction> Instructions = new Dictionary<OpCodes, IInstruction>();
         public Memory Memory = new Memory((int)Math.Pow(2, 24));
         public Register One = new Register("One", 1);
         public Register SAR = new Register("SAR");
@@ -69,6 +71,7 @@ namespace MimaSim.MIMA.Components
         //Hack for Init all Fields
         public void Init()
         {
+            InitInstructions();
         }
 
         public void SetRegister(Registers reg, ushort value)
@@ -96,6 +99,17 @@ namespace MimaSim.MIMA.Components
             else
             {
                 throw new Exception("unknown opcode");
+            }
+        }
+
+        private void InitInstructions()
+        {
+            var types = Assembly.GetCallingAssembly().GetTypes().Where(_ => _.GetInterfaces().Contains(typeof(IInstruction)));
+            foreach (var t in types)
+            {
+                var instance = (IInstruction)Activator.CreateInstance(t);
+
+                Instructions.Add(instance.Instruction, instance);
             }
         }
     }
