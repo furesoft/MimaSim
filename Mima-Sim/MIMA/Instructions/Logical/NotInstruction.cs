@@ -8,12 +8,10 @@ namespace MimaSim.MIMA.Instructions.Logical
     {
         public OpCodes Instruction => OpCodes.NOT;
         public string Mnemonic => "not";
-        public InstructionTypeSizes Size => InstructionTypeSizes.SingleReg;
 
         public bool Invoke(CPU cpu)
         {
-            var r1 = cpu.FetchRegister();
-            var registerValue = cpu.GetRegister(r1);
+            var registerValue = cpu.GetRegister(Registers.X);
 
             var res = (~registerValue) & 0xffff;
             cpu.SetRegister(Registers.Accumulator, (ushort)res);

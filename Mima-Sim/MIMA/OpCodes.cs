@@ -1,30 +1,20 @@
-﻿namespace MimaSim.Core
+﻿namespace MimaSim.MIMA
 {
     public enum OpCodes : byte
     {
-        MOV_LIT_REG = 0x10,
         MOV_REG_REG = 0x11,
         MOV_REG_MEM = 0x12,
         MOV_MEM_REG = 0x13,
-        MOV_LIT_MEM = 0x1B,
+
         MOV_REG_PTR_REG = 0x1C,
-        MOV_LIT_OFF_REG = 0x1D,
 
-        ADD_REG_REG = 0x14,
-        ADD_LIT_REG = 0x3F,
+        Add = 0x14,
 
-        SUB_LIT_REG = 0x16,
-        SUB_REG_LIT = 0x1E,
-        SUB_REG_REG = 0x1F,
+        Mul = 0x21,
 
-        MUL_LIT_REG = 0x20,
-        MUL_REG_REG = 0x21,
+        LSF = 0x27,
 
-        LSF_REG_LIT = 0x26,
-        LSF_REG_REG = 0x27,
-
-        RSF_REG_LIT = 0x2A,
-        RSF_REG_REG = 0x2B,
+        RSH = 0x2B,
 
         INC_REG = 0x35,
         DEC_REG = 0x36,
@@ -46,12 +36,11 @@
 
         NOP = 0xFF,
 
-        AND_REG_LIT = 0x2E,
-        AND_REG_REG = 0x2F,
-        OR_REG_LIT = 0x30,
-        OR_REG_REG = 0x31,
-        XOR_REG_LIT = 0x32,
-        XOR_REG_REG = 0x33,
+        And = 0x2F,
+        Or = 0x30,
+        Xor = 0x32,
         NOT = 0x34,
+        Div = 0x51,
+        SUB = 0x50,
     }
 }

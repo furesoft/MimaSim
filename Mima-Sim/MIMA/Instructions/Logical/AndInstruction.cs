@@ -4,18 +4,15 @@ using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Logical
 {
-    public class AndRegRegInstruction : IInstruction
+    public class AndInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.AND_REG_REG;
+        public OpCodes Instruction => OpCodes.And;
         public string Mnemonic => "and";
-        public InstructionTypeSizes Size => InstructionTypeSizes.RegReg;
 
         public bool Invoke(CPU cpu)
         {
-            var r1 = cpu.FetchRegister();
-            var r2 = cpu.FetchRegister();
-            var registerValue1 = cpu.GetRegister(r1);
-            var registerValue2 = cpu.GetRegister(r2);
+            var registerValue1 = cpu.GetRegister(Registers.X);
+            var registerValue2 = cpu.GetRegister(Registers.Y);
 
             var res = registerValue1 & registerValue2;
             cpu.SetRegister(Registers.Accumulator, (ushort)res);

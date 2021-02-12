@@ -8,7 +8,6 @@ namespace MimaSim.MIMA.Instructions.Jumps
     {
         public OpCodes Instruction => OpCodes.JLE_REG;
         public string Mnemonic => "jle";
-        public InstructionTypeSizes Size => InstructionTypeSizes.RegLit;
 
         public bool Invoke(CPU cpu)
         {

@@ -12,6 +12,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
             tokenizer.AddDefinition(TokenKind.HexLiteral, "[0-9a-fA-F]{2}");
+            tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
             var tokens = tokenizer.Tokenize(input);
             var enumerator = new TokenEnumerator(tokens);

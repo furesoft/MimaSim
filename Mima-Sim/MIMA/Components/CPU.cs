@@ -74,7 +74,9 @@ namespace MimaSim.MIMA.Components
 
         public ushort GetRegister(Registers reg)
         {
-            return RegisterMap.GetRegister(Enum.GetName(typeof(Registers), reg)).GetValue();
+            var regName = Enum.GetName<Registers>(reg);
+
+            return RegisterMap.GetRegister(regName).GetValue();
         }
 
         public ushort GetRegister(byte reg)

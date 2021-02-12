@@ -8,7 +8,6 @@ namespace MimaSim.MIMA.Instructions.Jumps
     {
         public OpCodes Instruction => OpCodes.JGE_LIT;
         public string Mnemonic => "jge";
-        public InstructionTypeSizes Size => InstructionTypeSizes.RegMem;
 
         public bool Invoke(CPU cpu)
         {

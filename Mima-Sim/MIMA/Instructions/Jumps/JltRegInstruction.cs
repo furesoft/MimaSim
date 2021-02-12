@@ -8,7 +8,6 @@ namespace MimaSim.MIMA.Instructions.Jumps
     {
         public OpCodes Instruction => OpCodes.JLT_REG;
         public string Mnemonic => "jlt";
-        public InstructionTypeSizes Size => InstructionTypeSizes.RegLit;
 
         public bool Invoke(CPU cpu)
         {

@@ -1,5 +1,6 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
+using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Arithmetik
 {
@@ -8,15 +9,13 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
         public OpCodes Instruction => OpCodes.INC_REG;
 
         public string Mnemonic => "inc";
-        public InstructionTypeSizes Size => InstructionTypeSizes.SingleReg;
 
         public bool Invoke(CPU cpu)
         {
-            var r1 = cpu.FetchRegister();
-            var oldValue = cpu.GetRegister(r1);
+            var oldValue = cpu.GetRegister(Registers.Accumulator);
             var newValue = oldValue + 1;
 
-            cpu.SetRegister(r1, (ushort)newValue);
+            cpu.SetRegister(Registers.Accumulator, (ushort)newValue);
 
             return false;
         }

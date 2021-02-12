@@ -7,7 +7,7 @@ Beispiel:
 ```
 10 2A 00 02 /* setze x */
 10 01 00 03 /* setze y */
-14 03 02 /* Addiere beide zahlen */
+14 /* Addiere beide zahlen */
 ```
 
 Es kann jederzeit Code durch /* .. */ kommentiert werden, wobei .. ein beliebiger Kommentar ist

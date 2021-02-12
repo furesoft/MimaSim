@@ -1,4 +1,5 @@
-﻿using MimaSim.MIMA.Components;
+﻿using MimaSim.MIMA;
+using MimaSim.MIMA.Components;
 
 namespace MimaSim.Core
 {
@@ -6,7 +7,6 @@ namespace MimaSim.Core
     {
         OpCodes Instruction { get; }
         string Mnemonic { get; }
-        InstructionTypeSizes Size { get; }
 
         bool Invoke(CPU cpu);
     }
