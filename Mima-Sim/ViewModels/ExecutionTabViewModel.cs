@@ -2,6 +2,7 @@
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
+using MimaSim.Messages;
 using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
 using ReactiveUI;
@@ -57,6 +58,13 @@ namespace MimaSim.ViewModels
                     RunMode = false;
                     DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
                 }
+            });
+
+            var stopObserver = MessageBus.Current.Listen<StopMessage>();
+            stopObserver.Subscribe(_ =>
+            {
+                RunMode = false;
+                CPU.Instance.Clock.Stop();
             });
         }
 
