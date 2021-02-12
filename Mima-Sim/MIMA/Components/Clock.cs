@@ -18,8 +18,6 @@ namespace MimaSim.MIMA.Components
 
         public event Action<object> FrequencyChanged;
 
-        public event Action Tick;
-
         public short Frequency => _frequency;
 
         public void SetFrequency(short frequency)
@@ -41,7 +39,7 @@ namespace MimaSim.MIMA.Components
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Tick?.Invoke();
+            CPU.Instance.Step();
         }
     }
 }
