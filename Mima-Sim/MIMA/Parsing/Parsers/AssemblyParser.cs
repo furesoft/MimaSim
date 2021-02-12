@@ -3,6 +3,7 @@ using MimaSim.Core.AST;
 using MimaSim.Core.Tokenizer;
 using MimaSim.MIMA.VM;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.MIMA.Parsing.Parsers
@@ -47,12 +48,31 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return string.Join("|", allNames);
         }
 
+        private IAstNode ParseInstruction(TokenEnumerator enumerator)
+        {
+            throw new NotImplementedException();
+        }
+
         private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
         {
             //ToDo: implement assembly parser
-            var token = enumerator.Read();
+            var _nodes = new List<IAstNode>();
+            Token token;
+            do
+            {
+                token = enumerator.Peek();
 
-            return NodeFactory.Call("{}", null);
+                if (token.Kind == TokenKind.Mnemnonic)
+                {
+                    _nodes.Add(ParseInstruction(enumerator));
+                }
+                else if (token.Kind == TokenKind.EndOfFile)
+                {
+                    break;
+                }
+            } while (token.Kind != TokenKind.EndOfFile);
+
+            return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MimaSim.Messages;
+using ReactiveUI;
+using System;
 
 namespace MimaSim.MIMA.Components
 {
@@ -38,6 +40,8 @@ namespace MimaSim.MIMA.Components
             if (address.Value > 0 && address.Value < _values.Length)
             {
                 _values[address.Value] = value;
+
+                MessageBus.Current.SendMessage(new MemoryCellChangedMessage { Address = address, Value = value });
             }
         }
     }

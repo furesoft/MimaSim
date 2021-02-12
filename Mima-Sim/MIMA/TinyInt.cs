@@ -2,6 +2,8 @@
 {
     public class TinyInt
     {
+        public static TinyInt MaxValue = 8388608;
+
         public TinyInt(int value)
         {
             Value = value & 0xFFFFFF;
@@ -9,7 +11,6 @@
         }
 
         public static TinyInt Invalid { get; }
-
         public bool HasValue { get; set; }
 
         public int Value { get; }

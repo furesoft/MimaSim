@@ -1,7 +1,11 @@
 ﻿using MimaSim.Controls;
+using MimaSim.Messages;
+using MimaSim.MIMA;
 using MimaSim.Models;
 using ReactiveUI;
 using System.Collections.ObjectModel;
+using System.Reactive;
+using System.Reactive.Disposables;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
@@ -13,7 +17,19 @@ namespace MimaSim.ViewModels
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
 
             MemoryCells = new ObservableCollection<MemoryCellModel>();
-            MemoryCells.Add(new MemoryCellModel { Value = 123 });
+
+            this.WhenActivated(disposables =>
+            {
+                var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
+                observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
+                {
+                    MemoryCells.Add(new MemoryCellModel { Address = _.Address.Value, Value = _.Value });
+                }));
+
+                Disposable
+                    .Create(() => { /* Handle deactivation */ })
+                    .DisposeWith(disposables);
+            });
         }
 
         public ViewModelActivator Activator => new ViewModelActivator();

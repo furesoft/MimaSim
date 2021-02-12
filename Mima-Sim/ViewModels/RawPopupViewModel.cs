@@ -15,7 +15,7 @@ namespace MimaSim.ViewModels
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
 
-            this.WhenActivated((CompositeDisposable disposables) =>
+            this.WhenActivated((disposables) =>
             {
                 Raw = GetRawString();
 
