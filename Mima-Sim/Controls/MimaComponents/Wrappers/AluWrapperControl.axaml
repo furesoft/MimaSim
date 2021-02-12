@@ -8,8 +8,6 @@
              xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.AluWrapperControl" Width="133" Height="180">
   <Canvas>
-    <c:BusControl b:BusRegistry.Id="alu_output_z2" Width="60" Height="15" Canvas.Top="19" Canvas.Left="0" State="None" />
-    <c:BusControl b:BusRegistry.Id="alu_output_to_base_part" Width="15" Height="62" Canvas.Top="19" Canvas.Left="0" State="None" />
     <c:BusControl b:BusRegistry.Id="alu_command_to_base_part" Width="35" Height="15" Canvas.Top="80" Canvas.Left="0" State="None" />
     <c:BusControl b:BusRegistry.Id="alu_command_part_to_base" Width="15" Height="92" Canvas.Top="82" Canvas.Left="0" State="None" />
 
@@ -17,7 +15,6 @@
     <c:BusControl b:BusRegistry.Id="alu_input_y2" Width="15" Height="35" Canvas.Top="138" Canvas.Left="87" State="None" />
 
     <c:AluControl Canvas.Top="13" Canvas.Left="35" />
-    <c:RegisterControl Canvas.Top="13" Canvas.Left="56" Register="Z" me:RegisterConnector.IsConnected="True" />
     <c:RegisterControl Canvas.Top="113" Canvas.Left="35" Register="X" me:RegisterConnector.IsConnected="True" />
     <c:RegisterControl Canvas.Top="113" Canvas.Left="77" Register="Y" me:RegisterConnector.IsConnected="True" />
   </Canvas>
