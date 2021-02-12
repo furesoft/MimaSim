@@ -6,40 +6,40 @@ namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
-        private TinyInt[] _values;
+        private ushort[] _values;
 
         public Memory(int length)
         {
-            _values = new TinyInt[length];
+            _values = new ushort[length];
         }
 
-        public Memory(TinyInt[] parent)
+        public Memory(ushort[] parent)
         {
             _values = parent;
         }
 
         public void Expand(int length)
         {
-            TinyInt[] buffer = new TinyInt[length];
+            ushort[] buffer = new ushort[length];
 
             Array.Copy(_values, buffer, _values.Length);
         }
 
-        public TinyInt GetValue(TinyInt address)
+        public ushort GetValue(ushort address)
         {
-            if (address.Value > 0 && address.Value < _values.Length)
+            if (address > 0 && address < _values.Length)
             {
-                return _values[address.Value];
+                return _values[address];
             }
 
-            return TinyInt.Invalid;
+            return 0;
         }
 
-        public void SetValue(TinyInt address, TinyInt value)
+        public void SetValue(ushort address, ushort value)
         {
-            if (address.Value > 0 && address.Value < _values.Length)
+            if (address > 0 && address < _values.Length)
             {
-                _values[address.Value] = value;
+                _values[address] = value;
 
                 MessageBus.Current.SendMessage(new MemoryCellChangedMessage { Address = address, Value = value });
             }

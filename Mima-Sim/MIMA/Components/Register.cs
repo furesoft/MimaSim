@@ -4,9 +4,9 @@
     {
         public Bus Bus = new Bus();
 
-        private TinyInt _value;
+        private ushort _value;
 
-        public Register(string name, TinyInt value)
+        public Register(string name, ushort value)
             : this(name)
         {
             _value = value;
@@ -17,12 +17,12 @@
             RegisterMap.AddRegister(name, this);
         }
 
-        public TinyInt GetValue()
+        public ushort GetValue()
         {
             return _value;
         }
 
-        public void SetValue(TinyInt value)
+        public void SetValue(ushort value)
         {
             _value = value;
             Bus.Send(value);

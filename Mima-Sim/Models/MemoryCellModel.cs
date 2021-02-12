@@ -1,10 +1,8 @@
-﻿using MimaSim.MIMA;
-
-namespace MimaSim.Models
+﻿namespace MimaSim.Models
 {
     public class MemoryCellModel
     {
-        public int Address { get; set; }
-        public TinyInt Value { get; set; }
+        public ushort Address { get; set; }
+        public ushort Value { get; set; }
     }
 }

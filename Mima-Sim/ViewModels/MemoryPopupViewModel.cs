@@ -1,6 +1,5 @@
 ﻿using MimaSim.Controls;
 using MimaSim.Messages;
-using MimaSim.MIMA;
 using MimaSim.Models;
 using ReactiveUI;
 using System.Collections.ObjectModel;
@@ -23,7 +22,7 @@ namespace MimaSim.ViewModels
                 var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
                 observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
                 {
-                    MemoryCells.Add(new MemoryCellModel { Address = _.Address.Value, Value = _.Value });
+                    MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
                 }));
 
                 Disposable
