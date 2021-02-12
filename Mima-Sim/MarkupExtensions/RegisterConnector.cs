@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Threading;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.MIMA;
 
@@ -10,7 +11,11 @@ namespace MimaSim.MarkupExtensions
         {
             if (value)
             {
-                RegisterMap.GetRegister(rc.Register).Bus.Subscribe(_ => ToolTip.SetTip(rc, _));
+                RegisterMap.GetRegister(rc.Register).Bus.Subscribe(_ =>
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    ToolTip.SetTip(rc, _));
+                });
             }
         }
     }
