@@ -5,9 +5,9 @@ Der Maschinencode wird direkt in Hexadezimalzahlen geschrieben. Es werden jeweil
 Beispiel:
 
 ```
-2A 00 00 42 02 /* Setze X */
-2A 00 00 08 03 /* Setze Y */
-5A /* Addiere beide zahlen */
+10 2A 00 02 /* setze x */
+10 01 00 03 /* setze y */
+14 03 02 /* Addiere beide zahlen */
 ```
 
 Es kann jederzeit Code durch /* .. */ kommentiert werden, wobei .. ein beliebiger Kommentar ist
