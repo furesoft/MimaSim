@@ -2,6 +2,7 @@
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace MimaSim.Controls.MimaComponents
 {
@@ -43,14 +44,17 @@ namespace MimaSim.Controls.MimaComponents
             {
                 _state = value;
 
-                if (_state == BusState.None)
+                Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    Background = Brushes.Gray;
-                }
-                else if (_state == BusState.Recieving)
-                {
-                    Background = Brushes.Red;
-                }
+                    if (_state == BusState.None)
+                    {
+                        Background = Brushes.Gray;
+                    }
+                    else if (_state == BusState.Recieving)
+                    {
+                        Background = Brushes.Red;
+                    }
+                });
             }
         }
 
