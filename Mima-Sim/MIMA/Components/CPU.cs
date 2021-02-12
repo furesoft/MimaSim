@@ -1,5 +1,7 @@
 ﻿using MimaSim.Core;
+using MimaSim.Messages;
 using MimaSim.MIMA.VM;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,10 +41,20 @@ namespace MimaSim.MIMA.Components
         public byte Fetch()
         {
             var nextInstuctionAddress = GetRegister(Registers.IAR);
-            var instruction = Program[nextInstuctionAddress];
-            SetRegister(Registers.IAR, (ushort)(nextInstuctionAddress + 1));
 
-            return instruction;
+            if (nextInstuctionAddress < Program.Length)
+            {
+                var instruction = Program[nextInstuctionAddress];
+                SetRegister(Registers.IAR, (ushort)(nextInstuctionAddress + 1));
+
+                return instruction;
+            }
+            else
+            {
+                MessageBus.Current.SendMessage(new StopMessage());
+
+                return (byte)OpCodes.Exit;
+            }
         }
 
         public ushort Fetch16()
