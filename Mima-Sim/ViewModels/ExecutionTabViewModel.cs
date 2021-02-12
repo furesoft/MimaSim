@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
@@ -77,19 +78,19 @@ namespace MimaSim.ViewModels
         public bool RunMode
         {
             get { return _runMode; }
-            set { _runMode = value; this.RaiseAndSetIfChanged(ref _runMode, value); }
+            set { this.RaiseAndSetIfChanged(ref _runMode, value); }
         }
 
         public object SelectedLanguage
         {
             get { return _selectedLanguage; }
-            set { _selectedLanguage = value; this.RaiseAndSetIfChanged(ref _selectedLanguage, value); }
+            set { this.RaiseAndSetIfChanged(ref _selectedLanguage, value); }
         }
 
         public string Source
         {
             get { return _source; }
-            set { _source = value; this.RaiseAndSetIfChanged(ref _source, value); }
+            set { this.RaiseAndSetIfChanged(ref _source, value); }
         }
 
         public ICommand StepCommand { get; set; }
