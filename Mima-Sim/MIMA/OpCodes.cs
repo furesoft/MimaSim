@@ -42,9 +42,7 @@
         JGE_REG = 0x48,
         JGE_LIT = 0x49,
 
-        CAL_LIT = 0x5E,
-        CAL_REG = 0x5F,
-        RET = 0x60,
+        Exit = 0x60,
 
         NOP = 0xFF,
 
