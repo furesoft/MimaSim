@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
 {
     public class MulInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.Mul;
+        public OpCodes Instruction => OpCodes.MUL;
 
         public string Mnemonic => "mul";
 

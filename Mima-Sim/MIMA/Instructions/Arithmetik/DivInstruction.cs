@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
 {
     public class DivInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.Div;
+        public OpCodes Instruction => OpCodes.DIV;
 
         public string Mnemonic => "div";
 

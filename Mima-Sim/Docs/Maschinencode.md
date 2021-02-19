@@ -31,7 +31,7 @@ Instruktionen
 |Befehl |Opcode|Argumente|Anzahl Argumente|Beschreibung|
 |-------|------|---------|----------------|------------|
 |mov    |2A    |Register und/oder Speicherstelle |2|Werte verschieben|
-|loadi  |2B    |Konstante|1|Lädt eine Konstante in das Register Accumulator|
+|load   |2B    |Konstante|1|Lädt eine Konstante in das Register Accumulator|
 |jmp    |3A    |Absolute Adresse|1|Springt zur Adresse|
 |jmpr   |3B    |Relative Adresse|1|Springt soweit vor/zurück wie im Argument angegeben|
 |jmpc   |3C    |Absolute Adresse|1|Springt, wenn Accumulator 1 ist zur Adresse|
@@ -41,4 +41,4 @@ Instruktionen
 |cmplt  |4C    |Konstante|1|Prüft ob Wert im Accumulator kleiner ist|
 |cmpgt  |4D    |Konstante|1|Prüft ob Wert im Accumulator größer ist|
 |add    |5A    |-|0|Addiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|
-|sub    |5A    |-|0|Subtrahiert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|
+|mul    |5B    |-|0|Multipliziert die Werte von Register X und Y  und speichert das Ergebnis im Accumulator|

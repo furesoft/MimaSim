@@ -1,46 +1,45 @@
 ﻿namespace MimaSim.MIMA
 {
-    public enum OpCodes : byte
+    public enum OpCodes
     {
-        MOV_REG_REG = 0x11,
-        MOV_REG_MEM = 0x12,
-        MOV_MEM_REG = 0x13,
+        NOP = 0x00,
+        EXIT = 0x01,
 
-        MOV_REG_PTR_REG = 0x1C,
+        LOAD = 0x04,
 
-        Add = 0x14,
+        //Arithmethic
+        ADD = 0x08,
 
-        Mul = 0x21,
+        MUL = 0x12,
+        SUB = 0x13,
+        DIV = 0x14,
 
-        LSF = 0x27,
+        INC = 0x15,
+        DEC = 0x16,
 
-        RSH = 0x2B,
+        //Shifting
+        LSHIFT = 0x20,
 
-        INC_REG = 0x35,
-        DEC_REG = 0x36,
+        RSHIFT = 0x21,
 
-        JNE_Lit = 0x15,
-        JNE_REG = 0x40,
-        JEQ_REG = 0x3E,
-        JEQ_LIT = 0x41,
-        JLT_REG = 0x42,
-        JLT_LIT = 0x43,
-        JGT_REG = 0x44,
-        JGT_LIT = 0x45,
-        JLE_REG = 0x46,
-        JLE_LIT = 0x47,
-        JGE_REG = 0x48,
-        JGE_LIT = 0x49,
+        // Logical
+        NOT = 0x24,
 
-        Exit = 0x60,
+        AND = 0x25,
+        OR = 0x26,
+        XOR = 0x27,
 
-        NOP = 0xFF,
+        //Jumps
+        JUMP = 0x30,
 
-        And = 0x2F,
-        Or = 0x30,
-        Xor = 0x32,
-        NOT = 0x34,
-        Div = 0x51,
-        SUB = 0x50,
+        JNEQ = 0x31,
+        JEQ = 0x32,
+        JLT = 0x33,
+        JLE = 0x34,
+        JGT = 0x35,
+        JGE = 0x36,
+
+        MOV_REG_REG = 0x40,
+        MOV_MEM_REG = 0x41,
     }
 }

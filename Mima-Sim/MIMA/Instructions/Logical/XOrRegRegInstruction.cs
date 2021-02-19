@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Instructions.Logical
 {
     public class XOrRegRegInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.Xor;
+        public OpCodes Instruction => OpCodes.XOR;
         public string Mnemonic => "xor";
 
         public bool Invoke(CPU cpu)

@@ -55,7 +55,7 @@ namespace MimaSim.MIMA.Components
             {
                 MessageBus.Current.SendMessage(new StopMessage());
 
-                return (byte)OpCodes.Exit;
+                return (byte)OpCodes.NOP;
             }
         }
 

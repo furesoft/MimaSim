@@ -7,7 +7,7 @@ namespace MimaSim.MIMA.Instructions
 {
     public class ExitInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.Exit;
+        public OpCodes Instruction => OpCodes.EXIT;
         public string Mnemonic => "exit";
 
         public bool Invoke(CPU cpu)

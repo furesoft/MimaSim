@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
 {
     public class IncReg : IInstruction
     {
-        public OpCodes Instruction => OpCodes.INC_REG;
+        public OpCodes Instruction => OpCodes.INC;
 
         public string Mnemonic => "inc";
 

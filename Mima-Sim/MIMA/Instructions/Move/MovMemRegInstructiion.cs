@@ -3,16 +3,16 @@ using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Move
 {
-    public class MovMemRegInstruction : IInstruction
+    public class MovMemRegInstructiion : IInstruction
     {
-        public OpCodes Instruction => OpCodes.MOV_MEM_REG;
+        public OpCodes Instruction => OpCodes.MOV_REG_REG;
         public string Mnemonic => "move";
 
         public bool Invoke(CPU cpu)
         {
-            var address = cpu.Fetch16();
+            var registerFrom = cpu.FetchRegister();
             var registerTo = cpu.FetchRegister();
-            var value = cpu.Memory.GetValue(address);
+            var value = cpu.GetRegister(registerFrom);
 
             cpu.SetRegister(registerTo, value);
 

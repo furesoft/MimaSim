@@ -5,16 +5,16 @@ namespace MimaSim.MIMA.Instructions.Move
 {
     public class MovRegMemInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.MOV_REG_MEM;
+        public OpCodes Instruction => OpCodes.MOV_MEM_REG;
         public string Mnemonic => "move";
 
         public bool Invoke(CPU cpu)
         {
-            var registerFrom = cpu.FetchRegister();
             var address = cpu.Fetch16();
-            var value = cpu.GetRegister(registerFrom);
+            var value = cpu.Memory.GetValue(address);
+            var register = cpu.FetchRegister();
 
-            cpu.Memory.SetValue(address, value);
+            cpu.SetRegister(register, value);
 
             return false;
         }
