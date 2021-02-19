@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MimaSim.ViewModels"
              xmlns:c="clr-namespace:MimaSim.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             Tag="{DynamicResource cpu}"
+             mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="450"
              x:Class="MimaSim.Tabs.ExecutionTab">
   <Grid ColumnDefinitions="450,*">
     <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" />

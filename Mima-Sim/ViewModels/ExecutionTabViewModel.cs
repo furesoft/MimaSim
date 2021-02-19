@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
@@ -8,6 +9,8 @@ using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
 using ReactiveUI;
 using System;
+using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
@@ -29,6 +32,29 @@ namespace MimaSim.ViewModels
 
             ViewRawCommand = DialogService.CreateOpenCommand(new RawViewPopupControl(), new RawPopupViewModel());
             OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
+
+            LoadCommand = ReactiveCommand.Create(async () =>
+            {
+                var ofd = new OpenFileDialog();
+                ofd.Title = "Programm laden";
+
+                var window = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
+                var filenames = await ofd.ShowAsync(window.MainWindow);
+
+                Source = File.ReadAllText(filenames.First());
+            });
+
+            SaveCommand = ReactiveCommand.Create(async () =>
+            {
+                var svd = new SaveFileDialog();
+                svd.Title = "Programm speichern";
+
+                var window = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
+
+                var filename = await svd.ShowAsync(window.MainWindow);
+
+                File.WriteAllText(filename, Source);
+            });
 
             RunCodeCommand = ReactiveCommand.Create(() =>
             {
@@ -70,6 +96,7 @@ namespace MimaSim.ViewModels
         }
 
         public ViewModelActivator Activator => new ViewModelActivator();
+        public ICommand LoadCommand { get; set; }
         public ICommand OpenClockSettingsCommand { get; set; }
         public ICommand OpenErrorPopupCommand { get; set; }
         public ICommand OpenMemoryPopupCommand { get; set; }
@@ -80,6 +107,8 @@ namespace MimaSim.ViewModels
             get { return _runMode; }
             set { this.RaiseAndSetIfChanged(ref _runMode, value); }
         }
+
+        public ICommand SaveCommand { get; set; }
 
         public object SelectedLanguage
         {
