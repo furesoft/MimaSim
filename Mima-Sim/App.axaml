@@ -6,6 +6,8 @@
     <StyleInclude Source="avares://MimaSim/Styles.axaml" />
     <StyleInclude Source="avares://MimaSim/Styles/ContentDialogStyle.axaml" />
     <StyleInclude Source="avares://MimaSim/Styles/DialogControlStyle.axaml" />
+    <StyleInclude Source="avares://MimaSim/Styles/ExecutionBarStyle.axaml" />
+    <StyleInclude Source="avares://MimaSim/Styles/ButtonStyles.axaml" />
 
     <FluentTheme Mode="Light" />
   </Application.Styles>

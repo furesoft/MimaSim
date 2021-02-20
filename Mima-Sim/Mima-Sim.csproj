@@ -16,6 +16,8 @@
     <AvaloniaXaml Remove="Controls\ContentDialogStyle.axaml" />
     <AvaloniaXaml Remove="Controls\DialogControlStyle.axaml" />
     <AvaloniaXaml Remove="Styles.axaml" />
+    <AvaloniaXaml Remove="Styles\ButtonStyles.axaml" />
+    <AvaloniaXaml Remove="Styles\ExecutionBarStyle.axaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
@@ -37,11 +39,13 @@
     <AvaloniaResource Include="Resources\Icons\save.png" />
     <AvaloniaResource Include="Resources\Icons\step.png" />
     <AvaloniaResource Include="Resources\Icons\stop.png" />
+    <AvaloniaResource Include="Styles\ButtonStyles.axaml" />
     <AvaloniaResource Include="Styles\ContentDialogStyle.axaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaResource>
     <AvaloniaResource Include="Styles\DialogControlStyle.axaml" />
     <AvaloniaResource Include="Styles.axaml" />
+    <AvaloniaResource Include="Styles\ExecutionBarStyle.axaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />

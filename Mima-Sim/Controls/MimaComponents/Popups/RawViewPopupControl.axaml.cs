@@ -11,13 +11,8 @@ namespace MimaSim.Controls.MimaComponents.Popups
         public RawViewPopupControl()
         {
             DataContext = new RawPopupViewModel();
-
-            this.WhenActivated(disposables =>
-            {
-                Disposable
-                     .Create(() => { /* handle deactivation */ })
-                     .DisposeWith(disposables);
-            });
+            var cc = DataContext as IActivatableViewModel;
+            cc.Activator.Activate();
 
             InitializeComponent();
         }
