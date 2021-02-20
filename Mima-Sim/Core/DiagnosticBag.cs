@@ -12,12 +12,12 @@ namespace MimaSim.Core
 
         public string[] GetAll()
         {
-            return _diagnostics.Select(_ => _.Message).ToArray();
+            return _diagnostics.Select(_ => _.ToString()).ToArray();
         }
 
-        public void ReportInvalidMovInstruction()
+        public void ReportInvalidMovInstruction(int start, int end)
         {
-            Report("mov besitzt ein ungültiges Argument", 0, 0);
+            Report("mov besitzt ein ungültiges Argument", start, end);
         }
 
         internal void ReportUnknownError()
@@ -35,6 +35,11 @@ namespace MimaSim.Core
             public int End { get; set; }
             public string Message { get; set; }
             public int Start { get; set; }
+
+            public override string ToString()
+            {
+                return $"(Start:End {Start}:{End}): {Message}";
+            }
         }
     }
 }

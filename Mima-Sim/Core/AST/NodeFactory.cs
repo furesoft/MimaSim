@@ -19,5 +19,10 @@ namespace MimaSim.Core.AST
         {
             return new LiteralNode(value);
         }
+
+        public static IAstNode Tuple(params IAstNode[] nodes)
+        {
+            return Call("()", nodes);
+        }
     }
 }

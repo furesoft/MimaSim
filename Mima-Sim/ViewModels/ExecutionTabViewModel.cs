@@ -63,7 +63,7 @@ namespace MimaSim.ViewModels
                     if (RunMode)
                     {
                         var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
-                        DiagnosticBag diagnostics = new DiagnosticBag();
+                        DiagnosticBag diagnostics = null;
                         CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
                         if (!diagnostics.IsEmpty)
@@ -73,10 +73,12 @@ namespace MimaSim.ViewModels
 
                             DialogService.OpenError(string.Join('\n', errors));
                         }
+                        else
+                        {
+                            RegisterMap.GetRegister("IAR").SetValue(0);
 
-                        RegisterMap.GetRegister("IAR").SetValue(0);
-
-                        CPU.Instance.Clock.Start();
+                            CPU.Instance.Clock.Start();
+                        }
                     }
                     else
                     {

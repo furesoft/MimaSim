@@ -57,10 +57,6 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg1);
                             _emitter.EmitRegister(reg2);
                         }
-                        else
-                        {
-                            Diagnostics.ReportInvalidMovInstruction();
-                        }
                     }
                 }
             }

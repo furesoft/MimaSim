@@ -10,6 +10,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
 {
     public class AssemblyParser : IParser
     {
+        public DiagnosticBag Diagnostics = new DiagnosticBag();
+
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
@@ -155,9 +157,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 var secondArgRegister = Enum.Parse<Registers>(secondArg.Contents, true);
 
                 return NodeFactory.Call("mov", null,
-                    NodeFactory.Literal(firstArgRegister),
-                    NodeFactory.Literal(secondArgRegister)
+                    NodeFactory.Tuple(NodeFactory.Literal(firstArgRegister), NodeFactory.Literal(firstArg)),
+                    NodeFactory.Tuple(NodeFactory.Literal(secondArgRegister), NodeFactory.Literal(secondArg))
                 );
+            }
+            else
+            {
+                Diagnostics.ReportInvalidMovInstruction(firstArg.Start, firstArg.End);
             }
 
             return NodeFactory.Call("{}", null);

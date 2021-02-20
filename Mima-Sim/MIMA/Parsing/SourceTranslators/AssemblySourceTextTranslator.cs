@@ -1,7 +1,9 @@
-﻿using MimaSim.Core;
+﻿using MimaSim.Controls;
+using MimaSim.Core;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Visitors;
+using System;
 
 namespace MimaSim.MIMA.Parsing.SourceTranslators
 {
@@ -16,14 +18,24 @@ namespace MimaSim.MIMA.Parsing.SourceTranslators
             {
                 diagnostics.ReportUnknownError();
 
-                return new byte[0];
+                return Array.Empty<byte>();
             }
 
-            var visitor = new AssemblyVisitor();
+            if (parser.Diagnostics.IsEmpty)
+            {
+                var visitor = new AssemblyVisitor();
 
-            ast.Visit(visitor);
+                ast.Visit(visitor);
 
-            return visitor.GetRaw();
+                return visitor.GetRaw();
+            }
+            else
+            {
+                DialogService.OpenError(string.Join('\n', parser.Diagnostics.GetAll()));
+                diagnostics = parser.Diagnostics;
+
+                return Array.Empty<byte>();
+            }
         }
     }
 }
