@@ -3,7 +3,6 @@ using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
 using System;
-using System.Collections.Generic;
 
 namespace MimaSim.MIMA.Visitors
 {
