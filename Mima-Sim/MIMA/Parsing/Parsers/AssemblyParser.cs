@@ -17,10 +17,12 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var tokenizer = new PrecedenceBasedRegexTokenizer();
 
             tokenizer.AddDefinition(TokenKind.Comma, ",", 1);
+            tokenizer.AddDefinition(TokenKind.Colon, ":", 1);
             tokenizer.AddDefinition(TokenKind.AddressLiteral, "&[0-9a-fA-F]{1,6}", 3);
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
             tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 2);
             tokenizer.AddDefinition(TokenKind.Mnemnonic, GetMnemnonicPattern(), 2);
+            tokenizer.AddDefinition(TokenKind.Identifier, "[a-zA-Z_][0-9a-zA-F_]*", 4);
 
             tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
@@ -109,7 +111,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     break;
             }
 
-            return NodeFactory.Call("{}", AstCallNodeType.Group);
+            return null;
         }
 
         private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
@@ -125,6 +127,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 {
                     _nodes.Add(ParseInstruction(enumerator));
                 }
+                else if (token.Kind == TokenKind.Identifier)
+                {
+                    _nodes.Add(ParseLabel(enumerator));
+                }
                 else if (token.Kind == TokenKind.EndOfFile)
                 {
                     break;
@@ -132,6 +138,14 @@ namespace MimaSim.MIMA.Parsing.Parsers
             } while (token.Kind != TokenKind.EndOfFile);
 
             return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
+        }
+
+        private IAstNode ParseLabel(TokenEnumerator enumerator)
+        {
+            var nameToken = enumerator.Read(TokenKind.Identifier);
+            enumerator.Read(TokenKind.Colon);
+
+            return NodeFactory.Call("label", null, NodeFactory.Id(nameToken.Contents));
         }
 
         private IAstNode ParseLiteral(TokenEnumerator enumerator)
@@ -157,8 +171,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 var secondArgRegister = Enum.Parse<Registers>(secondArg.Contents, true);
 
                 return NodeFactory.Call("mov", null,
-                    NodeFactory.Tuple(NodeFactory.Literal(firstArgRegister), NodeFactory.Literal(firstArg)),
-                    NodeFactory.Tuple(NodeFactory.Literal(secondArgRegister), NodeFactory.Literal(secondArg))
+                    NodeFactory.Literal(firstArgRegister),
+                    NodeFactory.Literal(secondArgRegister)
                 );
             }
             else

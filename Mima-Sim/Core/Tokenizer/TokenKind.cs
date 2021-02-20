@@ -27,5 +27,6 @@
         Exclamation,
         Operator,
         AddressLiteral,
+        Colon,
     }
 }

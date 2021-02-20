@@ -3,6 +3,7 @@ using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
 using MimaSim.MIMA.VM;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
@@ -10,6 +11,7 @@ namespace MimaSim.MIMA.Visitors
     public class AssemblyVisitor : INodeVisitor, IEmitter
     {
         private ByteCodeEmitter _emitter = new ByteCodeEmitter();
+        private Dictionary<string, int> _labels = new Dictionary<string, int>();
         private DiagnosticBag Diagnostics = new DiagnosticBag();
 
         public byte[] GetRaw()
@@ -57,6 +59,12 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg1);
                             _emitter.EmitRegister(reg2);
                         }
+                    }
+                    else if (cn.Name == "label")
+                    {
+                        var id = (IdentifierNode)cn.Args.First();
+
+                        _labels.Add(id.Name, _emitter.Position);
                     }
                 }
             }
