@@ -8,7 +8,7 @@ namespace MimaSim.Core
     {
         private List<Diagnostic> _diagnostics = new List<Diagnostic>();
 
-        public bool IsEmpty => _diagnostics.Count > 0;
+        public bool IsEmpty => _diagnostics.Count == 0;
 
         public string[] GetAll()
         {

@@ -8,6 +8,8 @@ namespace MimaSim.Core.Emiting
     {
         private ByteArrayBuilder _builder = new ByteArrayBuilder();
 
+        public int Position => _builder.Length;
+
         public void EmitInstruction(OpCodes opcode)
         {
             EmitOpcode(opcode);
