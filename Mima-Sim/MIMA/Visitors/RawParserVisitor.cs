@@ -1,6 +1,7 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
+using MimaSim.Core.Emiting;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace MimaSim.MIMA.Visitors
 {
     public class RawParserVisitor : INodeVisitor, IEmitter
     {
-        private List<byte> _raw = new List<byte>();
+        private ByteArrayBuilder _raw = new ByteArrayBuilder();
 
         public byte[] GetRaw()
         {
@@ -31,7 +32,7 @@ namespace MimaSim.MIMA.Visitors
             {
                 if (arg is LiteralNode lit)
                 {
-                    _raw.Add((byte)lit.Value);
+                    _raw.Append((byte)lit.Value);
                 }
             }
         }
