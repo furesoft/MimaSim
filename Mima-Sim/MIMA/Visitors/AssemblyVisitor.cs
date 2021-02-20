@@ -2,22 +2,23 @@
 using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
+using MimaSim.MIMA.VM;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
 {
     public class AssemblyVisitor : INodeVisitor, IEmitter
     {
-        private ByteArrayBuilder _raw = new ByteArrayBuilder();
+        private ByteCodeEmitter _emitter = new ByteCodeEmitter();
 
         public byte[] GetRaw()
         {
-            return _raw.ToArray();
+            return _emitter.ToArray();
         }
 
         public void Visit(LiteralNode lit)
         {
-            _raw.Append((ushort)lit.Value);
+            _emitter.EmitLiteral((ushort)lit.Value);
         }
 
         public void Visit(IdentifierNode id)
@@ -37,12 +38,25 @@ namespace MimaSim.MIMA.Visitors
                     }
                     else if (cn.Name == "load")
                     {
-                        _raw.Append((byte)OpCodes.LOAD);
+                        _emitter.EmitOpcode(OpCodes.LOAD);
 
                         //visit literal
                         var lit = (LiteralNode)cn.Args.First();
 
                         Visit(lit);
+                    }
+                    else if (cn.Name == "mov")
+                    {
+                        var firstArg = (LiteralNode)cn.Args.First();
+                        var secondArg = (LiteralNode)cn.Args.Last();
+
+                        if (firstArg.Value is Registers reg1 && secondArg.Value is Registers reg2)
+                        {
+                            _emitter.EmitOpcode(OpCodes.MOV_REG_REG);
+
+                            _emitter.EmitRegister(reg1);
+                            _emitter.EmitRegister(reg2);
+                        }
                     }
                 }
             }
@@ -53,7 +67,7 @@ namespace MimaSim.MIMA.Visitors
             var opcodeNode = (LiteralNode)cn.Args.First();
             var opcode = (OpCodes)opcodeNode.Value;
 
-            _raw.Append((byte)opcode);
+            _emitter.EmitOpcode(opcode);
         }
     }
 }

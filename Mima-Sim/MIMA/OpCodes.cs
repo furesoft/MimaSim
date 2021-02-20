@@ -41,5 +41,6 @@
 
         MOV_REG_REG = 0x40,
         MOV_MEM_REG = 0x41,
+        MOV = 0x42,
     }
 }

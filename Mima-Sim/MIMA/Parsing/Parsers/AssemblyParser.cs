@@ -70,6 +70,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case OpCodes.LOAD:
                     return NodeFactory.Call("load", null, ParseLiteral(enumerator));
 
+                case OpCodes.MOV:
+                    return ParseMoveInstruction(enumerator);
+
                 case OpCodes.NOT:
                     break;
 
@@ -101,12 +104,6 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     break;
 
                 case OpCodes.JGE:
-                    break;
-
-                case OpCodes.MOV_REG_REG:
-                    break;
-
-                case OpCodes.MOV_MEM_REG:
                     break;
             }
 
@@ -142,6 +139,28 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var value = Convert.ToUInt16(token.Contents, 16);
 
             return NodeFactory.Literal(value);
+        }
+
+        private IAstNode ParseMoveInstruction(TokenEnumerator enumerator)
+        {
+            var firstArg = enumerator.Read();
+
+            enumerator.Read(TokenKind.Comma);
+
+            var secondArg = enumerator.Read();
+
+            if (firstArg.Kind == TokenKind.Register && secondArg.Kind == TokenKind.Register)
+            {
+                var firstArgRegister = Enum.Parse<Registers>(firstArg.Contents, true);
+                var secondArgRegister = Enum.Parse<Registers>(secondArg.Contents, true);
+
+                return NodeFactory.Call("mov", null,
+                    NodeFactory.Literal(firstArgRegister),
+                    NodeFactory.Literal(secondArgRegister)
+                );
+            }
+
+            return NodeFactory.Call("{}", null);
         }
     }
 }
