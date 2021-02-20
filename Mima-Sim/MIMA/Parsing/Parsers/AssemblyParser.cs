@@ -92,15 +92,23 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case OpCodes.JMP:
                     var label = enumerator.Read(TokenKind.LabelReference);
-                    var arg = NodeFactory.Literal(label.Contents);
 
-                    return NodeFactory.Call("jmp", null, arg);
+                    return NodeFactory.Call("jmp", null, NodeFactory.Literal(label.Contents));
 
                 case OpCodes.JNEQ:
                     break;
 
                 case OpCodes.JEQ:
-                    break;
+                    var jelabel = enumerator.Read(TokenKind.LabelReference);
+                    enumerator.Read(TokenKind.Comma);
+
+                    var jecond = enumerator.Read(TokenKind.HexLiteral);
+                    var jecondValue = Convert.ToUInt16(jecond.Contents, 16);
+
+                    return NodeFactory.Call("jmpe", null,
+                        NodeFactory.Literal(jelabel.Contents),
+                        NodeFactory.Literal(jecondValue)
+                    );
 
                 case OpCodes.JLT:
                     break;

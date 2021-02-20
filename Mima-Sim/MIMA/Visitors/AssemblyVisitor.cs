@@ -68,6 +68,9 @@ namespace MimaSim.MIMA.Visitors
                         _emitter.EmitOpcode(OpCodes.JMP);
                         _emitter.EmitLiteral(address);
                     }
+                    else if (cn.Name == "jmpe")
+                    {
+                    }
                     else if (cn.Name == "label")
                     {
                         var id = (IdentifierNode)cn.Args.First();
