@@ -33,9 +33,17 @@ namespace MimaSim.Core.AST
             sb.Append("(");
 
             sb.Append(SeperateArgs(call.Args));
-            sb.Append(") : ");
 
-            sb.Append(call.Type);
+            if (call.Type != null)
+            {
+                sb.Append(") : ");
+
+                sb.Append(call.Type);
+            }
+            else
+            {
+                sb.Append(")");
+            }
 
             return sb.ToString();
         }
