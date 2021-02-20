@@ -30,7 +30,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private string GetMnemnonicPattern()
         {
-            var names = Enum.GetNames(typeof(Mnemnonics));
+            var names = Enum.GetNames(typeof(OpCodes));
             var namesLowered = names.Select(_ => _.ToLower());
 
             var allNames = names.Concat(namesLowered);
@@ -55,32 +55,20 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             switch (value)
             {
-                case OpCodes.NOP:
-                    break;
-
+                case OpCodes.INC:
+                case OpCodes.DEC:
                 case OpCodes.EXIT:
                 case OpCodes.ADD:
-
                 case OpCodes.MUL:
-
                 case OpCodes.SUB:
-
                 case OpCodes.DIV:
 
-                case OpCodes.LOAD:
+                case OpCodes.LSHIFT:
+                case OpCodes.RSHIFT:
                     return NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(value));
 
-                case OpCodes.INC:
-                    break;
-
-                case OpCodes.DEC:
-                    break;
-
-                case OpCodes.LSHIFT:
-                    break;
-
-                case OpCodes.RSHIFT:
-                    break;
+                case OpCodes.LOAD:
+                    return NodeFactory.Call("load", null, ParseLiteral(enumerator));
 
                 case OpCodes.NOT:
                     break;
@@ -145,6 +133,15 @@ namespace MimaSim.MIMA.Parsing.Parsers
             } while (token.Kind != TokenKind.EndOfFile);
 
             return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
+        }
+
+        private IAstNode ParseLiteral(TokenEnumerator enumerator)
+        {
+            var token = enumerator.Read(TokenKind.HexLiteral);
+
+            var value = Convert.ToUInt16(token.Contents, 16);
+
+            return NodeFactory.Literal(value);
         }
     }
 }
