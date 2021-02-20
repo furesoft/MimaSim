@@ -50,7 +50,79 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseInstruction(TokenEnumerator enumerator)
         {
-            throw new NotImplementedException();
+            var mnemnonic = enumerator.Read(TokenKind.Mnemnonic);
+            var value = Enum.Parse<OpCodes>(mnemnonic.Contents, true);
+
+            switch (value)
+            {
+                case OpCodes.NOP:
+                    break;
+
+                case OpCodes.EXIT:
+                case OpCodes.ADD:
+
+                case OpCodes.MUL:
+
+                case OpCodes.SUB:
+
+                case OpCodes.DIV:
+
+                case OpCodes.LOAD:
+                    return NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(value));
+
+                case OpCodes.INC:
+                    break;
+
+                case OpCodes.DEC:
+                    break;
+
+                case OpCodes.LSHIFT:
+                    break;
+
+                case OpCodes.RSHIFT:
+                    break;
+
+                case OpCodes.NOT:
+                    break;
+
+                case OpCodes.AND:
+                    break;
+
+                case OpCodes.OR:
+                    break;
+
+                case OpCodes.XOR:
+                    break;
+
+                case OpCodes.JUMP:
+                    break;
+
+                case OpCodes.JNEQ:
+                    break;
+
+                case OpCodes.JEQ:
+                    break;
+
+                case OpCodes.JLT:
+                    break;
+
+                case OpCodes.JLE:
+                    break;
+
+                case OpCodes.JGT:
+                    break;
+
+                case OpCodes.JGE:
+                    break;
+
+                case OpCodes.MOV_REG_REG:
+                    break;
+
+                case OpCodes.MOV_MEM_REG:
+                    break;
+            }
+
+            return NodeFactory.Call("{}", AstCallNodeType.Group);
         }
 
         private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
