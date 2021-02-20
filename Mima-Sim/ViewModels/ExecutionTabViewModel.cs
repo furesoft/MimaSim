@@ -63,12 +63,15 @@ namespace MimaSim.ViewModels
                     if (RunMode)
                     {
                         var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
-                        CPU.Instance.Program = translator.ToRaw(Source, out var hasError);
+                        DiagnosticBag diagnostics = new DiagnosticBag();
+                        CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
-                        if (hasError)
+                        if (!diagnostics.IsEmpty)
                         {
                             RunMode = false;
-                            DialogService.OpenError("Der Programmcode enthält einige Fehler. Code kann nicht übersetzt werden.");
+                            string[] errors = diagnostics.GetAll();
+
+                            DialogService.OpenError(string.Join('\n', errors));
                         }
 
                         RegisterMap.GetRegister("IAR").SetValue(0);

@@ -32,7 +32,7 @@ namespace MimaSim.Core.Tokenizer
                 if (lastMatch != null && bestMatch.StartIndex < lastMatch.EndIndex)
                     continue;
 
-                yield return new Token(bestMatch.TokenType, bestMatch.Value);
+                yield return new Token(bestMatch.TokenType, bestMatch.Value, bestMatch.StartIndex, bestMatch.EndIndex);
 
                 lastMatch = bestMatch;
             }

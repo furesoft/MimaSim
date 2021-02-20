@@ -10,6 +10,7 @@ namespace MimaSim.MIMA.Visitors
     public class AssemblyVisitor : INodeVisitor, IEmitter
     {
         private ByteCodeEmitter _emitter = new ByteCodeEmitter();
+        private DiagnosticBag Diagnostics = new DiagnosticBag();
 
         public byte[] GetRaw()
         {
@@ -40,7 +41,6 @@ namespace MimaSim.MIMA.Visitors
                     {
                         _emitter.EmitOpcode(OpCodes.LOAD);
 
-                        //visit literal
                         var lit = (LiteralNode)cn.Args.First();
 
                         Visit(lit);
@@ -56,6 +56,10 @@ namespace MimaSim.MIMA.Visitors
 
                             _emitter.EmitRegister(reg1);
                             _emitter.EmitRegister(reg2);
+                        }
+                        else
+                        {
+                            Diagnostics.ReportInvalidMovInstruction();
                         }
                     }
                 }

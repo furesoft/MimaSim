@@ -7,22 +7,21 @@ namespace MimaSim.MIMA.Parsing.SourceTranslators
 {
     public class AssemblySourceTextTranslator : ISourceTextTranslator
     {
-        public byte[] ToRaw(string input, out bool hasErrors)
+        public byte[] ToRaw(string input, ref DiagnosticBag diagnostics)
         {
             var parser = new AssemblyParser();
             var ast = (CallNode)parser.Parse(input);
 
             if (ast.IsEmpty || ast.Type == null)
             {
-                hasErrors = true;
+                diagnostics.ReportUnknownError();
+
                 return new byte[0];
             }
 
             var visitor = new AssemblyVisitor();
 
             ast.Visit(visitor);
-
-            hasErrors = false;
 
             return visitor.GetRaw();
         }
