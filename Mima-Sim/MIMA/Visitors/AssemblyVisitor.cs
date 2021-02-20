@@ -11,7 +11,7 @@ namespace MimaSim.MIMA.Visitors
     public class AssemblyVisitor : INodeVisitor, IEmitter
     {
         private ByteCodeEmitter _emitter = new ByteCodeEmitter();
-        private Dictionary<string, int> _labels = new Dictionary<string, int>();
+        private Dictionary<string, ushort> _labels = new Dictionary<string, ushort>();
         private DiagnosticBag Diagnostics = new DiagnosticBag();
 
         public byte[] GetRaw()
@@ -60,11 +60,19 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg2);
                         }
                     }
+                    else if (cn.Name == "jmp")
+                    {
+                        var addressArg = (LiteralNode)cn.Args.First();
+                        var address = _labels[addressArg.Value.ToString().Remove(0, 1)];
+
+                        _emitter.EmitOpcode(OpCodes.JMP);
+                        _emitter.EmitLiteral(address);
+                    }
                     else if (cn.Name == "label")
                     {
                         var id = (IdentifierNode)cn.Args.First();
 
-                        _labels.Add(id.Name, _emitter.Position);
+                        _labels.Add(id.Name, (ushort)_emitter.Position);
                     }
                 }
             }

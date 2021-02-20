@@ -63,7 +63,7 @@ namespace MimaSim.ViewModels
                     if (RunMode)
                     {
                         var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
-                        DiagnosticBag diagnostics = null;
+                        DiagnosticBag diagnostics = new DiagnosticBag();
                         CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
                         if (!diagnostics.IsEmpty)

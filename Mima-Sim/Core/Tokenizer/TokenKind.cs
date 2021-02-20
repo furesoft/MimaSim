@@ -28,5 +28,6 @@
         Operator,
         AddressLiteral,
         Colon,
+        LabelReference,
     }
 }

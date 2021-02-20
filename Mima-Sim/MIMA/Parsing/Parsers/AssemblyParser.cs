@@ -23,6 +23,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 2);
             tokenizer.AddDefinition(TokenKind.Mnemnonic, GetMnemnonicPattern(), 2);
             tokenizer.AddDefinition(TokenKind.Identifier, "[a-zA-Z_][0-9a-zA-F_]*", 4);
+            tokenizer.AddDefinition(TokenKind.LabelReference, @"\$[a-zA-Z_][0-9a-zA-F_]*", 4);
 
             tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
@@ -89,8 +90,11 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case OpCodes.XOR:
                     break;
 
-                case OpCodes.JUMP:
-                    break;
+                case OpCodes.JMP:
+                    var label = enumerator.Read(TokenKind.LabelReference);
+                    var arg = NodeFactory.Literal(label.Contents);
+
+                    return NodeFactory.Call("jmp", null, arg);
 
                 case OpCodes.JNEQ:
                     break;

@@ -30,7 +30,7 @@
         XOR = 0x27,
 
         //Jumps
-        JUMP = 0x30,
+        JMP = 0x30,
 
         JNEQ = 0x31,
         JEQ = 0x32,
