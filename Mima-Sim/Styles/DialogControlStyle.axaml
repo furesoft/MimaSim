@@ -23,7 +23,7 @@
             </StackPanel>
 
             <Grid Classes="single" Grid.Row="5" VerticalAlignment="Bottom">
-              <Button Classes="base" VerticalContentAlignment="Bottom" IsDefault="True" Content="{TemplateBinding CommandText, Mode=TwoWay}" Command="{TemplateBinding Command}" />
+              <Button MinWidth="250" Classes="base" VerticalContentAlignment="Bottom" IsDefault="True" Content="{TemplateBinding CommandText, Mode=TwoWay}" Command="{TemplateBinding Command}" />
             </Grid>
           </Grid>
         </Border>
