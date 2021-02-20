@@ -53,4 +53,19 @@
   <Style Selector="controls|ExecutionBar ToggleButton:checked Image.tbunchecked">
     <Setter Property="IsVisible" Value="false" />
   </Style>
+
+  <Style Selector="controls|DialogControl[IsCancelEnabled=False] Grid.single">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
+  <Style Selector="controls|DialogControl[IsCancelEnabled=True] Grid.single">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+
+  <Style Selector="controls|DialogControl[IsCancelEnabled=False] StackPanel.both">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+
+  <Style Selector="controls|DialogControl[IsCancelEnabled=True] StackPanel.both">
+    <Setter Property="IsVisible" Value="True" />
+  </Style>
 </Styles>
