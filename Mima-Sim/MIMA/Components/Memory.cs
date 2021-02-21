@@ -29,6 +29,9 @@ namespace MimaSim.MIMA.Components
         {
             if (address > 0 && address < _values.Length)
             {
+                CPU.Instance.SetRegister(Registers.SAR, address);
+                CPU.Instance.SetRegister(Registers.SDR, _values[address]);
+
                 return _values[address];
             }
 
@@ -40,6 +43,9 @@ namespace MimaSim.MIMA.Components
             if (address > 0 && address < _values.Length)
             {
                 _values[address] = value;
+
+                CPU.Instance.SetRegister(Registers.SAR, address);
+                CPU.Instance.SetRegister(Registers.SDR, _values[address]);
 
                 MessageBus.Current.SendMessage(new MemoryCellChangedMessage { Address = address, Value = value });
             }
