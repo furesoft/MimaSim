@@ -33,7 +33,13 @@ namespace MimaSim.ViewModels
 
             return string.Join(' ', raw.Select(_ =>
             {
-                return (_).ToString("x");
+                var result = (_).ToString("x");
+                if (result.Length == 1)
+                {
+                    result = "0" + result;
+                }
+
+                return result;
             })).ToUpper();
         }
     }

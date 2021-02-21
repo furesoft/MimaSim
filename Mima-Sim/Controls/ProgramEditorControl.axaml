@@ -16,6 +16,6 @@
       <ComboBoxItem>Hochsprache</ComboBoxItem>
     </ComboBox>
 
-    <TextBox Text="{Binding Source}" AcceptsReturn="True" MinWidth="150" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
+    <TextBox Text="{Binding Source}" TextWrapping="Wrap" AcceptsReturn="True" MinWidth="150" MaxHeight="450" MinHeight="150" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,5,0,5" />
   </Grid>
 </UserControl>

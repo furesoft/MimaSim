@@ -136,6 +136,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     return ParseIntLiteral();
             }
 
+            Diagnostics.ReportUnknownError();
             return null;
         }
     }

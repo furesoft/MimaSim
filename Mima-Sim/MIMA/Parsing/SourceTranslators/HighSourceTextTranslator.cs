@@ -15,8 +15,6 @@ namespace MimaSim.MIMA.Parsing.SourceTranslators
             var parser = new HighParser();
             var ast = parser.Parse(input);
 
-            Debug.WriteLine(ast.ToString());
-
             if (parser.Diagnostics.IsEmpty)
             {
                 var visitor = new HighParserVisitor();
