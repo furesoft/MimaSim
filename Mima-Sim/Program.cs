@@ -9,7 +9,7 @@ namespace MimaSim
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UseReactiveUI()
-                .UseManagedSystemDialogs()
+                //.UseManagedSystemDialogs()
                 .UsePlatformDetect()
                 .LogToTrace();
 
