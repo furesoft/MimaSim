@@ -59,6 +59,45 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg2);
                         }
                     }
+                    else if (cn.Name == "mov_reg_mem")
+                    {
+                        var firstArg = (LiteralNode)cn.Args.First();
+                        var secondArg = (LiteralNode)cn.Args.Last();
+
+                        if (firstArg.Value is Registers reg && secondArg.Value is ushort addr)
+                        {
+                            _emitter.EmitOpcode(OpCodes.MOV_REG_MEM);
+
+                            _emitter.EmitRegister(reg);
+                            _emitter.EmitLiteral(addr);
+                        }
+                    }
+                    else if (cn.Name == "mov_mem_reg")
+                    {
+                        var firstArg = (LiteralNode)cn.Args.First();
+                        var secondArg = (LiteralNode)cn.Args.Last();
+
+                        if (firstArg.Value is ushort addr && secondArg.Value is Registers reg)
+                        {
+                            _emitter.EmitOpcode(OpCodes.MOV_MEM_REG);
+
+                            _emitter.EmitLiteral(addr);
+                            _emitter.EmitRegister(reg);
+                        }
+                    }
+                    else if (cn.Name == "mov_mem_mem")
+                    {
+                        var firstArg = (LiteralNode)cn.Args.First();
+                        var secondArg = (LiteralNode)cn.Args.Last();
+
+                        if (firstArg.Value is ushort addr1 && secondArg.Value is ushort addr2)
+                        {
+                            _emitter.EmitOpcode(OpCodes.MOV_MEM_MEM);
+
+                            _emitter.EmitLiteral(addr1);
+                            _emitter.EmitLiteral(addr2);
+                        }
+                    }
                     else if (cn.Name == "jmp")
                     {
                         var addressArg = (LiteralNode)cn.Args.First();
