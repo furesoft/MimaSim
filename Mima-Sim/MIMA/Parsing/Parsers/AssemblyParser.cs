@@ -146,11 +146,20 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseLiteral()
         {
-            var token = _enumerator.Read(TokenKind.HexLiteral);
+            var token = _enumerator.Read();
 
-            var value = Convert.ToUInt16(token.Contents, 16);
+            if (token.Kind == TokenKind.HexLiteral)
+            {
+                var value = Convert.ToUInt16(token.Contents, 16);
 
-            return NodeFactory.Literal(value);
+                return NodeFactory.Literal(value);
+            }
+            else
+            {
+                Diagnostics.ReportHexLiteralExpected(token);
+
+                return NodeFactory.Literal(null);
+            }
         }
 
         private IAstNode ParseMoveInstruction()

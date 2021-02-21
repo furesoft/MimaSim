@@ -47,5 +47,6 @@
         NotEquals,
         LessEquals,
         GreaterEquals,
+        Unknown,
     }
 }

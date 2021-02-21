@@ -32,41 +32,7 @@ namespace MimaSim.MIMA.Visitors
         {
             if (!call.IsEmpty)
             {
-                foreach (var arg in call.Args)
-                {
-                    if (arg is LiteralNode lit)
-                    {
-                        Visit(lit);
-                        Registers register = _registerAllocator.Allocate();
-
-                        _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
-                    }
-                    else if (arg is CallNode cn)
-                    {
-                        Registers register = _registerAllocator.Allocate();
-
-                        if (cn.Args.Count == 1)
-                        {
-                            VisitUnary(cn);
-                        }
-                        else
-                        {
-                            Visit(cn);
-
-                            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
-                            EmitArithmeticOperators(call);
-                        }
-                    }
-                }
-
-                if (call.Args.Count == 1)
-                {
-                    VisitUnary(call);
-                }
-                else
-                {
-                    EmitArithmeticOperators(call);
-                }
+                TraverseTree(call);
             }
         }
 
@@ -132,20 +98,21 @@ namespace MimaSim.MIMA.Visitors
             }
         }
 
-        private void VisitUnary(CallNode cn)
+        private void TraverseTree(IAstNode ast)
         {
-            if (cn.Args.First() is LiteralNode lit)
+            if (ast is LiteralNode lit)
             {
-                if (cn.Name == "-")
-                {
-                    var negation = (ushort)(-(ushort)lit.Value);
+                Visit(lit);
+                Registers register = _registerAllocator.Allocate();
 
-                    _emitter.EmitInstruction(OpCodes.LOAD, negation);
-                }
-                else if (cn.Name == "+")
-                {
-                    _emitter.EmitInstruction(OpCodes.LOAD, (ushort)lit.Value);
-                }
+                _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
+            }
+            else if (ast is CallNode cn)
+            {
+                TraverseTree(cn.Args.First());
+                TraverseTree(cn.Args.Last());
+
+                EmitArithmeticOperators(cn);
             }
         }
     }

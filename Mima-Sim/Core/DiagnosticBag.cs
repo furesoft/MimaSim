@@ -16,6 +16,11 @@ namespace MimaSim.Core
             return _diagnostics.Select(_ => _.ToString()).ToArray();
         }
 
+        public void ReportHexLiteralExpected(Token token)
+        {
+            Report($"Hexadezimalzahl erwartet. Bekommen '{token.Contents}'", token.Start, token.End);
+        }
+
         public void ReportInvalidLiteral(Token token)
         {
             Report($"Ungültiges Literal '{token.Contents}'", token.Start, token.End);

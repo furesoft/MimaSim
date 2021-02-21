@@ -6,6 +6,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.ErrorPopupControl">
   <c:DialogControl CommandText="OK" Header="Fehler" Command="{Binding CloseCommand}">
-    <TextBlock Text="{Binding Message}" FontSize="22" />
+    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" FontSize="22" MaxWidth="300" />
   </c:DialogControl>
 </UserControl>
