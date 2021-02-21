@@ -17,18 +17,11 @@ namespace MimaSim.ViewModels
 
             MemoryCells = new ObservableCollection<MemoryCellModel>();
 
-            this.WhenActivated(disposables =>
+            var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
+            observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
             {
-                var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
-                observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
-                {
-                    MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
-                }));
-
-                Disposable
-                    .Create(() => { /* Handle deactivation */ })
-                    .DisposeWith(disposables);
-            });
+                MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
+            }));
         }
 
         public ViewModelActivator Activator => new ViewModelActivator();
