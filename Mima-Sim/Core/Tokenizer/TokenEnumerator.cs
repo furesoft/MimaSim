@@ -6,14 +6,16 @@ namespace MimaSim.Core.Tokenizer
 {
     public sealed class TokenEnumerator
     {
-        private int _position;
         private readonly Token[] _tokens;
+        private int _position;
 
         public TokenEnumerator(IEnumerable<Token> tokenStream)
         {
             _tokens = tokenStream.ToArray();
             _position = 0;
         }
+
+        public Token Current => _tokens[_position];
 
         public void BackTrack(int pos)
         {

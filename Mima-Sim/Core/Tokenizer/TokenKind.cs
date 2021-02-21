@@ -25,10 +25,17 @@
         CloseParen,
         OpenParen,
         Exclamation,
-        Operator,
+
         AddressLiteral,
         Colon,
         LabelReference,
         IntLiteral,
+        FalseKeyword,
+        TrueKeyword,
+        Slash,
+        Star,
+        Minus,
+        Plus,
+        Operator,
     }
 }

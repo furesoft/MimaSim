@@ -40,37 +40,40 @@ namespace MimaSim.MIMA.Visitors
                         Registers register = _registerAllocator.Allocate();
 
                         _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
-
-                        if (register == Registers.Y)
-                        {
-                            goto emitOpcode;
-                        }
                     }
                     else if (arg is CallNode cn)
                     {
+                        Registers register = _registerAllocator.Allocate();
+
                         Visit(cn);
+
+                        _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
+                        EmitArithmeticOperators(call);
                     }
                 }
+                EmitArithmeticOperators(call);
+            }
+        }
 
-            emitOpcode:
-                switch (call.Name)
-                {
-                    case "+":
-                        _emitter.EmitInstruction(OpCodes.ADD);
-                        break;
+        private void EmitArithmeticOperators(CallNode call)
+        {
+            switch (call.Name)
+            {
+                case "+":
+                    _emitter.EmitInstruction(OpCodes.ADD);
+                    break;
 
-                    case "-":
-                        _emitter.EmitInstruction(OpCodes.SUB);
-                        break;
+                case "-":
+                    _emitter.EmitInstruction(OpCodes.SUB);
+                    break;
 
-                    case "*":
-                        _emitter.EmitInstruction(OpCodes.MUL);
-                        break;
+                case "*":
+                    _emitter.EmitInstruction(OpCodes.MUL);
+                    break;
 
-                    case "/":
-                        _emitter.EmitInstruction(OpCodes.DIV);
-                        break;
-                }
+                case "/":
+                    _emitter.EmitInstruction(OpCodes.DIV);
+                    break;
             }
         }
     }

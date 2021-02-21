@@ -12,7 +12,7 @@ namespace MimaTest
         [TestMethod]
         public void Parse_Literal_Should_Pass()
         {
-            var input = "1 + 2 * 2 + 3";
+            var input = "2*3+1";
             var parser = new HighSourceTextTranslator();
 
             DiagnosticBag diagnostics = new DiagnosticBag();

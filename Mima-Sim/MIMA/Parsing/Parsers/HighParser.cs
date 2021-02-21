@@ -2,13 +2,29 @@
 using MimaSim.Core.AST;
 using MimaSim.Core.Tokenizer;
 using System;
+using System.Collections.Generic;
 
 namespace MimaSim.MIMA.Parsing.Parsers
 {
     public class HighParser : IParser
     {
         public DiagnosticBag Diagnostics = new DiagnosticBag();
+
+        private PrecedenceMap _binaryOperatorPrecedence = new PrecedenceMap
+        {
+            [TokenKind.Plus] = 4,
+            [TokenKind.Minus] = 4,
+            [TokenKind.Star] = 5,
+            [TokenKind.Slash] = 5,
+        };
+
         private TokenEnumerator _enumerator;
+
+        private PrecedenceMap _unaryOperatorPrecedence = new PrecedenceMap
+        {
+            [TokenKind.Plus] = 6,
+            [TokenKind.Minus] = 6,
+        };
 
         public IAstNode Parse(string input)
         {
@@ -17,7 +33,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
             tokenizer.AddDefinition(TokenKind.IntLiteral, "[0-9]+", 3);
             tokenizer.AddDefinition(TokenKind.Identifier, "[a-zA-Z_][0-9a-zA-F_]*", 4);
-            tokenizer.AddDefinition(TokenKind.Operator, @"[+\-*/]", 4);
+            tokenizer.AddDefinition(TokenKind.Plus, @"\+", 4);
+            tokenizer.AddDefinition(TokenKind.Minus, @"-", 4);
+            tokenizer.AddDefinition(TokenKind.Star, @"\*", 4);
+            tokenizer.AddDefinition(TokenKind.Slash, @"/", 4);
+
+            tokenizer.AddDefinition(TokenKind.TrueKeyword, @"true", 2);
+            tokenizer.AddDefinition(TokenKind.FalseKeyword, @"false", 2);
 
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
@@ -29,100 +51,92 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             _enumerator = enumerator;
 
-            return ParseExpression();
+            return ParseBinaryExpression();
         }
 
-        //Expr -> Term + Expr | Term - Expr | Term
-        private IAstNode ParseExpression()
+        private IAstNode ParseBinaryExpression(int parentPrecedence = 0)
         {
-            IAstNode left, right = null;
-
-            left = ParseTerm();
-
-            var lookahead = _enumerator.Peek(0);
-
-            if (lookahead.Kind == TokenKind.Operator)
+            IAstNode left;
+            var unaryOperatorPrecedence = _unaryOperatorPrecedence.GetPrecedence(_enumerator.Current.Kind);
+            if (unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
             {
-                if (lookahead.Contents == "+" || lookahead.Contents == "-")
-                {
-                    _enumerator.Read();
+                var operatorToken = _enumerator.Read();
+                var operand = ParseBinaryExpression(unaryOperatorPrecedence);
 
-                    right = ParseExpression();
-
-                    return NodeFactory.Call(lookahead.Contents, null, left, right);
-                }
+                left = NodeFactory.Call(operatorToken.Contents, null, operand);
             }
-
-            return left;
-        }
-
-        //Fact -> ( Expr ) | Literal
-        private IAstNode ParseFact()
-        {
-            var lookahead = _enumerator.Peek(0);
-
-            if (lookahead.Kind == TokenKind.OpenParen)
+            else
             {
+                left = ParsePrimaryExpression();
                 _enumerator.Read();
-                var expr = ParseExpression();
-                _enumerator.Read(TokenKind.CloseParen);
-
-                return expr;
-            }
-            else if (lookahead.Kind == TokenKind.IntLiteral || lookahead.Kind == TokenKind.HexLiteral)
-            {
-                return ParseLiteral();
-            }
-            else
-            {
-                Diagnostics.ReportInvalidSymbol(lookahead);
             }
 
-            return NodeFactory.Literal(null);
-        }
-
-        // Literal -> HexLiteral | IntLiteral
-        private IAstNode ParseLiteral()
-        {
-            var token = _enumerator.Read();
-
-            if (token.Kind == TokenKind.HexLiteral)
+            while (true)
             {
-                return NodeFactory.Literal(Convert.ToUInt16(token.Contents, 16));
-            }
-            else if (token.Kind == TokenKind.IntLiteral)
-            {
-                return NodeFactory.Literal(ushort.Parse(token.Contents));
-            }
-            else
-            {
-                Diagnostics.ReportInvalidLiteral(token);
+                var precedence = _binaryOperatorPrecedence.GetPrecedence(_enumerator.Current.Kind);
 
-                return NodeFactory.Literal(null);
-            }
-        }
+                if (precedence == 0 || precedence <= parentPrecedence)
+                    break;
 
-        // Term -> Fact * Term | Fact / Term | Fact
-        private IAstNode ParseTerm()
-        {
-            IAstNode left, right = null;
-            left = ParseFact();
+                var operatorToken = _enumerator.Read();
+                var right = ParseBinaryExpression(precedence);
 
-            var lookahead = _enumerator.Peek(0);
-
-            if (lookahead.Kind == TokenKind.Operator)
-            {
-                if (lookahead.Contents == "*" || lookahead.Contents == "/")
-                {
-                    _enumerator.Read();
-
-                    right = ParseTerm();
-
-                    return NodeFactory.Call(lookahead.Contents, null, left, right);
-                }
+                left = NodeFactory.Call(operatorToken.Contents, null, left, right);
             }
 
             return left;
+        }
+
+        private IAstNode ParseBooleanLiteral()
+        {
+            var current = _enumerator.Peek();
+
+            var isTrue = current.Kind == TokenKind.TrueKeyword;
+            var value = isTrue ? 1 : 0;
+
+            return NodeFactory.Literal((ushort)value);
+        }
+
+        private IAstNode ParseHexLiteral()
+        {
+            return NodeFactory.Literal(Convert.ToUInt16(_enumerator.Current.Contents, 16));
+        }
+
+        private IAstNode ParseIntLiteral()
+        {
+            return NodeFactory.Literal(ushort.Parse(_enumerator.Current.Contents));
+        }
+
+        private IAstNode ParseParenthesizedExpression()
+        {
+            var left = _enumerator.Read(TokenKind.OpenParen);
+            var expression = ParseBinaryExpression();
+            var right = _enumerator.Read(TokenKind.CloseParen);
+
+            return expression;
+        }
+
+        private IAstNode ParsePrimaryExpression()
+        {
+            var current = _enumerator.Current;
+
+            switch (current.Kind)
+            {
+                case TokenKind.OpenParen:
+                    return ParseParenthesizedExpression();
+
+                case TokenKind.FalseKeyword:
+                case TokenKind.TrueKeyword:
+                    return ParseBooleanLiteral();
+
+                case TokenKind.HexLiteral:
+                    return ParseHexLiteral();
+
+                case TokenKind.IntLiteral:
+                    return ParseIntLiteral();
+            }
+
+            return null;
         }
     }
 }
