@@ -1,13 +1,11 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Logical
 {
     public class AndInstruction : IInstruction
     {
         public OpCodes Instruction => OpCodes.AND;
-        public string Mnemonic => "and";
 
         public bool Invoke(CPU cpu)
         {

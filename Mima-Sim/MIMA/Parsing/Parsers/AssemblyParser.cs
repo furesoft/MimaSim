@@ -1,7 +1,6 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.AST;
 using MimaSim.Core.Tokenizer;
-using MimaSim.MIMA.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +69,12 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case OpCodes.LSHIFT:
                 case OpCodes.RSHIFT:
+
+                case OpCodes.CMPEQ:
+                case OpCodes.CMPGE:
+                case OpCodes.CMPGT:
+                case OpCodes.CMPLE:
+                case OpCodes.CMPLT:
                     return NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(value));
 
                 case OpCodes.LOAD:
@@ -95,32 +100,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                     return NodeFactory.Call("jmp", null, NodeFactory.Literal(label.Contents));
 
-                case OpCodes.JNEQ:
-                    break;
+                case OpCodes.JMPC:
+                    var labelc = enumerator.Read(TokenKind.LabelReference);
 
-                case OpCodes.JEQ:
-                    var jelabel = enumerator.Read(TokenKind.LabelReference);
-                    enumerator.Read(TokenKind.Comma);
-
-                    var jecond = enumerator.Read(TokenKind.HexLiteral);
-                    var jecondValue = Convert.ToUInt16(jecond.Contents, 16);
-
-                    return NodeFactory.Call("jmpe", null,
-                        NodeFactory.Literal(jelabel.Contents),
-                        NodeFactory.Literal(jecondValue)
-                    );
-
-                case OpCodes.JLT:
-                    break;
-
-                case OpCodes.JLE:
-                    break;
-
-                case OpCodes.JGT:
-                    break;
-
-                case OpCodes.JGE:
-                    break;
+                    return NodeFactory.Call("jmpc", null, NodeFactory.Literal(labelc.Contents));
             }
 
             return null;

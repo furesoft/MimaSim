@@ -1,14 +1,11 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Arithmetik
 {
     public class AddInstruction : IInstruction
     {
         public OpCodes Instruction => OpCodes.ADD;
-
-        public string Mnemonic => "add";
 
         public bool Invoke(CPU cpu)
         {

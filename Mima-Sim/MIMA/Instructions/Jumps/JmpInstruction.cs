@@ -7,13 +7,11 @@ namespace MimaSim.MIMA.Instructions.Jumps
     {
         public OpCodes Instruction => OpCodes.JMP;
 
-        public string Mnemonic => "jmp";
-
         public bool Invoke(CPU cpu)
         {
             var address = cpu.Fetch16();
 
-            cpu.SetRegister(VM.Registers.IAR, address);
+            cpu.SetRegister(Registers.IAR, address);
 
             return false;
         }

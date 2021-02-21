@@ -2,7 +2,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using MimaSim.ViewModels;
 using ReactiveUI;
-using System.Reactive.Disposables;
 
 namespace MimaSim.Controls.MimaComponents.Popups
 {

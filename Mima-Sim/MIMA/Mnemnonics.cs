@@ -1,4 +1,4 @@
-﻿namespace MimaSim.MIMA.VM
+﻿namespace MimaSim.MIMA
 {
     public enum Mnemnonics
     {

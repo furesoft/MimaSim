@@ -2,7 +2,6 @@
 using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
-using MimaSim.MIMA.VM;
 using System.Collections.Generic;
 using System.Linq;
 

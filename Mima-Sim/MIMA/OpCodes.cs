@@ -32,15 +32,18 @@
         //Jumps
         JMP = 0x30,
 
-        JNEQ = 0x31,
-        JEQ = 0x32,
-        JLT = 0x33,
-        JLE = 0x34,
-        JGT = 0x35,
-        JGE = 0x36,
+        JMPC = 0x31,
+
+        CMPLT = 0x33,
+        CMPLE = 0x34,
+        CMPEQ = 0x35,
+        CMPGE = 0x36,
+        CMPGT = 0x37,
 
         MOV_REG_REG = 0x40,
         MOV_MEM_REG = 0x41,
+
+        //Only needed for parsing
         MOV = 0x42,
     }
 }

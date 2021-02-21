@@ -1,20 +1,19 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Jumps
 {
-    public class JumpGreaterEqualsInstruction : IInstruction
+    public class JmpConditionalInstruction : IInstruction
     {
-        public OpCodes Instruction => OpCodes.JGE;
-        public string Mnemonic => "jge";
+        public OpCodes Instruction => OpCodes.JMPC;
 
         public bool Invoke(CPU cpu)
         {
-            var value = cpu.Fetch16();
             var address = cpu.Fetch16();
 
-            if (value >= cpu.GetRegister(Registers.Accumulator))
+            var cond = cpu.GetRegister(Registers.Accumulator) == 0 ? false : true;
+
+            if (cond)
             {
                 cpu.SetRegister(Registers.IAR, address);
             }

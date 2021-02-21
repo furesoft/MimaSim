@@ -1,6 +1,5 @@
 ﻿using MimaSim.Core;
 using MimaSim.Messages;
-using MimaSim.MIMA.VM;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

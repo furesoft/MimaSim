@@ -6,7 +6,6 @@ namespace MimaSim.MIMA.Instructions.Move
     public class MovRegMemInstruction : IInstruction
     {
         public OpCodes Instruction => OpCodes.MOV_MEM_REG;
-        public string Mnemonic => "move";
 
         public bool Invoke(CPU cpu)
         {

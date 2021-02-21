@@ -1,5 +1,4 @@
 ﻿using MimaSim.MIMA;
-using MimaSim.MIMA.VM;
 using System;
 
 namespace MimaSim.Core.Emiting

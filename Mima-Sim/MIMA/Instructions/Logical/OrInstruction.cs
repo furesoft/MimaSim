@@ -1,13 +1,11 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using MimaSim.MIMA.VM;
 
 namespace MimaSim.MIMA.Instructions.Logical
 {
     public class OrInstruction : IInstruction
     {
         public OpCodes Instruction => OpCodes.OR;
-        public string Mnemonic => "or";
 
         public bool Invoke(CPU cpu)
         {
