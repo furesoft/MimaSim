@@ -4,6 +4,7 @@ using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
 using MimaSim.MIMA.Parsing;
 using System;
+using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
 {
@@ -19,8 +20,7 @@ namespace MimaSim.MIMA.Visitors
 
         public void Visit(LiteralNode lit)
         {
-            _emitter.EmitInstruction(OpCodes.LOAD);
-            _emitter.EmitLiteral((ushort)lit.Value);
+            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)lit.Value);
         }
 
         public void Visit(IdentifierNode id)
@@ -45,14 +45,28 @@ namespace MimaSim.MIMA.Visitors
                     {
                         Registers register = _registerAllocator.Allocate();
 
-                        Visit(cn);
+                        if (cn.Args.Count == 1)
+                        {
+                            VisitUnary(cn);
+                        }
+                        else
+                        {
+                            Visit(cn);
 
-                        _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
-                        EmitArithmeticOperators(call);
+                            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
+                            EmitArithmeticOperators(call);
+                        }
                     }
                 }
 
-                EmitArithmeticOperators(call);
+                if (call.Args.Count == 1)
+                {
+                    VisitUnary(call);
+                }
+                else
+                {
+                    EmitArithmeticOperators(call);
+                }
             }
         }
 
@@ -115,6 +129,23 @@ namespace MimaSim.MIMA.Visitors
                 case ">=":
                     _emitter.EmitInstruction(OpCodes.CMPGE);
                     break;
+            }
+        }
+
+        private void VisitUnary(CallNode cn)
+        {
+            if (cn.Args.First() is LiteralNode lit)
+            {
+                if (cn.Name == "-")
+                {
+                    var negation = (ushort)(-(ushort)lit.Value);
+
+                    _emitter.EmitInstruction(OpCodes.LOAD, negation);
+                }
+                else if (cn.Name == "+")
+                {
+                    _emitter.EmitInstruction(OpCodes.LOAD, (ushort)lit.Value);
+                }
             }
         }
     }
