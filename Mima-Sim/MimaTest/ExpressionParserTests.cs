@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MimaSim.Core;
+using MimaSim.Core.AST;
 using MimaSim.MIMA.Parsing.Parsers;
+using MimaSim.MIMA.Parsing.SourceTranslators;
 
 namespace MimaTest
 {
@@ -10,9 +13,11 @@ namespace MimaTest
         public void Parse_Literal_Should_Pass()
         {
             var input = "1 + 2 * 2 + 3";
-            var parser = new HighParser();
+            var parser = new HighSourceTextTranslator();
 
-            var ast = parser.Parse(input);
+            DiagnosticBag diagnostics = new DiagnosticBag();
+
+            var ast = parser.ToRaw(input, ref diagnostics);
         }
     }
 }

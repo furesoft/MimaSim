@@ -15,7 +15,7 @@ namespace MimaSim.Core
                     return new AssemblySourceTextTranslator();
 
                 case LanguageName.Hochsprache:
-                    break;
+                    return new HighSourceTextTranslator();
 
                 default:
                     return new RawSourceTextTranslator();
