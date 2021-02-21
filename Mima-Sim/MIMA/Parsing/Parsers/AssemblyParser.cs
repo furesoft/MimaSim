@@ -171,6 +171,28 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     NodeFactory.Literal(secondArgRegister)
                 );
             }
+            else if (firstArg.Kind == TokenKind.Register && secondArg.Kind == TokenKind.AddressLiteral)
+            {
+                var register = Enum.Parse<Registers>(firstArg.Contents, true);
+
+                return NodeFactory.Call("mov_reg_mem", null,
+                    NodeFactory.Literal(register),
+                    NodeFactory.Literal(Convert.ToUInt16(secondArg.Contents.Remove(0, 1), 16)));
+            }
+            else if (firstArg.Kind == TokenKind.AddressLiteral && secondArg.Kind == TokenKind.Register)
+            {
+                var register = Enum.Parse<Registers>(secondArg.Contents, true);
+
+                return NodeFactory.Call("mov_mem_reg", null,
+                    NodeFactory.Literal(Convert.ToUInt16(firstArg.Contents.Remove(0, 1), 16)),
+                    NodeFactory.Literal(register));
+            }
+            else if (firstArg.Kind == TokenKind.AddressLiteral && secondArg.Kind == TokenKind.AddressLiteral)
+            {
+                return NodeFactory.Call("mov_mem_mem", null,
+                    NodeFactory.Literal(Convert.ToUInt16(firstArg.Contents.Remove(0, 1), 16)),
+                    NodeFactory.Literal(Convert.ToUInt16(secondArg.Contents.Remove(0, 1), 16)));
+            }
             else
             {
                 Diagnostics.ReportInvalidMovInstruction(firstArg.Start, firstArg.End);
