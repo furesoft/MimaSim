@@ -1,5 +1,6 @@
 ﻿using MimaSim.MIMA;
 using System;
+using System.Collections.Generic;
 
 namespace MimaSim.Core.Emiting
 {
@@ -7,7 +8,15 @@ namespace MimaSim.Core.Emiting
     {
         private readonly ByteArrayBuilder _builder = new ByteArrayBuilder();
 
+        private readonly Dictionary<string, ushort> _labels = new Dictionary<string, ushort>();
         public int Position => _builder.Length;
+
+        public ushort CreateLabel(string name)
+        {
+            _labels.Add(name, (ushort)_builder.Length);
+
+            return (ushort)_builder.Length;
+        }
 
         public void EmitInstruction(OpCodes opcode)
         {
@@ -42,6 +51,11 @@ namespace MimaSim.Core.Emiting
         public void EmitRegister(Registers reg)
         {
             _builder.Append((byte)reg);
+        }
+
+        public ushort GetLabel(string name)
+        {
+            return _labels[name];
         }
 
         public byte[] ToArray() => _builder.ToArray();
