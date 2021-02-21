@@ -3,7 +3,7 @@ using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Move
 {
-    public class MovMemRegInstructiion : IInstruction
+    public class MovRegRegInstructiion : IInstruction
     {
         public OpCodes Instruction => OpCodes.MOV_REG_REG;
 

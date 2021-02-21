@@ -42,8 +42,10 @@
 
         MOV_REG_REG = 0x40,
         MOV_MEM_REG = 0x41,
+        MOV_REG_MEM = 0x42,
+        MOV_MEM_MEM = 0x43,
 
         //Only needed for parsing
-        MOV = 0x42,
+        MOV = 0x44,
     }
 }
