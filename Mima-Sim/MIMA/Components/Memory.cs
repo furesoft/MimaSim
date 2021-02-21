@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
-        private ushort[] _values;
+        private readonly ushort[] _values;
 
         public Memory(int length)
         {

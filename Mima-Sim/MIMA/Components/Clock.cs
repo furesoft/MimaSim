@@ -7,7 +7,7 @@ namespace MimaSim.MIMA.Components
     {
         private short _frequency;
 
-        private Timer _timer;
+        private readonly Timer _timer;
 
         public Clock(short frequency)
         {

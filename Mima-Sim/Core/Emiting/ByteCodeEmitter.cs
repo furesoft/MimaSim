@@ -5,7 +5,7 @@ namespace MimaSim.Core.Emiting
 {
     public class ByteCodeEmitter
     {
-        private ByteArrayBuilder _builder = new ByteArrayBuilder();
+        private readonly ByteArrayBuilder _builder = new ByteArrayBuilder();
 
         public int Position => _builder.Length;
 

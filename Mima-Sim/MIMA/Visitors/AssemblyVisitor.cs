@@ -9,9 +9,9 @@ namespace MimaSim.MIMA.Visitors
 {
     public class AssemblyVisitor : INodeVisitor, IEmitter
     {
-        private ByteCodeEmitter _emitter = new ByteCodeEmitter();
-        private Dictionary<string, ushort> _labels = new Dictionary<string, ushort>();
-        private DiagnosticBag Diagnostics = new DiagnosticBag();
+        private readonly ByteCodeEmitter _emitter = new ByteCodeEmitter();
+        private readonly Dictionary<string, ushort> _labels = new Dictionary<string, ushort>();
+        private readonly DiagnosticBag Diagnostics = new DiagnosticBag();
 
         public byte[] GetRaw()
         {

@@ -6,7 +6,7 @@
         public Bus LeftInputBus = new Bus();
         public Bus OutputBus = new Bus();
         public Bus RightInputBus = new Bus();
-        private CPU _cpu;
+        private readonly CPU _cpu;
 
         public ALU(CPU cPU)
         {

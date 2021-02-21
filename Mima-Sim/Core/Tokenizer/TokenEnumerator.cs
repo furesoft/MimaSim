@@ -7,7 +7,7 @@ namespace MimaSim.Core.Tokenizer
     public sealed class TokenEnumerator
     {
         private int _position;
-        private Token[] _tokens;
+        private readonly Token[] _tokens;
 
         public TokenEnumerator(IEnumerable<Token> tokenStream)
         {

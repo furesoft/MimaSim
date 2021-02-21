@@ -7,7 +7,7 @@ namespace MimaSim.Core.Tokenizer
     {
         private readonly int _precedence;
         private readonly TokenKind _returnsToken;
-        private Regex _regex;
+        private readonly Regex _regex;
 
         public TokenDefinition(TokenKind returnsToken, string regexPattern, int precedence)
         {
