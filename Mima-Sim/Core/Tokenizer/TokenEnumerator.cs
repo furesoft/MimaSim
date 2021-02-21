@@ -6,29 +6,33 @@ namespace MimaSim.Core.Tokenizer
 {
     public sealed class TokenEnumerator
     {
+        private int _position;
         private Token[] _tokens;
-
-        private int pos;
 
         public TokenEnumerator(IEnumerable<Token> tokenStream)
         {
             _tokens = tokenStream.ToArray();
-            pos = 0;
+            _position = 0;
         }
 
         public void BackTrack(int pos)
         {
-            this.pos = pos;
+            this._position = pos;
         }
 
         public int BackTrackPos()
         {
-            return pos;
+            return _position;
         }
 
         public Token Peek(int offset = 0)
         {
-            return _tokens[pos + offset];
+            if ((_position + offset) <= _tokens.Length)
+            {
+                return _tokens[_position + offset];
+            }
+
+            return Token.EndOfFile;
         }
 
         public Token Read()
@@ -56,9 +60,9 @@ namespace MimaSim.Core.Tokenizer
             return result;
         }
 
-        private void Advance(int Offset)
+        private void Advance(int offset)
         {
-            pos += Offset;
+            _position += offset;
         }
     }
 }
