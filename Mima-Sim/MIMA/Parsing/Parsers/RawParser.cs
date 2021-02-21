@@ -8,6 +8,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
 {
     public class RawParser : IParser
     {
+        private TokenEnumerator _enumerator;
+
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
@@ -15,18 +17,18 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
             var tokens = tokenizer.Tokenize(input);
-            var enumerator = new TokenEnumerator(tokens);
+            _enumerator = new TokenEnumerator(tokens);
 
-            return ParseHexStream(enumerator);
+            return ParseHexStream();
         }
 
-        private IAstNode ParseHexStream(TokenEnumerator enumerator)
+        private IAstNode ParseHexStream()
         {
             var _nodes = new List<IAstNode>();
             Token token;
             do
             {
-                token = enumerator.Read();
+                token = _enumerator.Read();
 
                 if (token.Kind == TokenKind.HexLiteral)
                 {

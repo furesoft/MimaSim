@@ -10,6 +10,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
     public class AssemblyParser : IParser
     {
         public DiagnosticBag Diagnostics = new DiagnosticBag();
+        private TokenEnumerator _enumerator;
 
         public IAstNode Parse(string input)
         {
@@ -27,9 +28,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
             var tokens = tokenizer.Tokenize(input);
-            var enumerator = new TokenEnumerator(tokens);
+            _enumerator = new TokenEnumerator(tokens);
 
-            return ParseInstructionBlock(enumerator);
+            return ParseInstructionBlock();
         }
 
         private string GetMnemnonicPattern()
@@ -52,9 +53,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return string.Join("|", allNames);
         }
 
-        private IAstNode ParseInstruction(TokenEnumerator enumerator)
+        private IAstNode ParseInstruction()
         {
-            var mnemnonic = enumerator.Read(TokenKind.Mnemnonic);
+            var mnemnonic = _enumerator.Read(TokenKind.Mnemnonic);
             var value = Enum.Parse<OpCodes>(mnemnonic.Contents, true);
 
             switch (value)
@@ -78,10 +79,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     return NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(value));
 
                 case OpCodes.LOAD:
-                    return NodeFactory.Call("load", null, ParseLiteral(enumerator));
+                    return NodeFactory.Call("load", null, ParseLiteral());
 
                 case OpCodes.MOV:
-                    return ParseMoveInstruction(enumerator);
+                    return ParseMoveInstruction();
 
                 case OpCodes.NOT:
                     break;
@@ -96,12 +97,12 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     break;
 
                 case OpCodes.JMP:
-                    var label = enumerator.Read(TokenKind.LabelReference);
+                    var label = _enumerator.Read(TokenKind.LabelReference);
 
                     return NodeFactory.Call("jmp", null, NodeFactory.Literal(label.Contents));
 
                 case OpCodes.JMPC:
-                    var labelc = enumerator.Read(TokenKind.LabelReference);
+                    var labelc = _enumerator.Read(TokenKind.LabelReference);
 
                     return NodeFactory.Call("jmpc", null, NodeFactory.Literal(labelc.Contents));
             }
@@ -109,22 +110,22 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return null;
         }
 
-        private IAstNode ParseInstructionBlock(TokenEnumerator enumerator)
+        private IAstNode ParseInstructionBlock()
         {
             //ToDo: implement assembly parser
             var _nodes = new List<IAstNode>();
             Token token;
             do
             {
-                token = enumerator.Peek();
+                token = _enumerator.Peek();
 
                 if (token.Kind == TokenKind.Mnemnonic)
                 {
-                    _nodes.Add(ParseInstruction(enumerator));
+                    _nodes.Add(ParseInstruction());
                 }
                 else if (token.Kind == TokenKind.Identifier)
                 {
-                    _nodes.Add(ParseLabel(enumerator));
+                    _nodes.Add(ParseLabel());
                 }
                 else if (token.Kind == TokenKind.EndOfFile)
                 {
@@ -135,30 +136,30 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
         }
 
-        private IAstNode ParseLabel(TokenEnumerator enumerator)
+        private IAstNode ParseLabel()
         {
-            var nameToken = enumerator.Read(TokenKind.Identifier);
-            enumerator.Read(TokenKind.Colon);
+            var nameToken = _enumerator.Read(TokenKind.Identifier);
+            _enumerator.Read(TokenKind.Colon);
 
             return NodeFactory.Call("label", null, NodeFactory.Id(nameToken.Contents));
         }
 
-        private IAstNode ParseLiteral(TokenEnumerator enumerator)
+        private IAstNode ParseLiteral()
         {
-            var token = enumerator.Read(TokenKind.HexLiteral);
+            var token = _enumerator.Read(TokenKind.HexLiteral);
 
             var value = Convert.ToUInt16(token.Contents, 16);
 
             return NodeFactory.Literal(value);
         }
 
-        private IAstNode ParseMoveInstruction(TokenEnumerator enumerator)
+        private IAstNode ParseMoveInstruction()
         {
-            var firstArg = enumerator.Read();
+            var firstArg = _enumerator.Read();
 
-            enumerator.Read(TokenKind.Comma);
+            _enumerator.Read(TokenKind.Comma);
 
-            var secondArg = enumerator.Read();
+            var secondArg = _enumerator.Read();
 
             if (firstArg.Kind == TokenKind.Register && secondArg.Kind == TokenKind.Register)
             {
