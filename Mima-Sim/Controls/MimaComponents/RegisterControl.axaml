@@ -9,7 +9,7 @@
 
   <Border BorderBrush="Black" BorderThickness="1">
     <Grid>
-      <TextBlock Text="{Binding ElementName=register, Path=Register}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center" />
+      <Button Content="{Binding ElementName=register, Path=Register}" Classes="clickable"  FontSize="15" VerticalAlignment="Center" Command="{me:OpenRegisterPopup}" />
     </Grid>
   </Border>
 </UserControl>
