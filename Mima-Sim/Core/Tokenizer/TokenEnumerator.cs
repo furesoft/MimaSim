@@ -27,7 +27,7 @@ namespace MimaSim.Core.Tokenizer
 
         public Token Peek(int offset = 0)
         {
-            if ((_position + offset) <= _tokens.Length)
+            if ((_position + offset) <= (_tokens.Length - 1))
             {
                 return _tokens[_position + offset];
             }

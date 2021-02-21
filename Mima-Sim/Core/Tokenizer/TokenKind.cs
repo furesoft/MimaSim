@@ -29,5 +29,6 @@
         AddressLiteral,
         Colon,
         LabelReference,
+        IntLiteral,
     }
 }

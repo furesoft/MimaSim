@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MimaSim.Core.Tokenizer;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.Core
@@ -14,9 +16,19 @@ namespace MimaSim.Core
             return _diagnostics.Select(_ => _.ToString()).ToArray();
         }
 
+        public void ReportInvalidLiteral(Token token)
+        {
+            Report($"Ungültiges Literal '{token.Contents}'", token.Start, token.End);
+        }
+
         public void ReportInvalidMovInstruction(int start, int end)
         {
             Report("mov besitzt ein ungültiges Argument", start, end);
+        }
+
+        public void ReportInvalidSymbol(Token lookahead)
+        {
+            Report($"Unerwartetes Symbol '{lookahead.Contents}'", lookahead.Start, lookahead.End);
         }
 
         internal void ReportUnknownError()
