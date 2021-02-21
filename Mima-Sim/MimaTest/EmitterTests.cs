@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MimaSim.Core.Emiting;
 using MimaSim.MIMA;
-using MimaSim.MIMA.VM;
 
 namespace MimaTest
 {
