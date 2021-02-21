@@ -5,9 +5,8 @@
         Accumulator = 1,
         X = 2,
         Y = 3,
-        Z = 4,
-        IAR = 6,
-        SAR = 7,
-        SDR = 8,
+        IAR = 4,
+        SAR = 5,
+        SDR = 6,
     }
 }
