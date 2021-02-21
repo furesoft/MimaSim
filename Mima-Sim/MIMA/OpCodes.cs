@@ -39,6 +39,7 @@
         CMPEQ = 0x35,
         CMPGE = 0x36,
         CMPGT = 0x37,
+        CMPNEQ = 0x38,
 
         MOV_REG_REG = 0x40,
         MOV_MEM_REG = 0x41,
@@ -46,6 +47,6 @@
         MOV_MEM_MEM = 0x43,
 
         //Only needed for parsing
-        MOV = 0x44,
+        MOV,
     }
 }

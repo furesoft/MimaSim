@@ -37,5 +37,15 @@
         Minus,
         Plus,
         Operator,
+        Pipe,
+        Hat,
+        Bang,
+        Ampersand,
+        GreaterThen,
+        LessThen,
+        EqualsEquals,
+        NotEquals,
+        LessEquals,
+        GreaterEquals,
     }
 }

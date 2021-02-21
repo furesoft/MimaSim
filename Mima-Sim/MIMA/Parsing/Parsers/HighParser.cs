@@ -16,6 +16,17 @@ namespace MimaSim.MIMA.Parsing.Parsers
             [TokenKind.Minus] = 4,
             [TokenKind.Star] = 5,
             [TokenKind.Slash] = 5,
+
+            [TokenKind.GreaterThen] = 3,
+            [TokenKind.LessThen] = 3,
+            [TokenKind.EqualsEquals] = 3,
+            [TokenKind.NotEquals] = 3,
+            [TokenKind.GreaterEquals] = 3,
+            [TokenKind.LessEquals] = 3,
+            [TokenKind.Pipe] = 3,
+
+            [TokenKind.Ampersand] = 1,
+            [TokenKind.Hat] = 1,
         };
 
         private TokenEnumerator _enumerator;
@@ -24,6 +35,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
         {
             [TokenKind.Plus] = 6,
             [TokenKind.Minus] = 6,
+
+            [TokenKind.Bang] = 6,
         };
 
         public IAstNode Parse(string input)
@@ -37,6 +50,22 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Minus, @"-", 4);
             tokenizer.AddDefinition(TokenKind.Star, @"\*", 4);
             tokenizer.AddDefinition(TokenKind.Slash, @"/", 4);
+
+            tokenizer.AddDefinition(TokenKind.Hat, @"\^", 4);
+            tokenizer.AddDefinition(TokenKind.Pipe, @"\|", 4);
+
+            tokenizer.AddDefinition(TokenKind.Ampersand, @"\&", 4);
+
+            tokenizer.AddDefinition(TokenKind.EqualsEquals, @"==", 4);
+            tokenizer.AddDefinition(TokenKind.GreaterEquals, @">=", 4);
+            tokenizer.AddDefinition(TokenKind.LessEquals, @"<=", 4);
+
+            tokenizer.AddDefinition(TokenKind.NotEquals, @"!=", 4);
+
+            tokenizer.AddDefinition(TokenKind.LessThen, @"<", 4);
+            tokenizer.AddDefinition(TokenKind.GreaterThen, @">", 4);
+
+            tokenizer.AddDefinition(TokenKind.Bang, @"\!", 4);
 
             tokenizer.AddDefinition(TokenKind.TrueKeyword, @"true", 2);
             tokenizer.AddDefinition(TokenKind.FalseKeyword, @"false", 2);

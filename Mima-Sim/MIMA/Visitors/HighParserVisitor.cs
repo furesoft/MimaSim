@@ -51,6 +51,7 @@ namespace MimaSim.MIMA.Visitors
                         EmitArithmeticOperators(call);
                     }
                 }
+
                 EmitArithmeticOperators(call);
             }
         }
@@ -73,6 +74,46 @@ namespace MimaSim.MIMA.Visitors
 
                 case "/":
                     _emitter.EmitInstruction(OpCodes.DIV);
+                    break;
+
+                case "!":
+                    _emitter.EmitInstruction(OpCodes.NOT);
+                    break;
+
+                case "|":
+                    _emitter.EmitInstruction(OpCodes.OR);
+                    break;
+
+                case "^":
+                    _emitter.EmitInstruction(OpCodes.XOR);
+                    break;
+
+                case "&":
+                    _emitter.EmitInstruction(OpCodes.AND);
+                    break;
+
+                case ">":
+                    _emitter.EmitInstruction(OpCodes.CMPGT);
+                    break;
+
+                case "<":
+                    _emitter.EmitInstruction(OpCodes.CMPLT);
+                    break;
+
+                case "==":
+                    _emitter.EmitInstruction(OpCodes.CMPEQ);
+                    break;
+
+                case "!=":
+                    _emitter.EmitInstruction(OpCodes.CMPNEQ);
+                    break;
+
+                case "<=":
+                    _emitter.EmitInstruction(OpCodes.CMPGE);
+                    break;
+
+                case ">=":
+                    _emitter.EmitInstruction(OpCodes.CMPGE);
                     break;
             }
         }
