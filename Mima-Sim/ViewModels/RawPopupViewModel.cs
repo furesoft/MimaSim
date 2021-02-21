@@ -14,16 +14,7 @@ namespace MimaSim.ViewModels
         public RawPopupViewModel()
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
-
-            this.WhenActivated((disposables) =>
-            {
-                Raw = GetRawString();
-
-                /* handle activation */
-                Disposable
-                    .Create(() => { /* handle deactivation */ })
-                    .DisposeWith(disposables);
-            });
+            Raw = GetRawString();
         }
 
         public ViewModelActivator Activator => new ViewModelActivator();

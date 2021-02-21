@@ -29,7 +29,11 @@ namespace MimaSim.ViewModels
             StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
             StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
 
-            ViewRawCommand = DialogService.CreateOpenCommand(new RawViewPopupControl(), new RawPopupViewModel());
+            ViewRawCommand = ReactiveCommand.Create(() =>
+            {
+                DialogService.Open(new RawViewPopupControl(), new RawPopupViewModel());
+            });
+
             OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
             LoadCommand = ReactiveCommand.Create(async () =>
