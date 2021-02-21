@@ -1,4 +1,5 @@
-﻿using MimaSim.Controls;
+﻿using Avalonia.Threading;
+using MimaSim.Controls;
 using MimaSim.Messages;
 using MimaSim.Models;
 using ReactiveUI;
@@ -20,7 +21,10 @@ namespace MimaSim.ViewModels
             var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
             observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
             {
-                MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
+                });
             }));
         }
 
