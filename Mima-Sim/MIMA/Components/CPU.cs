@@ -12,7 +12,7 @@ namespace MimaSim.MIMA.Components
     {
         public static CPU Instance = new CPU();
 
-        public Register Accumulator = new Register("Accumulator", 42);
+        public Register Accumulator = new Register("Accumulator");
         public ALU ALU;
         public Clock Clock = new Clock(1024);
         public ControlUnit ControlUnit = new ControlUnit();
