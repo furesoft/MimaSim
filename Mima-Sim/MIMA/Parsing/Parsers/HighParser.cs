@@ -92,7 +92,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             }
             else if (token.Kind == TokenKind.IntLiteral)
             {
-                return NodeFactory.Literal(uint.Parse(token.Contents));
+                return NodeFactory.Literal(ushort.Parse(token.Contents));
             }
             else
             {
