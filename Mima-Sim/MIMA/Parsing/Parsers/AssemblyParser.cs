@@ -112,7 +112,6 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseInstructionBlock()
         {
-            //ToDo: implement assembly parser
             var _nodes = new List<IAstNode>();
             Token token;
             do
