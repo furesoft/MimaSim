@@ -37,34 +37,38 @@ namespace MimaSim.MIMA.Visitors
         {
             if (!call.IsEmpty)
             {
-                //todo: turn if tree to switch statement
-                if (call.Name == "BinaryExpression")
+                switch (call.Name)
                 {
-                    TraverseTree(call);
-                    EmitExpression();
-                }
-                else if (call.Name == "if")
-                {
-                    VisitIfStatement(call);
-                }
-                else if (call.Name == "registerDefinition")
-                {
-                    VisitRegisterDefinition(call);
-                }
-                else if (call.Name == "varDefinition")
-                {
-                    VisitVarDefinition(call);
-                }
-                else if (call.Name == "varAssignment")
-                {
-                    VisitVarAssignment(call);
-                }
-                else if (call.Name == "{}")
-                {
-                    foreach (var line in call.Args)
-                    {
-                        Visit((CallNode)line);
-                    }
+                    case "BinaryExpression":
+                        TraverseTree(call);
+                        EmitExpression();
+                        break;
+
+                    case "if":
+                        VisitIfStatement(call);
+                        break;
+
+                    case "registerDefinition":
+                        VisitRegisterDefinition(call);
+                        break;
+
+                    case "varDefinition":
+                        VisitVarDefinition(call);
+                        break;
+
+                    case "varAssignment":
+                        VisitVarAssignment(call);
+                        break;
+
+                    case "{}":
+                        {
+                            foreach (var line in call.Args)
+                            {
+                                Visit((CallNode)line);
+                            }
+
+                            break;
+                        }
                 }
             }
         }
