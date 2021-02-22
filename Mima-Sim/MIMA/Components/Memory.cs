@@ -40,7 +40,7 @@ namespace MimaSim.MIMA.Components
 
         public void SetValue(ushort address, ushort value)
         {
-            if (address > 0 && address < _values.Length)
+            if (address >= 0 && address < _values.Length)
             {
                 _values[address] = value;
 
