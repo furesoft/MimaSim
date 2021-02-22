@@ -86,6 +86,9 @@ namespace MimaSim.ViewModels
                     else
                     {
                         CPU.Instance.Clock.Stop();
+
+                        BusRegistry.DeactivateAllMaps();
+                        BusRegistry.DeactivateBus("controlunit_iar");
                     }
                 }
                 else
