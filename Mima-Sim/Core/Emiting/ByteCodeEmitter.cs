@@ -9,13 +9,12 @@ namespace MimaSim.Core.Emiting
         private readonly ByteArrayBuilder _builder = new ByteArrayBuilder();
 
         private readonly Dictionary<string, ushort> _labels = new Dictionary<string, ushort>();
+        private int _labelCount = 0;
         public int Position => _builder.Length;
 
-        public ushort CreateLabel(string name)
+        public Label DefineLabel()
         {
-            _labels.Add(name, (ushort)_builder.Length);
-
-            return (ushort)_builder.Length;
+            return new Label(_labelCount++);
         }
 
         public void EmitInstruction(OpCodes opcode)
@@ -58,6 +57,16 @@ namespace MimaSim.Core.Emiting
             return _labels[name];
         }
 
+        public void MarkLabel(Label label)
+        {
+            _labels.Add("L" + label.LabelNum, (ushort)_builder.Length);
+        }
+
         public byte[] ToArray() => _builder.ToArray();
+
+        internal void CreateLabel(string name)
+        {
+            _labels.Add(name, (ushort)_builder.Length);
+        }
     }
 }
