@@ -70,8 +70,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.TrueKeyword, @"true", 2);
             tokenizer.AddDefinition(TokenKind.FalseKeyword, @"false", 2);
 
+            tokenizer.AddDefinition(TokenKind.IfKeyword, @"if", 2);
+
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
+
+            tokenizer.AddDefinition(TokenKind.OpenBracket, @"\{", 4);
+            tokenizer.AddDefinition(TokenKind.CloseBracket, @"\}", 4);
 
             tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
 
@@ -80,7 +85,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             _enumerator = enumerator;
 
-            return ParseBinaryExpression();
+            return ParseStatements();
         }
 
         private IAstNode ParseBinaryExpression(int parentPrecedence = 0)
@@ -126,9 +131,31 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Literal((ushort)value);
         }
 
+        private IAstNode ParseExpression()
+        {
+            return NodeFactory.Call("BinaryExpression", null, ParseBinaryExpression());
+        }
+
         private IAstNode ParseHexLiteral()
         {
             return NodeFactory.Literal(Convert.ToUInt16(_enumerator.Current.Contents, 16));
+        }
+
+        private IAstNode ParseIfStatement()
+        {
+            var keyword = _enumerator.Read(TokenKind.IfKeyword);
+            _enumerator.Read(TokenKind.OpenParen);
+
+            var condition = ParseExpression();
+
+            _enumerator.Read(TokenKind.CloseParen);
+            _enumerator.Read(TokenKind.OpenBracket);
+
+            var body = ParseStatements();
+
+            _enumerator.Read(TokenKind.CloseBracket);
+
+            return NodeFactory.Call("if", null, condition, body);
         }
 
         private IAstNode ParseIntLiteral()
@@ -167,6 +194,42 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             Diagnostics.ReportUnknownError();
             return null;
+        }
+
+        private IAstNode ParseStatement()
+        {
+            var lookahead = _enumerator.Current;
+            switch (lookahead.Kind)
+            {
+                case TokenKind.IfKeyword:
+                    return ParseIfStatement();
+
+                default:
+                    return ParseExpression();
+            }
+
+            return null;
+        }
+
+        private IAstNode ParseStatements()
+        {
+            var _nodes = new List<IAstNode>();
+            Token token;
+            do
+            {
+                token = _enumerator.Peek();
+
+                if (token.Kind == TokenKind.EndOfFile || token.Kind == TokenKind.CloseBracket)
+                {
+                    break;
+                }
+                else
+                {
+                    _nodes.Add(ParseStatement());
+                }
+            } while (token.Kind != TokenKind.EndOfFile);
+
+            return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
         }
     }
 }

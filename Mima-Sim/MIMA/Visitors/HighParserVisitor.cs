@@ -37,8 +37,22 @@ namespace MimaSim.MIMA.Visitors
         {
             if (!call.IsEmpty)
             {
-                TraverseTree(call);
-                EmitExpression();
+                if (call.Name == "BinaryExpression")
+                {
+                    TraverseTree(call);
+                    EmitExpression();
+                }
+                else if (call.Name == "if")
+                {
+                    VisitIfStatement(call);
+                }
+                else if (call.Name == "{}")
+                {
+                    foreach (var line in call.Args)
+                    {
+                        Visit((CallNode)line);
+                    }
+                }
             }
         }
 
@@ -148,6 +162,22 @@ namespace MimaSim.MIMA.Visitors
                 TraverseTree(cn.Args.First());
                 TraverseTree(cn.Args.Last());
             }
+        }
+
+        private void VisitIfStatement(CallNode call)
+        {
+            // Emit Condition
+            Visit((CallNode)call.Args.First());
+
+            //todo: emit if-statement
+            var trueLabel = _emitter.DefineLabel();
+
+            _emitter.EmitInstruction(OpCodes.JMPC, (ushort)trueLabel.LabelNum);
+            foreach (CallNode body in ((CallNode)call.Args.Last()).Args)
+            {
+                Visit(body);
+            }
+            _emitter.MarkLabel(trueLabel);
         }
     }
 }

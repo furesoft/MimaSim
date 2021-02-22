@@ -48,5 +48,6 @@
         LessEquals,
         GreaterEquals,
         Unknown,
+        IfKeyword,
     }
 }
