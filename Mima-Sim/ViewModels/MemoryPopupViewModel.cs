@@ -1,11 +1,9 @@
 ﻿using Avalonia.Threading;
 using MimaSim.Controls;
+using MimaSim.Core;
 using MimaSim.Messages;
-using MimaSim.Models;
 using ReactiveUI;
-using System.Collections.ObjectModel;
 using System.Reactive;
-using System.Reactive.Disposables;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels
@@ -16,14 +14,21 @@ namespace MimaSim.ViewModels
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
 
-            MemoryCells = new ObservableCollection<MemoryCellModel>();
+            MemoryCells = new ObservableDictionary<int, ushort>();
 
             var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
             observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
             {
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    MemoryCells.Add(new MemoryCellModel { Address = _.Address, Value = _.Value });
+                    if (MemoryCells.ContainsKey(_.Address))
+                    {
+                        MemoryCells[_.Address] = _.Value;
+                    }
+                    else
+                    {
+                        MemoryCells.Add(_.Address, _.Value);
+                    }
                 });
             }));
         }
@@ -31,6 +36,6 @@ namespace MimaSim.ViewModels
         public ViewModelActivator Activator => new ViewModelActivator();
         public ICommand CloseCommand { get; set; }
 
-        public ObservableCollection<MemoryCellModel> MemoryCells { get; set; }
+        public ObservableDictionary<int, ushort> MemoryCells { get; set; }
     }
 }

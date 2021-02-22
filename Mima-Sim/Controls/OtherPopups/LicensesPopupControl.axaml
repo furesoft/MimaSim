@@ -8,6 +8,7 @@
   <c:DialogControl CommandText="OK" Header="Lizenzen" Command="{Binding CloseCommand}">
     <StackPanel>
       <TextBlock Text="Benutzerinterface: AvaloniaUI" />
+      <TextBlock Text="ObservableCollection: Dr. WPF (http://drwpf.com/blog/2007/09/16/can-i-bind-my-itemscontrol-to-a-dictionary/)" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>
