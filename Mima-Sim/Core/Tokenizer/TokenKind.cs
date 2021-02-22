@@ -51,5 +51,6 @@
         IfKeyword,
         RegisterKeyword,
         EqualsToken,
+        VarKeyword,
     }
 }

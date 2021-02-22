@@ -50,6 +50,10 @@ namespace MimaSim.MIMA.Visitors
                 {
                     VisitRegisterDefinition(call);
                 }
+                else if (call.Name == "varDefinition")
+                {
+                    VisitVarDefinition(call);
+                }
                 else if (call.Name == "{}")
                 {
                     foreach (var line in call.Args)
@@ -191,6 +195,30 @@ namespace MimaSim.MIMA.Visitors
 
             _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
             _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
+        }
+
+        private void VisitVarDefinition(CallNode call)
+        {
+            var idNode = (IdentifierNode)call.Args.First();
+            var adress = MemoryAllocator.Allocate(idNode.Name);
+
+            var valueNode = call.Args.Last();
+
+            if (valueNode is IdentifierNode valueIdNode)
+            {
+                //ToDo: implement variables as expressions
+            }
+            else if (valueNode is CallNode cn)
+            {
+                Visit(cn);
+            }
+            else if (valueNode is LiteralNode litNode)
+            {
+                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)litNode.Value);
+                _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                _emitter.EmitRegister(Registers.Accumulator);
+                _emitter.EmitLiteral(adress);
+            }
         }
     }
 }

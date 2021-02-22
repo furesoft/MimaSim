@@ -8,9 +8,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 {
     public class HighParser : IParser
     {
-        public DiagnosticBag Diagnostics = new DiagnosticBag();
+        public DiagnosticBag Diagnostics = new();
 
-        private PrecedenceMap _binaryOperatorPrecedence = new PrecedenceMap
+        private PrecedenceMap _binaryOperatorPrecedence = new()
         {
             [TokenKind.Plus] = 4,
             [TokenKind.Minus] = 4,
@@ -31,7 +31,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private TokenEnumerator _enumerator;
 
-        private PrecedenceMap _unaryOperatorPrecedence = new PrecedenceMap
+        private PrecedenceMap _unaryOperatorPrecedence = new()
         {
             [TokenKind.Plus] = 6,
             [TokenKind.Minus] = 6,
@@ -74,6 +74,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             tokenizer.AddDefinition(TokenKind.IfKeyword, @"if", 2);
             tokenizer.AddDefinition(TokenKind.RegisterKeyword, @"register", 2);
+            tokenizer.AddDefinition(TokenKind.VarKeyword, @"var", 2);
 
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
@@ -223,6 +224,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case TokenKind.RegisterKeyword:
                     return ParseRegisterDefinition();
 
+                case TokenKind.VarKeyword:
+                    return ParseVarDefinition();
+
                 default:
                     return ParseExpression();
             }
@@ -249,6 +253,19 @@ namespace MimaSim.MIMA.Parsing.Parsers
             } while (token.Kind != TokenKind.EndOfFile);
 
             return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
+        }
+
+        private IAstNode ParseVarDefinition()
+        {
+            _enumerator.Read(TokenKind.VarKeyword);
+
+            var nameToken = _enumerator.Read(TokenKind.Identifier);
+
+            _enumerator.Read(TokenKind.EqualsToken);
+
+            var value = ParseBinaryExpression();
+
+            return NodeFactory.Call("varDefinition", null, NodeFactory.Id(nameToken.Contents), value);
         }
     }
 }
