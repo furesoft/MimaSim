@@ -29,21 +29,12 @@ namespace MimaSim.Core.AST
         {
             var sb = new StringBuilder();
 
-            sb.Append(call.Name);
-            sb.Append("(");
+            sb.Append(call.Type);
+            sb.Append('(');
 
             sb.Append(SeperateArgs(call.Args));
 
-            if (call.Type != null)
-            {
-                sb.Append(") : ");
-
-                sb.Append(call.Type);
-            }
-            else
-            {
-                sb.Append(")");
-            }
+            sb.Append(')');
 
             return sb.ToString();
         }

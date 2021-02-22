@@ -56,9 +56,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
         private IAstNode ParseInstruction()
         {
             var mnemnonic = _enumerator.Read(TokenKind.Mnemnonic);
-            var value = Enum.Parse<OpCodes>(mnemnonic.Contents, true);
+            var opcode = Enum.Parse<OpCodes>(mnemnonic.Contents, true);
 
-            switch (value)
+            switch (opcode)
             {
                 case OpCodes.INC:
                 case OpCodes.DEC:
@@ -76,10 +76,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case OpCodes.CMPGT:
                 case OpCodes.CMPLE:
                 case OpCodes.CMPLT:
-                    return NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(value));
+                    return NodeFactory.Call(AstCallNodeType.NoArgInstruction, NodeFactory.Literal(opcode));
 
                 case OpCodes.LOAD:
-                    return NodeFactory.Call("load", null, ParseLiteral());
+                    return NodeFactory.Call(AstCallNodeType.Load, ParseLiteral());
 
                 case OpCodes.MOV:
                     return ParseMoveInstruction();
@@ -99,12 +99,12 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case OpCodes.JMP:
                     var label = _enumerator.Read(TokenKind.LabelReference);
 
-                    return NodeFactory.Call("jmp", null, NodeFactory.Literal(label.Contents));
+                    return NodeFactory.Call(AstCallNodeType.Jmp, NodeFactory.Literal(label.Contents));
 
                 case OpCodes.JMPC:
                     var labelc = _enumerator.Read(TokenKind.LabelReference);
 
-                    return NodeFactory.Call("jmpc", null, NodeFactory.Literal(labelc.Contents));
+                    return NodeFactory.Call(AstCallNodeType.JmpConditional, NodeFactory.Literal(labelc.Contents));
             }
 
             return null;
@@ -132,7 +132,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 }
             } while (token.Kind != TokenKind.EndOfFile);
 
-            return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
+            return NodeFactory.Call(AstCallNodeType.Group, _nodes.ToArray());
         }
 
         private IAstNode ParseLabel()
@@ -140,7 +140,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var nameToken = _enumerator.Read(TokenKind.Identifier);
             _enumerator.Read(TokenKind.Colon);
 
-            return NodeFactory.Call("label", null, NodeFactory.Id(nameToken.Contents));
+            return NodeFactory.Call(AstCallNodeType.Label, NodeFactory.Id(nameToken.Contents));
         }
 
         private IAstNode ParseLiteral()
@@ -174,7 +174,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 var firstArgRegister = Enum.Parse<Registers>(firstArg.Contents, true);
                 var secondArgRegister = Enum.Parse<Registers>(secondArg.Contents, true);
 
-                return NodeFactory.Call("mov", null,
+                return NodeFactory.Call(AstCallNodeType.MovRegReg,
                     NodeFactory.Literal(firstArgRegister),
                     NodeFactory.Literal(secondArgRegister)
                 );
@@ -183,7 +183,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             {
                 var register = Enum.Parse<Registers>(firstArg.Contents, true);
 
-                return NodeFactory.Call("mov_reg_mem", null,
+                return NodeFactory.Call(AstCallNodeType.MovRegMem,
                     NodeFactory.Literal(register),
                     NodeFactory.Literal(Convert.ToUInt16(secondArg.Contents.Remove(0, 1), 16)));
             }
@@ -191,13 +191,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
             {
                 var register = Enum.Parse<Registers>(secondArg.Contents, true);
 
-                return NodeFactory.Call("mov_mem_reg", null,
+                return NodeFactory.Call(AstCallNodeType.MovMemReg,
                     NodeFactory.Literal(Convert.ToUInt16(firstArg.Contents.Remove(0, 1), 16)),
                     NodeFactory.Literal(register));
             }
             else if (firstArg.Kind == TokenKind.AddressLiteral && secondArg.Kind == TokenKind.AddressLiteral)
             {
-                return NodeFactory.Call("mov_mem_mem", null,
+                return NodeFactory.Call(AstCallNodeType.MovMemMem,
                     NodeFactory.Literal(Convert.ToUInt16(firstArg.Contents.Remove(0, 1), 16)),
                     NodeFactory.Literal(Convert.ToUInt16(secondArg.Contents.Remove(0, 1), 16)));
             }
@@ -206,7 +206,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 Diagnostics.ReportInvalidMovInstruction(firstArg.Start, firstArg.End);
             }
 
-            return NodeFactory.Call("{}", null);
+            return NodeFactory.Call(AstCallNodeType.Group);
         }
     }
 }

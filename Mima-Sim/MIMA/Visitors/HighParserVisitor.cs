@@ -16,7 +16,7 @@ namespace MimaSim.MIMA.Visitors
 
         private Stack<LiteralNode> _expressionStack = new();
 
-        private Stack<string> _opStack = new();
+        private Stack<AstCallNodeType> _opStack = new();
 
         public byte[] GetRaw()
         {
@@ -37,30 +37,30 @@ namespace MimaSim.MIMA.Visitors
         {
             if (!call.IsEmpty)
             {
-                switch (call.Name)
+                switch (call.Type)
                 {
-                    case "BinaryExpression":
+                    case AstCallNodeType.BinaryExpresson:
                         TraverseTree(call);
                         EmitExpression();
                         break;
 
-                    case "if":
+                    case AstCallNodeType.IfStatement:
                         VisitIfStatement(call);
                         break;
 
-                    case "registerDefinition":
+                    case AstCallNodeType.RegisterDefinitionStatement:
                         VisitRegisterDefinition(call);
                         break;
 
-                    case "varDefinition":
+                    case AstCallNodeType.VariableDefinitionStatement:
                         VisitVarDefinition(call);
                         break;
 
-                    case "varAssignment":
+                    case AstCallNodeType.VariableAssignmentStatement:
                         VisitVarAssignment(call);
                         break;
 
-                    case "{}":
+                    case AstCallNodeType.Group:
                         {
                             foreach (var line in call.Args)
                             {
@@ -73,63 +73,63 @@ namespace MimaSim.MIMA.Visitors
             }
         }
 
-        private void EmitArithmeticOperator(string op)
+        private void EmitArithmeticOperator(AstCallNodeType op)
         {
             switch (op)
             {
-                case "+":
+                case AstCallNodeType.Addition:
                     _emitter.EmitInstruction(OpCodes.ADD);
                     break;
 
-                case "-":
+                case AstCallNodeType.Subtraktion:
                     _emitter.EmitInstruction(OpCodes.SUB);
                     break;
 
-                case "*":
+                case AstCallNodeType.Multiplication:
                     _emitter.EmitInstruction(OpCodes.MUL);
                     break;
 
-                case "/":
+                case AstCallNodeType.Division:
                     _emitter.EmitInstruction(OpCodes.DIV);
                     break;
 
-                case "!":
+                case AstCallNodeType.Not:
                     _emitter.EmitInstruction(OpCodes.NOT);
                     break;
 
-                case "|":
+                case AstCallNodeType.Or:
                     _emitter.EmitInstruction(OpCodes.OR);
                     break;
 
-                case "^":
+                case AstCallNodeType.Xor:
                     _emitter.EmitInstruction(OpCodes.XOR);
                     break;
 
-                case "&":
+                case AstCallNodeType.And:
                     _emitter.EmitInstruction(OpCodes.AND);
                     break;
 
-                case ">":
+                case AstCallNodeType.GreaterThan:
                     _emitter.EmitInstruction(OpCodes.CMPGT);
                     break;
 
-                case "<":
+                case AstCallNodeType.LessThen:
                     _emitter.EmitInstruction(OpCodes.CMPLT);
                     break;
 
-                case "==":
+                case AstCallNodeType.Equal:
                     _emitter.EmitInstruction(OpCodes.CMPEQ);
                     break;
 
-                case "!=":
+                case AstCallNodeType.NotEqual:
                     _emitter.EmitInstruction(OpCodes.CMPNEQ);
                     break;
 
-                case "<=":
+                case AstCallNodeType.LessEqual:
                     _emitter.EmitInstruction(OpCodes.CMPGE);
                     break;
 
-                case ">=":
+                case AstCallNodeType.GreaterEqual:
                     _emitter.EmitInstruction(OpCodes.CMPGE);
                     break;
             }
@@ -174,7 +174,7 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (ast is CallNode cn)
             {
-                _opStack.Push(cn.Name);
+                _opStack.Push(cn.Type);
 
                 TraverseTree(cn.Args.First());
                 TraverseTree(cn.Args.Last());
@@ -209,10 +209,22 @@ namespace MimaSim.MIMA.Visitors
         private void VisitVarAssignment(CallNode call)
         {
             var idNode = (IdentifierNode)call.Args.First();
-            var valueNode = (LiteralNode)call.Args.Last();
-
+            var value = call.Args.Last();
             var memoryAddress = MemoryAllocator.Allocate(idNode.Name);
-            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
+
+            if (value is LiteralNode valueNode)
+            {
+                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
+            }
+            else if (value is CallNode cn && cn.Type == AstCallNodeType.RegisterExpression)
+            {
+                var reg = (LiteralNode)cn.Args.First();
+
+                _emitter.EmitInstruction(OpCodes.MOV_REG_REG);
+                _emitter.EmitRegister((Registers)reg.Value);
+                _emitter.EmitRegister(Registers.Accumulator);
+            }
+
             _emitter.EmitInstruction(OpCodes.MOV_REG_MEM, Registers.Accumulator, memoryAddress);
         }
 
@@ -231,7 +243,7 @@ namespace MimaSim.MIMA.Visitors
                 _emitter.EmitLiteral(valueAddress);
                 _emitter.EmitLiteral(adress);
             }
-            else if (valueNode is CallNode regNode && regNode.Name == "registerExpression")
+            else if (valueNode is CallNode regNode && regNode.Type == AstCallNodeType.RegisterExpression)
             {
                 _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value, Registers.Accumulator);
                 _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);

@@ -40,6 +40,26 @@ namespace MimaSim.MIMA.Parsing.Parsers
             [TokenKind.Bang] = 6,
         };
 
+        private Dictionary<string, AstCallNodeType> OperatorNodeTypeMap = new()
+        {
+            ["+"] = AstCallNodeType.Addition,
+            ["-"] = AstCallNodeType.Subtraktion,
+            ["*"] = AstCallNodeType.Multiplication,
+            ["/"] = AstCallNodeType.Division,
+
+            ["&"] = AstCallNodeType.And,
+            ["!"] = AstCallNodeType.Not,
+            ["^"] = AstCallNodeType.Xor,
+            ["|"] = AstCallNodeType.Or,
+
+            ["<"] = AstCallNodeType.LessThen,
+            ["<="] = AstCallNodeType.LessEqual,
+            ["=="] = AstCallNodeType.Equal,
+            ["!="] = AstCallNodeType.NotEqual,
+            [">="] = AstCallNodeType.GreaterEqual,
+            [">"] = AstCallNodeType.GreaterThan,
+        };
+
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
@@ -114,7 +134,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 var operatorToken = _enumerator.Read();
                 var operand = ParseBinaryExpression(unaryOperatorPrecedence);
 
-                left = NodeFactory.Call(operatorToken.Contents, null, operand);
+                left = NodeFactory.Call(OperatorNodeTypeMap[operatorToken.Contents], operand);
             }
             else
             {
@@ -132,7 +152,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 var operatorToken = _enumerator.Read();
                 var right = ParseBinaryExpression(precedence);
 
-                left = NodeFactory.Call(operatorToken.Contents, null, left, right);
+                left = NodeFactory.Call(OperatorNodeTypeMap[operatorToken.Contents], left, right);
             }
 
             return left;
@@ -150,7 +170,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseExpression()
         {
-            return NodeFactory.Call("BinaryExpression", null, ParseBinaryExpression());
+            return NodeFactory.Call(AstCallNodeType.BinaryExpresson, ParseBinaryExpression());
         }
 
         private IAstNode ParseHexLiteral()
@@ -179,7 +199,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             _enumerator.Read(TokenKind.CloseBracket);
 
-            return NodeFactory.Call("if", null, condition, body);
+            return NodeFactory.Call(AstCallNodeType.IfStatement, condition, body);
         }
 
         private IAstNode ParseIntLiteral()
@@ -250,7 +270,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             var value = ParseBinaryExpression();
 
-            return NodeFactory.Call("registerDefinition", null, register, value);
+            return NodeFactory.Call(AstCallNodeType.RegisterDefinitionStatement, register, value);
         }
 
         private IAstNode ParseRegisterExpression()
@@ -258,7 +278,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var registerKeywordToken = _enumerator.Read();
             var register = ParseRegister();
 
-            return NodeFactory.Call("registerExpression", null, register);
+            return NodeFactory.Call(AstCallNodeType.RegisterExpression, register);
         }
 
         private IAstNode ParseStatement()
@@ -303,7 +323,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 }
             } while (token.Kind != TokenKind.EndOfFile);
 
-            return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
+            return NodeFactory.Call(AstCallNodeType.Group, _nodes.ToArray());
         }
 
         private IAstNode ParseVariableAssignment()
@@ -314,7 +334,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             var value = ParseBinaryExpression();
 
-            return NodeFactory.Call("varAssignment", null, NodeFactory.Id(nameToken.Contents), value);
+            return NodeFactory.Call(AstCallNodeType.VariableAssignmentStatement, NodeFactory.Id(nameToken.Contents), value);
         }
 
         private IAstNode ParseVariableDefinition()
@@ -327,7 +347,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             var value = ParseBinaryExpression();
 
-            return NodeFactory.Call("varDefinition", null, id, value);
+            return NodeFactory.Call(AstCallNodeType.VariableDefinitionStatement, id, value);
         }
     }
 }

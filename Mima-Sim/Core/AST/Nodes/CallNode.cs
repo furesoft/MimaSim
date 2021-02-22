@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using MimaSim.MIMA.Parsing;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.Core.AST.Nodes
 {
     public struct CallNode : IAstNode
     {
-        public CallNode(string name, object type, List<IAstNode> args)
+        public CallNode(AstCallNodeType type, List<IAstNode> args)
         {
-            Name = name;
             Args = args;
             Type = type;
         }
@@ -19,8 +19,7 @@ namespace MimaSim.Core.AST.Nodes
             get { return !Args.Any(); }
         }
 
-        public string Name { get; set; }
-        public object Type { get; set; }
+        public AstCallNodeType Type { get; set; }
 
         public override string ToString()
         {

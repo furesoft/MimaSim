@@ -2,6 +2,7 @@
 using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
+using MimaSim.MIMA.Parsing;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,11 +35,11 @@ namespace MimaSim.MIMA.Visitors
             {
                 if (arg is CallNode cn)
                 {
-                    if (cn.Name == "noArgInstruction")
+                    if (cn.Type == AstCallNodeType.NoArgInstruction)
                     {
                         VisitNoArgInstruction(cn);
                     }
-                    else if (cn.Name == "load")
+                    else if (cn.Type == AstCallNodeType.Load)
                     {
                         _emitter.EmitOpcode(OpCodes.LOAD);
 
@@ -46,7 +47,7 @@ namespace MimaSim.MIMA.Visitors
 
                         Visit(lit);
                     }
-                    else if (cn.Name == "mov")
+                    else if (cn.Type == AstCallNodeType.MovRegReg)
                     {
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
@@ -59,7 +60,7 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg2);
                         }
                     }
-                    else if (cn.Name == "mov_reg_mem")
+                    else if (cn.Type == AstCallNodeType.MovRegMem)
                     {
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
@@ -72,7 +73,7 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitLiteral(addr);
                         }
                     }
-                    else if (cn.Name == "mov_mem_reg")
+                    else if (cn.Type == AstCallNodeType.MovMemReg)
                     {
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
@@ -85,7 +86,7 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitRegister(reg);
                         }
                     }
-                    else if (cn.Name == "mov_mem_mem")
+                    else if (cn.Type == AstCallNodeType.MovMemMem)
                     {
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
@@ -98,7 +99,7 @@ namespace MimaSim.MIMA.Visitors
                             _emitter.EmitLiteral(addr2);
                         }
                     }
-                    else if (cn.Name == "jmp")
+                    else if (cn.Type == AstCallNodeType.Jmp)
                     {
                         var addressArg = (LiteralNode)cn.Args.First();
                         var address = _emitter.GetLabel(addressArg.Value.ToString().Remove(0, 1));
@@ -106,7 +107,7 @@ namespace MimaSim.MIMA.Visitors
                         _emitter.EmitOpcode(OpCodes.JMP);
                         _emitter.EmitLiteral(address);
                     }
-                    else if (cn.Name == "label")
+                    else if (cn.Type == AstCallNodeType.Label)
                     {
                         var id = (IdentifierNode)cn.Args.First();
 
