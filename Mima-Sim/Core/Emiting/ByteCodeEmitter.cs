@@ -35,11 +35,16 @@ namespace MimaSim.Core.Emiting
             EmitRegister(reg2);
         }
 
+        public void EmitInstruction(OpCodes opcode, Registers reg1, ushort address)
+        {
+            EmitOpcode(opcode);
+            EmitRegister(reg1);
+            EmitLiteral(address);
+        }
+
         public void EmitLiteral(ushort value)
         {
-            var bytes = BitConverter.GetBytes(value);
-
-            _builder.Append(bytes, addLength: false);
+            _builder.Append(value);
         }
 
         public void EmitOpcode(OpCodes op)

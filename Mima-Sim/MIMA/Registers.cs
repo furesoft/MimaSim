@@ -2,6 +2,7 @@
 {
     public enum Registers
     {
+        Invalid = 0,
         Accumulator = 1,
         X = 2,
         Y = 3,
