@@ -187,6 +187,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Literal(ushort.Parse(_enumerator.Current.Contents));
         }
 
+        private IAstNode ParseNameExpression()
+        {
+            var idToken = _enumerator.Current;
+
+            return NodeFactory.Id(idToken.Contents);
+        }
+
         private IAstNode ParseParenthesizedExpression()
         {
             var left = _enumerator.Read(TokenKind.OpenParen);
@@ -219,7 +226,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     return ParseRegisterExpression();
 
                 case TokenKind.Identifier:
-                    return ParseIdentifier();
+                    return ParseNameExpression();
             }
 
             Diagnostics.ReportUnknownError();
