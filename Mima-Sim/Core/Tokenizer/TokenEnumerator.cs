@@ -15,7 +15,18 @@ namespace MimaSim.Core.Tokenizer
             _position = 0;
         }
 
-        public Token Current => _tokens[_position];
+        public Token Current
+        {
+            get
+            {
+                if (_position < _tokens.Length)
+                {
+                    return _tokens[_position];
+                }
+
+                return Token.EndOfFile;
+            }
+        }
 
         public void BackTrack(int pos)
         {
