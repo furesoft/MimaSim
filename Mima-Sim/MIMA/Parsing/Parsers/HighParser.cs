@@ -145,6 +145,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Literal(Convert.ToUInt16(_enumerator.Current.Contents, 16));
         }
 
+        private IAstNode ParseIdentifier()
+        {
+            var idToken = _enumerator.Read(TokenKind.Identifier);
+
+            return NodeFactory.Id(idToken.Contents);
+        }
+
         private IAstNode ParseIfStatement()
         {
             var keyword = _enumerator.Read(TokenKind.IfKeyword);
@@ -194,6 +201,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case TokenKind.IntLiteral:
                     return ParseIntLiteral();
+
+                case TokenKind.Identifier:
+                    return ParseIdentifier();
             }
 
             Diagnostics.ReportUnknownError();
@@ -225,7 +235,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
                     return ParseRegisterDefinition();
 
                 case TokenKind.VarKeyword:
-                    return ParseVarDefinition();
+                    return ParseVariableDefinition();
+
+                case TokenKind.Identifier:
+                    return ParseVariableAssignment();
 
                 default:
                     return ParseExpression();
@@ -255,17 +268,28 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Call("{}", AstCallNodeType.Group, _nodes.ToArray());
         }
 
-        private IAstNode ParseVarDefinition()
+        private IAstNode ParseVariableAssignment()
         {
-            _enumerator.Read(TokenKind.VarKeyword);
-
             var nameToken = _enumerator.Read(TokenKind.Identifier);
 
             _enumerator.Read(TokenKind.EqualsToken);
 
             var value = ParseBinaryExpression();
 
-            return NodeFactory.Call("varDefinition", null, NodeFactory.Id(nameToken.Contents), value);
+            return NodeFactory.Call("varAssignment", null, NodeFactory.Id(nameToken.Contents), value);
+        }
+
+        private IAstNode ParseVariableDefinition()
+        {
+            _enumerator.Read(TokenKind.VarKeyword);
+
+            var id = ParseIdentifier();
+
+            _enumerator.Read(TokenKind.EqualsToken);
+
+            var value = ParseBinaryExpression();
+
+            return NodeFactory.Call("varDefinition", null, id, value);
         }
     }
 }
