@@ -4,14 +4,19 @@ using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
 using MimaSim.MIMA.Parsing;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
 {
     public class HighParserVisitor : INodeVisitor, IEmitter
     {
-        private readonly ByteCodeEmitter _emitter = new ByteCodeEmitter();
-        private readonly RegisterAllocator _registerAllocator = new RegisterAllocator();
+        private readonly ByteCodeEmitter _emitter = new();
+        private readonly RegisterAllocator _registerAllocator = new();
+
+        private Queue<LiteralNode> _expressionStack = new();
+
+        private Stack<string> _opStack = new();
 
         public byte[] GetRaw()
         {
@@ -33,12 +38,13 @@ namespace MimaSim.MIMA.Visitors
             if (!call.IsEmpty)
             {
                 TraverseTree(call);
+                EmitExpression();
             }
         }
 
-        private void EmitArithmeticOperators(CallNode call)
+        private void EmitArithmeticOperator(string op)
         {
-            switch (call.Name)
+            switch (op)
             {
                 case "+":
                     _emitter.EmitInstruction(OpCodes.ADD);
@@ -98,21 +104,49 @@ namespace MimaSim.MIMA.Visitors
             }
         }
 
+        private void EmitExpression()
+        {
+            while (_expressionStack.Count > 0)
+            {
+                var f = _expressionStack.Dequeue();
+                EmitLiteral(f);
+
+                if (_expressionStack.Count > 0)
+                {
+                    var s = _expressionStack.Dequeue();
+                    EmitLiteral(s);
+                }
+
+                var op = _opStack.Pop();
+                EmitArithmeticOperator(op);
+
+                if (_opStack.Count > 0)
+                {
+                    _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, _registerAllocator.Allocate());
+                }
+            }
+        }
+
+        private void EmitLiteral(LiteralNode lit)
+        {
+            Visit(lit);
+            Registers register = _registerAllocator.Allocate();
+
+            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
+        }
+
         private void TraverseTree(IAstNode ast)
         {
             if (ast is LiteralNode lit)
             {
-                Visit(lit);
-                Registers register = _registerAllocator.Allocate();
-
-                _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
+                _expressionStack.Enqueue(lit);
             }
             else if (ast is CallNode cn)
             {
+                _opStack.Push(cn.Name);
+
                 TraverseTree(cn.Args.First());
                 TraverseTree(cn.Args.Last());
-
-                EmitArithmeticOperators(cn);
             }
         }
     }
