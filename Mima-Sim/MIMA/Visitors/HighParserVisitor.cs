@@ -14,7 +14,7 @@ namespace MimaSim.MIMA.Visitors
         private readonly ByteCodeEmitter _emitter = new();
         private readonly RegisterAllocator _registerAllocator = new();
 
-        private Queue<LiteralNode> _expressionStack = new();
+        private Stack<LiteralNode> _expressionStack = new();
 
         private Stack<string> _opStack = new();
 
@@ -108,12 +108,12 @@ namespace MimaSim.MIMA.Visitors
         {
             while (_expressionStack.Count > 0)
             {
-                var f = _expressionStack.Dequeue();
+                var f = _expressionStack.Pop();
                 EmitLiteral(f);
 
                 if (_expressionStack.Count > 0)
                 {
-                    var s = _expressionStack.Dequeue();
+                    var s = _expressionStack.Pop();
                     EmitLiteral(s);
                 }
 
@@ -139,7 +139,7 @@ namespace MimaSim.MIMA.Visitors
         {
             if (ast is LiteralNode lit)
             {
-                _expressionStack.Enqueue(lit);
+                _expressionStack.Push(lit);
             }
             else if (ast is CallNode cn)
             {
