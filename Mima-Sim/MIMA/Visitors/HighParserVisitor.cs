@@ -206,7 +206,11 @@ namespace MimaSim.MIMA.Visitors
 
             if (valueNode is IdentifierNode valueIdNode)
             {
-                //ToDo: implement variables as expressions
+                var valueAddress = MemoryAllocator.Allocate(valueIdNode.Name);
+
+                _emitter.EmitInstruction(OpCodes.MOV_MEM_MEM);
+                _emitter.EmitLiteral(valueAddress);
+                _emitter.EmitLiteral(adress);
             }
             else if (valueNode is CallNode regNode && regNode.Name == "registerExpression")
             {
