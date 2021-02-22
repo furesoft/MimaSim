@@ -37,6 +37,7 @@ namespace MimaSim.MIMA.Visitors
         {
             if (!call.IsEmpty)
             {
+                //todo: turn if tree to switch statement
                 if (call.Name == "BinaryExpression")
                 {
                     TraverseTree(call);
@@ -53,6 +54,10 @@ namespace MimaSim.MIMA.Visitors
                 else if (call.Name == "varDefinition")
                 {
                     VisitVarDefinition(call);
+                }
+                else if (call.Name == "varAssignment")
+                {
+                    VisitVarAssignment(call);
                 }
                 else if (call.Name == "{}")
                 {
@@ -195,6 +200,16 @@ namespace MimaSim.MIMA.Visitors
 
             _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
             _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
+        }
+
+        private void VisitVarAssignment(CallNode call)
+        {
+            var idNode = (IdentifierNode)call.Args.First();
+            var valueNode = (LiteralNode)call.Args.Last();
+
+            var memoryAddress = MemoryAllocator.Allocate(idNode.Name);
+            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
+            _emitter.EmitInstruction(OpCodes.MOV_REG_MEM, Registers.Accumulator, memoryAddress);
         }
 
         private void VisitVarDefinition(CallNode call)
