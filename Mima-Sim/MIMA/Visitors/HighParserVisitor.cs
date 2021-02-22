@@ -46,6 +46,10 @@ namespace MimaSim.MIMA.Visitors
                 {
                     VisitIfStatement(call);
                 }
+                else if (call.Name == "registerDefinition")
+                {
+                    VisitRegisterDefinition(call);
+                }
                 else if (call.Name == "{}")
                 {
                     foreach (var line in call.Args)
@@ -178,6 +182,15 @@ namespace MimaSim.MIMA.Visitors
                 Visit(body);
             }
             _emitter.MarkLabel(trueLabel);
+        }
+
+        private void VisitRegisterDefinition(CallNode call)
+        {
+            var registerNode = (LiteralNode)call.Args.First();
+            var valueNode = (LiteralNode)call.Args.Last();
+
+            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
+            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
         }
     }
 }

@@ -49,5 +49,7 @@
         GreaterEquals,
         Unknown,
         IfKeyword,
+        RegisterKeyword,
+        EqualsToken,
     }
 }

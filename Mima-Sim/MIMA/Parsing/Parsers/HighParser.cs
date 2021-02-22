@@ -51,6 +51,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Star, @"\*", 4);
             tokenizer.AddDefinition(TokenKind.Slash, @"/", 4);
 
+            tokenizer.AddDefinition(TokenKind.EqualsToken, @"=", 4);
+
             tokenizer.AddDefinition(TokenKind.Hat, @"\^", 4);
             tokenizer.AddDefinition(TokenKind.Pipe, @"\|", 4);
 
@@ -71,6 +73,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.FalseKeyword, @"false", 2);
 
             tokenizer.AddDefinition(TokenKind.IfKeyword, @"if", 2);
+            tokenizer.AddDefinition(TokenKind.RegisterKeyword, @"register", 2);
 
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
@@ -196,6 +199,19 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return null;
         }
 
+        private IAstNode ParseRegisterDefinition()
+        {
+            _enumerator.Read();
+
+            var registerName = _enumerator.Read(TokenKind.Identifier);
+
+            _enumerator.Read(TokenKind.EqualsToken);
+
+            var value = ParseBinaryExpression();
+
+            return NodeFactory.Call("registerDefinition", null, NodeFactory.Literal(Enum.Parse<Registers>(registerName.Contents, true)), value);
+        }
+
         private IAstNode ParseStatement()
         {
             var lookahead = _enumerator.Current;
@@ -203,6 +219,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
             {
                 case TokenKind.IfKeyword:
                     return ParseIfStatement();
+
+                case TokenKind.RegisterKeyword:
+                    return ParseRegisterDefinition();
 
                 default:
                     return ParseExpression();
