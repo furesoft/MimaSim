@@ -3,6 +3,7 @@ using MimaSim.Core.AST;
 using MimaSim.Core.Tokenizer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MimaSim.MIMA.Parsing.Parsers
 {
@@ -42,6 +43,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
         public IAstNode Parse(string input)
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
+
+            tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 3);
 
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
             tokenizer.AddDefinition(TokenKind.IntLiteral, "[0-9]+", 3);
@@ -90,6 +93,16 @@ namespace MimaSim.MIMA.Parsing.Parsers
             _enumerator = enumerator;
 
             return ParseStatements();
+        }
+
+        private string GetRegisterPattern()
+        {
+            var names = Enum.GetNames(typeof(Registers));
+            var namesLowered = names.Select(_ => _.ToLower());
+
+            var allNames = names.Concat(namesLowered);
+
+            return string.Join("|", allNames);
         }
 
         private IAstNode ParseBinaryExpression(int parentPrecedence = 0)
@@ -202,6 +215,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case TokenKind.IntLiteral:
                     return ParseIntLiteral();
 
+                case TokenKind.RegisterKeyword:
+                    return ParseRegisterExpression();
+
                 case TokenKind.Identifier:
                     return ParseIdentifier();
             }
@@ -210,17 +226,32 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return null;
         }
 
+        private IAstNode ParseRegister()
+        {
+            var regToken = _enumerator.Read();
+
+            return NodeFactory.Literal(Enum.Parse<Registers>(regToken.Contents, true));
+        }
+
         private IAstNode ParseRegisterDefinition()
         {
             _enumerator.Read();
 
-            var registerName = _enumerator.Read(TokenKind.Identifier);
+            var register = ParseRegister();
 
             _enumerator.Read(TokenKind.EqualsToken);
 
             var value = ParseBinaryExpression();
 
-            return NodeFactory.Call("registerDefinition", null, NodeFactory.Literal(Enum.Parse<Registers>(registerName.Contents, true)), value);
+            return NodeFactory.Call("registerDefinition", null, register, value);
+        }
+
+        private IAstNode ParseRegisterExpression()
+        {
+            var registerKeywordToken = _enumerator.Read();
+            var register = ParseRegister();
+
+            return NodeFactory.Call("registerExpression", null, register);
         }
 
         private IAstNode ParseStatement()

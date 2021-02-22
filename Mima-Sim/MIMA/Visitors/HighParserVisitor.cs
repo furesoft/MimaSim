@@ -208,6 +208,13 @@ namespace MimaSim.MIMA.Visitors
             {
                 //ToDo: implement variables as expressions
             }
+            else if (valueNode is CallNode regNode && regNode.Name == "registerExpression")
+            {
+                _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value, Registers.Accumulator);
+                _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                _emitter.EmitRegister(Registers.Accumulator);
+                _emitter.EmitLiteral(adress);
+            }
             else if (valueNode is CallNode cn)
             {
                 Visit(cn);
