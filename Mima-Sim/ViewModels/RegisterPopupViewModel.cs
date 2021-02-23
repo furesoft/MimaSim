@@ -8,7 +8,7 @@ namespace MimaSim.ViewModels
 {
     internal class RegisterPopupViewModel : ReactiveObject, IActivatableViewModel
     {
-        private byte _value;
+        private ushort _value;
 
         public RegisterPopupViewModel(string register)
         {
@@ -27,7 +27,7 @@ namespace MimaSim.ViewModels
         public string RegisterName { get; set; }
         public ICommand SetRegisterValueCommand { get; set; }
 
-        public byte Value
+        public ushort Value
         {
             get { return _value; }
             set { this.RaiseAndSetIfChanged(ref _value, value); }

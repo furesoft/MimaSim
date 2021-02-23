@@ -9,10 +9,10 @@ namespace MimaSim.MIMA.Instructions.Move
 
         public bool Invoke(CPU cpu)
         {
-            var fromAddress = cpu.Fetch();
+            var fromAddress = cpu.Fetch16();
             var value = cpu.Memory.GetValue(fromAddress);
 
-            var toAddress = cpu.Fetch();
+            var toAddress = cpu.Fetch16();
             cpu.Memory.SetValue(toAddress, value);
 
             return false;

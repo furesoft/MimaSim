@@ -14,7 +14,7 @@ namespace MimaSim.ViewModels
         {
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
 
-            MemoryCells = new ObservableDictionary<int, byte>();
+            MemoryCells = new();
 
             var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
             observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
@@ -36,6 +36,6 @@ namespace MimaSim.ViewModels
         public ViewModelActivator Activator => new ViewModelActivator();
         public ICommand CloseCommand { get; set; }
 
-        public ObservableDictionary<int, byte> MemoryCells { get; set; }
+        public ObservableDictionary<int, ushort> MemoryCells { get; set; }
     }
 }

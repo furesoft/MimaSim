@@ -4,9 +4,9 @@
     {
         public Bus Bus = new Bus();
 
-        private byte _value;
+        private ushort _value;
 
-        public Register(string name, byte value)
+        public Register(string name, ushort value)
             : this(name)
         {
             _value = value;
@@ -17,12 +17,12 @@
             RegisterMap.AddRegister(name, this);
         }
 
-        public byte GetValue()
+        public ushort GetValue()
         {
             return _value;
         }
 
-        public void SetValue(byte value)
+        public void SetValue(ushort value)
         {
             _value = value;
             Bus.Send(value);
