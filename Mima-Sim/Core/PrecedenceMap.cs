@@ -1,4 +1,4 @@
-﻿using MimaSim.Core.Tokenizer;
+﻿using MimaSim.Core.Parsing.Tokenizer;
 using System.Collections.Generic;
 
 namespace MimaSim.Core

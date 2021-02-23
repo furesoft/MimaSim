@@ -1,4 +1,4 @@
-﻿namespace MimaSim.Core.AST.Nodes
+﻿namespace MimaSim.Core.Parsing.AST.Nodes
 {
     public struct IdentifierNode : IAstNode
     {

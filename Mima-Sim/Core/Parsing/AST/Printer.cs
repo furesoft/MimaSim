@@ -1,7 +1,7 @@
-﻿using MimaSim.Core.AST.Nodes;
+﻿using MimaSim.Core.Parsing.AST.Nodes;
 using System;
 
-namespace MimaSim.Core.AST
+namespace MimaSim.Core.Parsing.AST
 {
     public static class Printer
     {

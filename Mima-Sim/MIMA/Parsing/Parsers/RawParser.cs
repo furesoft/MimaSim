@@ -1,6 +1,6 @@
-﻿using MimaSim.Core;
-using MimaSim.Core.AST;
-using MimaSim.Core.Tokenizer;
+﻿using MimaSim.Core.Parsing;
+using MimaSim.Core.Parsing.AST;
+using MimaSim.Core.Parsing.Tokenizer;
 using System;
 using System.Collections.Generic;
 

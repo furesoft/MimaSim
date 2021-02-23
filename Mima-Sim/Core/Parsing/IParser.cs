@@ -1,6 +1,6 @@
-﻿using MimaSim.Core.AST;
+﻿using MimaSim.Core.Parsing.AST;
 
-namespace MimaSim.Core
+namespace MimaSim.Core.Parsing
 {
     public interface IParser
     {

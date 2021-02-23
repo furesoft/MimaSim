@@ -1,4 +1,4 @@
-﻿namespace MimaSim.Core
+﻿namespace MimaSim.Core.Parsing
 {
     public interface IEmitter
     {

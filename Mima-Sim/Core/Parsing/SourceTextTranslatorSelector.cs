@@ -1,6 +1,6 @@
 ﻿using MimaSim.MIMA.Parsing.SourceTranslators;
 
-namespace MimaSim.Core
+namespace MimaSim.Core.Parsing
 {
     public static class SourceTextTranslatorSelector
     {

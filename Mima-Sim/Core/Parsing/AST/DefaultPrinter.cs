@@ -1,11 +1,11 @@
 ﻿/// Copyright by Chris Anders (filmee24, Furesoft)
 /// Copyright by Chris Anders (filmee24, Furesoft)
-using MimaSim.Core.AST.Nodes;
+using MimaSim.Core.Parsing.AST.Nodes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MimaSim.Core.AST
+namespace MimaSim.Core.Parsing.AST
 {
     public class DefaultPrinter : IPrinter
     {

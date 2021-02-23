@@ -1,4 +1,4 @@
-﻿namespace MimaSim.Core.Tokenizer
+﻿namespace MimaSim.Core.Parsing.Tokenizer
 {
     public enum TokenKind
     {
@@ -52,5 +52,6 @@
         RegisterKeyword,
         EqualsToken,
         VarKeyword,
+        AddressOfKeyword,
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MimaSim.Core;
-using MimaSim.Core.AST.Nodes;
+using MimaSim.Core.Parsing;
+using MimaSim.Core.Parsing.AST.Nodes;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Visitors;
 

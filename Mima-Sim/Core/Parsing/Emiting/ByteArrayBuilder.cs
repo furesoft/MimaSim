@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MimaSim.Core.Emiting
+namespace MimaSim.Core.Parsing.Emiting
 {
     public class ByteArrayBuilder : IDisposable
     {

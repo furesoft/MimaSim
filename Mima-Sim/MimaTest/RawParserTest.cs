@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MimaSim.Core.AST.Nodes;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Visitors;
-using System;
 using System.Linq;
 
 namespace MimaTest

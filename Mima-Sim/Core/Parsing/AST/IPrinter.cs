@@ -1,6 +1,6 @@
-﻿using MimaSim.Core.AST.Nodes;
+﻿using MimaSim.Core.Parsing.AST.Nodes;
 
-namespace MimaSim.Core.AST
+namespace MimaSim.Core.Parsing.AST
 {
     public interface IPrinter
     {

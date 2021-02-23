@@ -1,4 +1,4 @@
-﻿namespace MimaSim.Core.Emiting
+﻿namespace MimaSim.Core.Parsing.Emiting
 {
     public struct Label
     {

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace MimaSim.Core.Tokenizer
+namespace MimaSim.Core.Parsing.Tokenizer
 {
     public class TokenDefinition
     {
         private readonly int _precedence;
-        private readonly TokenKind _returnsToken;
         private readonly Regex _regex;
+        private readonly TokenKind _returnsToken;
 
         public TokenDefinition(TokenKind returnsToken, string regexPattern, int precedence)
         {

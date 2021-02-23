@@ -1,8 +1,7 @@
 ﻿using MimaSim.MIMA;
-using System;
 using System.Collections.Generic;
 
-namespace MimaSim.Core.Emiting
+namespace MimaSim.Core.Parsing.Emiting
 {
     public class ByteCodeEmitter
     {

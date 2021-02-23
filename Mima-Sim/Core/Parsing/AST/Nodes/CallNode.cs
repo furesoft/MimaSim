@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MimaSim.Core.AST.Nodes
+namespace MimaSim.Core.Parsing.AST.Nodes
 {
     public struct CallNode : IAstNode
     {

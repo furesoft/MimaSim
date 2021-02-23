@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MimaSim.Core.AST
+namespace MimaSim.Core.Parsing.AST
 {
     public class ScopedPrinter : IDisposable
     {

@@ -1,8 +1,8 @@
-﻿using MimaSim.Core.AST.Nodes;
+﻿using MimaSim.Core.Parsing.AST.Nodes;
 using MimaSim.MIMA.Parsing;
 using System.Collections.Generic;
 
-namespace MimaSim.Core.AST
+namespace MimaSim.Core.Parsing.AST
 {
     public static class NodeFactory
     {

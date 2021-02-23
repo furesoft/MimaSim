@@ -1,9 +1,9 @@
 ﻿using MimaSim.Core;
-using MimaSim.Core.AST;
-using MimaSim.Core.AST.Nodes;
-using MimaSim.Core.Emiting;
+using MimaSim.Core.Parsing;
+using MimaSim.Core.Parsing.AST;
+using MimaSim.Core.Parsing.AST.Nodes;
+using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA.Parsing;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors

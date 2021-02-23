@@ -2,7 +2,6 @@
 using MimaSim.MIMA.Components;
 using ReactiveUI;
 using System.Linq;
-using System.Reactive.Disposables;
 using System.Windows.Input;
 
 namespace MimaSim.ViewModels

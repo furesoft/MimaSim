@@ -1,6 +1,7 @@
 ﻿using MimaSim.Core;
-using MimaSim.Core.AST;
-using MimaSim.Core.Tokenizer;
+using MimaSim.Core.Parsing;
+using MimaSim.Core.Parsing.AST;
+using MimaSim.Core.Parsing.Tokenizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.IfKeyword, @"if", 2);
             tokenizer.AddDefinition(TokenKind.RegisterKeyword, @"register", 2);
             tokenizer.AddDefinition(TokenKind.VarKeyword, @"var", 2);
+            tokenizer.AddDefinition(TokenKind.AddressOfKeyword, @"addressof", 2);
 
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
