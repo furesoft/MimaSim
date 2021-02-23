@@ -33,5 +33,6 @@
         NotEqual,
         LessEqual,
         GreaterEqual,
+        AddressOfExpression,
     }
 }

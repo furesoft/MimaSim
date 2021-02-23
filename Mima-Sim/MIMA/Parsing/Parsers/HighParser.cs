@@ -127,6 +127,14 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return string.Join("|", allNames);
         }
 
+        private IAstNode ParseAddressOfExpression()
+        {
+            var addressOfKeywordToken = _enumerator.Read();
+            var address = ParsePrimaryExpression();
+
+            return NodeFactory.Call(AstCallNodeType.AddressOfExpression, address);
+        }
+
         private IAstNode ParseBinaryExpression(int parentPrecedence = 0)
         {
             IAstNode left;
@@ -246,6 +254,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case TokenKind.RegisterKeyword:
                     return ParseRegisterExpression();
+
+                case TokenKind.AddressOfKeyword:
+                    return ParseAddressOfExpression();
 
                 case TokenKind.Identifier:
                     return ParseNameExpression();
