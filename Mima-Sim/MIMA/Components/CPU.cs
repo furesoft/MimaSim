@@ -83,7 +83,7 @@ namespace MimaSim.MIMA.Components
 
         public void SetRegister(Registers reg, byte value)
         {
-            RegisterMap.GetRegister(Enum.GetName(typeof(Registers), reg)).SetValue(value);
+            RegisterMap.GetRegister(Enum.GetName(reg)).SetValue(value);
         }
 
         public void SetRegister(byte reg, byte value)

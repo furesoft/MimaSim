@@ -357,7 +357,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseVariableAssignment()
         {
-            var nameToken = _enumerator.Read(TokenKind.Identifier);
+            var nameToken = _enumerator.Current;
 
             _enumerator.Read(TokenKind.EqualsToken);
 
