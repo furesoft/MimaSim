@@ -21,7 +21,7 @@ namespace MimaSim.Core.Parsing.Emiting
             EmitOpcode(opcode);
         }
 
-        public void EmitInstruction(OpCodes opcode, byte value)
+        public void EmitInstruction(OpCodes opcode, ushort value)
         {
             EmitOpcode(opcode);
             EmitLiteral(value);
@@ -41,7 +41,7 @@ namespace MimaSim.Core.Parsing.Emiting
             EmitLiteral(address);
         }
 
-        public void EmitLiteral(byte value)
+        public void EmitLiteral(ushort value)
         {
             _builder.Append(value);
         }
