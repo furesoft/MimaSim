@@ -100,6 +100,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.RegisterKeyword, @"register", 2);
             tokenizer.AddDefinition(TokenKind.VarKeyword, @"var", 2);
             tokenizer.AddDefinition(TokenKind.AddressOfKeyword, @"addressof", 2);
+            tokenizer.AddDefinition(TokenKind.LoopKeyword, @"loop", 2);
 
             tokenizer.AddDefinition(TokenKind.OpenParen, @"\(", 4);
             tokenizer.AddDefinition(TokenKind.CloseParen, @"\)", 4);
@@ -217,6 +218,18 @@ namespace MimaSim.MIMA.Parsing.Parsers
             return NodeFactory.Literal(byte.Parse(_enumerator.Current.Contents));
         }
 
+        private IAstNode ParseLoopStatement()
+        {
+            var keyword = _enumerator.Read(TokenKind.LoopKeyword);
+            _enumerator.Read(TokenKind.OpenBracket);
+
+            var body = ParseStatements();
+
+            _enumerator.Read(TokenKind.CloseBracket);
+
+            return NodeFactory.Call(AstCallNodeType.LoopStatement, body);
+        }
+
         private IAstNode ParseNameExpression()
         {
             var idToken = _enumerator.Current;
@@ -310,6 +323,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case TokenKind.Identifier:
                     return ParseVariableAssignment();
+
+                case TokenKind.LoopKeyword:
+                    return ParseLoopStatement();
 
                 default:
                     return ParseExpression();

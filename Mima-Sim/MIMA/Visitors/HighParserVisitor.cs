@@ -48,6 +48,10 @@ namespace MimaSim.MIMA.Visitors
                         VisitIfStatement(call);
                         break;
 
+                    case AstCallNodeType.LoopStatement:
+                        VisitLoopStatement(call);
+                        break;
+
                     case AstCallNodeType.RegisterDefinitionStatement:
                         VisitRegisterDefinition(call);
                         break;
@@ -195,6 +199,18 @@ namespace MimaSim.MIMA.Visitors
                 Visit(body);
             }
             _emitter.MarkLabel(trueLabel);
+        }
+
+        private void VisitLoopStatement(CallNode call)
+        {
+            //ToDo: implement emit loop statement
+            var label = _emitter.DefineLabel();
+            _emitter.MarkLabel(label);
+
+            Visit((CallNode)call.Args.First());
+
+            _emitter.EmitInstruction(OpCodes.JMP);
+            _emitter.EmitLiteral((byte)label.LabelNum);
         }
 
         private void VisitRegisterDefinition(CallNode call)

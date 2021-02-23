@@ -53,5 +53,6 @@
         EqualsToken,
         VarKeyword,
         AddressOfKeyword,
+        LoopKeyword,
     }
 }

@@ -34,5 +34,6 @@
         LessEqual,
         GreaterEqual,
         AddressOfExpression,
+        LoopStatement,
     }
 }
