@@ -26,7 +26,7 @@ namespace MimaSim.MIMA.Visitors
 
         public void Visit(LiteralNode lit)
         {
-            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)lit.Value);
+            _emitter.EmitInstruction(OpCodes.LOAD, (byte)lit.Value);
         }
 
         public void Visit(IdentifierNode id)
@@ -190,7 +190,7 @@ namespace MimaSim.MIMA.Visitors
             //todo: emit if-statement
             var trueLabel = _emitter.DefineLabel();
 
-            _emitter.EmitInstruction(OpCodes.JMPC, (ushort)trueLabel.LabelNum);
+            _emitter.EmitInstruction(OpCodes.JMPC, (byte)trueLabel.LabelNum);
             foreach (CallNode body in ((CallNode)call.Args.Last()).Args)
             {
                 Visit(body);
@@ -205,7 +205,7 @@ namespace MimaSim.MIMA.Visitors
 
             if (valueNode is LiteralNode ln)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)ln.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (byte)ln.Value);
                 _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
             }
             else if (valueNode is IdentifierNode idNode)
@@ -225,7 +225,7 @@ namespace MimaSim.MIMA.Visitors
 
             if (value is LiteralNode valueNode)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (byte)valueNode.Value);
             }
             else if (value is CallNode cn && cn.Type == AstCallNodeType.RegisterExpression)
             {
@@ -267,7 +267,7 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (valueNode is LiteralNode litNode)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)litNode.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (byte)litNode.Value);
                 _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
                 _emitter.EmitRegister(Registers.Accumulator);
                 _emitter.EmitLiteral(adress);

@@ -12,7 +12,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
             var oldValue = cpu.GetRegister(Registers.Accumulator);
             var newValue = oldValue - 1;
 
-            cpu.SetRegister(Registers.Accumulator, (ushort)newValue);
+            cpu.SetRegister(Registers.Accumulator, (byte)newValue);
 
             return false;
         }

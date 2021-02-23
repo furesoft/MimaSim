@@ -2,7 +2,7 @@
 {
     public class MemoryCellModel
     {
-        public ushort Address { get; set; }
-        public ushort Value { get; set; }
+        public byte Address { get; set; }
+        public byte Value { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace MimaSim.MIMA.Instructions.Shifting
             var shiftBy = cpu.GetRegister(Registers.Y);
             var res = oldValue << shiftBy;
 
-            cpu.SetRegister(Registers.Accumulator, (ushort)res);
+            cpu.SetRegister(Registers.Accumulator, (byte)res);
 
             return false;
         }

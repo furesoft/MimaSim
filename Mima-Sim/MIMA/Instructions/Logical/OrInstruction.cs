@@ -13,7 +13,7 @@ namespace MimaSim.MIMA.Instructions.Logical
             var registerValue2 = cpu.GetRegister(Registers.Y);
 
             var res = registerValue1 | registerValue2;
-            cpu.SetRegister(Registers.Accumulator, (ushort)res);
+            cpu.SetRegister(Registers.Accumulator, (byte)res);
 
             return false;
         }

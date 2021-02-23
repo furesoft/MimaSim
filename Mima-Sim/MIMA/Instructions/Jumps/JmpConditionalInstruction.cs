@@ -9,7 +9,7 @@ namespace MimaSim.MIMA.Instructions.Jumps
 
         public bool Invoke(CPU cpu)
         {
-            var address = cpu.Fetch16();
+            var address = cpu.Fetch();
 
             var cond = cpu.GetRegister(Registers.Accumulator) == 0 ? false : true;
 

@@ -46,7 +46,7 @@ namespace MimaSim.MIMA.Components
                 var instruction = Program[nextInstuctionAddress];
 
                 BusRegistry.ActivateBus("controlunit_iar");
-                SetRegister(Registers.IAR, (ushort)(nextInstuctionAddress + 1));
+                SetRegister(Registers.IAR, (byte)(nextInstuctionAddress + 1));
 
                 return instruction;
             }
@@ -58,27 +58,19 @@ namespace MimaSim.MIMA.Components
             }
         }
 
-        public ushort Fetch16()
-        {
-            var first = Fetch();
-            var second = Fetch();
-
-            return BitConverter.ToUInt16(new byte[] { first, second }, 0);
-        }
-
         public Registers FetchRegister()
         {
             return (Registers)Fetch();
         }
 
-        public ushort GetRegister(Registers reg)
+        public byte GetRegister(Registers reg)
         {
             var regName = Enum.GetName<Registers>(reg);
 
             return RegisterMap.GetRegister(regName).GetValue();
         }
 
-        public ushort GetRegister(byte reg)
+        public byte GetRegister(byte reg)
         {
             return GetRegister((Registers)reg);
         }
@@ -89,12 +81,12 @@ namespace MimaSim.MIMA.Components
             InitInstructions();
         }
 
-        public void SetRegister(Registers reg, ushort value)
+        public void SetRegister(Registers reg, byte value)
         {
             RegisterMap.GetRegister(Enum.GetName(typeof(Registers), reg)).SetValue(value);
         }
 
-        public void SetRegister(byte reg, ushort value)
+        public void SetRegister(byte reg, byte value)
         {
             SetRegister((Registers)reg, value);
         }

@@ -21,7 +21,7 @@ namespace MimaSim.MIMA.Visitors
 
         public void Visit(LiteralNode lit)
         {
-            _emitter.EmitLiteral((ushort)lit.Value);
+            _emitter.EmitLiteral((byte)lit.Value);
         }
 
         public void Visit(IdentifierNode id)
@@ -65,7 +65,7 @@ namespace MimaSim.MIMA.Visitors
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
 
-                        if (firstArg.Value is Registers reg && secondArg.Value is ushort addr)
+                        if (firstArg.Value is Registers reg && secondArg.Value is byte addr)
                         {
                             _emitter.EmitOpcode(OpCodes.MOV_REG_MEM);
 
@@ -78,7 +78,7 @@ namespace MimaSim.MIMA.Visitors
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
 
-                        if (firstArg.Value is ushort addr && secondArg.Value is Registers reg)
+                        if (firstArg.Value is byte addr && secondArg.Value is Registers reg)
                         {
                             _emitter.EmitOpcode(OpCodes.MOV_MEM_REG);
 
@@ -91,7 +91,7 @@ namespace MimaSim.MIMA.Visitors
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
 
-                        if (firstArg.Value is ushort addr1 && secondArg.Value is ushort addr2)
+                        if (firstArg.Value is byte addr1 && secondArg.Value is byte addr2)
                         {
                             _emitter.EmitOpcode(OpCodes.MOV_MEM_MEM);
 

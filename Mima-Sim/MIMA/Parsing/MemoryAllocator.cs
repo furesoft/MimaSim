@@ -4,9 +4,9 @@ namespace MimaSim.MIMA.Parsing
 {
     public static class MemoryAllocator
     {
-        private static Dictionary<string, ushort> _variableAllocations = new();
+        private static Dictionary<string, byte> _variableAllocations = new();
 
-        public static ushort Allocate(string name)
+        public static byte Allocate(string name)
         {
             if (_variableAllocations.ContainsKey(name))
             {
@@ -14,7 +14,7 @@ namespace MimaSim.MIMA.Parsing
             }
             else
             {
-                var address = (ushort)(_variableAllocations.Count + 1);
+                var address = (byte)(_variableAllocations.Count + 1);
                 _variableAllocations.Add(name, address);
 
                 return address;

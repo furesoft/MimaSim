@@ -11,7 +11,7 @@ namespace MimaSim.MIMA.Instructions.Move
         {
             var register = cpu.FetchRegister();
 
-            var address = cpu.Fetch16();
+            var address = cpu.Fetch();
             cpu.Memory.SetValue(address, cpu.GetRegister(register));
 
             return false;

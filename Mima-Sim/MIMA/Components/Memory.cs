@@ -6,26 +6,26 @@ namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
-        private readonly ushort[] _values;
+        private readonly byte[] _values;
 
         public Memory(int length)
         {
-            _values = new ushort[length];
+            _values = new byte[length];
         }
 
-        public Memory(ushort[] parent)
+        public Memory(byte[] parent)
         {
             _values = parent;
         }
 
         public void Expand(int length)
         {
-            ushort[] buffer = new ushort[length];
+            byte[] buffer = new byte[length];
 
             Array.Copy(_values, buffer, _values.Length);
         }
 
-        public ushort GetValue(ushort address)
+        public byte GetValue(byte address)
         {
             if (address > 0 && address < _values.Length)
             {
@@ -38,7 +38,7 @@ namespace MimaSim.MIMA.Components
             return 0;
         }
 
-        public void SetValue(ushort address, ushort value)
+        public void SetValue(byte address, byte value)
         {
             if (address >= 0 && address < _values.Length)
             {

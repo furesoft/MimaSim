@@ -165,7 +165,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var isTrue = current.Kind == TokenKind.TrueKeyword;
             var value = isTrue ? 1 : 0;
 
-            return NodeFactory.Literal((ushort)value);
+            return NodeFactory.Literal((byte)value);
         }
 
         private IAstNode ParseExpression()
@@ -204,7 +204,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseIntLiteral()
         {
-            return NodeFactory.Literal(ushort.Parse(_enumerator.Current.Contents));
+            return NodeFactory.Literal(byte.Parse(_enumerator.Current.Contents));
         }
 
         private IAstNode ParseNameExpression()
