@@ -2,6 +2,7 @@
 using MimaSim.Core.AST;
 using MimaSim.Core.AST.Nodes;
 using MimaSim.Core.Emiting;
+using MimaSim.Core.Parsing;
 using MimaSim.MIMA.Parsing;
 using System;
 using System.Collections.Generic;
@@ -200,10 +201,20 @@ namespace MimaSim.MIMA.Visitors
         private void VisitRegisterDefinition(CallNode call)
         {
             var registerNode = (LiteralNode)call.Args.First();
-            var valueNode = (LiteralNode)call.Args.Last();
+            var valueNode = call.Args.Last();
 
-            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
-            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
+            if (valueNode is LiteralNode ln)
+            {
+                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)ln.Value);
+                _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
+            }
+            else if (valueNode is IdentifierNode idNode)
+            {
+                var address = MemoryAllocator.Allocate(idNode.Name);
+                _emitter.EmitInstruction(OpCodes.MOV_MEM_REG);
+                _emitter.EmitLiteral(address);
+                _emitter.EmitRegister((Registers)registerNode.Value);
+            }
         }
 
         private void VisitVarAssignment(CallNode call)
