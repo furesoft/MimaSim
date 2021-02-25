@@ -5,6 +5,7 @@ using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
@@ -14,9 +15,7 @@ namespace MimaSim.MIMA.Visitors
         private readonly ByteCodeEmitter _emitter = new();
         private readonly RegisterAllocator _registerAllocator = new();
 
-        private Stack<LiteralNode> _expressionStack = new();
-
-        private Stack<AstCallNodeType> _opStack = new();
+        private Stack<IAstNode> _expressionStack = new();
 
         public byte[] GetRaw()
         {
@@ -40,8 +39,11 @@ namespace MimaSim.MIMA.Visitors
                 switch (call.Type)
                 {
                     case AstCallNodeType.BinaryExpresson:
-                        TraverseTree(call);
-                        EmitExpression();
+                        Debug.WriteLine(call.Args.First());
+
+                        TraverseTree(call.Args.First());
+                        EmitExpressionStack();
+
                         break;
 
                     case AstCallNodeType.IfStatement:
@@ -137,27 +139,23 @@ namespace MimaSim.MIMA.Visitors
                     _emitter.EmitInstruction(OpCodes.CMPGE);
                     break;
             }
+
+            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, _registerAllocator.Allocate());
         }
 
-        private void EmitExpression()
+        private void EmitExpressionStack()
         {
             while (_expressionStack.Count > 0)
             {
-                var f = _expressionStack.Pop();
-                EmitLiteral(f);
+                var top = _expressionStack.Pop();
 
-                if (_expressionStack.Count > 0)
+                if (top is LiteralNode ln)
                 {
-                    var s = _expressionStack.Pop();
-                    EmitLiteral(s);
+                    EmitLiteral(ln);
                 }
-
-                var op = _opStack.Pop();
-                EmitArithmeticOperator(op);
-
-                if (_opStack.Count > 0)
+                else
                 {
-                    _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, _registerAllocator.Allocate());
+                    EmitArithmeticOperator(((CallNode)top).Type);
                 }
             }
         }
@@ -178,7 +176,7 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (ast is CallNode cn)
             {
-                _opStack.Push(cn.Type);
+                _expressionStack.Push(cn);
 
                 TraverseTree(cn.Args.First());
                 TraverseTree(cn.Args.Last());
