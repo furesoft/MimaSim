@@ -45,7 +45,6 @@ namespace MimaSim.MIMA.Components
             {
                 var instruction = Program[nextInstuctionAddress];
 
-                BusRegistry.ActivateBus("controlunit_iar");
                 SetRegister(Registers.IAR, (byte)(nextInstuctionAddress + 1));
 
                 return instruction;
@@ -101,6 +100,8 @@ namespace MimaSim.MIMA.Components
 
         public bool Step()
         {
+            BusRegistry.ActivateBus("controlunit_iar");
+
             var instr = Fetch();
             return Step((OpCodes)instr);
         }
