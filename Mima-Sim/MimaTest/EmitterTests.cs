@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA;
 
 namespace MimaTest
