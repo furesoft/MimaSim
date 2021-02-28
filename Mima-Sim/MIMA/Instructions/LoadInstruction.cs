@@ -9,7 +9,7 @@ namespace MimaSim.MIMA.Instructions
 
         public bool Invoke(CPU cpu)
         {
-            cpu.SetRegister(Registers.Accumulator, cpu.Fetch());
+            cpu.SetRegister(Registers.Accumulator, cpu.Fetch16());
 
             return true;
         }
