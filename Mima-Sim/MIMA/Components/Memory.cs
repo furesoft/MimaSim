@@ -6,14 +6,14 @@ namespace MimaSim.MIMA.Components
 {
     public class Memory
     {
-        private readonly ushort[] _values;
+        private readonly short[] _values;
 
         public Memory(int length)
         {
-            _values = new ushort[length];
+            _values = new short[length];
         }
 
-        public Memory(ushort[] parent)
+        public Memory(short[] parent)
         {
             _values = parent;
         }
@@ -25,7 +25,7 @@ namespace MimaSim.MIMA.Components
             Array.Copy(_values, buffer, _values.Length);
         }
 
-        public ushort GetValue(ushort address)
+        public short GetValue(short address)
         {
             if (address > 0 && address < _values.Length)
             {
@@ -38,7 +38,7 @@ namespace MimaSim.MIMA.Components
             return 0;
         }
 
-        public void SetValue(ushort address, ushort value)
+        public void SetValue(short address, short value)
         {
             if (address >= 0 && address < _values.Length)
             {

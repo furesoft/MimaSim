@@ -57,12 +57,12 @@ namespace MimaSim.MIMA.Components
             }
         }
 
-        public ushort Fetch16()
+        public short Fetch16()
         {
             var first = Fetch();
             var second = Fetch();
 
-            return BitConverter.ToUInt16(new byte[] { first, second }, 0);
+            return BitConverter.ToInt16(new byte[] { first, second }, 0);
         }
 
         public Registers FetchRegister()
@@ -70,14 +70,14 @@ namespace MimaSim.MIMA.Components
             return (Registers)Fetch();
         }
 
-        public ushort GetRegister(Registers reg)
+        public short GetRegister(Registers reg)
         {
             var regName = Enum.GetName<Registers>(reg);
 
             return RegisterMap.GetRegister(regName).GetValue();
         }
 
-        public ushort GetRegister(byte reg)
+        public short GetRegister(byte reg)
         {
             return GetRegister((Registers)reg);
         }
@@ -88,12 +88,12 @@ namespace MimaSim.MIMA.Components
             InitInstructions();
         }
 
-        public void SetRegister(Registers reg, ushort value)
+        public void SetRegister(Registers reg, short value)
         {
             RegisterMap.GetRegister(Enum.GetName(reg)).SetValue(value);
         }
 
-        public void SetRegister(byte reg, ushort value)
+        public void SetRegister(byte reg, short value)
         {
             SetRegister((Registers)reg, value);
         }

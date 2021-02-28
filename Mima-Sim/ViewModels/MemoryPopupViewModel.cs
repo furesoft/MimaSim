@@ -36,6 +36,6 @@ namespace MimaSim.ViewModels
         public ViewModelActivator Activator => new ViewModelActivator();
         public ICommand CloseCommand { get; set; }
 
-        public ObservableDictionary<int, ushort> MemoryCells { get; set; }
+        public ObservableDictionary<int, short> MemoryCells { get; set; }
     }
 }

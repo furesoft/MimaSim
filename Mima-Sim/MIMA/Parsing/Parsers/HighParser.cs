@@ -68,7 +68,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 3);
 
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
-            tokenizer.AddDefinition(TokenKind.IntLiteral, "[0-9]+", 3);
+            tokenizer.AddDefinition(TokenKind.IntLiteral, "-?[0-9]+", 3);
             tokenizer.AddDefinition(TokenKind.Identifier, "[a-zA-Z_][0-9a-zA-F_]*", 4);
             tokenizer.AddDefinition(TokenKind.Plus, @"\+", 4);
             tokenizer.AddDefinition(TokenKind.Minus, @"-", 4);
@@ -215,7 +215,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseIntLiteral()
         {
-            return NodeFactory.Literal(byte.Parse(_enumerator.Current.Contents));
+            return NodeFactory.Literal(short.Parse(_enumerator.Current.Contents));
         }
 
         private IAstNode ParseLoopStatement()

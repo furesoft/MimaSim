@@ -2,7 +2,7 @@
 {
     public class MemoryCellChangedMessage
     {
-        public ushort Address { get; set; }
-        public ushort Value { get; set; }
+        public short Address { get; set; }
+        public short Value { get; set; }
     }
 }
