@@ -4,22 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             Design.Width="500" Design.Height="500"
              mc:Ignorable="d" Tag="{DynamicResource help}"
              x:Class="MimaSim.Tabs.DocumentationTab">
-  <Grid RowDefinitions="*,Auto">
+  <StackPanel>
     <TextBlock Grid.Row="0" Text="Dokumentation" TextAlignment="Center" FontSize="33" FontStyle="Oblique" FontWeight="Bold" />
-    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
-      <TextBlock Text="Sprache" FontSize="22" VerticalAlignment="Center" />
 
-      <ComboBox x:Name="languageSelectorCb" SelectedIndex="0" Margin="5,0,0,0">
-        <ComboBoxItem>Maschinencode</ComboBoxItem>
-        <ComboBoxItem>Assemblycode</ComboBoxItem>
-        <ComboBoxItem>Hochsprache</ComboBoxItem>
-      </ComboBox>
-    </StackPanel>
+    <TabControl TabStripPlacement="Bottom" MinHeight="450">
+      <TabItem Header="Tabellen">
+        <StackPanel Orientation="Horizontal">
+          <Border BorderThickness="1" BorderBrush="Black">
+            <Grid ShowGridLines="True" ColumnDefinitions="100,50" RowDefinitions="25,25,25,25" Margin="5">
+              <TextBlock Text="Register" Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" />
+              <TextBlock Text="Byte" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" />
 
-    <Grid Grid.Row="1" x:Name="markdownRenderPanel">
-      <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" Margin="5" x:Name="content" Text="{me:SelectDocumentMarkupExtension languageSelectorCb, content}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" />
-    </Grid>
-  </Grid>
+              <TextBlock Text="Accumulator" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+              <TextBlock Text="01" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" />
+
+              <TextBlock Text="X" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+              <TextBlock Text="02" Grid.Column="1" Grid.Row="2" TextAlignment="Center" VerticalAlignment="Center" />
+
+              <TextBlock Text="Y" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" />
+              <TextBlock Text="03" Grid.Column="1" Grid.Row="3" TextAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+
+          <Border BorderThickness="1" BorderBrush="Black" Margin="2,0,0,0">
+            <ScrollViewer>
+              <Grid ShowGridLines="True" ColumnDefinitions="100,50" RowDefinitions="25,25,25,25" Margin="5">
+                <TextBlock Text="Mnemnonic" Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" />
+                <TextBlock Text="Byte" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" />
+
+                <TextBlock Text="load" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                <TextBlock Text="04" Grid.Column="1" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" />
+              </Grid>
+            </ScrollViewer>
+          </Border>
+        </StackPanel>
+      </TabItem>
+    </TabControl>
+  </StackPanel>
 </UserControl>
