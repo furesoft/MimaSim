@@ -1,0 +1,34 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MimaSim.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+
+  <Style Selector="controls|MapTableControl">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderThickness="1" BorderBrush="Black">
+          <Grid ShowGridLines="False" ColumnDefinitions="100,50" RowDefinitions="25,2,*" Margin="5">
+            <TextBlock Text="{TemplateBinding LeftHeader}" FontSize="15" Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBlock Text="{TemplateBinding RightHeader}" FontSize="15" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" />
+
+            <Rectangle  Height="2" Fill="Black" Margin="0,0,5,0" Grid.Row="1" Grid.ColumnSpan="2" />
+
+            <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="0,4,0,0">
+              <ItemsPresenter ScrollViewer.VerticalScrollBarVisibility="Auto" VirtualizationMode="Simple" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" />
+            </ScrollViewer>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Setter Property="ItemTemplate">
+      <DataTemplate>
+        <Grid Margin="0,0,5,0">
+          <TextBlock Text="{Binding Key}" TextWrapping="Wrap" />
+          <TextBlock Text="{Binding Value}" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Right" />
+        </Grid>
+      </DataTemplate>
+    </Setter>
+  </Style>
+</Styles>

@@ -28,6 +28,9 @@ namespace MimaSim.Core
                     tab.Content = instance;
                     tab.Tag = instance.Index;
 
+                    var content = (Control)instance;
+                    content.DataContext = instance.ViewModel;
+
                     _items.Add(tab);
                 }
             }

@@ -4,5 +4,7 @@
     {
         int Index { get; }
         string Title { get; }
+
+        object ViewModel { get; }
     }
 }

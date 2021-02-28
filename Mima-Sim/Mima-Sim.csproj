@@ -18,6 +18,7 @@
     <AvaloniaXaml Remove="Styles.axaml" />
     <AvaloniaXaml Remove="Styles\ButtonStyles.axaml" />
     <AvaloniaXaml Remove="Styles\ExecutionBarStyle.axaml" />
+    <AvaloniaXaml Remove="Styles\MapTableControlStyle.axaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
@@ -46,6 +47,7 @@
     <AvaloniaResource Include="Styles\DialogControlStyle.axaml" />
     <AvaloniaResource Include="Styles.axaml" />
     <AvaloniaResource Include="Styles\ExecutionBarStyle.axaml" />
+    <AvaloniaResource Include="Styles\MapTableControlStyle.axaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />
