@@ -24,7 +24,7 @@ namespace MimaSim.MIMA.Visitors
 
         public void Visit(LiteralNode lit)
         {
-            _emitter.EmitInstruction(OpCodes.LOAD, (byte)lit.Value);
+            _emitter.EmitInstruction(OpCodes.LOAD, (ushort)lit.Value);
         }
 
         public void Visit(IdentifierNode id)
@@ -255,7 +255,7 @@ namespace MimaSim.MIMA.Visitors
 
             if (value is LiteralNode valueNode)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (byte)valueNode.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)valueNode.Value);
             }
             else if (value is CallNode cn)
             {
@@ -331,7 +331,7 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (valueNode is LiteralNode litNode)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (byte)litNode.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (ushort)litNode.Value);
                 _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
                 _emitter.EmitRegister(Registers.Accumulator);
                 _emitter.EmitLiteral(adress);
