@@ -8,8 +8,6 @@
              mc:Ignorable="d" Tag="{DynamicResource help}"
              x:Class="MimaSim.Tabs.DocumentationTab">
   <StackPanel>
-    <TextBlock Grid.Row="0" Text="Dokumentation" TextAlignment="Center" FontSize="33" FontStyle="Oblique" FontWeight="Bold" />
-
     <TabControl TabStripPlacement="Bottom" MinHeight="450">
       <TabItem Header="Tabellen">
 
