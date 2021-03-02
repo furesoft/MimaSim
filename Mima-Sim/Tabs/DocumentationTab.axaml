@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
-             Design.Width="500" Design.Height="500"
+             Design.Width="600" Design.Height="500"
              mc:Ignorable="d" Tag="{DynamicResource help}"
              x:Class="MimaSim.Tabs.DocumentationTab">
   <StackPanel>
@@ -12,9 +12,21 @@
 
     <TabControl TabStripPlacement="Bottom" MinHeight="450">
       <TabItem Header="Tabellen">
+
         <StackPanel Orientation="Horizontal" Spacing="2">
           <c:MapTableControl Items="{Binding RegisterTableItems}" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
           <c:MapTableControl Items="{Binding OpcodesTableItems}" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+
+          <StackPanel>
+            <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top">
+              <c:MapItem Key="Reg -> Reg" Value="40" />
+              <c:MapItem Key="Mem -> Reg" Value="41" />
+              <c:MapItem Key="Reg -> Mem" Value="42" />
+              <c:MapItem Key="Mem -> Mem" Value="43" />
+            </c:MapTableControl>
+
+            <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+          </StackPanel>
         </StackPanel>
       </TabItem>
     </TabControl>
