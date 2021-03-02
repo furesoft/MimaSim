@@ -17,9 +17,9 @@ namespace MimaTest
 
             var result = parser.Parse(input);
 
-            var toTest = NodeFactory.Call("{}", AstCallNodeType.Group,
-                    NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(OpCodes.ADD)),
-                    NodeFactory.Call("noArgInstruction", null, NodeFactory.Literal(OpCodes.SUB))
+            var toTest = NodeFactory.Call(AstCallNodeType.Group,
+                    NodeFactory.Call(AstCallNodeType.NoArgInstruction, NodeFactory.Literal(OpCodes.ADD)),
+                    NodeFactory.Call(AstCallNodeType.NoArgInstruction, NodeFactory.Literal(OpCodes.SUB))
                 );
 
             Assert.AreEqual(result.ToString(), toTest.ToString());
