@@ -8,11 +8,11 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border BorderThickness="1" BorderBrush="Black">
-          <Grid ShowGridLines="False" ColumnDefinitions="100,50" RowDefinitions="25,2,*" Margin="5">
+          <Grid ColumnDefinitions="*,*,5" RowDefinitions="25,2,*" Margin="5">
             <TextBlock Text="{TemplateBinding LeftHeader}" FontSize="15" Grid.Column="0" Grid.Row="0" FontWeight="Bold" VerticalAlignment="Center" />
-            <TextBlock Text="{TemplateBinding RightHeader}" FontSize="15" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBlock Text="{TemplateBinding RightHeader}" FontSize="15" Grid.Column="1" Grid.Row="0" TextAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
 
-            <Rectangle  Height="2" Fill="Black" Margin="0,0,5,0" Grid.Row="1" Grid.ColumnSpan="2" />
+            <Rectangle  Height="2" Fill="Black" Grid.Row="1" Grid.ColumnSpan="2" />
 
             <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Margin="0,4,0,0">
               <ItemsPresenter ScrollViewer.VerticalScrollBarVisibility="Auto" VirtualizationMode="Simple" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" />

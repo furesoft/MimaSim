@@ -1,4 +1,5 @@
-﻿using MimaSim.Controls.MimaComponents;
+﻿using Avalonia.Threading;
+using MimaSim.Controls.MimaComponents;
 using MimaSim.Properties;
 using System.Collections.Generic;
 using System.Xml;
@@ -96,9 +97,12 @@ namespace MimaSim.Core
 
         public static void SetData(string id, object value)
         {
-            if (!_ids.ContainsKey(id))
+            if (_ids.ContainsKey(id))
             {
-                _ids[id].Tag = value;
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    _ids[id].Tag = value;
+                });
             }
         }
 

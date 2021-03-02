@@ -35,7 +35,7 @@ namespace MimaSim.MIMA.Components
             ALU = new ALU(this);
         }
 
-        public byte[] Program { get; internal set; }
+        public byte[] Program { get; set; }
 
         public byte Fetch()
         {
@@ -45,7 +45,7 @@ namespace MimaSim.MIMA.Components
             {
                 var instruction = Program[nextInstuctionAddress];
 
-                SetRegister(Registers.IAR, (byte)(nextInstuctionAddress + 1));
+                SetRegister(Registers.IAR, (short)(nextInstuctionAddress + 1));
 
                 return instruction;
             }

@@ -20,7 +20,7 @@ namespace MimaSim.Tabs
         public int Index => 1;
         public string Title => "Prozessor";
 
-        object IUITab.ViewModel => null;
+        object IUITab.ViewModel => new ExecutionTabViewModel();
 
         private void InitializeComponent()
         {

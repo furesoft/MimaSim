@@ -27,7 +27,13 @@ namespace MimaSim.ViewModels
                     break;
                 }
 
-                OpcodesTableItems.Add(item, string.Format("{0:D2}", (int)Enum.Parse<OpCodes>(item, true)));
+                var byteRepOp = ((byte)Enum.Parse<OpCodes>(item, true)).ToString("X");
+                if (byteRepOp.Length == 1)
+                {
+                    byteRepOp = byteRepOp.Insert(0, "0");
+                }
+
+                OpcodesTableItems.Add(item, byteRepOp);
             }
         }
 
