@@ -176,7 +176,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var isTrue = current.Kind == TokenKind.TrueKeyword;
             var value = isTrue ? 1 : 0;
 
-            return NodeFactory.Literal((byte)value);
+            return NodeFactory.Literal((short)value);
         }
 
         private IAstNode ParseExpression()
