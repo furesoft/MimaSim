@@ -183,6 +183,39 @@ namespace MimaSim.MIMA.Visitors
             }
         }
 
+        private void VisitExpression(CallNode regNode, short adress)
+        {
+            if (regNode.Type == AstCallNodeType.RegisterExpression)
+            {
+                _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value, Registers.Accumulator);
+                _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                _emitter.EmitRegister(Registers.Accumulator);
+                _emitter.EmitLiteral(adress);
+            }
+            else if (regNode.Type == AstCallNodeType.AddressOfExpression)
+            {
+                var addressNode = regNode.Args.First();
+
+                if (addressNode is IdentifierNode nameNode)
+                {
+                    var address = MemoryAllocator.Allocate(nameNode.Name);
+
+                    _emitter.EmitInstruction(OpCodes.LOAD, address);
+                    _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                    _emitter.EmitRegister(Registers.Accumulator);
+                    _emitter.EmitLiteral(adress);
+                }
+            }
+            else if (regNode.Type == AstCallNodeType.BinaryExpresson)
+            {
+                Visit(regNode);
+
+                _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                _emitter.EmitRegister(Registers.Accumulator);
+                _emitter.EmitLiteral(adress);
+            }
+        }
+
         private void VisitIfStatement(CallNode call)
         {
             // Emit Condition
@@ -259,28 +292,7 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (value is CallNode cn)
             {
-                if (cn.Type == AstCallNodeType.RegisterExpression)
-                {
-                    var reg = (LiteralNode)cn.Args.First();
-
-                    _emitter.EmitInstruction(OpCodes.MOV_REG_REG);
-                    _emitter.EmitRegister((Registers)reg.Value);
-                    _emitter.EmitRegister(Registers.Accumulator);
-                }
-                else if (cn.Type == AstCallNodeType.AddressOfExpression)
-                {
-                    var addressNode = cn.Args.First();
-
-                    if (addressNode is IdentifierNode nameNode)
-                    {
-                        var address = MemoryAllocator.Allocate(nameNode.Name);
-
-                        _emitter.EmitInstruction(OpCodes.LOAD, address);
-                        _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
-                        _emitter.EmitRegister(Registers.Accumulator);
-                        _emitter.EmitLiteral(memoryAddress);
-                    }
-                }
+                VisitExpression(cn, memoryAddress);
             }
 
             _emitter.EmitInstruction(OpCodes.MOV_REG_MEM, Registers.Accumulator, memoryAddress);
@@ -301,29 +313,9 @@ namespace MimaSim.MIMA.Visitors
                 _emitter.EmitLiteral(valueAddress);
                 _emitter.EmitLiteral(adress);
             }
-            else if (valueNode is CallNode regNode)
+            else if (valueNode is CallNode exprNode)
             {
-                if (regNode.Type == AstCallNodeType.RegisterExpression)
-                {
-                    _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value, Registers.Accumulator);
-                    _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
-                    _emitter.EmitRegister(Registers.Accumulator);
-                    _emitter.EmitLiteral(adress);
-                }
-                else if (regNode.Type == AstCallNodeType.AddressOfExpression)
-                {
-                    var addressNode = regNode.Args.First();
-
-                    if (addressNode is IdentifierNode nameNode)
-                    {
-                        var address = MemoryAllocator.Allocate(nameNode.Name);
-
-                        _emitter.EmitInstruction(OpCodes.LOAD, address);
-                        _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
-                        _emitter.EmitRegister(Registers.Accumulator);
-                        _emitter.EmitLiteral(adress);
-                    }
-                }
+                VisitExpression(exprNode, adress);
             }
             else if (valueNode is CallNode cn)
             {

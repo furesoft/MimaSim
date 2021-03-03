@@ -357,11 +357,11 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseVariableAssignment()
         {
-            var nameToken = _enumerator.Current;
+            var nameToken = _enumerator.Read(TokenKind.Identifier);
 
             _enumerator.Read(TokenKind.EqualsToken);
 
-            var value = ParseBinaryExpression();
+            var value = ParseExpression();
 
             return NodeFactory.Call(AstCallNodeType.VariableAssignmentStatement, NodeFactory.Id(nameToken.Contents), value);
         }
@@ -374,7 +374,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             _enumerator.Read(TokenKind.EqualsToken);
 
-            var value = ParseBinaryExpression();
+            var value = ParseExpression();
 
             return NodeFactory.Call(AstCallNodeType.VariableDefinitionStatement, id, value);
         }
