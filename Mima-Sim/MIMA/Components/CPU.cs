@@ -14,7 +14,7 @@ namespace MimaSim.MIMA.Components
 
         public Register Accumulator = new Register("Accumulator");
         public ALU ALU;
-        public Clock Clock = new Clock(1024);
+        public Clock Clock = new Clock(250);
         public ControlUnit ControlUnit = new ControlUnit();
         public Bus DataBus = new Bus();
 
