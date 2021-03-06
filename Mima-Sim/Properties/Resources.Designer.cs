@@ -61,55 +61,26 @@ namespace MimaSim.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die # Assemblycode
-        /// ähnelt.
-        /// </summary>
-        internal static string Assemblycode {
-            get {
-                return ResourceManager.GetString("Assemblycode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;buslist&gt;
+        ///  &lt;map id=&quot;alu_main_bus&quot;&gt;
+        ///    &lt;item key=&quot;base_control_to_alu_out&quot; /&gt;
+        ///  &lt;/map&gt;
+        ///  &lt;map id=&quot;control-&gt;adr&quot;&gt;
+        ///    &lt;item key=&quot;base_control_to_alu_out&quot; /&gt;
+        ///    &lt;item key=&quot;base_control_to_mem_ar&quot; /&gt;
+        ///    &lt;item key=&quot;base_control_to_alu_x&quot; /&gt;
+        ///    &lt;item key=&quot;base_control_to_alu_y&quot; /&gt;
+        ///    &lt;item key=&quot;memory_adresss2&quot; /&gt;
+        ///  &lt;/map&gt;
+        ///  &lt;map id=&quot;full_main_bus&quot; inherits=&quot;alu_main_bus&quot;&gt;
+        ///    &lt;item key=&quot;base_control_to_mem_dr&quot; /&gt;
+        ///    &lt;item key=&quot;base_control_to_mem_ar&quot; /&gt;
+        ///
+        ///    &lt;item key=&quot;base_control_to_alu_x [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string BusMap {
             get {
                 return ResourceManager.GetString("BusMap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die # Hochsprache
-        /// ähnelt.
-        /// </summary>
-        internal static string Hochsprache {
-            get {
-                return ResourceManager.GetString("Hochsprache", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die # Maschinencode
-        ///
-        ///Der Maschinencode wird direkt in Hexadezimalzahlen geschrieben. Es werden jeweils 2 Ziffern zu einem Block zusammengefasst. Es können zur Formatierung Tabulatoren und neue Zeilen verwendet werden.
-        ///
-        ///Beispiel:
-        ///
-        ///```
-        ///2A 00 46 03 00 
-        ///10 A4 05 43 41
-        ///```
-        ///
-        ///Instruktionen
-        ///
-        ///|Befehl |Opcode|Argumente|Anzahl Argumente|
-        ///|-------|------|---------|----------------|
-        ///|mov    |2A    |Register und/oder Speicherstelle |2| ähnelt.
-        /// </summary>
-        internal static string Maschinencode {
-            get {
-                return ResourceManager.GetString("Maschinencode", resourceCulture);
             }
         }
     }
