@@ -72,6 +72,11 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case OpCodes.LSHIFT:
                 case OpCodes.RSHIFT:
 
+                case OpCodes.NOT:
+                case OpCodes.AND:
+                case OpCodes.OR:
+                case OpCodes.XOR:
+
                 case OpCodes.CMPEQ:
                 case OpCodes.CMPGE:
                 case OpCodes.CMPGT:
@@ -84,18 +89,6 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case OpCodes.MOV:
                     return ParseMoveInstruction();
-
-                case OpCodes.NOT:
-                    break;
-
-                case OpCodes.AND:
-                    break;
-
-                case OpCodes.OR:
-                    break;
-
-                case OpCodes.XOR:
-                    break;
 
                 case OpCodes.JMP:
                     var label = _enumerator.Read(TokenKind.LabelReference);
