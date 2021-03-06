@@ -3,6 +3,7 @@ using MimaSim.Controls;
 using MimaSim.Core;
 using MimaSim.Messages;
 using ReactiveUI;
+using System.Linq;
 using System.Reactive;
 using System.Windows.Input;
 
@@ -29,6 +30,8 @@ namespace MimaSim.ViewModels
                     {
                         MemoryCells.Add(_.Address, _.Value);
                     }
+
+                    MemoryCells.OrderBy(_ => _.Key);
                 });
             }));
         }
