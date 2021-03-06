@@ -39,8 +39,6 @@ namespace MimaSim.MIMA.Visitors
                 switch (call.Type)
                 {
                     case AstCallNodeType.BinaryExpresson:
-                        Debug.WriteLine(call.Args.First());
-
                         TraverseTree(call.Args.First());
                         EmitExpressionStack();
 
@@ -292,6 +290,10 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (value is CallNode cn)
             {
+                if (cn.Args.First() is LiteralNode ln && ln.Value is string)
+                {
+                    return;
+                }
                 VisitExpression(cn, memoryAddress);
             }
 
@@ -315,7 +317,31 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (valueNode is CallNode exprNode)
             {
-                VisitExpression(exprNode, adress);
+                if (exprNode.Type == AstCallNodeType.BinaryExpresson)
+                {
+                    if (exprNode.Args.First() is LiteralNode ln && ln.Value is string stringValue)
+                    {
+                        short address = adress;
+                        foreach (var c in stringValue)
+                        {
+                            _emitter.EmitInstruction(OpCodes.LOAD, (short)c);
+                            _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                            _emitter.EmitRegister(Registers.Accumulator);
+                            _emitter.EmitLiteral(address);
+
+                            address++;
+                        }
+
+                        _emitter.EmitInstruction(OpCodes.LOAD, 0);
+                        _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                        _emitter.EmitRegister(Registers.Accumulator);
+                        _emitter.EmitLiteral(address);
+                    }
+                    else
+                    {
+                        VisitExpression(exprNode, adress);
+                    }
+                }
             }
             else if (valueNode is CallNode cn)
             {
@@ -323,10 +349,13 @@ namespace MimaSim.MIMA.Visitors
             }
             else if (valueNode is LiteralNode litNode)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (short)litNode.Value);
-                _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
-                _emitter.EmitRegister(Registers.Accumulator);
-                _emitter.EmitLiteral(adress);
+                if (litNode.Value is short shortValue)
+                {
+                    _emitter.EmitInstruction(OpCodes.LOAD, shortValue);
+                    _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                    _emitter.EmitRegister(Registers.Accumulator);
+                    _emitter.EmitLiteral(adress);
+                }
             }
         }
     }

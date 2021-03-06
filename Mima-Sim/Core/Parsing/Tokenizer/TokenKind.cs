@@ -54,5 +54,6 @@
         VarKeyword,
         AddressOfKeyword,
         LoopKeyword,
+        StringLiteral,
     }
 }

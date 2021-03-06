@@ -65,11 +65,13 @@ namespace MimaSim.MIMA.Parsing.Parsers
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
 
+            tokenizer.AddDefinition(TokenKind.StringLiteral, @"'.*?'", 8); //ToDo: fix string tokenization
             tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 3);
 
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
             tokenizer.AddDefinition(TokenKind.IntLiteral, "-?[0-9]+", 3);
             tokenizer.AddDefinition(TokenKind.Identifier, "[a-zA-Z_][0-9a-zA-F_]*", 4);
+
             tokenizer.AddDefinition(TokenKind.Plus, @"\+", 4);
             tokenizer.AddDefinition(TokenKind.Minus, @"-", 4);
             tokenizer.AddDefinition(TokenKind.Star, @"\*", 4);
@@ -265,6 +267,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
                 case TokenKind.IntLiteral:
                     return ParseIntLiteral();
 
+                case TokenKind.StringLiteral:
+                    return ParseStringLiteral();
+
                 case TokenKind.RegisterKeyword:
                     return ParseRegisterExpression();
 
@@ -353,6 +358,14 @@ namespace MimaSim.MIMA.Parsing.Parsers
             } while (token.Kind != TokenKind.EndOfFile);
 
             return NodeFactory.Call(AstCallNodeType.Group, _nodes.ToArray());
+        }
+
+        private IAstNode ParseStringLiteral()
+        {
+            var content = _enumerator.Current.Contents;
+            content = content.Substring(1, content.Length - 2);
+
+            return NodeFactory.Literal(content);
         }
 
         private IAstNode ParseVariableAssignment()
