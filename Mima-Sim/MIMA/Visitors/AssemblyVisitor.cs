@@ -21,7 +21,7 @@ namespace MimaSim.MIMA.Visitors
 
         public void Visit(LiteralNode lit)
         {
-            _emitter.EmitLiteral((byte)lit.Value);
+            _emitter.EmitLiteral((short)lit.Value);
         }
 
         public void Visit(IdentifierNode id)

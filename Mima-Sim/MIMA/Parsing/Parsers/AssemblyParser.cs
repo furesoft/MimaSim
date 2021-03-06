@@ -143,7 +143,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
             if (token.Kind == TokenKind.HexLiteral)
             {
-                var value = Convert.ToUInt16(token.Contents, 16);
+                var value = Convert.ToInt16(token.Contents, 16);
 
                 return NodeFactory.Literal(value);
             }
