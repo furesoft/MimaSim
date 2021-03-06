@@ -48,5 +48,6 @@
 
         //Only needed for parsing
         MOV,
+        CMPN,
     }
 }

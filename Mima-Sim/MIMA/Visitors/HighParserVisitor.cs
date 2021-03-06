@@ -5,16 +5,14 @@ using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA.Parsing;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace MimaSim.MIMA.Visitors
 {
     public class HighParserVisitor : INodeVisitor, IEmitter
     {
-        private readonly ByteCodeEmitter _emitter = new();
         private readonly RegisterAllocator _registerAllocator = new();
-
+        private ByteCodeEmitter _emitter = new();
         private Stack<IAstNode> _expressionStack = new();
 
         public byte[] GetRaw()
@@ -39,6 +37,22 @@ namespace MimaSim.MIMA.Visitors
                 switch (call.Type)
                 {
                     case AstCallNodeType.BinaryExpresson:
+                        var args = call.Args;
+
+                        if (args.Count() == 1)
+                        {
+                            var arg = args.First();
+
+                            if (arg is LiteralNode argLit && argLit.Value is short argVal)
+                            {
+                                if (argVal == 1 || argVal == 0)
+                                {
+                                    _emitter.EmitInstruction(OpCodes.LOAD, argVal);
+                                    break;
+                                }
+                            }
+                        }
+
                         TraverseTree(call.Args.First());
                         EmitExpressionStack();
 
@@ -98,7 +112,7 @@ namespace MimaSim.MIMA.Visitors
                     break;
 
                 case AstCallNodeType.Not:
-                    _emitter.EmitInstruction(OpCodes.NOT);
+                    _emitter.EmitInstruction(OpCodes.CMPN);
                     break;
 
                 case AstCallNodeType.Or:
@@ -216,18 +230,25 @@ namespace MimaSim.MIMA.Visitors
 
         private void VisitIfStatement(CallNode call)
         {
-            // Emit Condition
-            Visit((CallNode)call.Args.First());
+            var tmpEmitter = new ByteCodeEmitter(); // needed to calculate body size
+            var baseEmitter = _emitter;
 
-            //todo: emit if-statement
-            var trueLabel = _emitter.DefineLabel();
+            _emitter = tmpEmitter;
 
-            _emitter.EmitInstruction(OpCodes.JMPC, (byte)trueLabel.LabelNum);
             foreach (CallNode body in ((CallNode)call.Args.Last()).Args)
             {
                 Visit(body);
             }
-            _emitter.MarkLabel(trueLabel);
+
+            int codeLength = _emitter.Position;
+
+            _emitter = baseEmitter;
+
+            Visit((CallNode)call.Args.First());
+            _emitter.EmitOpcode(OpCodes.CMPN);
+
+            _emitter.EmitInstruction(OpCodes.JMPC, (short)(_emitter.Position + codeLength));
+            _emitter.Append(tmpEmitter.ToArray());
         }
 
         private void VisitLoopStatement(CallNode call)
@@ -249,7 +270,7 @@ namespace MimaSim.MIMA.Visitors
 
             if (valueNode is LiteralNode ln)
             {
-                _emitter.EmitInstruction(OpCodes.LOAD, (byte)ln.Value);
+                _emitter.EmitInstruction(OpCodes.LOAD, (short)ln.Value);
                 _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, (Registers)registerNode.Value);
             }
             else if (valueNode is IdentifierNode idNode)

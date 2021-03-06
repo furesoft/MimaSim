@@ -13,7 +13,7 @@ namespace MimaSim.Tabs
         }
 
         public int Index => 2;
-        public string Title => "Dokumentation";
+        public string Title => "Tabellen";
 
         public object ViewModel => new TablesViewModel();
 

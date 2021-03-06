@@ -11,6 +11,11 @@ namespace MimaSim.Core.Parsing.Emiting
         private int _labelCount = 0;
         public int Position => _builder.Length;
 
+        public void Append(byte[] raw)
+        {
+            _builder.Append(raw, false);
+        }
+
         public Label DefineLabel()
         {
             return new Label(_labelCount++);

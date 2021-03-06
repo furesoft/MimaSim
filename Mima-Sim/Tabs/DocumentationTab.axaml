@@ -7,49 +7,19 @@
              Design.Width="700" Design.Height="500"
              mc:Ignorable="d" Tag="{DynamicResource help}"
              x:Class="MimaSim.Tabs.DocumentationTab">
-  <StackPanel>
-    <TabControl TabStripPlacement="Bottom" MinHeight="450">
-      <TabItem Header="Tabellen">
+  <StackPanel Orientation="Horizontal" Spacing="5">
+    <c:MapTableControl Items="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+    <c:MapTableControl Items="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
 
-        <StackPanel Orientation="Horizontal" Spacing="5">
-          <c:MapTableControl Items="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-          <c:MapTableControl Items="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+    <StackPanel>
+      <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top">
+        <c:MapItem Key="Reg -> Reg" Value="40" />
+        <c:MapItem Key="Mem -> Reg" Value="41" />
+        <c:MapItem Key="Reg -> Mem" Value="42" />
+        <c:MapItem Key="Mem -> Mem" Value="43" />
+      </c:MapTableControl>
 
-          <StackPanel>
-            <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top">
-              <c:MapItem Key="Reg -> Reg" Value="40" />
-              <c:MapItem Key="Mem -> Reg" Value="41" />
-              <c:MapItem Key="Reg -> Mem" Value="42" />
-              <c:MapItem Key="Mem -> Mem" Value="43" />
-            </c:MapTableControl>
-
-            <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
-          </StackPanel>
-        </StackPanel>
-      </TabItem>
-
-      <TabItem Header="Maschinensprache">
-        <Grid ColumnDefinitions="AUTO,50,500" RowDefinitions="100,25,100">
-          <Border BorderBrush="Black" VerticalAlignment="Top" BorderThickness="1" MaxWidth="300" MaxHeight="50" HorizontalAlignment="Left">
-            <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="4">
-              <TextBlock Text="Mnemnonic" />
-              <TextBlock Text="Argument1" />
-              <TextBlock Text="Argument2" />
-            </StackPanel>
-          </Border>
-
-          <TextBlock Grid.Row="0" Grid.Column="2" Text="OpCode/Mnemnonic und Argumente werden in jeweils 2er Blöcken von Hexadezimalzahlen beschrieben und durch ein Leerzeichen getrennt. Zahlen als Argumente müssen immer 2 2er Blöcke sein, aufgrund der implementierten Architektur. In allen Sprachen kann der Code durch /* ... */ kommentiert werden, wobei ... den Kommentar darstellt." TextWrapping="Wrap" />
-
-          <StackPanel Grid.Column="2" Grid.Row="2">
-            <TextBlock Text="Beispielprogramm" FontSize="22" FontWeight="Bold" />
-            <TextBox MaxWidth="350" AcceptsReturn="True" Text="04 2A 00 /* Lade 42 in den Accumulator */
-40 01 02 /* Schiebe Inhalt aus Accumulator in Register X */
-04 02 00 /* Lade 2 in den Accumulator */
-40 01 03 /* Schiebe Inhalt aus Accumulator in Register Y */
-12 /* Multiplizere Inhalt von Register X mit Register Y */" TextWrapping="Wrap" />
-          </StackPanel>
-        </Grid>
-      </TabItem>
-    </TabControl>
+      <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+    </StackPanel>
   </StackPanel>
 </UserControl>
