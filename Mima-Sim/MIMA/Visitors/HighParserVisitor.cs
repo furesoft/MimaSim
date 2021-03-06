@@ -294,6 +294,7 @@ namespace MimaSim.MIMA.Visitors
                 {
                     return;
                 }
+
                 VisitExpression(cn, memoryAddress);
             }
 
@@ -336,6 +337,23 @@ namespace MimaSim.MIMA.Visitors
                         _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
                         _emitter.EmitRegister(Registers.Accumulator);
                         _emitter.EmitLiteral(address);
+                    }
+                    else if (exprNode.Args.First() is CallNode argNode && argNode.Type == AstCallNodeType.ArrayExpression)
+                    {
+                        var arrExprNode = (CallNode)argNode.Args.First();
+                        var values = arrExprNode.Args;
+
+                        short tmpAddr = adress;
+
+                        foreach (LiteralNode v in values)
+                        {
+                            _emitter.EmitInstruction(OpCodes.LOAD, (short)v.Value);
+                            _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
+                            _emitter.EmitRegister(Registers.Accumulator);
+                            _emitter.EmitLiteral(tmpAddr);
+
+                            tmpAddr++;
+                        }
                     }
                     else
                     {

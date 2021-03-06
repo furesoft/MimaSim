@@ -94,6 +94,10 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.GreaterThen, @">", 4);
 
             tokenizer.AddDefinition(TokenKind.Bang, @"\!", 4);
+            tokenizer.AddDefinition(TokenKind.Comma, ",", 4);
+
+            tokenizer.AddDefinition(TokenKind.OpenSquare, @"\[", 4);
+            tokenizer.AddDefinition(TokenKind.CloseSquare, @"\]", 4);
 
             tokenizer.AddDefinition(TokenKind.TrueKeyword, @"true", 2);
             tokenizer.AddDefinition(TokenKind.FalseKeyword, @"false", 2);
@@ -101,6 +105,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             tokenizer.AddDefinition(TokenKind.IfKeyword, @"if", 2);
             tokenizer.AddDefinition(TokenKind.RegisterKeyword, @"register", 2);
             tokenizer.AddDefinition(TokenKind.VarKeyword, @"var", 2);
+            tokenizer.AddDefinition(TokenKind.ArrayKeyword, @"array", 2);
             tokenizer.AddDefinition(TokenKind.AddressOfKeyword, @"addressof", 2);
             tokenizer.AddDefinition(TokenKind.LoopKeyword, @"loop", 2);
 
@@ -136,6 +141,46 @@ namespace MimaSim.MIMA.Parsing.Parsers
             var address = ParsePrimaryExpression();
 
             return NodeFactory.Call(AstCallNodeType.AddressOfExpression, address);
+        }
+
+        private IAstNode ParseArrayExpression()
+        {
+            var keywordToken = _enumerator.Read();
+            _enumerator.Read(TokenKind.OpenParen);
+            IAstNode values = ParseArrayValues();
+
+            _enumerator.Read(TokenKind.CloseParen);
+
+            return NodeFactory.Call(AstCallNodeType.ArrayExpression, values);
+        }
+
+        private IAstNode ParseArrayValues()
+        {
+            List<IAstNode> values = new List<IAstNode>();
+
+            Token token;
+            do
+            {
+                token = _enumerator.Peek();
+
+                if (token.Kind == TokenKind.IntLiteral)
+                {
+                    values.Add(ParseIntLiteral());
+                    _enumerator.Read();
+                }
+                else if (token.Kind == TokenKind.HexLiteral)
+                {
+                    values.Add(ParseHexLiteral());
+                    _enumerator.Read();
+                }
+
+                if (_enumerator.Peek().Kind != TokenKind.CloseParen)
+                {
+                    _enumerator.Read(TokenKind.Comma);
+                }
+            } while (token.Kind != TokenKind.CloseParen);
+
+            return NodeFactory.Call(AstCallNodeType.Group, values.ToArray());
         }
 
         private IAstNode ParseBinaryExpression(int parentPrecedence = 0)
@@ -272,6 +317,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 case TokenKind.RegisterKeyword:
                     return ParseRegisterExpression();
+
+                case TokenKind.ArrayKeyword:
+                    return ParseArrayExpression();
 
                 case TokenKind.AddressOfKeyword:
                     return ParseAddressOfExpression();

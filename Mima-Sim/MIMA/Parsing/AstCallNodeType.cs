@@ -35,5 +35,6 @@
         GreaterEqual,
         AddressOfExpression,
         LoopStatement,
+        ArrayExpression,
     }
 }

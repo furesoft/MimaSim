@@ -55,5 +55,8 @@
         AddressOfKeyword,
         LoopKeyword,
         StringLiteral,
+        ArrayKeyword,
+        CloseSquare,
+        OpenSquare,
     }
 }
