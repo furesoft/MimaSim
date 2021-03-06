@@ -65,7 +65,7 @@ namespace MimaSim.MIMA.Visitors
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
 
-                        if (firstArg.Value is Registers reg && secondArg.Value is byte addr)
+                        if (firstArg.Value is Registers reg && secondArg.Value is short addr)
                         {
                             _emitter.EmitOpcode(OpCodes.MOV_REG_MEM);
 
@@ -78,7 +78,7 @@ namespace MimaSim.MIMA.Visitors
                         var firstArg = (LiteralNode)cn.Args.First();
                         var secondArg = (LiteralNode)cn.Args.Last();
 
-                        if (firstArg.Value is byte addr && secondArg.Value is Registers reg)
+                        if (firstArg.Value is short addr && secondArg.Value is Registers reg)
                         {
                             _emitter.EmitOpcode(OpCodes.MOV_MEM_REG);
 
