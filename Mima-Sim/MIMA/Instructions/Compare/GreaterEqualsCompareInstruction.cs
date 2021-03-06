@@ -14,7 +14,7 @@ namespace MimaSim.MIMA.Instructions.Compare
 
             var value = left >= right;
 
-            cpu.SetRegister(Registers.Accumulator, value ? 1 : 0);
+            cpu.SetRegister(Registers.Accumulator, (short)(value ? 1 : 0));
 
             return false;
         }
