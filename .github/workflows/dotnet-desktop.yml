@@ -24,6 +24,6 @@ jobs:
       run: dotnet build ./Mima-Sim/Mima-Sim.csproj --configuration Release
     - name: Publish
       run: |
-        dotnet publish ./Mima-Sim/Mima-Sim.csproj -runtime linux-x64 -c Release -o MimaSim 
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime-identifier linux-x64 -c Release -o MimaSim_Linux-X64 
     
   
