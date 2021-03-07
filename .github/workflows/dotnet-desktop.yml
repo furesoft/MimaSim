@@ -18,12 +18,12 @@ jobs:
       with:
         dotnet-version: 5.0.x
         
-    
-    # dotnet build and publish
-    - name: Build with dotnet
-      run: dotnet build ./Mima-Sim/Mima-Sim.csproj --configuration Release
     - name: Publish
       run: |
-        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o MimaSim_Linux-X64 
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o MimaSim_Linux-x64 
     
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Linux x64
+        path: ./MimaSim_Linux-X64/ 
   
