@@ -20,7 +20,7 @@ namespace MimaSim.MIMA.Components
 
         public Dictionary<OpCodes, IInstruction> Instructions = new Dictionary<OpCodes, IInstruction>();
         public Memory Memory = new Memory((int)Math.Pow(2, 24));
-        public Register One = new Register("One", 1);
+
         public Register SAR = new Register("SAR");
         public Register SDR = new Register("SDR");
 
@@ -28,11 +28,24 @@ namespace MimaSim.MIMA.Components
 
         public Register Y = new Register("Y");
 
-        public Register Z = new Register("Z");
-
         public CPU()
         {
             ALU = new ALU(this);
+
+            ControlUnit.IAR.Bus.Subscribe(_ =>
+            {
+                BusRegistry.ActivateBus("controlunit_iar");
+            });
+
+            X.Bus.Subscribe(_ =>
+            {
+                BusRegistry.GetBusMap("cu->x").Activate();
+            });
+
+            Y.Bus.Subscribe(_ =>
+            {
+                BusRegistry.GetBusMap("cu->y").Activate();
+            });
         }
 
         public byte[] Program { get; set; }
@@ -100,18 +113,16 @@ namespace MimaSim.MIMA.Components
 
         public bool Step()
         {
-            BusRegistry.ActivateBus("controlunit_iar");
-
             var instr = Fetch();
-            return Step((OpCodes)instr);
+            var result = Step((OpCodes)instr);
+
+            return result;
         }
 
         public bool Step(OpCodes instruction)
         {
             if (Instructions.ContainsKey(instruction))
             {
-                BusRegistry.DeactivateBus("controlunit_iar");
-
                 return Instructions[instruction].Invoke(this);
             }
             else

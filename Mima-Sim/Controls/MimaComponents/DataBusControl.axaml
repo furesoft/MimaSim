@@ -7,11 +7,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.DataBusControl">
   <StackPanel Orientation="Horizontal">
-    <c:BusControl b:BusRegistry.Id="base_control_to_alu_out" Height="25" Width="95" State="None" />
+    <c:BusControl b:BusRegistry.Id="base_control_to_alu_out" Height="25" Width="100" State="None" />
     <c:BusControl b:BusRegistry.Id="base_control_to_alu_x" Height="25" Width="40" State="None" />
-    <c:BusControl b:BusRegistry.Id="base_control_to_alu_y" Height="25" Width="52" State="None" />
+    <c:BusControl b:BusRegistry.Id="base_control_to_alu_y" Height="25" Width="43" State="None" />
 
-    <c:BusControl b:BusRegistry.Id="base_control_to_mem_ar" Height="25" Width="77" State="None" />
+    <c:BusControl b:BusRegistry.Id="base_control_to_mem_ar" Height="25" Width="80" State="None" />
     <c:BusControl b:BusRegistry.Id="base_control_to_mem_dr" Height="25" Width="68" State="None" />
   </StackPanel>
 </UserControl>

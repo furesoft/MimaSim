@@ -1,13 +1,13 @@
-﻿using System;
+﻿using MimaSim.Core;
+using System;
 using System.Timers;
 
 namespace MimaSim.MIMA.Components
 {
     public class Clock
     {
-        private short _frequency;
-
         private readonly Timer _timer;
+        private short _frequency;
 
         public Clock(short frequency)
         {
@@ -40,6 +40,10 @@ namespace MimaSim.MIMA.Components
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             CPU.Instance.Step();
+
+            System.Threading.Thread.Sleep(750);
+
+            BusRegistry.DeactivateAllMaps();
         }
     }
 }

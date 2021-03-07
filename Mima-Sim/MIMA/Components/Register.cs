@@ -19,6 +19,8 @@
 
         public short GetValue()
         {
+            Bus.Send(_value);
+
             return _value;
         }
 
