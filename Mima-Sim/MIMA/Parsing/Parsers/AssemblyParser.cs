@@ -179,7 +179,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
                 return NodeFactory.Call(AstCallNodeType.MovRegMem,
                     NodeFactory.Literal(register),
-                    NodeFactory.Literal(Convert.ToUInt16(secondArg.Contents.Remove(0, 1), 16)));
+                    NodeFactory.Literal(Convert.ToInt16(secondArg.Contents.Remove(0, 1), 16)));
             }
             else if (firstArg.Kind == TokenKind.AddressLiteral && secondArg.Kind == TokenKind.Register)
             {
