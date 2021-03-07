@@ -91,6 +91,25 @@ namespace MimaSim.MIMA.Visitors
             }
         }
 
+        private byte[] BuildBody(CallNode node)
+        {
+            var tmpEmitter = new ByteCodeEmitter(); // needed to calculate body size
+            var baseEmitter = _emitter;
+
+            _emitter = tmpEmitter;
+
+            foreach (CallNode body in node.Args)
+            {
+                Visit(body);
+            }
+
+            var code = _emitter.ToArray();
+
+            _emitter = baseEmitter;
+
+            return code;
+        }
+
         private void EmitArithmeticOperator(AstCallNodeType op)
         {
             switch (op)
@@ -230,25 +249,13 @@ namespace MimaSim.MIMA.Visitors
 
         private void VisitIfStatement(CallNode call)
         {
-            var tmpEmitter = new ByteCodeEmitter(); // needed to calculate body size
-            var baseEmitter = _emitter;
-
-            _emitter = tmpEmitter;
-
-            foreach (CallNode body in ((CallNode)call.Args.Last()).Args)
-            {
-                Visit(body);
-            }
-
-            int codeLength = _emitter.Position;
-
-            _emitter = baseEmitter;
+            var code = BuildBody(call);
 
             Visit((CallNode)call.Args.First());
             _emitter.EmitOpcode(OpCodes.CMPN);
 
-            _emitter.EmitInstruction(OpCodes.JMPC, (short)(_emitter.Position + codeLength));
-            _emitter.Append(tmpEmitter.ToArray());
+            _emitter.EmitInstruction(OpCodes.JMPC, (short)(_emitter.Position + code.Length));
+            _emitter.Append(code);
         }
 
         private void VisitLoopStatement(CallNode call)
