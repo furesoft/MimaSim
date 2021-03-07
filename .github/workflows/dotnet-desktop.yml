@@ -21,7 +21,7 @@ jobs:
     
     # dotnet build and publish
     - name: Build with dotnet
-      run: dotnet build $Env:GITHUB_WORKSPACE/Projektarbeit/MimaSim/Mima-Sim.csproj --configuration Release
+      run: dotnet build $Env:GITHUB_WORKSPACE/Projektarbeit/Mima-Sim/Mima-Sim.csproj --configuration Release
     - name: dotnet publish
       run: |
         dotnet publish -c Release -o MimaSim 
