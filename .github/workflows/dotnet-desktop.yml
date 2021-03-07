@@ -21,8 +21,8 @@ jobs:
     
     # dotnet build and publish
     - name: Build with dotnet
-      run: dotnet build $/home/runner/work/Projektarbeit/Projektarbeit/Projektarbeit/Mima-Sim/Mima-Sim.csproj --configuration Release
-    - name: dotnet publish
+      run: dotnet build $/home/runner/work/Projektarbeit/Projektarbeit/Mima-Sim/Mima-Sim.csproj --configuration Release
+    - name: Publish
       run: |
         dotnet publish -c Release -o MimaSim 
     
