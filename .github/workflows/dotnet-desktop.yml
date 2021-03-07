@@ -20,10 +20,10 @@ jobs:
         
     - name: Publish
       run: |
-        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o MimaSim_Linux-x64 
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
     
     - uses: actions/upload-artifact@v2
       with:
         name: Linux x64
-        path: ./MimaSim_Linux-X64/ 
+        path: ./Publish/* 
   
