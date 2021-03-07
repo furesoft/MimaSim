@@ -18,12 +18,10 @@ jobs:
       with:
         dotnet-version: 5.0.x
         
-    -name Change Directory
-      run: cd MimaSim
     
     # dotnet build and publish
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build ./MimaSim/MimaSim.sln --configuration Release
     - name: dotnet publish
       run: |
         dotnet publish -c Release -o MimaSim 
