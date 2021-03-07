@@ -18,12 +18,16 @@ jobs:
       with:
         dotnet-version: 5.0.x
         
-    - name: Publish
+    - name: Publish Linux Binary
       run: |
         dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
     
+    - name: Publish Windows Binary
+      run: |
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime windows-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
+        
     - uses: actions/upload-artifact@v2
       with:
-        name: Linux x64
+        name: Binaries
         path: ./Publish/* 
   
