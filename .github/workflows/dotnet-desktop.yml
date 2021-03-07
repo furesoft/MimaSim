@@ -22,12 +22,36 @@ jobs:
       run: |
         dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
     
-    - name: Publish Windows Binary
+    - name: Publish Windows X64 Binary
       run: |
-        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime windows-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime win10-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
         
-    - uses: actions/upload-artifact@v2
+    - name: Publish Windows X86 Binary
+      run: |
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime win10-x86 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
+        
+    - name: Publish OSX X64 Binary
+      run: |
+        dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime osx-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
+        
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
       with:
         name: Binaries
         path: ./Publish/* 
+        
+    - name: Create Release
+       id: create_release
+       uses: actions/create-release@v1
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+       with:
+         tag_name: ${{ github.ref }}
+         release_name: Release ${{ github.ref }}
+         body: |
+           Changes in this Release
+           - First Change
+           - Second Change
+         draft: false
+         prerelease: false
   
