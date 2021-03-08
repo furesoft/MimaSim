@@ -33,7 +33,14 @@ jobs:
     - name: Publish OSX X64 Binary
       run: |
         dotnet publish ./Mima-Sim/Mima-Sim.csproj --runtime osx-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -c Release -o Publish
+    
+    - name: Add Installer Tool
+      run: | 
+        dotnet tool install --global dotnet-deb
         
+    - name: Create Debian Package
+      run: dotnet deb install
+    
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
