@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
+    <None Remove="Resources\BusMap.xml" />
     <None Remove="Resources\cpu.png" />
     <None Remove="Resources\Icons\load.png" />
     <None Remove="Resources\Icons\pause.png" />
@@ -48,6 +49,9 @@
     <AvaloniaResource Include="Styles.axaml" />
     <AvaloniaResource Include="Styles\ExecutionBarStyle.axaml" />
     <AvaloniaResource Include="Styles\MapTableControlStyle.axaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BusMap.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />

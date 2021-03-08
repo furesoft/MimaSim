@@ -115,7 +115,10 @@ namespace MimaSim.Core
         {
             if (_ids.ContainsKey(id))
             {
-                _ids[id].State = state;
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    _ids[id].State = state;
+                });
             }
         }
     }
