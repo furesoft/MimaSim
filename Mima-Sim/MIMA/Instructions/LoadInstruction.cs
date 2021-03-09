@@ -1,7 +1,5 @@
 ﻿using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MimaSim.MIMA.Instructions
 {
@@ -11,7 +9,7 @@ namespace MimaSim.MIMA.Instructions
 
         public bool Invoke(CPU cpu)
         {
-            BusRegistry.GetBusMap("cu->accu").Activate();
+            BusRegistry.Activate("cu->accu");
             cpu.SetRegister(Registers.Accumulator, cpu.Fetch16());
 
             return true;

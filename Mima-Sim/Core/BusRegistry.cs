@@ -1,4 +1,6 @@
-﻿using Avalonia.Threading;
+﻿using Avalonia.Controls;
+using Avalonia.Media;
+using Avalonia.Threading;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.Properties;
 using System.Collections.Generic;
@@ -9,11 +11,26 @@ namespace MimaSim.Core
     public static class BusRegistry
     {
         private static readonly Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
-        private static readonly Dictionary<string, BusMap> _maps = new Dictionary<string, BusMap>();
+        private static Dictionary<string, BusActivator> _activationDefinitions = new Dictionary<string, BusActivator>();
+        private static ProgressBar MainBus;
 
         static BusRegistry()
         {
             LoadMapsFromConfig();
+        }
+
+        public static void Activate(string id)
+        {
+            if (_activationDefinitions.ContainsKey(id))
+            {
+                var def = _activationDefinitions[id];
+                ActivateBus(def.BusID);
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MainBus.Value = def.MainBus;
+                    MainBus.Foreground = Brushes.Red;
+                });
+            }
         }
 
         public static void ActivateBus(string id)
@@ -21,11 +38,15 @@ namespace MimaSim.Core
             ChangeBusState(id, BusState.Recieving);
         }
 
-        public static void DeactivateAllMaps()
+        public static void DeactivateAll()
         {
-            foreach (var map in _maps)
+            foreach (var id in _ids)
             {
-                map.Value.Deactivate();
+                DeactivateBus(id.Key);
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MainBus.Foreground = Brushes.Gray;
+                });
             }
         }
 
@@ -33,16 +54,6 @@ namespace MimaSim.Core
         {
             ChangeBusState(id, BusState.None);
             SetData(id, null);
-        }
-
-        public static BusMap GetBusMap(string id)
-        {
-            if (_maps.ContainsKey(id))
-            {
-                return _maps[id];
-            }
-
-            return null;
         }
 
         public static string GetId(BusControl target)
@@ -60,22 +71,24 @@ namespace MimaSim.Core
 
             foreach (XmlNode item in root.ChildNodes)
             {
-                var mapid = item.Attributes["id"].Value;
-                var map = new BusMap();
+                var activatorEntry = new BusActivator();
 
-                if (item.HasAttribute("inherits"))
+                var activatorID = item.Attributes["id"].Value;
+
+                foreach (XmlNode setter in item.ChildNodes)
                 {
-                    var basemap = GetBusMap(item.Attributes["inherits"].Value);
-
-                    map.AddRange(basemap);
+                    if (setter.Name == "setbus")
+                    {
+                        activatorEntry.BusID = setter.Attributes["id"].Value;
+                    }
+                    else if (setter.Name == "mainbus")
+                    {
+                        activatorEntry.MainBus = int.Parse(setter.Attributes["value"].Value);
+                    }
                 }
 
-                foreach (XmlNode child in item.ChildNodes)
-                {
-                    map.Add(child.Attributes["key"].Value);
-                }
-
-                RegisterBusMap(mapid, map);
+                _activationDefinitions.Add(activatorID, activatorEntry);
+                activatorEntry = new BusActivator();
             }
         }
 
@@ -84,14 +97,6 @@ namespace MimaSim.Core
             if (!_ids.ContainsKey(id))
             {
                 _ids.Add(id, control);
-            }
-        }
-
-        public static void RegisterBusMap(string id, BusMap map)
-        {
-            if (!_maps.ContainsKey(id))
-            {
-                _maps.Add(id, map);
             }
         }
 
@@ -106,9 +111,16 @@ namespace MimaSim.Core
             }
         }
 
-        public static void SetId(BusControl target, string id)
+        public static void SetId(object target, string id)
         {
-            RegisterBus(id, target);
+            if (target is BusControl bc)
+            {
+                RegisterBus(id, bc);
+            }
+            else if (target is ProgressBar mb)
+            {
+                MainBus = mb;
+            }
         }
 
         private static void ChangeBusState(string id, BusState state)

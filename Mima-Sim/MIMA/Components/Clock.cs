@@ -43,7 +43,7 @@ namespace MimaSim.MIMA.Components
 
             System.Threading.Thread.Sleep(750);
 
-            BusRegistry.DeactivateAllMaps();
+            BusRegistry.DeactivateAll();
         }
     }
 }

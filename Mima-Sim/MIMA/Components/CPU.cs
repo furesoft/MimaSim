@@ -39,12 +39,12 @@ namespace MimaSim.MIMA.Components
 
             X.Bus.Subscribe(_ =>
             {
-                BusRegistry.GetBusMap("cu->x").Activate();
+                BusRegistry.Activate("cu->x");
             });
 
             Y.Bus.Subscribe(_ =>
             {
-                BusRegistry.GetBusMap("cu->y").Activate();
+                BusRegistry.Activate("cu->y");
             });
         }
 

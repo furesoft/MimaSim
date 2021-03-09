@@ -1,39 +1,22 @@
-<buslist>
-  <map id="alu_main_bus">
-    <item key="base_control_to_alu_out" />
-  </map>
-  <map id="cu->adr">
-    <item key="base_control_to_alu_out" />
-    <item key="base_control_to_mem_ar" />
-    <item key="base_control_to_alu_x" />
-    <item key="base_control_to_alu_y" />
-    <item key="memory_adresss2" />
-  </map>
-  <map id="cu->data">
-    <item key="base_control_to_alu_out" />
-    <item key="base_control_to_mem_ar" />
-    <item key="base_control_to_alu_x" />
-    <item key="base_control_to_alu_y" />
-    <item key="memory_adresss2" />
-  </map>
-  <map id="full_main_bus" inherits="alu_main_bus">
-    <item key="base_control_to_mem_dr" />
-    <item key="base_control_to_mem_ar" />
-
-    <item key="base_control_to_alu_x" />
-    <item key="base_control_to_alu_y" />
-  </map>
-  <map id="cu->accu" inherits="alu_main_bus">
-    <item key="base_to_accu" />
-    <item key="base_control_to_alu_x" />
-  </map>
-  <map id="cu->x" inherits="alu_main_bus">
-    <item key="base_control_to_alu_x" />
-    <item key="alu_input_x2" />
-  </map>
-  <map id="cu->y" inherits="alu_main_bus">
-    <item key="base_control_to_alu_x" />
-    <item key="base_control_to_alu_y" />
-    <item key="alu_input_y2" />
-  </map>
-</buslist>
+<busactivations>
+  <activator id="cu->x">
+    <setbus id="alu_input_x2" />
+    <mainbus value="42" />
+  </activator>
+  <activator id="cu->y">
+    <setbus id="alu_input_y2" />
+    <mainbus value="55" />
+  </activator>
+  <activator id="cu->accu">
+    <setbus id="base_to_accu" />
+    <mainbus value="42" />
+  </activator>
+  <activator id="cu->adr">
+    <setbus id="memory_adresss2" />
+    <mainbus value="75" />
+  </activator>
+  <activator id="cu->data">
+    <setbus id="memory_data2" />
+    <mainbus value="100" />
+  </activator>
+</busactivations>
