@@ -260,7 +260,6 @@ namespace MimaSim.MIMA.Visitors
 
         private void VisitLoopStatement(CallNode call)
         {
-            //ToDo: implement emit loop statement
             var label = _emitter.DefineLabel();
             _emitter.MarkLabel(label);
 

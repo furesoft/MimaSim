@@ -65,7 +65,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         {
             var tokenizer = new PrecedenceBasedRegexTokenizer();
 
-            tokenizer.AddDefinition(TokenKind.StringLiteral, @"'.*?'", 8); //ToDo: fix string tokenization
+            tokenizer.AddDefinition(TokenKind.StringLiteral, @"'.*?'", 8);
             tokenizer.AddDefinition(TokenKind.Register, GetRegisterPattern(), 3);
 
             tokenizer.AddDefinition(TokenKind.HexLiteral, "0x[0-9a-fA-F]{1,6}", 3);
