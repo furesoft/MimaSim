@@ -24,7 +24,11 @@ namespace MimaSim.Core
             if (_activationDefinitions.ContainsKey(id))
             {
                 var def = _activationDefinitions[id];
-                ActivateBus(def.BusID);
+                foreach (var b in def.BusIDs)
+                {
+                    ActivateBus(b);
+                }
+
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     MainBus.Value = def.MainBus;
@@ -79,7 +83,7 @@ namespace MimaSim.Core
                 {
                     if (setter.Name == "setbus")
                     {
-                        activatorEntry.BusID = setter.Attributes["id"].Value;
+                        activatorEntry.BusIDs.Add(setter.Attributes["id"].Value);
                     }
                     else if (setter.Name == "mainbus")
                     {

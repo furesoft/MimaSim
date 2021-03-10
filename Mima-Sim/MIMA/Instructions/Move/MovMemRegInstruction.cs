@@ -10,8 +10,7 @@ namespace MimaSim.MIMA.Instructions.Move
         public bool Invoke(CPU cpu)
         {
             var address = cpu.Fetch16();
-            BusRegistry.Activate("cu->adr");
-            BusRegistry.Activate("cu->data");
+            BusRegistry.Activate("cu->mem");
 
             var value = cpu.Memory.GetValue(address);
             var register = cpu.FetchRegister();

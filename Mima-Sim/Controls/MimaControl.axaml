@@ -12,7 +12,7 @@
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="190" />
       <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
 
-      <w:AccuWrapper Canvas.Top="217" Canvas.Left="196" />
+      <w:AccuWrapper Canvas.Top="217" Canvas.Left="194" />
 
       <c:DataBusControl Height="25" Canvas.Top="192" Canvas.Left="110" />
 

@@ -11,8 +11,7 @@ namespace MimaSim.MIMA.Instructions.Move
         {
             var fromAddress = cpu.Fetch16();
 
-            BusRegistry.Activate("cu->adr");
-            BusRegistry.Activate("cu->data");
+            BusRegistry.Activate("cu->mem");
 
             var value = cpu.Memory.GetValue(fromAddress);
 

@@ -1,8 +1,10 @@
-﻿namespace MimaSim.Core
+﻿using System.Collections.Generic;
+
+namespace MimaSim.Core
 {
     public class BusActivator
     {
-        public string BusID { get; set; }
+        public List<string> BusIDs { get; set; } = new List<string>();
         public int MainBus { get; set; }
     }
 }

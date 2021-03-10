@@ -11,12 +11,9 @@
     <setbus id="base_to_accu" />
     <mainbus value="42" />
   </activator>
-  <activator id="cu->adr">
-    <setbus id="memory_adresss2" />
-    <mainbus value="75" />
-  </activator>
-  <activator id="cu->data">
+  <activator id="cu->mem">
     <setbus id="memory_data2" />
+    <setbus id="memory_adresss2" />
     <mainbus value="100" />
   </activator>
 </busactivations>
