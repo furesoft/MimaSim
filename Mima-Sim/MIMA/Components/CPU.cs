@@ -10,23 +10,23 @@ namespace MimaSim.MIMA.Components
 {
     public class CPU
     {
-        public static CPU Instance = new CPU();
+        public static CPU Instance = new();
 
-        public Register Accumulator = new Register("Accumulator");
+        public Register Accumulator = new("Accumulator");
         public ALU ALU;
-        public Clock Clock = new Clock(250);
-        public ControlUnit ControlUnit = new ControlUnit();
-        public Bus DataBus = new Bus();
+        public Clock Clock = new(250);
+        public ControlUnit ControlUnit = new();
+        public Bus DataBus = new();
 
-        public Dictionary<OpCodes, IInstruction> Instructions = new Dictionary<OpCodes, IInstruction>();
-        public Memory Memory = new Memory((int)Math.Pow(2, 24));
+        public Dictionary<OpCodes, IInstruction> Instructions = new();
+        public Memory Memory = new((int)Math.Pow(2, 24));
 
-        public Register SAR = new Register("SAR");
-        public Register SDR = new Register("SDR");
+        public Register SAR = new("SAR");
+        public Register SDR = new("SDR");
 
-        public Register X = new Register("X");
+        public Register X = new("X");
 
-        public Register Y = new Register("Y");
+        public Register Y = new("Y");
 
         public CPU()
         {

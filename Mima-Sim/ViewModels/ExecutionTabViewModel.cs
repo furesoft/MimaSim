@@ -67,7 +67,7 @@ namespace MimaSim.ViewModels
                     if (RunMode)
                     {
                         var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
-                        DiagnosticBag diagnostics = new DiagnosticBag();
+                        DiagnosticBag diagnostics = new();
                         CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
                         if (!diagnostics.IsEmpty)
@@ -107,7 +107,7 @@ namespace MimaSim.ViewModels
             });
         }
 
-        public ViewModelActivator Activator => new ViewModelActivator();
+        public ViewModelActivator Activator => new();
         public ICommand LoadCommand { get; set; }
         public ICommand OpenClockSettingsCommand { get; set; }
         public ICommand OpenErrorPopupCommand { get; set; }

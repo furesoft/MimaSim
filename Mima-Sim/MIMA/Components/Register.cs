@@ -2,7 +2,7 @@
 {
     public class Register
     {
-        public Bus Bus = new Bus();
+        public Bus Bus = new();
 
         private short _value;
 

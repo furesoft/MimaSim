@@ -10,7 +10,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 {
     public class AssemblyParser : IParser
     {
-        public DiagnosticBag Diagnostics = new DiagnosticBag();
+        public DiagnosticBag Diagnostics = new();
         private TokenEnumerator _enumerator;
 
         public IAstNode Parse(string input)

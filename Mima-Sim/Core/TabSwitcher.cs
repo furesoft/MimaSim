@@ -8,7 +8,7 @@ namespace MimaSim.Core
     public static class TabSwitcher
     {
         public static TabControl Parent;
-        private static readonly List<TabItem> _items = new List<TabItem>();
+        private static readonly List<TabItem> _items = new();
 
         public static void Initialize(TabControl parent)
         {

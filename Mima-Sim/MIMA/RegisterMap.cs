@@ -5,7 +5,7 @@ namespace MimaSim.MIMA
 {
     public static class RegisterMap
     {
-        private static readonly Dictionary<string, Register> _map = new Dictionary<string, Register>();
+        private static readonly Dictionary<string, Register> _map = new();
 
         public static void AddRegister(string name, Register register)
         {

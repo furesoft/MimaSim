@@ -2,10 +2,10 @@
 {
     public class ALU
     {
-        public Bus CpuBus = new Bus();
-        public Bus LeftInputBus = new Bus();
-        public Bus OutputBus = new Bus();
-        public Bus RightInputBus = new Bus();
+        public Bus CpuBus = new();
+        public Bus LeftInputBus = new();
+        public Bus OutputBus = new();
+        public Bus RightInputBus = new();
         private readonly CPU _cpu;
 
         public ALU(CPU cPU)

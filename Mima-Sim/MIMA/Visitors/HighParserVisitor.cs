@@ -13,7 +13,7 @@ namespace MimaSim.MIMA.Visitors
     {
         private readonly RegisterAllocator _registerAllocator = new();
         private ByteCodeEmitter _emitter = new();
-        private Stack<IAstNode> _expressionStack = new();
+        private readonly Stack<IAstNode> _expressionStack = new();
 
         public byte[] GetRaw()
         {

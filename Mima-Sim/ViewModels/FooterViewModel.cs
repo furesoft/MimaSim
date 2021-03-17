@@ -12,7 +12,7 @@ namespace MimaSim.ViewModels
             OpenLicenseCommand = DialogService.CreateOpenCommand(new LicensesPopupControl(), new LicensePopupViewModel());
         }
 
-        public ViewModelActivator Activator => new ViewModelActivator();
+        public ViewModelActivator Activator => new();
         public ICommand OpenLicenseCommand { get; set; }
     }
 }

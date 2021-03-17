@@ -13,7 +13,7 @@ namespace MimaSim.ViewModels
             CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         }
 
-        public ViewModelActivator Activator => new ViewModelActivator();
+        public ViewModelActivator Activator => new();
 
         public ICommand CloseCommand { get; set; }
 

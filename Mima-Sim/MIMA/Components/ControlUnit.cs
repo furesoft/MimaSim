@@ -2,7 +2,7 @@
 {
     public class ControlUnit
     {
-        public Bus AccuBus = new Bus();
-        public Register IAR = new Register("IAR");
+        public Bus AccuBus = new();
+        public Register IAR = new("IAR");
     }
 }

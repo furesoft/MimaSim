@@ -9,7 +9,7 @@ namespace MimaSim.Core.Parsing.Emiting
 
         private const byte streamTrue = 1;
 
-        private MemoryStream store = new MemoryStream();
+        private MemoryStream store = new();
 
         public ByteArrayBuilder()
         {

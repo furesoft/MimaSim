@@ -16,7 +16,7 @@ namespace MimaSim.ViewModels
             Raw = GetRawString();
         }
 
-        public ViewModelActivator Activator => new ViewModelActivator();
+        public ViewModelActivator Activator => new();
 
         public ICommand CloseCommand { get; set; }
 

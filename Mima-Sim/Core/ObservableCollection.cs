@@ -572,7 +572,7 @@ namespace MimaSim.Core
                 throw new ArgumentNullException("info");
             }
 
-            Collection<DictionaryEntry> entries = new Collection<DictionaryEntry>();
+            Collection<DictionaryEntry> entries = new();
             foreach (DictionaryEntry entry in _keyedEntryCollection)
                 entries.Add(entry);
             info.AddValue("entries", entries);
@@ -805,11 +805,11 @@ namespace MimaSim.Core
 
             #region fields
 
-            private ObservableDictionary<TKey, TValue> _dictionary;
-            private int _version;
+            private readonly ObservableDictionary<TKey, TValue> _dictionary;
+            private readonly int _version;
             private int _index;
             private KeyValuePair<TKey, TValue> _current;
-            private bool _isDictionaryEntryEnumerator;
+            private readonly bool _isDictionaryEntryEnumerator;
 
             #endregion fields
         }
@@ -823,11 +823,11 @@ namespace MimaSim.Core
         protected KeyedDictionaryEntryCollection<TKey> _keyedEntryCollection;
 
         private int _countCache = 0;
-        private Dictionary<TKey, TValue> _dictionaryCache = new Dictionary<TKey, TValue>();
+        private readonly Dictionary<TKey, TValue> _dictionaryCache = new();
         private int _dictionaryCacheVersion = 0;
 
         [NonSerialized]
-        private SerializationInfo _siInfo = null;
+        private readonly SerializationInfo _siInfo = null;
 
         private int _version = 0;
 

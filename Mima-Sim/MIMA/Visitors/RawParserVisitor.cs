@@ -8,7 +8,7 @@ namespace MimaSim.MIMA.Visitors
 {
     public class RawParserVisitor : INodeVisitor, IEmitter
     {
-        private readonly ByteArrayBuilder _raw = new ByteArrayBuilder();
+        private readonly ByteArrayBuilder _raw = new();
 
         public byte[] GetRaw()
         {

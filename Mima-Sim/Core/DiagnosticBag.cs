@@ -6,7 +6,7 @@ namespace MimaSim.Core
 {
     public class DiagnosticBag
     {
-        private readonly List<Diagnostic> _diagnostics = new List<Diagnostic>();
+        private readonly List<Diagnostic> _diagnostics = new();
 
         public bool IsEmpty => _diagnostics.Count == 0;
 

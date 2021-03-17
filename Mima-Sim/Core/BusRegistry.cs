@@ -10,8 +10,8 @@ namespace MimaSim.Core
 {
     public static class BusRegistry
     {
-        private static readonly Dictionary<string, BusControl> _ids = new Dictionary<string, BusControl>();
-        private static Dictionary<string, BusActivator> _activationDefinitions = new Dictionary<string, BusActivator>();
+        private static readonly Dictionary<string, BusActivator> _activationDefinitions = new();
+        private static readonly Dictionary<string, BusControl> _ids = new();
         private static ProgressBar MainBus;
 
         static BusRegistry()
@@ -92,7 +92,7 @@ namespace MimaSim.Core
                 }
 
                 _activationDefinitions.Add(activatorID, activatorEntry);
-                activatorEntry = new BusActivator();
+                _ = new BusActivator();
             }
         }
 

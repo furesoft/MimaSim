@@ -4,7 +4,7 @@ namespace MimaSim.Core.Parsing
 {
     public static class SymbolTable
     {
-        private static List<Symbol> _symbols = new();
+        private static readonly List<Symbol> _symbols = new();
 
         public static void AddSymbol(Symbol sym)
         {

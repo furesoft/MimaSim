@@ -5,9 +5,9 @@ namespace MimaSim.Core.Parsing.Emiting
 {
     public class ByteCodeEmitter
     {
-        private readonly ByteArrayBuilder _builder = new ByteArrayBuilder();
+        private readonly ByteArrayBuilder _builder = new();
 
-        private readonly Dictionary<string, byte> _labels = new Dictionary<string, byte>();
+        private readonly Dictionary<string, byte> _labels = new();
         private int _labelCount = 0;
         public int Position => _builder.Length;
 

@@ -4,7 +4,7 @@ namespace MimaSim.MIMA.Parsing
 {
     public static class MemoryAllocator
     {
-        private static Dictionary<string, byte> _variableAllocations = new();
+        private static readonly Dictionary<string, byte> _variableAllocations = new();
 
         public static byte Allocate(string name)
         {

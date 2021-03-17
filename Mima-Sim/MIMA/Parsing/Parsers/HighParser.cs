@@ -12,7 +12,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
     {
         public DiagnosticBag Diagnostics = new();
 
-        private PrecedenceMap _binaryOperatorPrecedence = new()
+        private readonly PrecedenceMap _binaryOperatorPrecedence = new()
         {
             [TokenKind.Plus] = 4,
             [TokenKind.Minus] = 4,
@@ -31,9 +31,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             [TokenKind.Hat] = 1,
         };
 
-        private TokenEnumerator _enumerator;
-
-        private PrecedenceMap _unaryOperatorPrecedence = new()
+        private readonly PrecedenceMap _unaryOperatorPrecedence = new()
         {
             [TokenKind.Plus] = 6,
             [TokenKind.Minus] = 6,
@@ -41,7 +39,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
             [TokenKind.Bang] = 6,
         };
 
-        private Dictionary<string, AstCallNodeType> OperatorNodeTypeMap = new()
+        private readonly Dictionary<string, AstCallNodeType> OperatorNodeTypeMap = new()
         {
             ["+"] = AstCallNodeType.Addition,
             ["-"] = AstCallNodeType.Subtraktion,
@@ -60,6 +58,8 @@ namespace MimaSim.MIMA.Parsing.Parsers
             [">="] = AstCallNodeType.GreaterEqual,
             [">"] = AstCallNodeType.GreaterThan,
         };
+
+        private TokenEnumerator _enumerator;
 
         public IAstNode Parse(string input)
         {
@@ -137,7 +137,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseAddressOfExpression()
         {
-            var addressOfKeywordToken = _enumerator.Read();
+            _ = _enumerator.Read();
             var address = ParsePrimaryExpression();
 
             return NodeFactory.Call(AstCallNodeType.AddressOfExpression, address);
@@ -145,7 +145,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseArrayExpression()
         {
-            var keywordToken = _enumerator.Read();
+            _ = _enumerator.Read();
             _enumerator.Read(TokenKind.OpenParen);
             IAstNode values = ParseArrayValues();
 
@@ -156,7 +156,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseArrayValues()
         {
-            List<IAstNode> values = new List<IAstNode>();
+            List<IAstNode> values = new();
 
             Token token;
             do
@@ -245,7 +245,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseIfStatement()
         {
-            var keyword = _enumerator.Read(TokenKind.IfKeyword);
+            _ = _enumerator.Read(TokenKind.IfKeyword);
             _enumerator.Read(TokenKind.OpenParen);
 
             var condition = ParseExpression();
@@ -267,7 +267,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseLoopStatement()
         {
-            var keyword = _enumerator.Read(TokenKind.LoopKeyword);
+            _ = _enumerator.Read(TokenKind.LoopKeyword);
             _enumerator.Read(TokenKind.OpenBracket);
 
             var body = ParseStatements();
@@ -286,9 +286,9 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseParenthesizedExpression()
         {
-            var left = _enumerator.Read(TokenKind.OpenParen);
+            _ = _enumerator.Read(TokenKind.OpenParen);
             var expression = ParseBinaryExpression();
-            var right = _enumerator.Read(TokenKind.CloseParen);
+            _ = _enumerator.Read(TokenKind.CloseParen);
 
             return expression;
         }
@@ -354,7 +354,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
 
         private IAstNode ParseRegisterExpression()
         {
-            var registerKeywordToken = _enumerator.Read();
+            _ = _enumerator.Read();
             var register = ParseRegister();
 
             return NodeFactory.Call(AstCallNodeType.RegisterExpression, register);
@@ -363,28 +363,15 @@ namespace MimaSim.MIMA.Parsing.Parsers
         private IAstNode ParseStatement()
         {
             var lookahead = _enumerator.Current;
-            switch (lookahead.Kind)
+            return lookahead.Kind switch
             {
-                case TokenKind.IfKeyword:
-                    return ParseIfStatement();
-
-                case TokenKind.RegisterKeyword:
-                    return ParseRegisterDefinition();
-
-                case TokenKind.VarKeyword:
-                    return ParseVariableDefinition();
-
-                case TokenKind.Identifier:
-                    return ParseVariableAssignment();
-
-                case TokenKind.LoopKeyword:
-                    return ParseLoopStatement();
-
-                default:
-                    return ParseExpression();
-            }
-
-            return null;
+                TokenKind.IfKeyword => ParseIfStatement(),
+                TokenKind.RegisterKeyword => ParseRegisterDefinition(),
+                TokenKind.VarKeyword => ParseVariableDefinition(),
+                TokenKind.Identifier => ParseVariableAssignment(),
+                TokenKind.LoopKeyword => ParseLoopStatement(),
+                _ => ParseExpression(),
+            };
         }
 
         private IAstNode ParseStatements()
@@ -411,7 +398,7 @@ namespace MimaSim.MIMA.Parsing.Parsers
         private IAstNode ParseStringLiteral()
         {
             var content = _enumerator.Current.Contents;
-            content = content.Substring(1, content.Length - 2);
+            content = content[1..^1];
 
             return NodeFactory.Literal(content);
         }
