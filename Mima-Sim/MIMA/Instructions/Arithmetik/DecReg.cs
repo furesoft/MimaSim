@@ -9,6 +9,8 @@ namespace MimaSim.MIMA.Instructions.Arithmetik
 
         public bool Invoke(CPU cpu)
         {
+            BusRegistry.Activate("cu->accu");
+
             var oldValue = cpu.GetRegister(Registers.Accumulator);
             var newValue = oldValue - 1;
 
