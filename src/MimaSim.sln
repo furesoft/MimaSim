@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimaSim", "MimaSim\MimaSim\MimaSim.csproj", "{AE3BD177-F123-474E-8780-79FBA9536006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimaSim.Desktop", "MimaSim\MimaSim.Desktop\MimaSim.Desktop.csproj", "{1AFBF93B-C795-4FE0-A0E4-AB02C5BB88A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimaSim.Browser", "MimaSim\MimaSim.Browser\MimaSim.Browser.csproj", "{755A4127-285B-4DC1-95BE-3C34BFCA38AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimaTest", "MimaSim\MimaTest\MimaTest.csproj", "{E8D97A5F-122F-40E1-AD39-6060F55B685B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE3BD177-F123-474E-8780-79FBA9536006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3BD177-F123-474E-8780-79FBA9536006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3BD177-F123-474E-8780-79FBA9536006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3BD177-F123-474E-8780-79FBA9536006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AFBF93B-C795-4FE0-A0E4-AB02C5BB88A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AFBF93B-C795-4FE0-A0E4-AB02C5BB88A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AFBF93B-C795-4FE0-A0E4-AB02C5BB88A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AFBF93B-C795-4FE0-A0E4-AB02C5BB88A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755A4127-285B-4DC1-95BE-3C34BFCA38AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755A4127-285B-4DC1-95BE-3C34BFCA38AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755A4127-285B-4DC1-95BE-3C34BFCA38AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755A4127-285B-4DC1-95BE-3C34BFCA38AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8D97A5F-122F-40E1-AD39-6060F55B685B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8D97A5F-122F-40E1-AD39-6060F55B685B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8D97A5F-122F-40E1-AD39-6060F55B685B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8D97A5F-122F-40E1-AD39-6060F55B685B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

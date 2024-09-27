@@ -1,0 +1,13 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim">
+  <Style Selector="c|RegisterControl">
+    <Setter Property="Background" Value="LightGray" />
+  </Style>
+
+  <Style Selector="TextBlock.popupHeader">
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="TextAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="22" />
+  </Style>
+</Styles>

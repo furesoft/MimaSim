@@ -1,0 +1,31 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
+             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
+             Design.Width="700" Design.Height="500" x:CompileBindings="False"
+             mc:Ignorable="d" Tag="{DynamicResource help}"
+             x:Class="MimaSim.Tabs.DocumentationTab">
+  <UserControl.Resources>
+    <DataTemplate x:Key="cellTemplate">
+      <TextBlock Text="{Binding}" />
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <StackPanel Orientation="Horizontal" Spacing="5">
+    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+
+    <StackPanel>
+      <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top">
+        <c:MapItem Key="Reg -> Reg" Value="40" />
+        <c:MapItem Key="Mem -> Reg" Value="41" />
+        <c:MapItem Key="Reg -> Mem" Value="42" />
+        <c:MapItem Key="Mem -> Mem" Value="43" />
+      </c:MapTableControl>
+
+      <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

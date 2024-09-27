@@ -1,0 +1,20 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:MimaSim.Core;assembly=MimaSim"
+             xmlns:me="clr-namespace:MimaSim.MarkupExtensions" x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
+             Width="100" Height="300"
+             x:Class="MimaSim.Controls.MimaComponents.Wrappers.ControlUnitWrapper">
+  <Canvas>
+    <c:ControlUnitControl Canvas.Top="0" Canvas.Left="0" Width="100" Height="220" />
+
+    <c:ClockControl Name="clock" Tag="{me:GetClockFrequency}" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" />
+
+    <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="45" Canvas.Top="220" Width="15" Height="25" State="None" />
+
+    <c:RegisterControl Register="IAR" Canvas.Left="35" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
+  </Canvas>
+</UserControl>

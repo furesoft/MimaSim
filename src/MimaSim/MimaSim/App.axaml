@@ -1,0 +1,22 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:MimaSim"
+             x:Class="MimaSim.App"
+             RequestedThemeVariant="Light">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <StyleInclude Source="avares://MimaSim/Styles.axaml" />
+        <StyleInclude Source="avares://MimaSim/Styles/ContentDialogStyle.axaml" />
+        <StyleInclude Source="avares://MimaSim/Styles/DialogControlStyle.axaml" />
+        <StyleInclude Source="avares://MimaSim/Styles/ExecutionBarStyle.axaml" />
+        <StyleInclude Source="avares://MimaSim/Styles/MapTableControlStyle.axaml" />
+        <StyleInclude Source="avares://MimaSim/Styles/ButtonStyles.axaml" />
+
+        <FluentTheme />
+    </Application.Styles>
+</Application>

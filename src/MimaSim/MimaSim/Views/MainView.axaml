@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim" x:CompileBindings="False"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Views.MainView">
+    <c:ContentDialog c:DialogService.IsHost="True">
+        <c:ContentDialog.DialogContent>
+            <c:DialogControl Header="Error" IsCancelEnabled="True" CommandText="OK" Command="{Binding TestCommand}">
+                Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
+            </c:DialogControl>
+        </c:ContentDialog.DialogContent>
+        <DockPanel>
+            <TabControl Name="content" DockPanel.Dock="Top" />
+
+            <c:FooterControl DockPanel.Dock="Bottom" Height="40" VerticalAlignment="Bottom" />
+        </DockPanel>
+    </c:ContentDialog>
+</UserControl>

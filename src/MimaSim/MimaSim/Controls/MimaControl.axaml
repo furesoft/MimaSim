@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:MimaSim.Controls.MimaComponents;assembly=MimaSim"
+             xmlns:w="clr-namespace:MimaSim.Controls.MimaComponents.Wrappers;assembly=MimaSim"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:CompileBindings="False"
+             x:Class="MimaSim.Controls.MimaControl">
+  <Border BorderBrush="Black" BorderThickness="1">
+    <Canvas>
+
+      <w:AluWrapperControl Canvas.Top="20" Canvas.Left="190" />
+      <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
+
+      <w:AccuWrapper Canvas.Top="217" Canvas.Left="194" />
+
+      <c:DataBusControl Height="25" Canvas.Top="192" Canvas.Left="110" />
+
+      <w:ControlUnitWrapper Canvas.Top="20" Canvas.Left="13" />
+    </Canvas>
+  </Border>
+</UserControl>
