@@ -33,5 +33,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_BRANCH: main # The branch the action should deploy from.
           BRANCH: gh-pages-from-actions # The branch the action should deploy to.
-          FOLDER: MimaSim.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/
+          FOLDER: src/MimaSim/MimaSim.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/
           SINGLE_COMMIT: true
