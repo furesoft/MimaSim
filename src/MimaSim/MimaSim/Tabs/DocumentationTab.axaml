@@ -9,21 +9,18 @@
              x:Class="MimaSim.Tabs.DocumentationTab">
   <UserControl.Resources>
     <DataTemplate x:Key="cellTemplate">
-      <TextBlock Text="{Binding}" />
+      <Grid Margin="0,0,5,0" ColumnDefinitions="*,*">
+        <TextBlock Text="{Binding Key}" TextWrapping="Wrap" />
+        <TextBlock Text="{Binding Value}" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right" />
+      </Grid>
     </DataTemplate>
   </UserControl.Resources>
 
   <StackPanel Orientation="Horizontal" Spacing="5">
     <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-
+    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
     <StackPanel>
-      <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top">
-        <c:MapItem Key="Reg -> Reg" Value="40" />
-        <c:MapItem Key="Mem -> Reg" Value="41" />
-        <c:MapItem Key="Reg -> Mem" Value="42" />
-        <c:MapItem Key="Mem -> Mem" Value="43" />
-      </c:MapTableControl>
+      <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding MovTableItems}" />
 
       <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
     </StackPanel>

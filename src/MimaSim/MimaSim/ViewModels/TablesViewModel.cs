@@ -3,6 +3,7 @@ using MimaSim.MIMA;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using MimaSim.Models;
 
 namespace MimaSim.ViewModels;
 
@@ -12,12 +13,18 @@ public class TablesViewModel : ReactiveObject
     {
         RegisterTableItems = [];
         OpcodesTableItems = [];
+        MovTableItems = [
+            new("Reg -> Reg", "40"),
+            new("Mem -> Reg", "41"),
+            new("Reg -> Mem", "42"),
+            new("Mem -> Mem", "43"),
+        ];
 
         var registerNames = Enum.GetNames<Registers>();
         for (int i = 1; i < registerNames.Length; i++)
         {
             string item = registerNames[i];
-            RegisterTableItems.Add((item, $"{(int)Enum.Parse<Registers>(item, true):D2}"));
+            RegisterTableItems.Add(new(item, $"{(int)Enum.Parse<Registers>(item, true):D2}"));
         }
 
         foreach (var item in Enum.GetNames<OpCodes>())
@@ -33,10 +40,11 @@ public class TablesViewModel : ReactiveObject
                 byteRepOp = byteRepOp.Insert(0, "0");
             }
 
-            OpcodesTableItems.Add((item, byteRepOp));
+            OpcodesTableItems.Add(new(item, byteRepOp));
         }
     }
 
-    public ObservableCollection<(string Key, string Value)> OpcodesTableItems { get; }
-    public ObservableCollection<(string Key, string Value)> RegisterTableItems { get; }
+    public ObservableCollection<TableCellModel> OpcodesTableItems { get; }
+    public ObservableCollection<TableCellModel> RegisterTableItems { get; }
+    public ObservableCollection<TableCellModel> MovTableItems { get; }
 }
