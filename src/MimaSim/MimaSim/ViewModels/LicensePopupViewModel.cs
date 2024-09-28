@@ -6,11 +6,6 @@ namespace MimaSim.ViewModels;
 
 public class LicensePopupViewModel : ReactiveObject, IActivatableViewModel
 {
-    public LicensePopupViewModel()
-    {
-        CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
-    }
-
     public ViewModelActivator Activator => new();
-    public ICommand CloseCommand { get; set; }
+    public ICommand CloseCommand { get; set; } = ReactiveCommand.Create(() => DialogService.Close());
 }

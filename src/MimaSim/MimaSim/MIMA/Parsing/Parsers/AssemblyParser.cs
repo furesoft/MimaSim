@@ -54,7 +54,7 @@ public class AssemblyParser : IParser
         return string.Join("|", allNames);
     }
 
-    private IAstNode ParseInstruction()
+    private IAstNode? ParseInstruction()
     {
         var mnemnonic = _enumerator.Read(TokenKind.Mnemnonic);
         var opcode = Enum.Parse<OpCodes>(mnemnonic.Contents, true);

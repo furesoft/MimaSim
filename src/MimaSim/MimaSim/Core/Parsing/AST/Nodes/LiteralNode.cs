@@ -1,13 +1,8 @@
 ﻿namespace MimaSim.Core.Parsing.AST.Nodes;
 
-public struct LiteralNode : IAstNode
+public struct LiteralNode(object? value) : IAstNode
 {
-    public LiteralNode(object value)
-    {
-        Value = value;
-    }
-
-    public object Value { get; set; }
+    public object? Value { get; set; } = value;
 
     public override string ToString()
     {

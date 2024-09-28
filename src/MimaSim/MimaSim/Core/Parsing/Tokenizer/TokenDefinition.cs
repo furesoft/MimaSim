@@ -3,18 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace MimaSim.Core.Parsing.Tokenizer;
 
-public class TokenDefinition
+public class TokenDefinition(TokenKind returnsToken, string regexPattern, int precedence)
 {
-    private readonly int _precedence;
-    private readonly Regex _regex;
-    private readonly TokenKind _returnsToken;
-
-    public TokenDefinition(TokenKind returnsToken, string regexPattern, int precedence)
-    {
-        _regex = new Regex(regexPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        _returnsToken = returnsToken;
-        _precedence = precedence;
-    }
+    private readonly Regex _regex = new(regexPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public IEnumerable<TokenMatch> FindMatches(string inputString)
     {
@@ -25,9 +16,9 @@ public class TokenDefinition
             {
                 StartIndex = matches[i].Index,
                 EndIndex = matches[i].Index + matches[i].Length,
-                TokenType = _returnsToken,
+                TokenType = returnsToken,
                 Value = matches[i].Value,
-                Precedence = _precedence
+                Precedence = precedence
             };
         }
     }

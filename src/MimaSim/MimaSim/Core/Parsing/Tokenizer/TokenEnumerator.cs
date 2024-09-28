@@ -4,16 +4,10 @@ using System.Linq;
 
 namespace MimaSim.Core.Parsing.Tokenizer;
 
-public sealed class TokenEnumerator
+public sealed class TokenEnumerator(IEnumerable<Token> tokenStream)
 {
-    private readonly Token[] _tokens;
-    private int _position;
-
-    public TokenEnumerator(IEnumerable<Token> tokenStream)
-    {
-        _tokens = tokenStream.ToArray();
-        _position = 0;
-    }
+    private readonly Token[] _tokens = tokenStream.ToArray();
+    private int _position = 0;
 
     public Token Current
     {

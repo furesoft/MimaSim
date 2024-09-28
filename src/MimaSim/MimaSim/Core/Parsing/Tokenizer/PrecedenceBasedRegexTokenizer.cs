@@ -5,12 +5,7 @@ namespace MimaSim.Core.Parsing.Tokenizer;
 
 public class PrecedenceBasedRegexTokenizer
 {
-    private readonly List<TokenDefinition> _tokenDefinitions;
-
-    public PrecedenceBasedRegexTokenizer()
-    {
-        _tokenDefinitions = [];
-    }
+    private readonly List<TokenDefinition> _tokenDefinitions = [];
 
     public void AddDefinition(TokenKind kind, string pattern, int precedence = 1)
     {

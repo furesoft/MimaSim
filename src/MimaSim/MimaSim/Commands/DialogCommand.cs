@@ -4,16 +4,11 @@ using System.Windows.Input;
 
 namespace MimaSim.Commands;
 
-public class DialogCommand : ICommand
+public class DialogCommand(Action<object> command) : ICommand
 {
-    public DialogCommand(Action<object> command)
-    {
-        Command = command;
-    }
+    public event EventHandler? CanExecuteChanged;
 
-    public event EventHandler CanExecuteChanged;
-
-    public Action<object> Command { get; set; }
+    public Action<object> Command { get; set; } = command;
 
     public bool CanExecute(object parameter)
     {

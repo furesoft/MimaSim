@@ -4,19 +4,13 @@ using System.Linq;
 
 namespace MimaSim.Core.Parsing.AST.Nodes;
 
-public struct CallNode : IAstNode
+public struct CallNode(AstCallNodeType type, List<IAstNode> args) : IAstNode
 {
-    public CallNode(AstCallNodeType type, List<IAstNode> args)
-    {
-        Args = args;
-        Type = type;
-    }
-
-    public List<IAstNode> Args { get; set; }
+    public List<IAstNode> Args { get; set; } = args;
 
     public bool IsEmpty => !Args.Any();
 
-    public AstCallNodeType Type { get; set; }
+    public AstCallNodeType Type { get; set; } = type;
 
     public override string ToString()
     {

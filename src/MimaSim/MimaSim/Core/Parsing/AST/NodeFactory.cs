@@ -16,7 +16,7 @@ public static class NodeFactory
         return new IdentifierNode(name);
     }
 
-    public static IAstNode Literal(object value)
+    public static IAstNode Literal(object? value)
     {
         return new LiteralNode(value);
     }

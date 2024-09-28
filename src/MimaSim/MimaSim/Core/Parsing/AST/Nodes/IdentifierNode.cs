@@ -1,13 +1,8 @@
 ﻿namespace MimaSim.Core.Parsing.AST.Nodes;
 
-public struct IdentifierNode : IAstNode
+public struct IdentifierNode(string name) : IAstNode
 {
-    public IdentifierNode(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 
     public override string ToString()
     {

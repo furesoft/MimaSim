@@ -8,11 +8,6 @@ namespace MimaSim.ViewModels;
 
 public class ClockSettingsPopupViewModel : ReactiveObject, IActivatableViewModel
 {
-    public ClockSettingsPopupViewModel()
-    {
-        SetClockSettings = new DialogCommand(_ => { Debug.WriteLine("OK Called"); });
-    }
-
     public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
     public short Frequency
@@ -21,5 +16,5 @@ public class ClockSettingsPopupViewModel : ReactiveObject, IActivatableViewModel
         set { CPU.Instance.Clock.SetFrequency(value); this.RaisePropertyChanged(); }
     }
 
-    public ICommand SetClockSettings { get; set; }
+    public ICommand SetClockSettings { get; set; } = new DialogCommand(_ => { Debug.WriteLine("OK Called"); });
 }
