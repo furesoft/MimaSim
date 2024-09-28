@@ -7,6 +7,7 @@ namespace MimaSim.MIMA.Components;
 public class Memory
 {
     private readonly short[] _values;
+    public int Length => _values.Length;
 
     public Memory(int length)
     {

@@ -19,7 +19,7 @@ public class CPU
     public Bus DataBus = new();
 
     public Dictionary<OpCodes, IInstruction> Instructions = new();
-    public Memory Memory = new((int)Math.Pow(2, 24));
+    public Memory Memory = new((int)Math.Pow(2, 8));
 
     public Register SAR = new("SAR");
     public Register SDR = new("SDR");

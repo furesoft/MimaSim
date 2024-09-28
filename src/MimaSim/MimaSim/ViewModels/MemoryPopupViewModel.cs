@@ -6,7 +6,9 @@ using MimaSim.Messages;
 using ReactiveUI;
 using System.Linq;
 using System.Reactive;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using MimaSim.MIMA.Components;
 using MimaSim.Models;
 
 namespace MimaSim.ViewModels;
@@ -19,6 +21,11 @@ public class MemoryPopupViewModel : ReactiveObject, IActivatableViewModel
 
         MemoryCells = [];
 
+        for (short i = 0; i < CPU.Instance.Memory.Length; i++)
+        {
+            MemoryCells.Add(new(i, 0));
+        }
+
         var observable = MessageBus.Current.Listen<MemoryCellChangedMessage>();
         observable.Subscribe(Observer.Create<MemoryCellChangedMessage>(_ =>
         {
@@ -28,12 +35,6 @@ public class MemoryPopupViewModel : ReactiveObject, IActivatableViewModel
                 {
                     MemoryCells[_.Address].Value = _.Value;
                 }
-                else
-                {
-                    MemoryCells.Add(new(_.Address, _.Value));
-                }
-
-                //MemoryCells.OrderBy(_ => _.Address);
             });
         }));
     }
