@@ -1,10 +1,9 @@
-﻿using MimaSim.Commands;
+﻿using System.Windows.Input;
+using MimaSim.Commands;
 using MimaSim.MIMA;
 using ReactiveUI;
-using System;
-using System.Windows.Input;
 
-namespace MimaSim.ViewModels;
+namespace MimaSim.ViewModels.Mima;
 
 internal class RegisterPopupViewModel : ReactiveObject, IActivatableViewModel
 {
@@ -15,13 +14,13 @@ internal class RegisterPopupViewModel : ReactiveObject, IActivatableViewModel
         Register = register;
         RegisterName = "Register " + register;
 
-        SetRegisterValueCommand = new DialogCommand((_) =>
+        SetRegisterValueCommand = new DialogCommand(_ =>
         {
-            RegisterMap.GetRegister(Register).SetValue(Value);
+
         });
     }
 
-    public ViewModelActivator Activator => throw new NotImplementedException();
+    public ViewModelActivator Activator => new();
 
     public string Register { get; set; }
     public string RegisterName { get; set; }

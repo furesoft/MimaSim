@@ -15,7 +15,7 @@
 
             <Rectangle Grid.Row="3" Fill="Gray" />
 
-            <Grid Classes="single" Grid.Row="5" VerticalAlignment="Bottom">
+            <Grid Classes="single" Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Right">
               <Button MinWidth="250" Classes="base" VerticalContentAlignment="Bottom" IsDefault="True" Content="{TemplateBinding CommandText, Mode=TwoWay}" Command="{TemplateBinding Command}" />
             </Grid>
 

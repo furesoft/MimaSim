@@ -1,17 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using Avalonia.Threading;
-using MimaSim.Controls;
-using MimaSim.Core;
-using MimaSim.Messages;
-using ReactiveUI;
 using System.Linq;
 using System.Reactive;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia.Threading;
+using MimaSim.Controls;
+using MimaSim.Messages;
 using MimaSim.MIMA.Components;
 using MimaSim.Models;
+using ReactiveUI;
 
-namespace MimaSim.ViewModels;
+namespace MimaSim.ViewModels.Mima;
 
 public class MemoryPopupViewModel : ReactiveObject, IActivatableViewModel
 {

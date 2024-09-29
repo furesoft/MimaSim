@@ -24,6 +24,8 @@ public class Register
         return _value;
     }
 
+    public short GetValueWithoutNotification() => _value;
+
     public void SetValue(short value)
     {
         _value = value;

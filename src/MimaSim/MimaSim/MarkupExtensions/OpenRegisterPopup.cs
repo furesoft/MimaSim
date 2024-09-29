@@ -6,6 +6,7 @@ using MimaSim.MIMA;
 using MimaSim.ViewModels;
 using ReactiveUI;
 using System;
+using MimaSim.ViewModels.Mima;
 
 namespace MimaSim.MarkupExtensions;
 
@@ -21,7 +22,7 @@ public class OpenRegisterPopup : MarkupExtension
             {
                 DialogService.Open(new RegisterPopupControl(), new RegisterPopupViewModel(reg.Register)
                 {
-                    Value = RegisterMap.GetRegister(reg.Register).GetValue()
+                    Value = RegisterMap.GetRegister(reg.Register).GetValueWithoutNotification()
                 });
             });
         }

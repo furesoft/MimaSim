@@ -8,7 +8,7 @@
   <c:DialogControl CommandText="OK" Command="{Binding SetRegisterValueCommand}" IsCancelEnabled="False" Header="{Binding RegisterName}">
     <StackPanel>
       <TextBlock Text="Wert" />
-      <TextBox Text="{Binding Value}" />
+      <TextBlock Text="{Binding Value}" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>

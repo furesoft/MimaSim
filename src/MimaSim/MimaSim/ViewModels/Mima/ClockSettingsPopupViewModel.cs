@@ -1,10 +1,10 @@
-﻿using MimaSim.Commands;
+﻿using System.Diagnostics;
+using System.Windows.Input;
+using MimaSim.Commands;
 using MimaSim.MIMA.Components;
 using ReactiveUI;
-using System.Diagnostics;
-using System.Windows.Input;
 
-namespace MimaSim.ViewModels;
+namespace MimaSim.ViewModels.Mima;
 
 public class ClockSettingsPopupViewModel : ReactiveObject, IActivatableViewModel
 {

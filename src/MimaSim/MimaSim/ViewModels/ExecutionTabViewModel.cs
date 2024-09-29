@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using Avalonia.Platform.Storage;
+using MimaSim.ViewModels.Mima;
 
 namespace MimaSim.ViewModels;
 
@@ -41,6 +42,11 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         LoadCommand = ReactiveCommand.Create(async () =>
         {
             var lifetime = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
+
+            if (!lifetime.MainWindow.StorageProvider.CanOpen)
+            {
+                DialogService.Open(new TextBlock(){Text = "cannot open file"});
+            }
 
             var filenames = await lifetime.MainWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
