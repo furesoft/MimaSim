@@ -1,16 +1,16 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:MimaSim.Controls">
-  <Style Selector="controls|ExecutionBar ToggleButton Image.tbchecked">
+  <Style Selector="controls|ExecutionBar ToggleButton PathIcon.tbchecked">
     <Setter Property="IsVisible" Value="false" />
   </Style>
-  <Style Selector="controls|ExecutionBar ToggleButton:checked Image.tbchecked">
+  <Style Selector="controls|ExecutionBar ToggleButton:checked PathIcon.tbchecked">
     <Setter Property="IsVisible" Value="true" />
   </Style>
-  <Style Selector="controls|ExecutionBar ToggleButton Image.tbunchecked">
+  <Style Selector="controls|ExecutionBar ToggleButton PathIcon.tbunchecked">
     <Setter Property="IsVisible" Value="true" />
   </Style>
-  <Style Selector="controls|ExecutionBar ToggleButton:checked Image.tbunchecked">
+  <Style Selector="controls|ExecutionBar ToggleButton:checked PathIcon.tbunchecked">
     <Setter Property="IsVisible" Value="false" />
   </Style>
 </Styles>

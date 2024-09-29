@@ -4,29 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="325" d:DesignHeight="50" x:CompileBindings="False"
              x:Class="MimaSim.Controls.ExecutionBar">
-  <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-    <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode, Mode=TwoWay}" ToolTip.Tip="Ausführen" Command="{Binding RunCodeCommand}">
-      <Grid>
-        <Image Classes="tbunchecked" Source="/Resources/Icons/play.png" Width="20" Height="20" />
-        <Image Classes="tbchecked" Source="/Resources/Icons/pause.png" Width="20" Height="20" />
-      </Grid>
-    </ToggleButton>
-    <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}" Command="{Binding StepCommand}">
-      <Image Source="/Resources/Icons/step.png" Width="20" Height="20" />
-    </Button>
-    <Button ToolTip.Tip="Stoppen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}" Command="{Binding StopCommand}">
-      <Image Source="/Resources/Icons/stop.png" Width="20" Height="20" />
-    </Button>
-    <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
-    <Button ToolTip.Tip="Maschinencode anzeigen" Command="{Binding ViewRawCommand}" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}">
-      <Image Source="/Resources/Icons/raw.png" Width="20" Height="20" />
-    </Button>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Spacing="3">
+        <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode, Mode=TwoWay}" ToolTip.Tip="Ausführen"
+                      Command="{Binding RunCodeCommand}">
+            <Grid>
+                <PathIcon Classes="tbunchecked" Data="{StaticResource play}" Width="20" Height="20" />
+                <PathIcon Classes="tbchecked" Data="{StaticResource pause}" Width="20" Height="20" />
+            </Grid>
+        </ToggleButton>
+        <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}"
+                Command="{Binding StepCommand}">
+            <PathIcon Data="{StaticResource continue}" Margin="2" Width="20" Height="20" />
+        </Button>
+        <Button ToolTip.Tip="Stoppen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}"
+                Command="{Binding StopCommand}">
+            <PathIcon Data="{StaticResource stop}" Margin="2" Width="20" Height="20" />
+        </Button>
 
-    <Button Command="{Binding LoadCommand}">
-      <Image Source="/Resources/Icons/load.png" Margin="2" Width="20" Height="20" ToolTip.Tip="Laden" />
-    </Button>
-    <Button Command="{Binding SaveCommand}">
-      <Image Source="/Resources/Icons/save.png" Margin="2" Width="20" Height="20" ToolTip.Tip="Speichern" />
-    </Button>
-  </StackPanel>
+        <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
+
+        <Button ToolTip.Tip="Maschinencode anzeigen" Command="{Binding ViewRawCommand}"
+                IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}">
+            <PathIcon Data="{StaticResource binary}" Margin="2" Width="20" Height="20" />
+        </Button>
+
+        <Button Command="{Binding LoadCommand}">
+            <PathIcon Data="{StaticResource load}" Margin="2" Width="20" Height="20" ToolTip.Tip="Laden" />
+        </Button>
+        <Button Command="{Binding SaveCommand}">
+            <PathIcon Data="{StaticResource save}" Margin="2" Width="20" Height="20" ToolTip.Tip="Speichern" />
+        </Button>
+    </StackPanel>
 </UserControl>

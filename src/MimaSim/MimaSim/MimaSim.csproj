@@ -34,4 +34,13 @@
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Resources\Icons\load.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\pause.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\play.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\raw.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\save.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\step.png" />
+      <UpToDateCheckInput Remove="Resources\Icons\stop.png" />
+    </ItemGroup>
 </Project>
