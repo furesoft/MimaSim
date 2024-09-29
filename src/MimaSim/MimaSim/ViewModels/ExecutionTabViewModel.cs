@@ -39,15 +39,10 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
+        var lifetime = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
+
         LoadCommand = ReactiveCommand.Create(async () =>
         {
-            var lifetime = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
-
-            if (!lifetime.MainWindow.StorageProvider.CanOpen)
-            {
-                DialogService.Open(new TextBlock(){Text = "cannot open file"});
-            }
-
             var filenames = await lifetime.MainWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Programm laden"
@@ -60,14 +55,10 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         SaveCommand = ReactiveCommand.Create(async () =>
         {
-            var svd = new SaveFileDialog();
-            svd.Title = "Programm speichern";
+            var file = await lifetime.MainWindow.StorageProvider.SaveFilePickerAsync(new() { Title = "Programm speichern" });
+            await using var writer = new StreamWriter(await file.OpenWriteAsync());
 
-            var window = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
-
-            var filename = await svd.ShowAsync(window.MainWindow);
-
-            File.WriteAllText(filename, Source);
+            writer.Write(Source);
         });
 
         RunCodeCommand = ReactiveCommand.Create(() =>
