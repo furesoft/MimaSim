@@ -11,10 +11,9 @@
                 Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
             </c:DialogControl>
         </c:ContentDialog.DialogContent>
+
         <DockPanel>
             <TabControl Name="content" DockPanel.Dock="Top" />
-
-            <c:FooterControl DockPanel.Dock="Bottom" Height="40" VerticalAlignment="Bottom" />
         </DockPanel>
     </c:ContentDialog>
 </UserControl>
