@@ -39,11 +39,24 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
-        var lifetime = App.Current.ApplicationLifetime as ClassicDesktopStyleApplicationLifetime;
+        IStorageProvider storage;
+
+        if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            storage = desktop.MainWindow!.StorageProvider;
+        }
+        else if (App.Current.ApplicationLifetime is ISingleViewApplicationLifetime singleView)
+        {
+            storage = TopLevel.GetTopLevel(singleView.MainView)!.StorageProvider;
+        }
+        else
+        {
+            throw new Exception("No storage");
+        }
 
         LoadCommand = ReactiveCommand.Create(async () =>
         {
-            var filenames = await lifetime.MainWindow.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            var filenames = await storage.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Programm laden"
             });
@@ -55,7 +68,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         SaveCommand = ReactiveCommand.Create(async () =>
         {
-            var file = await lifetime.MainWindow.StorageProvider.SaveFilePickerAsync(new() { Title = "Programm speichern" });
+            var file = await storage.SaveFilePickerAsync(new() { Title = "Programm speichern" });
             await using var writer = new StreamWriter(await file.OpenWriteAsync());
 
             writer.Write(Source);
