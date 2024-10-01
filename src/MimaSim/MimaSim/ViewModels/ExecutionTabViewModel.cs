@@ -14,6 +14,7 @@ using System.Linq;
 using System.Windows.Input;
 using Avalonia.Platform.Storage;
 using MimaSim.ViewModels.Mima;
+using Splat;
 
 namespace MimaSim.ViewModels;
 
@@ -39,20 +40,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
-        IStorageProvider storage;
-
-        if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            storage = desktop.MainWindow!.StorageProvider;
-        }
-        else if (App.Current.ApplicationLifetime is ISingleViewApplicationLifetime singleView)
-        {
-            storage = TopLevel.GetTopLevel(singleView.MainView)!.StorageProvider;
-        }
-        else
-        {
-            throw new Exception("No storage");
-        }
+        IStorageProvider storage = Locator.Current.GetService<IStorageProvider>();
 
         LoadCommand = ReactiveCommand.Create(async () =>
         {

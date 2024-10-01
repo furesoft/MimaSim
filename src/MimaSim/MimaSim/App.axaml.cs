@@ -1,7 +1,9 @@
 using System.Reflection;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using MimaSim.MIMA.Components;
 using MimaSim.Views;
 using ReactiveUI;
@@ -28,6 +30,8 @@ public partial class App : Application
             {
                 //DataContext = new MainViewModel()
             };
+            Locator.CurrentMutable.Register<IStorageProvider>(() => desktop.MainWindow.StorageProvider);
+
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
@@ -35,6 +39,7 @@ public partial class App : Application
             {
                 //DataContext = new MainViewModel()
             };
+            Locator.CurrentMutable.Register<IStorageProvider>(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
         }
 
         base.OnFrameworkInitializationCompleted();
