@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
@@ -13,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using Avalonia.Platform.Storage;
+using MimaSim.Samples;
 using MimaSim.ViewModels.Mima;
 using Splat;
 
@@ -21,8 +21,9 @@ namespace MimaSim.ViewModels;
 public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 {
     private bool _runMode;
-    private object _selectedLanguage;
+    private LanguageName _selectedLanguage;
     private string _source;
+    private string[] _sampleNames;
 
     public ExecutionTabViewModel()
     {
@@ -124,10 +125,21 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
     public ICommand SaveCommand { get; set; }
 
-    public object SelectedLanguage
+    public LanguageName SelectedLanguage
     {
         get => _selectedLanguage;
-        set => this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
+
+            _sampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage);
+        }
+    }
+
+    public string[] SampleNames
+    {
+        get => _sampleNames;
+        set => _sampleNames = value;
     }
 
     public string Source
