@@ -51,7 +51,8 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
 
             SampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage).ToArray();
-            SelectedSample = SampleNames.FirstOrDefault();
+
+            SelectedSample = null;
         }
     }
 
@@ -61,6 +62,8 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         set
         {
             this.RaiseAndSetIfChanged(ref _selectedSample, value);
+
+            Source = Locator.Current.GetService<SampleLoader>().GetSample(SelectedLanguage, SelectedSample);
         }
     }
 
@@ -109,7 +112,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
                 Title = "Programm laden"
             });
 
-            var reader = new StreamReader(await filenames.First().OpenReadAsync());
+            using var reader = new StreamReader(await filenames.First().OpenReadAsync());
 
             Source = reader.ReadToEnd();
         });
