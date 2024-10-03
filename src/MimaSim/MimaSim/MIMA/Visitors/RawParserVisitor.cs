@@ -1,38 +1,36 @@
 ﻿using MimaSim.Core.Parsing;
-using MimaSim.Core.Parsing.AST;
-using MimaSim.Core.Parsing.AST.Nodes;
 using MimaSim.Core.Parsing.Emiting;
 using System;
+using Silverfly;
+using Silverfly.Nodes;
 
 namespace MimaSim.MIMA.Visitors;
 
-public class RawParserVisitor : INodeVisitor, IEmitter
+public class RawParserVisitor : NodeVisitor, IEmitter
 {
     private readonly ByteArrayBuilder _raw = new();
+
+    public RawParserVisitor()
+    {
+        For<LiteralNode>(Visit);
+        For<BlockNode>(Visit);
+    }
 
     public byte[] GetRaw()
     {
         return _raw.ToArray();
     }
 
-    public void Visit(LiteralNode lit)
+    private void Visit(LiteralNode literal)
     {
-        throw new NotImplementedException();
+        _raw.Append(Convert.ToByte(literal.Token.Text.ToString(), 16));
     }
 
-    public void Visit(IdentifierNode id)
+    public override void Visit(BlockNode block)
     {
-        throw new NotImplementedException();
-    }
-
-    public void Visit(CallNode call)
-    {
-        foreach (var arg in call.Args)
+        foreach (var child in block.Children)
         {
-            if (arg is LiteralNode lit)
-            {
-                _raw.Append((byte)lit.Value);
-            }
+            child.Accept(this);
         }
     }
 }
