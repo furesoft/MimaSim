@@ -25,6 +25,6 @@ public class MovMemMemInstruction : IInstruction, IDisassemblyInstruction
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"mov {disassembler.Fetch16()}, {disassembler.Fetch16()}");
+        builder.AppendLine($"mov 0x{disassembler.Fetch16():X2}, 0x{disassembler.Fetch16():X2}");
     }
 }

@@ -18,6 +18,6 @@ public class LoadInstruction : IInstruction, IDisassemblyInstruction
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"load {disassembler.Fetch16()}");
+        builder.AppendLine($"load 0x{disassembler.Fetch16():X2}");
     }
 }

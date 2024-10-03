@@ -23,6 +23,6 @@ public class MovRegMemInstruction : IInstruction, IDisassemblyInstruction
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"mov {disassembler.FetchRegister()}, {disassembler.Fetch16()}");
+        builder.AppendLine($"mov {disassembler.FetchRegister()}, 0x{disassembler.Fetch16():X2}");
     }
 }
