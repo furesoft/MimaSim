@@ -23,8 +23,7 @@
 
         <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
 
-        <Button ToolTip.Tip="Maschinencode anzeigen" Command="{Binding ViewRawCommand}"
-                IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}">
+        <Button ToolTip.Tip="Maschinencode anzeigen" Command="{Binding ViewRawCommand}">
             <PathIcon Data="{StaticResource binary}" Margin="2" Width="20" Height="20" />
         </Button>
 

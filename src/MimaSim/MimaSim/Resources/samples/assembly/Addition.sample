@@ -1,0 +1,5 @@
+﻿load 0x01
+mov accumulator, x
+load 0x02
+mov accumulator, y
+add

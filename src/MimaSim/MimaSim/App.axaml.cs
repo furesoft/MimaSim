@@ -4,7 +4,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
+using MimaSim.Samples;
 using MimaSim.Views;
 using ReactiveUI;
 using Splat;
@@ -41,6 +43,11 @@ public partial class App : Application
             };
             Locator.CurrentMutable.Register<IStorageProvider>(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
         }
+
+        var samples = new SampleLoader();
+        samples.FromResources(GetType().Assembly);
+
+        Locator.CurrentMutable.RegisterConstant(samples);
 
         base.OnFrameworkInitializationCompleted();
     }

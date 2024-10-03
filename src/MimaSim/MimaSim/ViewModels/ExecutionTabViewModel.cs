@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
@@ -12,7 +11,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
+using MimaSim.Samples;
 using MimaSim.ViewModels.Mima;
 using Splat;
 
@@ -21,8 +22,67 @@ namespace MimaSim.ViewModels;
 public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 {
     private bool _runMode;
-    private object _selectedLanguage;
+    private LanguageName _selectedLanguage;
+    private string _selectedSample;
     private string _source;
+    private string[] _sampleNames;
+
+    public ObservableCollection<LanguageName> LanguageNames { get; }
+    public ViewModelActivator Activator => new();
+    public ICommand LoadCommand { get; set; }
+    public ICommand OpenClockSettingsCommand { get; set; }
+    public ICommand OpenErrorPopupCommand { get; set; }
+    public ICommand OpenMemoryPopupCommand { get; set; }
+    public ICommand RunCodeCommand { get; set; }
+
+    public bool RunMode
+    {
+        get => _runMode;
+        set => this.RaiseAndSetIfChanged(ref _runMode, value);
+    }
+
+    public ICommand SaveCommand { get; set; }
+
+    public LanguageName SelectedLanguage
+    {
+        get => _selectedLanguage;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
+
+            SampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage).ToArray();
+
+            SelectedSample = null;
+        }
+    }
+
+    public string SelectedSample
+    {
+        get => _selectedSample;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedSample, value);
+
+            Source = Locator.Current.GetService<SampleLoader>().GetSample(SelectedLanguage, SelectedSample);
+        }
+    }
+
+    public string[] SampleNames
+    {
+        get => _sampleNames;
+        set => this.RaiseAndSetIfChanged(ref _sampleNames, value);
+    }
+
+    public string Source
+    {
+        get => _source;
+        set => this.RaiseAndSetIfChanged(ref _source, value);
+    }
+
+    public ICommand StepCommand { get; set; }
+
+    public ICommand StopCommand { get; set; }
+    public ICommand ViewRawCommand { get; set; }
 
     public ExecutionTabViewModel()
     {
@@ -32,6 +92,9 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
         StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
+
+        LanguageNames = new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>().Select(_ => Enum.Parse<LanguageName>(_)));
+        SelectedLanguage = LanguageNames.FirstOrDefault();
 
         ViewRawCommand = ReactiveCommand.Create(() =>
         {
@@ -49,7 +112,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
                 Title = "Programm laden"
             });
 
-            var reader = new StreamReader(await filenames.First().OpenReadAsync());
+            using var reader = new StreamReader(await filenames.First().OpenReadAsync());
 
             Source = reader.ReadToEnd();
         });
@@ -68,7 +131,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             {
                 if (RunMode)
                 {
-                    var translator = SourceTextTranslatorSelector.Select((LanguageName)Enum.Parse(typeof(LanguageName), ((ComboBoxItem)SelectedLanguage).Content.ToString()));
+                    var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
                     DiagnosticBag diagnostics = new();
                     CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
@@ -108,36 +171,4 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             CPU.Instance.Clock.Stop();
         });
     }
-
-    public ViewModelActivator Activator => new();
-    public ICommand LoadCommand { get; set; }
-    public ICommand OpenClockSettingsCommand { get; set; }
-    public ICommand OpenErrorPopupCommand { get; set; }
-    public ICommand OpenMemoryPopupCommand { get; set; }
-    public ICommand RunCodeCommand { get; set; }
-
-    public bool RunMode
-    {
-        get => _runMode;
-        set => this.RaiseAndSetIfChanged(ref _runMode, value);
-    }
-
-    public ICommand SaveCommand { get; set; }
-
-    public object SelectedLanguage
-    {
-        get => _selectedLanguage;
-        set => this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
-    }
-
-    public string Source
-    {
-        get => _source;
-        set => this.RaiseAndSetIfChanged(ref _source, value);
-    }
-
-    public ICommand StepCommand { get; set; }
-
-    public ICommand StopCommand { get; set; }
-    public ICommand ViewRawCommand { get; set; }
 }
