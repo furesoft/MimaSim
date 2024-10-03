@@ -39,7 +39,7 @@ public class ByteCodeEmitter
         EmitRegister(reg2);
     }
 
-    public void EmitInstruction(OpCodes opcode, Registers reg1, byte address)
+    public void EmitInstruction(OpCodes opcode, Registers reg1, short address)
     {
         EmitOpcode(opcode);
         EmitRegister(reg1);
