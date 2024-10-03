@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions;
 
 public class NOPInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.NOP;
+    public OpCodes OpCode => OpCodes.NOP;
 
     public bool Invoke(CPU cpu)
     {

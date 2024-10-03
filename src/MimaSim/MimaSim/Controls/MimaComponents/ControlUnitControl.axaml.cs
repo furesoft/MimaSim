@@ -7,7 +7,7 @@ public partial class ControlUnitControl : UserControl
 {
     public ControlUnitControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

@@ -14,7 +14,7 @@ public partial class MemoryWrapper : ReactiveUserControl<ExecutionTabViewModel>
             /* Handle view activation etc. */
         });
 
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

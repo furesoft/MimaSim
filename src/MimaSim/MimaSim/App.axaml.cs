@@ -24,15 +24,13 @@ public partial class App : Application
     {
         Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
-        CPU.Instance.Init();
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
                 //DataContext = new MainViewModel()
             };
-            Locator.CurrentMutable.Register<IStorageProvider>(() => desktop.MainWindow.StorageProvider);
+            Locator.CurrentMutable.Register(() => desktop.MainWindow.StorageProvider);
 
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
@@ -41,7 +39,7 @@ public partial class App : Application
             {
                 //DataContext = new MainViewModel()
             };
-            Locator.CurrentMutable.Register<IStorageProvider>(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+            Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
         }
 
         var samples = new SampleLoader();

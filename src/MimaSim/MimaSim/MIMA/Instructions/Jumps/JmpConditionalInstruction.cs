@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Jumps;
 
 public class JmpConditionalInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.JMPC;
+    public OpCodes OpCode => OpCodes.JMPC;
 
     public bool Invoke(CPU cpu)
     {

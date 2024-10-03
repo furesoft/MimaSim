@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik;
 
 public class DivInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.DIV;
+    public OpCodes OpCode => OpCodes.DIV;
 
     public bool Invoke(CPU cpu)
     {

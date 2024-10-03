@@ -7,7 +7,7 @@ public partial class AluWrapperControl : UserControl
 {
     public AluWrapperControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

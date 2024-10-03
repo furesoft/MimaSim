@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Compare;
 
 public class GreaterThanCompareInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.CMPGT;
+    public OpCodes OpCode => OpCodes.CMPGT;
 
     public bool Invoke(CPU cpu)
     {

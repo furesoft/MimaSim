@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Compare;
 
 public class NotEqualsCompareInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.CMPNEQ;
+    public OpCodes OpCode => OpCodes.CMPNEQ;
 
     public bool Invoke(CPU cpu)
     {

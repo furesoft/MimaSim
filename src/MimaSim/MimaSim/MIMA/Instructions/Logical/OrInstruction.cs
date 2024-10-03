@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Logical;
 
 public class OrInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.OR;
+    public OpCodes OpCode => OpCodes.OR;
 
     public bool Invoke(CPU cpu)
     {

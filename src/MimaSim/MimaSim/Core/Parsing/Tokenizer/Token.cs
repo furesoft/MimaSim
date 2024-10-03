@@ -5,7 +5,7 @@ public sealed class Token
     public Token(TokenKind Kind, string contents, int start, int end)
     {
         this.Kind = Kind;
-        this.Contents = contents;
+        Contents = contents;
         Start = start;
         End = end;
         Length = end - start;
@@ -14,7 +14,7 @@ public sealed class Token
     public Token(TokenKind Kind, string contents)
     {
         this.Kind = Kind;
-        this.Contents = contents;
+        Contents = contents;
         Length = contents.Length;
     }
 

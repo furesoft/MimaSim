@@ -7,7 +7,7 @@ public partial class MimaControl : UserControl
 {
     public MimaControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

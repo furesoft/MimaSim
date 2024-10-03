@@ -7,7 +7,7 @@ public class PrecedenceMap : Dictionary<TokenKind, int>
 {
     public int GetPrecedence(TokenKind opKind)
     {
-        if (this.ContainsKey(opKind))
+        if (ContainsKey(opKind))
         {
             return this[opKind];
         }

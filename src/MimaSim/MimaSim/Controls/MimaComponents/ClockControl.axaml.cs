@@ -8,7 +8,7 @@ public partial class ClockControl : ReactiveUserControl<ExecutionTabViewModel>
 {
     public ClockControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

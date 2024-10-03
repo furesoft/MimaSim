@@ -11,7 +11,7 @@ public partial class RegisterControl : UserControl
 
     public RegisterControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     public string Register

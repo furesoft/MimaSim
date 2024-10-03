@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Arithmetik;
 
 public class IncReg : IInstruction
 {
-    public OpCodes Instruction => OpCodes.INC;
+    public OpCodes OpCode => OpCodes.INC;
 
     public bool Invoke(CPU cpu)
     {

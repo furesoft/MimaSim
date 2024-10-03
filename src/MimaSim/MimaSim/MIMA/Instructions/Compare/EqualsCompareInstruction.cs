@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Compare;
 
 public class EqualsCompareInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.CMPEQ;
+    public OpCodes OpCode => OpCodes.CMPEQ;
 
     public bool Invoke(CPU cpu)
     {

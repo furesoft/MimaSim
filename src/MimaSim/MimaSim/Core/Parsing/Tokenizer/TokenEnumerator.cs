@@ -24,7 +24,7 @@ public sealed class TokenEnumerator(IEnumerable<Token> tokenStream)
 
     public void BackTrack(int pos)
     {
-        this._position = pos;
+        _position = pos;
     }
 
     public int BackTrackPos()

@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions;
 
 public class LoadInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.LOAD;
+    public OpCodes OpCode => OpCodes.LOAD;
 
     public bool Invoke(CPU cpu)
     {

@@ -12,7 +12,7 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
     {
         this.WhenActivated(disposables => { /* Handle view activation etc. */ });
 
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Compare;
 
 public class NotCompareInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.CMPN;
+    public OpCodes OpCode => OpCodes.CMPN;
 
     public bool Invoke(CPU cpu)
     {

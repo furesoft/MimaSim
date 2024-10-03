@@ -9,7 +9,7 @@ public partial class DocumentationTab : UserControl, IUITab
 {
     public DocumentationTab()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     public int Index => 2;

@@ -5,7 +5,7 @@ namespace MimaSim.Core;
 
 public interface IInstruction
 {
-    OpCodes Instruction { get; }
+    OpCodes OpCode { get; }
 
     bool Invoke(CPU cpu);
 }

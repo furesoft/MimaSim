@@ -7,7 +7,7 @@ public partial class MemoryControl : UserControl
 {
     public MemoryControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

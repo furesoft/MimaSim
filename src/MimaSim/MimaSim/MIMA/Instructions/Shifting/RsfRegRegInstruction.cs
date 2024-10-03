@@ -5,7 +5,7 @@ namespace MimaSim.MIMA.Instructions.Shifting;
 
 public class RsfRegRegInstruction : IInstruction
 {
-    public OpCodes Instruction => OpCodes.RSHIFT;
+    public OpCodes OpCode => OpCodes.RSHIFT;
 
     public bool Invoke(CPU cpu)
     {
