@@ -86,6 +86,9 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         {
             this.RaiseAndSetIfChanged(ref _source, value);
             IsCompiled = false;
+
+            if (_source == null) return;
+            Locator.Current.GetService<ICache>()!.AddOrUpdate("input", _source);
         }
     }
 
@@ -189,5 +192,8 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             RunMode = false;
             CPU.Instance.Clock.Stop();
         });
+
+        var cache = Locator.Current.GetService<ICache>();
+        _source = cache!.Get<string>("input")!;
     }
 }
