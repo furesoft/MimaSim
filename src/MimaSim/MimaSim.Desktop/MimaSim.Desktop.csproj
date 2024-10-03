@@ -5,6 +5,8 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <BlazorEnableCompression>true</BlazorEnableCompression>
+        <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
     </PropertyGroup>
 
     <PropertyGroup>
