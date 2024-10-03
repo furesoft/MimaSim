@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions;
 
-public class LoadInstruction : IInstruction
+public class LoadInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.LOAD;
 
@@ -13,5 +14,10 @@ public class LoadInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, cpu.Fetch16());
 
         return true;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"load {disassembler.Fetch16()}");
     }
 }

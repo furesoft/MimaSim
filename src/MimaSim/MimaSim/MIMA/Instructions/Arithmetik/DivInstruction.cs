@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Arithmetik;
 
-public class DivInstruction : IInstruction
+public class DivInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.DIV;
 
@@ -19,5 +20,10 @@ public class DivInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (short)(r1 / r2));
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"div");
     }
 }

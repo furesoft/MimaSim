@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Logical;
 
-public class XOrRegRegInstruction : IInstruction
+public class XOrRegRegInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.XOR;
 
@@ -16,5 +17,10 @@ public class XOrRegRegInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (byte)res);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"xor {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

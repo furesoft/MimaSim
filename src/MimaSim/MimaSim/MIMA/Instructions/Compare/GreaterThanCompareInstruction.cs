@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Compare;
 
-public class GreaterThanCompareInstruction : IInstruction
+public class GreaterThanCompareInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.CMPGT;
 
@@ -17,5 +18,10 @@ public class GreaterThanCompareInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (short)(value ? 1 : 0));
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"cmpgt {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

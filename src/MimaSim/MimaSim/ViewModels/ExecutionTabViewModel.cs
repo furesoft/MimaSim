@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using MimaSim.Controls;
+﻿using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.Core;
 using MimaSim.Core.Parsing;
@@ -26,10 +25,13 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     private string _selectedSample;
     private string _source;
     private string[] _sampleNames;
+    private bool _isCompiled;
 
     public ObservableCollection<LanguageName> LanguageNames { get; }
     public ViewModelActivator Activator => new();
+    public ICommand CompileCommand { get; set; }
     public ICommand LoadCommand { get; set; }
+    public ICommand SaveCommand { get; set; }
     public ICommand OpenClockSettingsCommand { get; set; }
     public ICommand OpenErrorPopupCommand { get; set; }
     public ICommand OpenMemoryPopupCommand { get; set; }
@@ -41,7 +43,11 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _runMode, value);
     }
 
-    public ICommand SaveCommand { get; set; }
+    public bool IsCompiled
+    {
+        get => _isCompiled;
+        set => this.RaiseAndSetIfChanged(ref _isCompiled, value);
+    }
 
     public LanguageName SelectedLanguage
     {
@@ -76,7 +82,11 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     public string Source
     {
         get => _source;
-        set => this.RaiseAndSetIfChanged(ref _source, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _source, value);
+            IsCompiled = false;
+        }
     }
 
     public ICommand StepCommand { get; set; }
@@ -88,26 +98,29 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     {
         OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
 
-        OpenClockSettingsCommand = DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
+        OpenClockSettingsCommand =
+            DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
 
         StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
         StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
 
-        LanguageNames = new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>().Select(_ => Enum.Parse<LanguageName>(_)));
+        LanguageNames =
+            new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>()
+                .Select(_ => Enum.Parse<LanguageName>(_)));
         SelectedLanguage = LanguageNames.FirstOrDefault();
 
         ViewRawCommand = ReactiveCommand.Create(() =>
         {
-            DialogService.Open(new RawViewPopupControl(), new RawPopupViewModel());
+            DialogService.Open(new DisassemblyViewPopupControl(), new DisassemblyPopupViewModel());
         });
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
-        IStorageProvider storage = Locator.Current.GetService<IStorageProvider>();
+        var storage = Locator.Current.GetService<IStorageProvider>();
 
         LoadCommand = ReactiveCommand.Create(async () =>
         {
-            var filenames = await storage.OpenFilePickerAsync(new FilePickerOpenOptions()
+            var filenames = await storage!.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Programm laden"
             });
@@ -119,48 +132,54 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         SaveCommand = ReactiveCommand.Create(async () =>
         {
-            var file = await storage.SaveFilePickerAsync(new() { Title = "Programm speichern" });
-            await using var writer = new StreamWriter(await file.OpenWriteAsync());
+            var file = await storage!.SaveFilePickerAsync(new() { Title = "Programm speichern" });
+            await using var writer = new StreamWriter(await file!.OpenWriteAsync());
 
             writer.Write(Source);
         });
 
+        DiagnosticBag diagnostics = new();
+        CompileCommand = ReactiveCommand.Create(() =>
+        {
+            if (string.IsNullOrEmpty(Source))
+            {
+                RunMode = false;
+                DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
+                return;
+            }
+
+            var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
+
+            diagnostics = new();
+            CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
+
+            IsCompiled = true;
+        });
+
         RunCodeCommand = ReactiveCommand.Create(() =>
         {
-            if (!string.IsNullOrEmpty(Source))
+            if (RunMode)
             {
-                if (RunMode)
+                if (!diagnostics.IsEmpty)
                 {
-                    var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
-                    DiagnosticBag diagnostics = new();
-                    CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
+                    RunMode = false;
+                    string[] errors = diagnostics.GetAll();
 
-                    if (!diagnostics.IsEmpty)
-                    {
-                        RunMode = false;
-                        string[] errors = diagnostics.GetAll();
-
-                        DialogService.OpenError(string.Join('\n', errors));
-                    }
-                    else
-                    {
-                        RegisterMap.GetRegister("IAR").SetValue(0);
-
-                        CPU.Instance.Clock.Start();
-                    }
+                    DialogService.OpenError(string.Join('\n', errors));
                 }
                 else
                 {
-                    CPU.Instance.Clock.Stop();
+                    RegisterMap.GetRegister("IAR").SetValue(0);
 
-                    BusRegistry.DeactivateAll();
-                    BusRegistry.DeactivateBus("controlunit_iar");
+                    CPU.Instance.Clock.Start();
                 }
             }
             else
             {
-                RunMode = false;
-                DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
+                CPU.Instance.Clock.Stop();
+
+                BusRegistry.DeactivateAll();
+                BusRegistry.DeactivateBus("controlunit_iar");
             }
         });
 

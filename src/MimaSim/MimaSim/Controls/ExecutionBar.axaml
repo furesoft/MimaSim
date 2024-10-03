@@ -5,25 +5,29 @@
              mc:Ignorable="d" d:DesignWidth="325" d:DesignHeight="50" x:CompileBindings="False"
              x:Class="MimaSim.Controls.ExecutionBar">
     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Spacing="3">
-        <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode, Mode=TwoWay}" ToolTip.Tip="Ausführen"
+        <Button ToolTip.Tip="Kompilieren" Command="{Binding CompileCommand}">
+            <PathIcon Data="{StaticResource compile}" Width="20" Height="20" />
+        </Button>
+
+        <ToggleButton Name="playpauseBtn" IsChecked="{Binding RunMode, Mode=TwoWay}" ToolTip.Tip="Ausführen" IsEnabled="{Binding IsCompiled}"
                       Command="{Binding RunCodeCommand}">
             <Grid>
                 <PathIcon Classes="tbunchecked" Data="{StaticResource play}" Width="20" Height="20" />
                 <PathIcon Classes="tbchecked" Data="{StaticResource pause}" Width="20" Height="20" />
             </Grid>
         </ToggleButton>
-        <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}"
+        <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding IsCompiled}"
                 Command="{Binding StepCommand}">
             <PathIcon Data="{StaticResource continue}" Margin="2" Width="20" Height="20" />
         </Button>
-        <Button ToolTip.Tip="Stoppen" IsEnabled="{Binding ElementName=playpauseBtn, Path=IsChecked}"
+        <Button ToolTip.Tip="Stoppen"
                 Command="{Binding StopCommand}">
             <PathIcon Data="{StaticResource stop}" Margin="2" Width="20" Height="20" />
         </Button>
 
         <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
 
-        <Button ToolTip.Tip="Maschinencode anzeigen" Command="{Binding ViewRawCommand}">
+        <Button ToolTip.Tip="Disassembly anzeigen" Command="{Binding ViewRawCommand}" IsEnabled="{Binding IsCompiled}">
             <PathIcon Data="{StaticResource binary}" Margin="2" Width="20" Height="20" />
         </Button>
 

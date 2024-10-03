@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Compare;
 
-public class NotCompareInstruction : IInstruction
+public class NotCompareInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.CMPN;
 
@@ -11,15 +12,13 @@ public class NotCompareInstruction : IInstruction
     {
         var accu = cpu.GetRegister(Registers.Accumulator);
 
-        if (accu == 1)
-        {
-            cpu.SetRegister(Registers.Accumulator, (short)0);
-        }
-        else
-        {
-            cpu.SetRegister(Registers.Accumulator, (short)1);
-        }
+        cpu.SetRegister(Registers.Accumulator, accu == 1 ? (short)0 : (short)1);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"cmpn {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

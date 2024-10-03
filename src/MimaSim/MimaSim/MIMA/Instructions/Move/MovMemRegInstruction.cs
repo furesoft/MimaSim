@@ -1,9 +1,11 @@
-﻿using MimaSim.Core;
+﻿using System;
+using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Move;
 
-public class MovMemRegInstruction : IInstruction
+public class MovMemRegInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.MOV_MEM_REG;
 
@@ -18,5 +20,10 @@ public class MovMemRegInstruction : IInstruction
         cpu.SetRegister(register, value);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"mov {disassembler.Fetch16()}, {disassembler.FetchRegister()}");
     }
 }

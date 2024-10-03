@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Compare;
 
-public class EqualsCompareInstruction : IInstruction
+public class EqualsCompareInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.CMPEQ;
 
@@ -17,5 +18,10 @@ public class EqualsCompareInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (short)(value ? 1 : 0));
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"cmpeq {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

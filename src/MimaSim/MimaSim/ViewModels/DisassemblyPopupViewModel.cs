@@ -3,14 +3,15 @@ using MimaSim.MIMA.Components;
 using ReactiveUI;
 using System.Linq;
 using System.Windows.Input;
+using MimaSim.Core;
 
 namespace MimaSim.ViewModels;
 
-public class RawPopupViewModel : ReactiveObject, IActivatableViewModel
+public class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
 {
     private string _raw;
 
-    public RawPopupViewModel()
+    public DisassemblyPopupViewModel()
     {
         CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
         Raw = GetRawString();
@@ -29,16 +30,8 @@ public class RawPopupViewModel : ReactiveObject, IActivatableViewModel
     private string GetRawString()
     {
         var raw = CPU.Instance.Program;
+        var disassembler = new Disassembler(raw);
 
-        return string.Join(' ', raw.Select(_ =>
-        {
-            var result = (_).ToString("x");
-            if (result.Length == 1)
-            {
-                result = "0" + result;
-            }
-
-            return result;
-        })).ToUpper();
+        return disassembler.Disassemble();
     }
 }

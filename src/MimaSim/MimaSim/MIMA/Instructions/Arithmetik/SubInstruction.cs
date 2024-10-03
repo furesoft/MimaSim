@@ -1,9 +1,10 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Arithmetik;
 
-public class SubInstruction : IInstruction
+public class SubInstruction : IInstruction, IDisassemblyInstruction
 {
     public OpCodes OpCode => OpCodes.SUB;
 
@@ -19,5 +20,10 @@ public class SubInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (short)(r1 - r2));
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"sub");
     }
 }
