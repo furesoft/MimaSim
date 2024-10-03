@@ -12,9 +12,9 @@ public class SampleLoader
         _samples.TryAdd((language, name), src);
     }
 
-    public string GetSample(LanguageName language, string name)
+    public string? GetSample(LanguageName language, string? name)
     {
-        return _samples[(language, name)];
+        return name is null ? null : _samples.GetValueOrDefault((language, name));
     }
 
     public IEnumerable<string> GetSampleNamesFor(LanguageName language)
