@@ -19,7 +19,6 @@ internal sealed partial class Program
         return BuildAvaloniaApp()
             .WithInterFont()
             .UseReactiveUI()
-            .UseReactiveUI()
             .StartBrowserAppAsync("out");
     }
 
