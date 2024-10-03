@@ -1,10 +1,10 @@
-﻿using MimaSim.Core.Parsing;
+﻿using System;
+using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.Emiting;
-using System;
 using Silverfly;
 using Silverfly.Nodes;
 
-namespace MimaSim.MIMA.Visitors;
+namespace MimaSim.MIMA.Parsing.Parsers.Raw;
 
 public class RawParserVisitor : NodeVisitor, IEmitter
 {
