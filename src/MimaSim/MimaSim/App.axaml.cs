@@ -45,9 +45,7 @@ public partial class App : Application
         }
 
         var samples = new SampleLoader();
-        samples.Register(LanguageName.Maschinencode, "Addition", "04 01 00 40 01 02 04 02 00 40 01 03 08");
-        samples.Register(LanguageName.Assembly, "Addition2", "load 0x01\nmov accumulator, x\nload 0x02\nmov accumulator, y\nadd");
-        samples.Register(LanguageName.Hochsprache, "Addition3", "var z = 1 + 2");
+        samples.FromResources(GetType().Assembly);
 
         Locator.CurrentMutable.RegisterConstant(samples);
 
