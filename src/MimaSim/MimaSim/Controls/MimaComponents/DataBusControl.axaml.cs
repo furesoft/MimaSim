@@ -7,7 +7,7 @@ public partial class DataBusControl : UserControl
 {
     public DataBusControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

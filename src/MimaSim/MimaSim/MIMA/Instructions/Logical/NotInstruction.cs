@@ -1,11 +1,12 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Logical;
 
-public class NotInstruction : IInstruction
+public class NotInstruction : IInstruction, IDisassemblyInstruction
 {
-    public OpCodes Instruction => OpCodes.NOT;
+    public OpCodes OpCode => OpCodes.NOT;
 
     public bool Invoke(CPU cpu)
     {
@@ -15,5 +16,10 @@ public class NotInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (byte)res);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"not {disassembler.FetchRegister()}");
     }
 }

@@ -18,7 +18,7 @@ public class CPU
     public ControlUnit ControlUnit = new();
     public Bus DataBus = new();
 
-    public Dictionary<OpCodes, IInstruction> Instructions = new();
+    public static Dictionary<OpCodes, IInstruction> Instructions = new();
     public Memory Memory = new((int)Math.Pow(2, 8));
 
     public Register SAR = new("SAR");
@@ -27,6 +27,8 @@ public class CPU
     public Register X = new("X");
 
     public Register Y = new("Y");
+
+    public byte[] Program { get; set; }
 
     public CPU()
     {
@@ -48,7 +50,16 @@ public class CPU
         });
     }
 
-    public byte[] Program { get; set; }
+    static CPU()
+    {
+        var types = Assembly.GetCallingAssembly().GetTypes().Where(_ => _.GetInterfaces().Contains(typeof(IInstruction)));
+        foreach (var t in types)
+        {
+            var instance = (IInstruction)Activator.CreateInstance(t);
+
+            Instructions.Add(instance.OpCode, instance);
+        }
+    }
 
     public byte Fetch()
     {
@@ -95,12 +106,6 @@ public class CPU
         return GetRegister((Registers)reg);
     }
 
-    //Hack for Init all Fields
-    public void Init()
-    {
-        InitInstructions();
-    }
-
     public void SetRegister(Registers reg, short value)
     {
         RegisterMap.GetRegister(Enum.GetName(reg)).SetValue(value);
@@ -128,17 +133,6 @@ public class CPU
         else
         {
             throw new Exception("unknown opcode");
-        }
-    }
-
-    private void InitInstructions()
-    {
-        var types = Assembly.GetCallingAssembly().GetTypes().Where(_ => _.GetInterfaces().Contains(typeof(IInstruction)));
-        foreach (var t in types)
-        {
-            var instance = (IInstruction)Activator.CreateInstance(t);
-
-            Instructions.Add(instance.Instruction, instance);
         }
     }
 }

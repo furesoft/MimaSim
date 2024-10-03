@@ -1,11 +1,13 @@
-﻿using MimaSim.Core;
+﻿using System;
+using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Shifting;
 
-public class RsfRegRegInstruction : IInstruction
+public class RsfRegRegInstruction : IInstruction, IDisassemblyInstruction
 {
-    public OpCodes Instruction => OpCodes.RSHIFT;
+    public OpCodes OpCode => OpCodes.RSHIFT;
 
     public bool Invoke(CPU cpu)
     {
@@ -16,5 +18,10 @@ public class RsfRegRegInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (byte)res);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"rshift {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

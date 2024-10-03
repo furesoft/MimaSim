@@ -1,11 +1,12 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Logical;
 
-public class AndInstruction : IInstruction
+public class AndInstruction : IInstruction, IDisassemblyInstruction
 {
-    public OpCodes Instruction => OpCodes.AND;
+    public OpCodes OpCode => OpCodes.AND;
 
     public bool Invoke(CPU cpu)
     {
@@ -16,5 +17,10 @@ public class AndInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (byte)res);
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"and {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

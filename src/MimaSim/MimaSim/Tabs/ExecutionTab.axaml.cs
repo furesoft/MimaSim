@@ -14,7 +14,7 @@ public partial class ExecutionTab : ReactiveUserControl<ExecutionTabViewModel>, 
 
         this.WhenActivated(disposables => { /* Handle view activation etc. */ });
 
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     public int Index => 1;

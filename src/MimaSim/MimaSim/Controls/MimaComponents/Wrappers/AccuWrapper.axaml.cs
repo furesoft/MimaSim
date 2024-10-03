@@ -7,7 +7,7 @@ public partial class AccuWrapper : UserControl
 {
     public AccuWrapper()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

@@ -7,7 +7,7 @@ public partial class AluControl : UserControl
 {
     public AluControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

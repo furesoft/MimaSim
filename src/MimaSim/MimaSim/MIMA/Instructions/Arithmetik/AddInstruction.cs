@@ -1,11 +1,12 @@
-﻿using MimaSim.Core;
+﻿using System.Text;
+using MimaSim.Core;
 using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions.Arithmetik;
 
-public class AddInstruction : IInstruction
+public class AddInstruction : IInstruction, IDisassemblyInstruction
 {
-    public OpCodes Instruction => OpCodes.ADD;
+    public OpCodes OpCode => OpCodes.ADD;
 
     public bool Invoke(CPU cpu)
     {
@@ -19,5 +20,10 @@ public class AddInstruction : IInstruction
         cpu.SetRegister(Registers.Accumulator, (short)(r1 + r2));
 
         return false;
+    }
+
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"add");
     }
 }

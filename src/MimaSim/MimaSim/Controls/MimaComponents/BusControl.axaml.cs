@@ -16,7 +16,7 @@ public partial class BusControl : UserControl
 
     public BusControl()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     public Orientation Orientation

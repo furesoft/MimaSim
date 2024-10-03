@@ -5,11 +5,11 @@ using ReactiveUI;
 
 namespace MimaSim.Controls.MimaComponents.Popups;
 
-public partial class RawViewPopupControl : ReactiveUserControl<RawPopupViewModel>
+public partial class DisassemblyViewPopupControl : ReactiveUserControl<DisassemblyPopupViewModel>
 {
-    public RawViewPopupControl()
+    public DisassemblyViewPopupControl()
     {
-        DataContext = new RawPopupViewModel();
+        DataContext = new DisassemblyPopupViewModel();
         var cc = DataContext as IActivatableViewModel;
         cc.Activator.Activate();
 

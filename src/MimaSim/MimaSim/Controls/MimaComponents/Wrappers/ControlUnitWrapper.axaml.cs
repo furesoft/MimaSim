@@ -7,7 +7,7 @@ public partial class ControlUnitWrapper : UserControl
 {
     public ControlUnitWrapper()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     private void InitializeComponent()

@@ -28,7 +28,7 @@ public static class DialogService
 
     public static bool GetIsHost(ContentDialog target)
     {
-        return object.ReferenceEquals(_host, target);
+        return ReferenceEquals(_host, target);
     }
 
     public static void Open(object content)
