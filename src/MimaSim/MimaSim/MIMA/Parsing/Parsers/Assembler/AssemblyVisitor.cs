@@ -19,7 +19,25 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         For<InstructionNode>(Visit);
         For<LiteralNode>(VisitLiteral, node => node.Value is ulong);
         For<LiteralNode>(VisitRegister, node => node.Value is Registers);
-        For<PrefixOperatorNode>(VisitAddress, op => op.Operator == "&");
+        For<PrefixOperatorNode>(VisitAddress, op => op.Tag == "address");
+        For<PrefixOperatorNode>(VisitLabelRef, op => op.Tag == "labelref");
+        For<PostfixOperatorNode>(VisitLabel, op => op.Tag == "label");
+    }
+
+    private void VisitLabel(PostfixOperatorNode labelDef)
+    {
+        if (labelDef.Expr is NameNode nameNode)
+        {
+            _emitter.CreateLabel(nameNode.Token.Text.ToString());
+        }
+    }
+
+    private void VisitLabelRef(PrefixOperatorNode labelRef)
+    {
+        if (labelRef.Expr is NameNode nameNode)
+        {
+            //todo: emit 0 address and adjust later in GetRaw()
+        }
     }
 
     private void VisitAddress(PrefixOperatorNode obj)
