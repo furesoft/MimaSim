@@ -1,6 +1,5 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.Core.Parsing.AST.Nodes;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Visitors;
 
@@ -11,9 +10,9 @@ public class RawSourceTextTranslator : ISourceTextTranslator
     public byte[] ToRaw(string input, ref DiagnosticBag diagnostics)
     {
         var parser = new RawParser();
-        var ast = (CallNode)parser.Parse(input);
+        var ast = parser.Parse(input);
 
-        if (ast.IsEmpty || ast.Type == null)
+        if (ast.Document.Messages.Count > 0)
         {
             diagnostics.ReportUnknownError();
             return [];
@@ -21,7 +20,7 @@ public class RawSourceTextTranslator : ISourceTextTranslator
 
         var visitor = new RawParserVisitor();
 
-        ast.Visit(visitor);
+        ast.Tree.Accept(visitor);
 
         return visitor.GetRaw();
     }

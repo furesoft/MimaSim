@@ -1,45 +1,33 @@
-﻿using MimaSim.Core.Parsing;
+﻿using System;
 using MimaSim.Core.Parsing.AST;
 using MimaSim.Core.Parsing.Tokenizer;
-using System;
-using System.Collections.Generic;
+using System.Linq;
+using Silverfly;
+using Silverfly.Lexing.IgnoreMatcher.Comments;
+using Silverfly.Nodes;
+using Silverfly.Parselets.Literals;
 
 namespace MimaSim.MIMA.Parsing.Parsers;
 
-public class RawParser : IParser
+
+public class RawParser : Parser
 {
     private TokenEnumerator _enumerator;
 
-    public IAstNode Parse(string input)
+    protected override void InitLexer(LexerConfig lexer)
     {
-        var tokenizer = new PrecedenceBasedRegexTokenizer();
-        tokenizer.AddDefinition(TokenKind.HexLiteral, "[0-9a-fA-F]{2}");
-        tokenizer.AddDefinition(TokenKind.Comment, @"/\\*.*?\\*/", 1);
+        lexer.IgnoreWhitespace();
 
-        var tokens = tokenizer.Tokenize(input);
-        _enumerator = new TokenEnumerator(tokens);
+        lexer.Ignore(new MultiLineCommentIgnoreMatcher("/*", "*/"));
+        lexer.Ignore(new SingleLineCommentIgnoreMatcher("//"));
 
-        return ParseHexStream();
+        lexer.MatchPattern(PredefinedSymbols.Number, "[0-9a-fA-F]+");
     }
 
-    private IAstNode ParseHexStream()
+    protected override void InitParser(ParserDefinition def)
     {
-        var _nodes = new List<IAstNode>();
-        Token token;
-        do
-        {
-            token = _enumerator.Read();
+        def.Block(PredefinedSymbols.SOF, PredefinedSymbols.EOF);
 
-            if (token.Kind == TokenKind.HexLiteral)
-            {
-                _nodes.Add(NodeFactory.Literal(Convert.ToByte(token.Contents, 16)));
-            }
-            else if (token.Kind == TokenKind.EndOfFile)
-            {
-                break;
-            }
-        } while (token.Kind != TokenKind.EndOfFile);
-
-        return NodeFactory.Call(AstCallNodeType.Group, _nodes.ToArray());
+        def.Register(PredefinedSymbols.Number, new NumberParselet());
     }
 }
