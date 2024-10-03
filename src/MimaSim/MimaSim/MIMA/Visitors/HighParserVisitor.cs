@@ -131,7 +131,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
                 break;
 
             case AstCallNodeType.Not:
-                _emitter.EmitInstruction(OpCodes.CMPN);
+                //_emitter.EmitInstruction(OpCodes.CMPN);
                 break;
 
             case AstCallNodeType.Or:
@@ -252,7 +252,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
         var code = BuildBody(call);
 
         Visit((CallNode)call.Args.First());
-        _emitter.EmitOpcode(OpCodes.CMPN);
+        //_emitter.EmitOpcode(OpCodes.CMPN);
 
         _emitter.EmitInstruction(OpCodes.JMPC, (short)(_emitter.Position + code.Length));
         _emitter.Append(code);

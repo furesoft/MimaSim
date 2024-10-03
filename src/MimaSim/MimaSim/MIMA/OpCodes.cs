@@ -40,13 +40,10 @@ public enum OpCodes
     CMPGE = 0x36,
     CMPGT = 0x37,
     CMPNEQ = 0x38,
+    CMPN = 0x39,
 
     MOV_REG_REG = 0x40,
     MOV_MEM_REG = 0x41,
     MOV_REG_MEM = 0x42,
     MOV_MEM_MEM = 0x43,
-
-    //Only needed for parsing
-    MOV,
-    CMPN,
 }
