@@ -12,7 +12,6 @@ using System.Linq;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
-using MimaSim.Samples;
 using MimaSim.ViewModels.Mima;
 using Splat;
 
@@ -23,7 +22,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     private bool _runMode;
     private LanguageName _selectedLanguage;
     private string _selectedSample;
-    private string _source;
+    private string? _source;
     private string[] _sampleNames;
     private bool _isCompiled;
 

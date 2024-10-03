@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using MimaSim.Core;
 
-namespace MimaSim.Samples;
+namespace MimaSim.Core;
 
 public class SampleLoader
 {

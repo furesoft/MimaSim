@@ -6,7 +6,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using MimaSim.Core;
 using MimaSim.MIMA.Components;
-using MimaSim.Samples;
 using MimaSim.Views;
 using ReactiveUI;
 using Splat;
