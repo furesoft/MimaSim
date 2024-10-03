@@ -73,7 +73,7 @@ public class ByteCodeEmitter
 
     public byte[] ToArray() => _builder.ToArray();
 
-    internal void CreateLabel(string name)
+    public void CreateLabel(string name)
     {
         _labels.Add(name, (byte)_builder.Length);
     }
