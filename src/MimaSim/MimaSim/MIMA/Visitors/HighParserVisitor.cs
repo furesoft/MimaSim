@@ -261,7 +261,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
     private void VisitLoopStatement(CallNode call)
     {
         var label = _emitter.DefineLabel();
-        _emitter.MarkLabel(label);
+       // _emitter.MarkLabel(label);
 
         Visit((CallNode)call.Args.First());
 

@@ -137,6 +137,52 @@ public class ByteArrayBuilder : IDisposable
         _store.Dispose();
     }
 
+    public void ReplaceAt(int index, byte value)
+    {
+        ValidateIndex(index);
+        var buffer = _store.GetBuffer();
+        buffer[index] = value;
+    }
+
+    public void ReplaceAt(int index, bool value)
+    {
+        ValidateIndex(index);
+        ReplaceAt(index, value ? streamTrue : streamFalse);
+    }
+
+    public void ReplaceAt(int index, char value)
+    {
+        ValidateIndex(index);
+        ReplaceAt(index, (byte)value);
+    }
+
+    public void ReplaceAt(int index, short value)
+    {
+        ValidateIndex(index);
+        var bytes = BitConverter.GetBytes(value);
+        Array.Copy(bytes, 0, _store.GetBuffer(), index, bytes.Length);
+    }
+
+    public void ReplaceAt(int index, int value)
+    {
+        ValidateIndex(index);
+        var bytes = BitConverter.GetBytes(value);
+        Array.Copy(bytes, 0, _store.GetBuffer(), index, bytes.Length);
+    }
+
+    public void ReplaceAt(int index, long value)
+    {
+        ValidateIndex(index);
+        var bytes = BitConverter.GetBytes(value);
+        Array.Copy(bytes, 0, _store.GetBuffer(), index, bytes.Length);
+    }
+
+    private void ValidateIndex(int index)
+    {
+        if (index < 0 || index >= Length)
+            throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range.");
+    }
+
     public bool GetBool()
     {
         return _store.ReadByte() == streamTrue;
