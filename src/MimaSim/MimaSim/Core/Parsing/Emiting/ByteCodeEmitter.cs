@@ -6,9 +6,8 @@ namespace MimaSim.Core.Parsing.Emiting;
 public class ByteCodeEmitter
 {
     private readonly ByteArrayBuilder _builder = new();
-
-    private readonly Dictionary<string, byte> _labels = new();
-    private int _labelCount = 0;
+    private readonly Dictionary<string, short> _labels = new();
+    private readonly List<short> _labelReferences = new();
     public int Position => _builder.Length;
 
     public void Append(byte[] raw)
@@ -18,7 +17,7 @@ public class ByteCodeEmitter
 
     public Label DefineLabel()
     {
-        return new Label(_labelCount++);
+        return new Label(_labels.Count);
     }
 
     public void EmitInstruction(OpCodes opcode)
@@ -61,17 +60,35 @@ public class ByteCodeEmitter
         _builder.Append((byte)reg);
     }
 
-    public byte GetLabel(string name)
+    public void AddLabelReference()
     {
-        return _labels[name];
+        _labelReferences.Add((short)_builder.Length);
+        _builder.Append((short)0);
     }
 
-    public void MarkLabel(Label label)
+    private void ReplaceLabelReferences()
     {
-        _labels.Add("L" + label.LabelNum, (byte)_builder.Length);
+        foreach (var kvp in _labels)
+        {
+            int index = 0;
+            while (index < _labelReferences.Count)
+            {
+                if (_labelReferences[index] == kvp.Value)
+                {
+                    _builder.ReplaceAt(index, kvp.Value);
+                }
+                index++;
+            }
+        }
+
+        _labelReferences.Clear();
     }
 
-    public byte[] ToArray() => _builder.ToArray();
+    public byte[] ToArray()
+    {
+        ReplaceLabelReferences(); // Ensure labels are replaced before converting to array
+        return _builder.ToArray();
+    }
 
     public void CreateLabel(string name)
     {
