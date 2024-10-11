@@ -78,6 +78,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         {
             this.RaiseAndSetIfChanged(ref _selectedSample, value);
 
+            if (value == null) return;
             Source = Locator.Current.GetService<SampleLoader>().GetSample(SelectedLanguage, SelectedSample);
         }
     }
@@ -119,7 +120,6 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         LanguageNames =
             new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>()
                 .Select(_ => Enum.Parse<LanguageName>(_)));
-        SelectedLanguage = LanguageNames.FirstOrDefault();
 
         ViewRawCommand = ReactiveCommand.Create(() =>
         {
@@ -204,7 +204,16 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         var cache = Locator.Current.GetService<ICache>();
         _source = cache!.Get<string>("input")!;
-        _selectedLanguage = Enum.Parse<LanguageName>(cache!.Get<string>("language")!);
+        var language = cache!.Get<string>("language")!;
+
+        if (language == null)
+        {
+            SelectedLanguage = LanguageNames.FirstOrDefault();
+        }
+        else
+        {
+            SelectedLanguage = Enum.Parse<LanguageName>(language);
+        }
     }
 
     private string GetExtensionForLanguage(LanguageName language)
