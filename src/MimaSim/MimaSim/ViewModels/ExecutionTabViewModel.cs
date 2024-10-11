@@ -15,6 +15,7 @@ using Avalonia.Platform.Storage;
 using MimaSim.ViewModels.Mima;
 using Splat;
 using AvaloniaEdit.Highlighting;
+using MimaSim.Tabs;
 
 namespace MimaSim.ViewModels;
 
@@ -37,6 +38,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     public ICommand OpenErrorPopupCommand { get; set; }
     public ICommand OpenMemoryPopupCommand { get; set; }
     public ICommand RunCodeCommand { get; set; }
+    public ICommand HelpCommand { get; set; }
 
     public bool RunMode
     {
@@ -113,6 +115,8 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         OpenClockSettingsCommand =
             DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
+
+        HelpCommand = DialogService.CreateOpenCommand(new DocumentationTab(), new TablesViewModel());
 
         StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
         StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());

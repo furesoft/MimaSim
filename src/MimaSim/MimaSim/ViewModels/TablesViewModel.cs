@@ -3,14 +3,20 @@ using MimaSim.MIMA;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using MimaSim.Controls;
 using MimaSim.Models;
 
 namespace MimaSim.ViewModels;
 
 public class TablesViewModel : ReactiveObject
 {
+    public ICommand CloseCommand { get; set; }
+
     public TablesViewModel()
     {
+        CloseCommand = ReactiveCommand.Create(DialogService.Close);
+
         RegisterTableItems = [];
         OpcodesTableItems = [];
         MovTableItems = [

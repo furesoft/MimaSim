@@ -16,13 +16,15 @@
     </DataTemplate>
   </UserControl.Resources>
 
-  <StackPanel Orientation="Horizontal" Spacing="5">
-    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-    <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-    <StackPanel>
-      <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding MovTableItems}" />
+  <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Hilfe">
+    <StackPanel Orientation="Horizontal" Spacing="5">
+      <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+      <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+      <StackPanel>
+        <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding MovTableItems}" />
 
-      <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+        <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+      </StackPanel>
     </StackPanel>
-  </StackPanel>
+    </c:DialogControl>
 </UserControl>

@@ -33,5 +33,11 @@
         <Button Command="{Binding SaveCommand}">
             <PathIcon Data="{StaticResource save}" Margin="2" Width="20" Height="20" ToolTip.Tip="Speichern" />
         </Button>
+
+        <Rectangle Width="2" Fill="Black" Margin="5,0,5,0" />
+
+        <Button Command="{Binding HelpCommand}">
+            <PathIcon Data="{StaticResource help}" Margin="2" Width="20" Height="20" ToolTip.Tip="Hilfe" />
+        </Button>
     </StackPanel>
 </UserControl>

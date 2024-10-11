@@ -12,11 +12,6 @@ public partial class DocumentationTab : UserControl
         InitializeComponent();
     }
 
-    public int Index => 2;
-    public string Title => "Tabellen";
-
-    public object ViewModel => new TablesViewModel();
-
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
