@@ -4,6 +4,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <IsTrimmable>true</IsTrimmable>
     </PropertyGroup>
 
     <ItemGroup>
