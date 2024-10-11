@@ -12,8 +12,6 @@ namespace MimaSim.MIMA.Parsing.Parsers;
 
 public class RawParser : Parser
 {
-    private TokenEnumerator _enumerator;
-
     protected override void InitLexer(LexerConfig lexer)
     {
         lexer.IgnoreWhitespace();

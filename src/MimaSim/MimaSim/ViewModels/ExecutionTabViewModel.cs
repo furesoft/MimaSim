@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
 using MimaSim.ViewModels.Mima;
 using Splat;
+using AvaloniaEdit.Highlighting;
 
 namespace MimaSim.ViewModels;
 
@@ -25,6 +26,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     private string? _source;
     private string[] _sampleNames;
     private bool _isCompiled;
+    private IHighlightingDefinition _highlighting;
 
     public ObservableCollection<LanguageName> LanguageNames { get; }
     public ViewModelActivator Activator => new();
@@ -48,6 +50,12 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _isCompiled, value);
     }
 
+    public IHighlightingDefinition Highlighting
+    {
+        get => _highlighting;
+        set => this.RaiseAndSetIfChanged(ref _highlighting, value);
+    }
+
     public LanguageName SelectedLanguage
     {
         get => _selectedLanguage;
@@ -58,6 +66,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             SampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage).ToArray();
 
             SelectedSample = null;
+            Highlighting = HighlightingManager.Instance.GetDefinitionByExtension(".hoch");
         }
     }
 

@@ -16,10 +16,6 @@
                 <PathIcon Classes="tbchecked" Data="{StaticResource pause}" Width="20" Height="20" />
             </Grid>
         </ToggleButton>
-        <Button ToolTip.Tip="Schritt ausführen" IsEnabled="{Binding IsCompiled}"
-                Command="{Binding StepCommand}">
-            <PathIcon Data="{StaticResource continue}" Margin="2" Width="20" Height="20" />
-        </Button>
         <Button ToolTip.Tip="Stoppen"
                 Command="{Binding StopCommand}">
             <PathIcon Data="{StaticResource stop}" Margin="2" Width="20" Height="20" />
