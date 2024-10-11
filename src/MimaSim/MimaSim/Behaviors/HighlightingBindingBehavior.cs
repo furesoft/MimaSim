@@ -1,22 +1,20 @@
-﻿using System;
+using System;
 using Avalonia;
 using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;
 using AvaloniaEdit.Highlighting;
 
-namespace MimaSim.Behaviors;
-
-public class DocumentTextBindingBehavior : Behavior<TextEditor>
+public class HighlightingBindingBehavior : Behavior<TextEditor>
 {
     private TextEditor _textEditor;
 
-    public static readonly StyledProperty<string> TextProperty =
-        AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
+    public static readonly StyledProperty<IHighlightingDefinition> HighlightingProperty =
+        AvaloniaProperty.Register<HighlightingBindingBehavior, IHighlightingDefinition>(nameof(Highlighting));
 
-    public string Text
+    public IHighlightingDefinition Highlighting
     {
-        get => GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
+        get => GetValue(HighlightingProperty);
+        set => SetValue(HighlightingProperty, value);
     }
 
     protected override void OnAttached()
@@ -27,7 +25,7 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
         {
             _textEditor = textEditor;
             _textEditor.TextChanged += TextChanged;
-            this.GetObservable(TextProperty).Subscribe(TextPropertyChanged);
+            this.GetObservable(HighlightingProperty).Subscribe(HighlightingPropertyChanged);
         }
     }
 
@@ -45,17 +43,16 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
         if (_textEditor != null && _textEditor.Document != null)
         {
-            Text = _textEditor.Document.Text;
+           Highlighting = _textEditor.SyntaxHighlighting;
         }
     }
 
-    private void TextPropertyChanged(string text)
+    private void HighlightingPropertyChanged(IHighlightingDefinition highlighting)
     {
-        if (_textEditor != null && _textEditor.Document != null && text != null)
+        if (_textEditor != null && _textEditor.Document != null && highlighting != null)
         {
             var caretOffset = _textEditor.CaretOffset;
-            _textEditor.Document.Text = text;
-            //_textEditor.CaretOffset = caretOffset;
+            _textEditor.SyntaxHighlighting = highlighting;
         }
     }
 }

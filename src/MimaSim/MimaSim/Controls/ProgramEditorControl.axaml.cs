@@ -4,11 +4,11 @@ using System.Xml;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using AvaloniaEdit;
 using AvaloniaEdit.Highlighting;
 using AvaloniaEdit.Highlighting.Xshd;
 using MimaSim.ViewModels;
 using ReactiveUI;
-using AvaloniaEdit;
 
 namespace MimaSim.Controls;
 
@@ -30,7 +30,8 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
 
     private void InitHighlighting()
     {
-        LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
+        this.Find<TextEditor>("editor").SyntaxHighlighting  = LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
+    
         LoadHighlighting("Assembler", ".asm", "Highligting_Assembler");
     }
 
