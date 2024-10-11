@@ -21,6 +21,11 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var samples = new SampleLoader();
+        samples.FromResources(GetType().Assembly);
+
+        Locator.CurrentMutable.RegisterConstant(samples);
+
         Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -40,11 +45,6 @@ public partial class App : Application
             };
             Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
         }
-
-        var samples = new SampleLoader();
-        samples.FromResources(GetType().Assembly);
-
-        Locator.CurrentMutable.RegisterConstant(samples);
 
         base.OnFrameworkInitializationCompleted();
     }
