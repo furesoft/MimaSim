@@ -6,8 +6,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" MinWidth="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.RawViewPopupControl">
   <c:DialogControl CommandText="OK" Header="Maschinencode" Command="{Binding CloseCommand}" MaxWidth="500">
-    <StackPanel>
-      <TextBox Text="{Binding Raw}" TextWrapping="Wrap" IsReadOnly="True" MinWidth="100" MinHeight="350" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+    <StackPanel Spacing="2">
+      <RadioButton x:Name="hexDump">Hex Dump</RadioButton>
+
+      <TextBox IsVisible="{Binding !#hexDump.IsChecked}" Text="{Binding Disassembly}" TextWrapping="Wrap" IsReadOnly="True" MinWidth="100" MinHeight="350" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+      <TextBox IsVisible="{Binding #hexDump.IsChecked}" Text="{Binding Raw}" TextWrapping="Wrap" IsReadOnly="True" MinWidth="100" MinHeight="350" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </StackPanel>
   </c:DialogControl>
 </UserControl>
