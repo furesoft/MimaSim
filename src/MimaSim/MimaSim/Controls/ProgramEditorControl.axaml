@@ -12,8 +12,8 @@
   <Grid ColumnDefinitions="AUTO,*,AUTO" RowDefinitions="35,*,35">
     <c:ExecutionBar Grid.Column="0" Grid.Row="0" Margin="5,3,0,0" />
 
-    <avaloniaEdit:TextEditor x:Name="editor" MinWidth="150" MaxHeight="450" MinHeight="150" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
-                             FontFamily="Cascadia Code,Consolas,Menlo,Monospace" Margin="0,5,0,5"
+    <avaloniaEdit:TextEditor x:Name="editor" MinWidth="150" MaxHeight="150" MinHeight="150" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+                             FontFamily="Cascadia Code,Consolas,Menlo,Monospace" Margin="0,5,0,5" VerticalAlignment="Top"
                              ShowLineNumbers="True">
         <i:Interaction.Behaviors>
             <behaviors:DocumentTextBindingBehavior Text="{Binding Source, Mode=TwoWay}"/>
