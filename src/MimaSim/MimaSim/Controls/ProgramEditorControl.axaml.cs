@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -22,6 +23,8 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+
+        Console.WriteLine(string.Join('\n', GetType().Assembly.GetManifestResourceNames()))
 
         IHighlightingDefinition customHighlighting;
         using (Stream s = GetType().Assembly.GetManifestResourceStream("MimaSim.Resources.CustomHighlighting.xshd"))
