@@ -25,7 +25,7 @@ jobs:
         run: dotnet workload install wasi-experimental
 
       - name: build
-        run: dotnet build --configuration Debug --output src/MimaSim/MimaSim.Browser/build src/MimaSim/MimaSim.Browser/MimaSim.Browser.csproj
+        run:  dotnet publish src/MimaSim/MimaSim.Browser/MimaSim.Browser.csproj
 
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -33,5 +33,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_BRANCH: main # The branch the action should deploy from.
           BRANCH: gh-pages-from-actions # The branch the action should deploy to.
-          FOLDER: src/MimaSim/MimaSim.Browser/build/AppBundle/
+          FOLDER: src/MimaSim/MimaSim.Browser/bin/Release/net8.0-browser/publish/wwwroot
           SINGLE_COMMIT: true
