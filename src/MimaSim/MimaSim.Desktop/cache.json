@@ -1,3 +1,4 @@
 {
-  "input": "\"load 0x01\\r\\nmov accumulator, x\\r\\nload 0x02\\r\\nmov accumulator, y\\r\\nadd\""
+  "input": "\"load 0x01\\r\\nmov accumulator, x\\r\\nload 0x02\\r\\nmov accumulator, y\\r\\nadd\"",
+  "language": "\"Assembly\""
 }

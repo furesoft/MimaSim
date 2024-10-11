@@ -67,6 +67,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
             SelectedSample = null;
             Highlighting = HighlightingManager.Instance.GetDefinitionByExtension(GetExtensionForLanguage(value));
+            Locator.Current.GetService<ICache>()!.AddOrUpdate("language", value.ToString());
         }
     }
 
@@ -203,6 +204,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         var cache = Locator.Current.GetService<ICache>();
         _source = cache!.Get<string>("input")!;
+        _selectedLanguage = Enum.Parse<LanguageName>(cache!.Get<string>("language")!);
     }
 
     private string GetExtensionForLanguage(LanguageName language)
