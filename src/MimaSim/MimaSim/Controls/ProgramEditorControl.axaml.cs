@@ -1,6 +1,10 @@
-﻿using Avalonia.Controls;
+﻿using System.IO;
+using System.Xml;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using AvaloniaEdit.Highlighting;
+using AvaloniaEdit.Highlighting.Xshd;
 using MimaSim.ViewModels;
 using ReactiveUI;
 
@@ -18,5 +22,18 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+
+        IHighlightingDefinition customHighlighting;
+        using (Stream s = GetType().Assembly.GetManifestResourceStream("MimaSim.Resources.CustomHighlighting.xshd"))
+        {
+            using (XmlReader reader = new XmlTextReader(s))
+            {
+                customHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            }
+        }
+
+        HighlightingManager.Instance.RegisterHighlighting("Custom Highlighting", new string[] { ".cool" }, customHighlighting);
+
+        editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".cool");
     }
 }
