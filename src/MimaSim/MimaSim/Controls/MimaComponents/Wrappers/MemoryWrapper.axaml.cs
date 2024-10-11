@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace MimaSim.Controls.MimaComponents.Wrappers;
 
-public partial class MemoryWrapper : ReactiveUserControl<ExecutionTabViewModel>
+public partial class MemoryWrapper : ReactiveUserControl<MainViewModel>
 {
     public MemoryWrapper()
     {

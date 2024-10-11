@@ -9,11 +9,11 @@ using MimaSim.Models;
 
 namespace MimaSim.ViewModels;
 
-public class TablesViewModel : ReactiveObject
+public class HelpPopupViewModel : ReactiveObject
 {
     public ICommand CloseCommand { get; set; }
 
-    public TablesViewModel()
+    public HelpPopupViewModel()
     {
         CloseCommand = ReactiveCommand.Create(DialogService.Close);
 

@@ -4,7 +4,7 @@ using MimaSim.ViewModels;
 
 namespace MimaSim.Controls.MimaComponents;
 
-public partial class ClockControl : ReactiveUserControl<ExecutionTabViewModel>
+public partial class ClockControl : ReactiveUserControl<MainViewModel>
 {
     public ClockControl()
     {

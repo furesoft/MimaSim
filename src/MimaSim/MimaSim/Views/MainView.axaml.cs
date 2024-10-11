@@ -6,11 +6,11 @@ using ReactiveUI;
 
 namespace MimaSim.Views;
 
-public partial class MainView : ReactiveUserControl<ExecutionTabViewModel>
+public partial class MainView : ReactiveUserControl<MainViewModel>
 {
     public MainView()
     {
-        ViewModel = new ExecutionTabViewModel(); // must be initialized before ui
+        ViewModel = new MainViewModel(); // must be initialized before ui
 
         InitializeComponent();
 

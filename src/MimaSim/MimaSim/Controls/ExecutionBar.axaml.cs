@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace MimaSim.Controls;
 
-public partial class ExecutionBar : ReactiveUserControl<ExecutionTabViewModel>
+public partial class ExecutionBar : ReactiveUserControl<MainViewModel>
 {
     public ExecutionBar()
     {

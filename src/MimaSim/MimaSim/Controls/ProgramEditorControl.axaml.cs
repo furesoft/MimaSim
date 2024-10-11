@@ -12,7 +12,7 @@ using ReactiveUI;
 
 namespace MimaSim.Controls;
 
-public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabViewModel>
+public partial class ProgramEditorControl : ReactiveUserControl<MainViewModel>
 {
     public ProgramEditorControl()
     {

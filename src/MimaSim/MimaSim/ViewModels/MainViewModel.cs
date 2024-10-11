@@ -19,7 +19,7 @@ using MimaSim.Tabs;
 
 namespace MimaSim.ViewModels;
 
-public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
+public class MainViewModel : ReactiveObject, IActivatableViewModel
 {
     private bool _runMode;
     private LanguageName _selectedLanguage;
@@ -109,14 +109,14 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
     public ICommand StopCommand { get; set; }
     public ICommand ViewRawCommand { get; set; }
 
-    public ExecutionTabViewModel()
+    public MainViewModel()
     {
         OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
 
         OpenClockSettingsCommand =
             DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
 
-        HelpCommand = DialogService.CreateOpenCommand(new DocumentationTab(), new TablesViewModel());
+        HelpCommand = DialogService.CreateOpenCommand(new DocumentationTab(), new HelpPopupViewModel());
 
         StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
         StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());

@@ -21,7 +21,7 @@
                 </StackPanel>
             </rc:Show>
 
-            <rc:Show Breakpoint="MdAndUp">
+            <rc:Show Breakpoint="SmAndUp">
                 <DockPanel>
                     <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top" VerticalAlignment="Top">
                         <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" VerticalAlignment="Top" />
