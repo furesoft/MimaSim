@@ -35,6 +35,6 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
 
         HighlightingManager.Instance.RegisterHighlighting("Custom Highlighting", new string[] { ".cool" }, customHighlighting);
 
-        editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".cool");
+        editor.SyntaxHighlighting = customHighlighting;
     }
 }
