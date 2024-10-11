@@ -8,6 +8,7 @@ using AvaloniaEdit.Highlighting;
 using AvaloniaEdit.Highlighting.Xshd;
 using MimaSim.ViewModels;
 using ReactiveUI;
+using AvaloniaEdit;
 
 namespace MimaSim.Controls;
 
@@ -24,17 +25,28 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
     {
         AvaloniaXamlLoader.Load(this);
 
+        InitHighlighting();
+    }
+
+    private void InitHighlighting()
+    {
+        this.Find<TextEditor>("editor").SyntaxHighlighting = LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
+    }
+
+    private IHighlightingDefinition LoadHighlighting(string name, string extension, string filename)
+    {
         IHighlightingDefinition customHighlighting;
-        using (Stream s = GetType().Assembly.GetManifestResourceStream("MimaSim.Resources.CustomHighligting.xshd"))
+        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.{filename}.xshd"))
         {
             using (XmlReader reader = new XmlTextReader(s))
             {
                 customHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
             }
         }
+    
 
-        HighlightingManager.Instance.RegisterHighlighting("Custom Highlighting", new string[] { ".cool" }, customHighlighting);
+        HighlightingManager.Instance.RegisterHighlighting(name, new string[] { extension }, customHighlighting);
 
-        editor.SyntaxHighlighting = customHighlighting;
+        return customHighlighting;
     }
 }
