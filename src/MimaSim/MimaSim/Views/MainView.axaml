@@ -8,12 +8,15 @@
     <c:ContentDialog c:DialogService.IsHost="True">
         <c:ContentDialog.DialogContent>
             <c:DialogControl Header="Error" IsCancelEnabled="True" CommandText="OK" Command="{Binding TestCommand}">
-                Irgendetwas ist schief gelaufen. Bitte Kontaktiere den Administrator
+                Something went wrong
             </c:DialogControl>
         </c:ContentDialog.DialogContent>
 
         <DockPanel>
-            <TabControl Name="content" DockPanel.Dock="Top" />
+            <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top">
+                <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" />
+                <c:MimaControl Grid.Column="1" Height="300" HorizontalAlignment="Center" Width="500" />
+            </Grid>
         </DockPanel>
     </c:ContentDialog>
 </UserControl>

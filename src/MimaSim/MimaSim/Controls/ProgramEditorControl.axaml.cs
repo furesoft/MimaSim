@@ -30,15 +30,15 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
 
     private void InitHighlighting()
     {
-        LoadHighlighting("Maschinencode", ".hex", "Highligting_Hex");
-        LoadHighlighting("Assembler", ".asm", "Highligting_Assembler");
-        LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
+        LoadHighlighting("Maschinencode", ".hex", "Hex");
+        LoadHighlighting("Assembler", ".asm", "Assembler");
+        LoadHighlighting("Hochsprache", ".hoch", "Hochsprache");
     }
 
-    private IHighlightingDefinition LoadHighlighting(string name, string extension, string filename)
+    private void LoadHighlighting(string name, string extension, string filename)
     {
         IHighlightingDefinition customHighlighting;
-        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.{filename}.xshd"))
+        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
         {
             using (XmlReader reader = new XmlTextReader(s))
             {
@@ -47,7 +47,5 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
         }
     
         HighlightingManager.Instance.RegisterHighlighting(name, new string[] { extension }, customHighlighting);
-
-        return customHighlighting;
     }
 }

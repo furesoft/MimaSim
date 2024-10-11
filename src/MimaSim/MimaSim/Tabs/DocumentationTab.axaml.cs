@@ -5,7 +5,7 @@ using MimaSim.ViewModels;
 
 namespace MimaSim.Tabs;
 
-public partial class DocumentationTab : UserControl, IUITab
+public partial class DocumentationTab : UserControl
 {
     public DocumentationTab()
     {
