@@ -17,7 +17,7 @@
                              ShowLineNumbers="True">
         <i:Interaction.Behaviors>
             <behaviors:DocumentTextBindingBehavior Text="{Binding Source, Mode=TwoWay}"/>
-            
+            <behaviors:HighlightingBindingBehavior Highlighting="{Binding Highlighting, Mode=TwoWay}"/>
         </i:Interaction.Behaviors>
     </avaloniaEdit:TextEditor>
 

@@ -4,6 +4,8 @@ using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;
 using AvaloniaEdit.Highlighting;
 
+namespace MimaSim.Behaviors;
+
 public class HighlightingBindingBehavior : Behavior<TextEditor>
 {
     private TextEditor _textEditor;

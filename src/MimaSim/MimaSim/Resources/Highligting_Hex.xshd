@@ -5,42 +5,8 @@
 	
 	<!-- This is the main ruleset. -->
 	<RuleSet>
-		<Span color="Comment" begin="#" />
+		<Span color="Comment" begin="//" />
 		<Span color="Comment" multiline="true" begin="/\*" end="\*/" />
-		
-		<Keywords fontWeight="bold" foreground="Blue">
-			<Word>nop</Word>
-			<Word>exit</Word>
-
-			<Word>mov</Word>
-			<Word>load</Word>
-
-			<Word>cmplt</Word>
-			<Word>cmple</Word>
-			<Word>cmpeq</Word>
-			<Word>cmpge</Word>
-			<Word>cmpgt</Word>
-			<Word>cmpne</Word>
-			<Word>cmpn</Word>
-
-			<Word>mul</Word>
-			<Word>add</Word>
-			<Word>sub</Word>
-			<Word>div</Word>
-			<Word>inc</Word>
-			<Word>dec</Word>
-
-			<Word>not</Word>
-			<Word>and</Word>
-			<Word>or</Word>
-			<Word>xor</Word>
-
-			<Word>lshift</Word>
-			<Word>rshift</Word>
-
-			<Word>jmp</Word>
-			<Word>jpmc</Word>
-		</Keywords>
 		
 		<!-- Digits -->
 		<Rule foreground="DarkBlue">

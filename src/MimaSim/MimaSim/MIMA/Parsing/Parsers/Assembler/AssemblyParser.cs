@@ -15,7 +15,7 @@ public class AssemblyParser : Parser
         lexer.IgnoreWhitespace();
 
         lexer.Ignore(new MultiLineCommentIgnoreMatcher("/*", "*/"));
-        lexer.Ignore(new SingleLineCommentIgnoreMatcher("//"));
+        lexer.Ignore(new SingleLineCommentIgnoreMatcher("#"));
 
         lexer.MatchNumber(true, false);
         lexer.AddMatcher(new EnumMatcher<Registers>("#register"));

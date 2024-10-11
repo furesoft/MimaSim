@@ -30,9 +30,9 @@ public partial class ProgramEditorControl : ReactiveUserControl<ExecutionTabView
 
     private void InitHighlighting()
     {
-        this.Find<TextEditor>("editor").SyntaxHighlighting  = LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
-    
+        LoadHighlighting("Maschinencode", ".hex", "Highligting_Hex");
         LoadHighlighting("Assembler", ".asm", "Highligting_Assembler");
+        LoadHighlighting("Hochsprache", ".hoch", "Highligting_Hochsprache");
     }
 
     private IHighlightingDefinition LoadHighlighting(string name, string extension, string filename)

@@ -66,7 +66,7 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
             SampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage).ToArray();
 
             SelectedSample = null;
-            Highlighting = HighlightingManager.Instance.GetDefinitionByExtension(".hoch");
+            Highlighting = HighlightingManager.Instance.GetDefinitionByExtension(GetExtensionForLanguage(value));
         }
     }
 
@@ -203,5 +203,16 @@ public class ExecutionTabViewModel : ReactiveObject, IActivatableViewModel
 
         var cache = Locator.Current.GetService<ICache>();
         _source = cache!.Get<string>("input")!;
+    }
+
+    private string GetExtensionForLanguage(LanguageName language)
+    {
+        return language switch
+        {
+            LanguageName.Hochsprache => ".hoch",
+            LanguageName.Assembly => ".asm",
+            LanguageName.Maschinencode => ".hex",
+            _ => ".asm"
+        };
     }
 }
