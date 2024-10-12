@@ -2,15 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:c="clr-namespace:MimaSim.Controls" x:CompileBindings="False"
+             xmlns:c="clr-namespace:MimaSim.Controls"
+             xmlns:avaloniaEdit="https://github.com/avaloniaui/avaloniaedit"
+             xmlns:behaviors="clr-namespace:MimaSim.Behaviors"
+             x:CompileBindings="False"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" MinWidth="450"
              x:Class="MimaSim.Controls.Popups.DisassemblyViewPopup">
   <c:DialogControl CommandText="OK" Header="Disassembler" Command="{Binding CloseCommand}" MaxWidth="500">
     <StackPanel Spacing="2">
-      <CheckBox x:Name="hexDump">Hex Dump</CheckBox>
+      <CheckBox x:Name="hexDump" IsChecked="{Binding ShowHexDump}">Hex Dump</CheckBox>
 
-      <TextBox IsVisible="{Binding !#hexDump.IsChecked}" Text="{Binding Disassembly}" TextWrapping="Wrap" IsReadOnly="True" MinWidth="100" MinHeight="350" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-      <TextBox IsVisible="{Binding #hexDump.IsChecked}" Text="{Binding Raw}" TextWrapping="Wrap" IsReadOnly="True" MinWidth="100" MinHeight="350" MaxHeight="350" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+      <avaloniaEdit:TextEditor x:Name="editor" MinWidth="150" MaxHeight="150" MinHeight="150"
+                               FontFamily="Cascadia Code,Consolas,Menlo,Monospace" Margin="0,5,0,5" VerticalAlignment="Top"
+                               ShowLineNumbers="True" SyntaxHighlighting="Assembler">
+        <Interaction.Behaviors>
+          <behaviors:DocumentTextBindingBehavior Text="{Binding Source, Mode=TwoWay}"/>
+
+        </Interaction.Behaviors>
+      </avaloniaEdit:TextEditor>
     </StackPanel>
   </c:DialogControl>
 </UserControl>

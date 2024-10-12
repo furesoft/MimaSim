@@ -7,12 +7,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Views.MainView">
     <c:ContentDialog c:DialogService.IsHost="True">
-        <c:ContentDialog.DialogContent>
-            <c:DialogControl Header="Error" IsCancelEnabled="True" CommandText="OK" Command="{Binding TestCommand}">
-                Something went wrong
-            </c:DialogControl>
-        </c:ContentDialog.DialogContent>
-
         <rc:BreakpointProvider>
             <rc:Show Breakpoint="Xs">
                 <StackPanel Orientation="Vertical">
@@ -25,7 +19,7 @@
                 <DockPanel>
                     <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top" VerticalAlignment="Top">
                         <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" VerticalAlignment="Top" />
-                        <c:MimaControl Grid.Column="1" Height="300" HorizontalAlignment="Center" Width="500" VerticalAlignment="Top" />
+                        <c:MimaControl Grid.Column="1" Height="300" HorizontalAlignment="Center" Width="500" VerticalAlignment="Center" />
                     </Grid>
                 </DockPanel>
             </rc:Show>

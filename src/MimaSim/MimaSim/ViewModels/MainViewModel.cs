@@ -11,10 +11,12 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Xml;
 using Avalonia.Platform.Storage;
 using MimaSim.ViewModels.Mima;
 using Splat;
 using AvaloniaEdit.Highlighting;
+using AvaloniaEdit.Highlighting.Xshd;
 using MimaSim.Controls.Popups;
 using MimaSim.Tabs;
 
@@ -24,7 +26,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 {
     private bool _runMode;
     private LanguageName _selectedLanguage;
-    private string _selectedSample;
+    private string? _selectedSample;
     private string? _source;
     private string[] _sampleNames;
     private bool _isCompiled;
@@ -66,7 +68,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
         {
             this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
 
-            SampleNames = Locator.Current.GetService<SampleLoader>().GetSampleNamesFor(_selectedLanguage).ToArray();
+            SampleNames = Locator.Current.GetService<SampleLoader>()!.GetSampleNamesFor(_selectedLanguage).ToArray();
 
             SelectedSample = null;
             Highlighting = HighlightingManager.Instance.GetDefinitionByExtension(GetExtensionForLanguage(value));
@@ -74,7 +76,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
         }
     }
 
-    public string SelectedSample
+    public string? SelectedSample
     {
         get => _selectedSample;
         set
@@ -82,7 +84,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             this.RaiseAndSetIfChanged(ref _selectedSample, value);
 
             if (value == null) return;
-            Source = Locator.Current.GetService<SampleLoader>().GetSample(SelectedLanguage, SelectedSample);
+            Source = Locator.Current.GetService<SampleLoader>()!.GetSample(SelectedLanguage, SelectedSample)!;
         }
     }
 
@@ -92,7 +94,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _sampleNames, value);
     }
 
-    public string Source
+    public string? Source
     {
         get => _source;
         set
@@ -112,6 +114,8 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
     public MainViewModel()
     {
+        InitHighlighting();
+
         OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
 
         OpenClockSettingsCommand =
@@ -124,7 +128,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
         LanguageNames =
             new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>()
-                .Select(_ => Enum.Parse<LanguageName>(_)));
+                .Select(lang => Enum.Parse<LanguageName>(lang)));
 
         ViewRawCommand = ReactiveCommand.Create(() =>
         {
@@ -209,16 +213,9 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
         var cache = Locator.Current.GetService<ICache>();
         _source = cache!.Get<string>("input")!;
-        var language = cache!.Get<string>("language")!;
+        var language = cache.Get<string>("language")!;
 
-        if (language == null)
-        {
-            SelectedLanguage = LanguageNames.FirstOrDefault();
-        }
-        else
-        {
-            SelectedLanguage = Enum.Parse<LanguageName>(language);
-        }
+        SelectedLanguage = language == null ? LanguageNames.FirstOrDefault() : Enum.Parse<LanguageName>(language);
     }
 
     private string GetExtensionForLanguage(LanguageName language)
@@ -230,5 +227,26 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             LanguageName.Maschinencode => ".hex",
             _ => ".asm"
         };
+    }
+
+    private void InitHighlighting()
+    {
+        LoadHighlighting("Maschinencode", ".hex", "Hex");
+        LoadHighlighting("Assembler", ".asm", "Assembler");
+        LoadHighlighting("Hochsprache", ".hoch", "Hochsprache");
+    }
+
+    private void LoadHighlighting(string name, string extension, string filename)
+    {
+        IHighlightingDefinition customHighlighting;
+        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
+        {
+            using (XmlReader reader = new XmlTextReader(s))
+            {
+                customHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            }
+        }
+
+        HighlightingManager.Instance.RegisterHighlighting(name, new string[] { extension }, customHighlighting);
     }
 }

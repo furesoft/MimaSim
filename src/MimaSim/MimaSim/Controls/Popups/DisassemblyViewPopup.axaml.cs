@@ -11,7 +11,7 @@ public partial class DisassemblyViewPopup : ReactiveUserControl<DisassemblyPopup
     {
         DataContext = new DisassemblyPopupViewModel();
         var cc = DataContext as IActivatableViewModel;
-        cc.Activator.Activate();
+        cc!.Activator.Activate();
 
         InitializeComponent();
     }

@@ -24,28 +24,5 @@ public partial class ProgramEditorControl : ReactiveUserControl<MainViewModel>
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
-
-        InitHighlighting();
-    }
-
-    private void InitHighlighting()
-    {
-        LoadHighlighting("Maschinencode", ".hex", "Hex");
-        LoadHighlighting("Assembler", ".asm", "Assembler");
-        LoadHighlighting("Hochsprache", ".hoch", "Hochsprache");
-    }
-
-    private void LoadHighlighting(string name, string extension, string filename)
-    {
-        IHighlightingDefinition customHighlighting;
-        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
-        {
-            using (XmlReader reader = new XmlTextReader(s))
-            {
-                customHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
-            }
-        }
-    
-        HighlightingManager.Instance.RegisterHighlighting(name, new string[] { extension }, customHighlighting);
     }
 }

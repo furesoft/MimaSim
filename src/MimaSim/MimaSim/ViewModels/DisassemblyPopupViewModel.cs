@@ -3,39 +3,45 @@ using MimaSim.MIMA.Components;
 using ReactiveUI;
 using System.Linq;
 using System.Windows.Input;
+using AvaloniaEdit.Highlighting;
 using MimaSim.Core;
 
 namespace MimaSim.ViewModels;
 
-public class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
+public partial class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
 {
-    private string _raw;
-    private string _disassembly;
+    private string? _source;
+
+    private bool _showHexDump;
 
     public DisassemblyPopupViewModel()
     {
-        CloseCommand = ReactiveCommand.Create(() => DialogService.Close());
-        Raw = GetRawString();
-        Disassembly = Disassemble();
+        CloseCommand = ReactiveCommand.Create(DialogService.Close);
+        ShowHexDump = false;
+    }
+
+    public bool ShowHexDump
+    {
+        get => _showHexDump;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _showHexDump, value);
+
+            Source = value ? GetRawString() : Disassemble();
+        }
     }
 
     public ViewModelActivator Activator => new();
 
     public ICommand CloseCommand { get; set; }
 
-    public string Raw
+    public string? Source
     {
-        get => _raw;
-        set { this.RaiseAndSetIfChanged(ref _raw, value); }
+        get => _source;
+        set => this.RaiseAndSetIfChanged(ref _source, value);
     }
 
-    public string Disassembly
-    {
-        get => _disassembly;
-        set { this.RaiseAndSetIfChanged(ref _disassembly, value); }
-    }
-
-    private string Disassemble()
+    private static string Disassemble()
     {
         var raw = CPU.Instance.Program;
         var disassembler = new Disassembler(raw);
@@ -43,7 +49,7 @@ public class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
         return disassembler.Disassemble();
     }
 
-    private string GetRawString()
+    private static string GetRawString()
     {
         var raw = CPU.Instance.Program;
 
