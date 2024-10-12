@@ -28,22 +28,17 @@ public partial class App : Application
 
         Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
 
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        switch (ApplicationLifetime)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                //DataContext = new MainViewModel()
-            };
-            Locator.CurrentMutable.Register(() => desktop.MainWindow.StorageProvider);
+            case IClassicDesktopStyleApplicationLifetime desktop:
+                desktop.MainWindow = new MainWindow();
+                Locator.CurrentMutable.Register(() => desktop.MainWindow.StorageProvider);
+                break;
 
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView
-            {
-                //DataContext = new MainViewModel()
-            };
-            Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+            case ISingleViewApplicationLifetime singleViewPlatform:
+                singleViewPlatform.MainView = new MainView();
+                Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+                break;
         }
 
         base.OnFrameworkInitializationCompleted();

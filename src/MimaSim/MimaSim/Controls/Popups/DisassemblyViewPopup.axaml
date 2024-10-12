@@ -17,7 +17,6 @@
                                ShowLineNumbers="True" SyntaxHighlighting="Assembler">
         <Interaction.Behaviors>
           <behaviors:DocumentTextBindingBehavior Text="{Binding Source, Mode=TwoWay}"/>
-
         </Interaction.Behaviors>
       </avaloniaEdit:TextEditor>
     </StackPanel>

@@ -137,10 +137,10 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
-        var storage = Locator.Current.GetService<IStorageProvider>();
 
         LoadCommand = ReactiveCommand.Create(async () =>
         {
+            var storage = Locator.Current.GetService<IStorageProvider>();
             var filenames = await storage!.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Programm laden"
@@ -153,6 +153,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
         SaveCommand = ReactiveCommand.Create(async () =>
         {
+            var storage = Locator.Current.GetService<IStorageProvider>();
             var file = await storage!.SaveFilePickerAsync(new() { Title = "Programm speichern" });
             await using var writer = new StreamWriter(await file!.OpenWriteAsync());
 
@@ -239,7 +240,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     private void LoadHighlighting(string name, string extension, string filename)
     {
         IHighlightingDefinition customHighlighting;
-        using (Stream s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
+        using (Stream? s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
         {
             using (XmlReader reader = new XmlTextReader(s))
             {
