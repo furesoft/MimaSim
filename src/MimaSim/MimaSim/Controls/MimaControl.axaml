@@ -17,6 +17,8 @@
       <c:DataBusControl Height="25" Canvas.Top="192" Canvas.Left="110" />
 
       <w:ControlUnitWrapper Canvas.Top="20" Canvas.Left="13" />
+
+      <w:StackWrapper Canvas.Top="55" Canvas.Left="510" />
     </Canvas>
   </Border>
 </UserControl>

@@ -10,7 +10,7 @@
         <rc:BreakpointProvider>
             <rc:Show Breakpoint="Xs">
                 <StackPanel Orientation="Vertical">
-                    <c:MimaControl Height="300" HorizontalAlignment="Center" Width="500" />
+                    <c:MimaControl Height="300" HorizontalAlignment="Center" Width="600" />
                     <c:ProgramEditorControl Height="300" Margin="5" />
                 </StackPanel>
             </rc:Show>
@@ -19,7 +19,7 @@
                 <DockPanel>
                     <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top" VerticalAlignment="Top">
                         <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" VerticalAlignment="Top" />
-                        <c:MimaControl Grid.Column="1" Height="300" HorizontalAlignment="Center" Width="500" VerticalAlignment="Center" />
+                        <c:MimaControl Grid.Column="1" Height="300" HorizontalAlignment="Center" Width="600" VerticalAlignment="Center" />
                     </Grid>
                 </DockPanel>
             </rc:Show>

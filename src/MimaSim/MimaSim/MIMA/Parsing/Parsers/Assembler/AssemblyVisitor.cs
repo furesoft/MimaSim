@@ -90,6 +90,8 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
             Mnemnonics.CMPGT => OpCodes.CMPGT,
             Mnemnonics.ADD => OpCodes.ADD,
             Mnemnonics.SUB => OpCodes.SUB,
+            Mnemnonics.PUSH => OpCodes.PUSH,
+            Mnemnonics.POP => OpCodes.POP,
             _ => throw new ArgumentOutOfRangeException(nameof(instruction.Mnemnonic), $@"No opcode defined for mnemonic: {instruction.Mnemnonic}")
         };
     }

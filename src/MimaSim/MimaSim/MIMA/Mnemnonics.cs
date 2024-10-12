@@ -12,4 +12,6 @@ public enum Mnemnonics
     CMPGT,
     ADD,
     SUB,
+    PUSH,
+    POP
 }

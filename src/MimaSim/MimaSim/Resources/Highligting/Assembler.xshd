@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<SyntaxDefinition name="Custom Highlighting" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+<SyntaxDefinition name="Assembler" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
 	<Color name="Comment" foreground="Green" />
 	<Color name="String" foreground="Blue" />
 	
@@ -13,7 +13,10 @@
 			<Word>exit</Word>
 
 			<Word>mov</Word>
-			<Word>load</Word>
+            <Word>load</Word>
+
+            <Word>push</Word>
+            <Word>pop</Word>
 
 			<Word>cmplt</Word>
 			<Word>cmple</Word>

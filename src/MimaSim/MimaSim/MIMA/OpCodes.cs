@@ -46,4 +46,7 @@ public enum OpCodes
     MOV_MEM_REG = 0x41,
     MOV_REG_MEM = 0x42,
     MOV_MEM_MEM = 0x43,
+
+    PUSH = 0x44,
+    POP = 0x45,
 }

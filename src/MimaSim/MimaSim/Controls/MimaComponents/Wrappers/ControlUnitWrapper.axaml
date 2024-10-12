@@ -13,8 +13,10 @@
 
     <c:ClockControl Name="clock" Tag="{me:GetClockFrequency}" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" />
 
-    <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="45" Canvas.Top="220" Width="15" Height="25" State="None" />
+    <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="15" Canvas.Top="220" Width="15" Height="25" State="None" />
+    <c:RegisterControl Register="IAR" Canvas.Left="5" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
 
-    <c:RegisterControl Register="IAR" Canvas.Left="35" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
+    <c:BusControl b:BusRegistry.Id="controlunit_sp" Canvas.Left="65" Canvas.Top="220" Width="15" Height="25" State="None" />
+    <c:RegisterControl Register="SP" Canvas.Left="55" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
   </Canvas>
 </UserControl>

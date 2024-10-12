@@ -10,33 +10,39 @@ namespace MimaSim.MIMA.Components;
 
 public class CPU
 {
-    public static CPU Instance = new();
+    public readonly static CPU Instance = new();
 
-    public Register Accumulator = new("Accumulator");
-    public ALU ALU;
-    public Clock Clock = new(250);
-    public ControlUnit ControlUnit = new();
-    public Bus DataBus = new();
+    public readonly Register Accumulator = new("Accumulator");
+    public readonly ALU ALU;
+    public readonly Clock Clock = new(250);
+    public readonly ControlUnit ControlUnit = new();
+    public readonly Bus DataBus = new();
 
-    public static Dictionary<OpCodes, IInstruction> Instructions = new();
-    public Memory Memory = new((int)Math.Pow(2, 8));
+    public readonly static Dictionary<OpCodes, IInstruction> Instructions = new();
+    public readonly Memory Memory = new((int)Math.Pow(2, 8));
+    public readonly Stack Stack;
 
-    public Register SAR = new("SAR");
-    public Register SDR = new("SDR");
+    public readonly Register SAR = new("SAR");
+    public readonly Register SDR = new("SDR");
 
-    public Register X = new("X");
+    public readonly Register X = new("X");
 
-    public Register Y = new("Y");
+    public readonly Register Y = new("Y");
 
-    public byte[] Program { get; set; }
+    public byte[]? Program { get; set; }
 
     public CPU()
     {
         ALU = new ALU(this);
+        Stack = new Stack(this);
 
         ControlUnit.IAR.Bus.Subscribe(_ =>
         {
             BusRegistry.ActivateBus("controlunit_iar");
+        });
+        ControlUnit.SP.Bus.Subscribe(_ =>
+        {
+            BusRegistry.ActivateBus("controlunit_sp");
         });
 
         X.Bus.Subscribe(_ =>
