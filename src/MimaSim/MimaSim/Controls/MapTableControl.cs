@@ -5,7 +5,7 @@ using System;
 
 namespace MimaSim.Controls;
 
-public class MapTableControl : ItemsControl, IStyleable
+public class MapTableControl : ItemsControl
 {
     public static readonly StyledProperty<string> LeftHeaderProperty =
         AvaloniaProperty.Register<MapTableControl, string>(nameof(LeftHeader));
@@ -24,6 +24,4 @@ public class MapTableControl : ItemsControl, IStyleable
         get => GetValue(RightHeaderProperty);
         set => SetValue(RightHeaderProperty, value);
     }
-
-    Type IStyleable.StyleKey => typeof(MapTableControl);
 }

@@ -1,6 +1,5 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.MIMA.Visitors;
 using MimaSim.MIMA.Parsing.Parsers.Assembler;
 
 namespace MimaSim.MIMA.Parsing.SourceTranslators;

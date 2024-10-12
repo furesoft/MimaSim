@@ -5,9 +5,9 @@ using MimaSim.ViewModels;
 
 namespace MimaSim.Tabs;
 
-public partial class DocumentationTab : UserControl
+public partial class HelpPopup : UserControl
 {
-    public DocumentationTab()
+    public HelpPopup()
     {
         InitializeComponent();
     }

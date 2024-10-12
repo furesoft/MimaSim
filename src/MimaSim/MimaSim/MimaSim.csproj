@@ -34,11 +34,27 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <Compile Update="Controls\Popups\DisassemblyViewPopup.axaml.cs">
+          <DependentUpon>DisassemblyViewPopupControl.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Controls\Popups\ErrorPopup.axaml.cs">
+          <DependentUpon>ErrorPopupControl.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Controls\Popups\HelpPopup.axaml.cs">
+          <DependentUpon>DocumentationTab.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="MIMA\Parsing\Parsers\High\AST\" />
+      <Folder Include="MIMA\Parsing\Parsers\High\Parselets\" />
     </ItemGroup>
 </Project>

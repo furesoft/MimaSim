@@ -1,13 +1,12 @@
-﻿using MimaSim.Core.Parsing;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.AST;
 using MimaSim.Core.Parsing.AST.Nodes;
 using MimaSim.Core.Parsing.Emiting;
-using MimaSim.MIMA.Parsing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace MimaSim.MIMA.Visitors;
+namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class HighParserVisitor : INodeVisitor, IEmitter
 {

@@ -2,7 +2,6 @@
 using MimaSim.Core.Parsing;
 using MimaSim.MIMA.Parsing.Parsers;
 using MimaSim.MIMA.Parsing.Parsers.Raw;
-using MimaSim.MIMA.Visitors;
 
 namespace MimaSim.MIMA.Parsing.SourceTranslators;
 

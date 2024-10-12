@@ -5,7 +5,7 @@ using System;
 
 namespace MimaSim.Controls;
 
-public class ContentDialog : ContentControl, IStyleable
+public class ContentDialog : ContentControl
 {
     public static readonly StyledProperty<object> DialogContentProperty =
         AvaloniaProperty.Register<ContentDialog, object>("DialogContent");
@@ -24,6 +24,4 @@ public class ContentDialog : ContentControl, IStyleable
         get => GetValue(IsOpenedProperty);
         set => SetValue(IsOpenedProperty, value);
     }
-
-    Type IStyleable.StyleKey => typeof(ContentDialog);
 }

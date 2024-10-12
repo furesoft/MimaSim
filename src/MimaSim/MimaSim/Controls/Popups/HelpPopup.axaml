@@ -2,11 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:me="clr-namespace:MimaSim.MarkupExtensions;assembly=MimaSim"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim"
              Design.Width="700" Design.Height="500" x:CompileBindings="False"
              mc:Ignorable="d" Tag="{DynamicResource help}"
-             x:Class="MimaSim.Tabs.DocumentationTab">
+             x:Class="MimaSim.Tabs.HelpPopup">
   <UserControl.Resources>
     <DataTemplate x:Key="cellTemplate">
       <Grid Margin="0,0,5,0" ColumnDefinitions="*,*">

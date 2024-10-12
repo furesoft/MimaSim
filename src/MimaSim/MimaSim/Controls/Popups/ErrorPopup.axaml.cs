@@ -3,11 +3,11 @@ using Avalonia.ReactiveUI;
 using MimaSim.ViewModels;
 using ReactiveUI;
 
-namespace MimaSim.Controls.MimaComponents.Popups;
+namespace MimaSim.Controls.Popups;
 
-public partial class ErrorPopupControl : ReactiveUserControl<ErrorPopupViewModel>
+public partial class ErrorPopup : ReactiveUserControl<ErrorPopupViewModel>
 {
-    public ErrorPopupControl()
+    public ErrorPopup()
     {
         DataContext = new ErrorPopupViewModel();
 

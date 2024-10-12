@@ -1,12 +1,12 @@
-﻿using MimaSim.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MimaSim.Core;
 using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.AST;
 using MimaSim.Core.Parsing.Tokenizer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace MimaSim.MIMA.Parsing.Parsers;
+namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class HighParser : IParser
 {

@@ -3,11 +3,11 @@ using Avalonia.ReactiveUI;
 using MimaSim.ViewModels;
 using ReactiveUI;
 
-namespace MimaSim.Controls.MimaComponents.Popups;
+namespace MimaSim.Controls.Popups;
 
-public partial class DisassemblyViewPopupControl : ReactiveUserControl<DisassemblyPopupViewModel>
+public partial class DisassemblyViewPopup : ReactiveUserControl<DisassemblyPopupViewModel>
 {
-    public DisassemblyViewPopupControl()
+    public DisassemblyViewPopup()
     {
         DataContext = new DisassemblyPopupViewModel();
         var cc = DataContext as IActivatableViewModel;

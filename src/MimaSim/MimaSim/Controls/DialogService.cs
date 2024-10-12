@@ -3,12 +3,13 @@ using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.ViewModels;
 using ReactiveUI;
 using System.Windows.Input;
+using MimaSim.Controls.Popups;
 
 namespace MimaSim.Controls;
 
 public static class DialogService
 {
-    private static ContentDialog _host;
+    private static ContentDialog? _host;
 
     public static void Close()
     {
@@ -57,7 +58,7 @@ public static class DialogService
 
     public static void OpenError(string message)
     {
-        Open(new ErrorPopupControl(), new ErrorPopupViewModel { Message = message });
+        Open(new ErrorPopup(), new ErrorPopupViewModel { Message = message });
     }
 
     public static void SetIsHost(ContentDialog target, bool value)
