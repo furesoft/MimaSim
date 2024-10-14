@@ -1,13 +1,17 @@
-﻿using Avalonia;
+﻿using System.Collections.Generic;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
+using MimaSim.MIMA.Components;
 
 namespace MimaSim.Controls.MimaComponents;
 
 public partial class DisplayControl : UserControl
 {
+    public Dictionary<(int, int), Border> Pixels { get; set; } = [];
+
     public DisplayControl()
     {
         InitializeComponent();
@@ -16,6 +20,8 @@ public partial class DisplayControl : UserControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         var grid = this.Find<Grid>("grid");
+        CPU.Instance.Display.SetDisplay(this);
+
         var stack = new StackPanel()
         {
             Spacing = 0,
@@ -40,8 +46,7 @@ public partial class DisplayControl : UserControl
                     Height = 25,
                     Background = Brushes.White
                 };
-                Grid.SetRow(cell, row);
-                Grid.SetColumn(cell, col);
+                Pixels.Add((col, row), cell);
 
                 colStack.Children.Add(cell);
             }

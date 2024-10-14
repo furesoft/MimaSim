@@ -25,9 +25,7 @@ public class CPU
     public readonly Register SAR = new("SAR");
     public readonly Register SDR = new("SDR");
 
-    public readonly Register DC = new("DC"); // Display Color
-    public readonly Register DX = new("DX"); // Display x-pos
-    public readonly Register DY = new("DY"); // Display y-pos
+    public readonly Display Display = new();
 
     public readonly Register X = new("X");
 
