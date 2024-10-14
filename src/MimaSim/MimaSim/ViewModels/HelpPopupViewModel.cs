@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MimaSim.Controls;
+using MimaSim.MIMA.Components;
 using MimaSim.Models;
 
 namespace MimaSim.ViewModels;
@@ -13,12 +14,18 @@ public class HelpPopupViewModel : ReactiveObject
 {
     public ICommand CloseCommand { get; set; }
 
+    public ObservableCollection<TableCellModel> OpcodesTableItems { get; }
+    public ObservableCollection<TableCellModel> RegisterTableItems { get; }
+    public ObservableCollection<TableCellModel> MovTableItems { get; }
+    public ObservableCollection<TableCellModel> ColorCodes { get; }
+
     public HelpPopupViewModel()
     {
         CloseCommand = ReactiveCommand.Create(DialogService.Close);
 
         RegisterTableItems = [];
         OpcodesTableItems = [];
+        ColorCodes = [];
         MovTableItems = [
             new("Reg -> Reg", "40"),
             new("Mem -> Reg", "41"),
@@ -31,6 +38,13 @@ public class HelpPopupViewModel : ReactiveObject
         {
             string item = registerNames[i];
             RegisterTableItems.Add(new(item, $"{(int)Enum.Parse<Registers>(item, true):D2}"));
+        }
+
+        var colorNames = Enum.GetNames<DisplayColor>();
+        for (int i = 0; i < colorNames.Length; i++)
+        {
+            string item = colorNames[i];
+            ColorCodes.Add(new(item, $"{(int)Enum.Parse<DisplayColor>(item, true):D2}"));
         }
 
         foreach (var item in Enum.GetNames<OpCodes>())
@@ -50,7 +64,5 @@ public class HelpPopupViewModel : ReactiveObject
         }
     }
 
-    public ObservableCollection<TableCellModel> OpcodesTableItems { get; }
-    public ObservableCollection<TableCellModel> RegisterTableItems { get; }
-    public ObservableCollection<TableCellModel> MovTableItems { get; }
+
 }
