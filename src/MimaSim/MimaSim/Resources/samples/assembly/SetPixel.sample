@@ -1,0 +1,4 @@
+﻿load 0x01
+mov accumulator, dx
+mov accumulator, dy
+mov accumulator, dc
