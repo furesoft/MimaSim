@@ -4,10 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mimaComponents="clr-namespace:MimaSim.Controls.MimaComponents"
              xmlns:core="clr-namespace:MimaSim.Core"
+             xmlns:me="clr-namespace:MimaSim.MarkupExtensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.DisplayWrapper">
    <Canvas Height="320" Width="600">
-       <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="100" State="None" core:BusRegistry.Id="base_to_display" />
+       <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="base_to_display" />
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="display_to_dc" />
        <mimaComponents:DisplayControl Canvas.Left="0" Canvas.Top="100" />
+
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="335" Width="49" Height="15" State="None" core:BusRegistry.Id="display_to_dx" />
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="335" Width="15" Height="40" State="None" core:BusRegistry.Id="dx" />
+       <mimaComponents:RegisterControl Register="DX" Canvas.Left="325" Canvas.Top="75" me:RegisterConnector.IsConnected="True" />
+
+       <mimaComponents:RegisterControl Register="DY" Canvas.Left="375" Canvas.Top="75" me:RegisterConnector.IsConnected="True" />
+
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="400" Width="49" Height="15" State="None" core:BusRegistry.Id="display_to_dc" />
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="435" Width="15" Height="40" State="None" core:BusRegistry.Id="dc" />
+       <mimaComponents:RegisterControl Register="DC" Canvas.Left="425" Canvas.Top="75" me:RegisterConnector.IsConnected="True" />
    </Canvas>
 </UserControl>
