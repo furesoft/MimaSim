@@ -8,7 +8,6 @@
              x:Class="MimaSim.Controls.MimaControl">
   <Border BorderBrush="Black" BorderThickness="1">
     <Canvas>
-
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="190" />
       <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
 
@@ -19,6 +18,8 @@
       <w:ControlUnitWrapper Canvas.Top="20" Canvas.Left="13" />
 
       <w:StackWrapper Canvas.Top="55" Canvas.Left="510" />
+
+      <w:DisplayWrapper Canvas.Top="210" Canvas.Left="12" />
     </Canvas>
   </Border>
 </UserControl>

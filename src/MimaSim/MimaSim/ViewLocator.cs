@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using MimaSim.ViewModels;
@@ -19,6 +20,7 @@ public class ViewLocator : IDataTemplate
         {
             return (Control)Activator.CreateInstance(type)!;
         }
+
 
         return new TextBlock { Text = "Not Found: " + name };
     }

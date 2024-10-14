@@ -1,0 +1,13 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mimaComponents="clr-namespace:MimaSim.Controls.MimaComponents"
+             xmlns:core="clr-namespace:MimaSim.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MimaSim.Controls.MimaComponents.Wrappers.DisplayWrapper">
+   <Canvas Height="320" Width="600">
+       <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="100" State="None" core:BusRegistry.Id="base_to_display" />
+       <mimaComponents:DisplayControl Canvas.Left="0" Canvas.Top="100" />
+   </Canvas>
+</UserControl>
