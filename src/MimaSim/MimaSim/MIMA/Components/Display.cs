@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia.Media;
+using Avalonia.Threading;
 using MimaSim.Controls.MimaComponents;
 
 namespace MimaSim.MIMA.Components;
@@ -25,7 +26,7 @@ public class Display
 
         var color = (DisplayColor)colorIndex;
 
-        _displayControl.Pixels[(x, y)].Background = GetBrush(color);
+        Dispatcher.UIThread.InvokeAsync(() => _displayControl.Pixels[(x, y)].Background = GetBrush(color));
     }
 
     private IBrush GetBrush(DisplayColor color)

@@ -9,6 +9,7 @@ public enum Registers
     IAR,
     SAR,
     SDR,
+    SP,
     DC,
     DX,
     DY

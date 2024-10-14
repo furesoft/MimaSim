@@ -56,6 +56,11 @@ public class CPU
         {
             BusRegistry.Activate("cu->y");
         });
+
+        Display.DC.Bus.Subscribe(_ =>
+        {
+            Display.SetPixel();
+        });
     }
 
     static CPU()
