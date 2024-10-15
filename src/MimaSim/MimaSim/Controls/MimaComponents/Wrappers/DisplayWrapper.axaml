@@ -13,7 +13,7 @@
        <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="base_to_display" />
        <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="display_to_dc" />
 
-       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="335" Width="49" Height="15" State="None" core:BusRegistry.Id="display_to_dx" />
+       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="336" Width="49" Height="15" State="None" core:BusRegistry.Id="display_to_dx" />
        <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="335" Width="15" Height="40" State="None" core:BusRegistry.Id="dx" />
        <mimaComponents:RegisterControl Register="DX" Canvas.Left="325" Canvas.Top="75" me:RegisterConnector.IsConnected="True" />
 

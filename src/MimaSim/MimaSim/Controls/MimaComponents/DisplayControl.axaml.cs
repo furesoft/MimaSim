@@ -28,30 +28,30 @@ public partial class DisplayControl : UserControl
             Orientation = Orientation.Vertical
         };
 
-        for (int col = 0; col < 5; col++)
+        for (int row = 0; row < 6; row++)
         {
-            var colStack = new StackPanel()
+            var rowStack = new StackPanel()
             {
                 Spacing = 0,
                 Orientation = Orientation.Horizontal
             };
 
-            for (int row = 0; row < 22; row++)
+            for (int col = 0; col < 28; col++)
             {
                 var cell = new Border
                 {
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(0),
-                    Width = 25,
-                    Height = 25,
+                    Width = 20,
+                    Height = 20,
                     Background = Brushes.White
                 };
-                Pixels.Add((col, row), cell);
+                Pixels.Add((row, col), cell);
 
-                colStack.Children.Add(cell);
+                rowStack.Children.Add(cell);
             }
 
-            stack.Children.Add(colStack);
+            stack.Children.Add(rowStack);
         }
 
         grid.Children.Add(stack);
