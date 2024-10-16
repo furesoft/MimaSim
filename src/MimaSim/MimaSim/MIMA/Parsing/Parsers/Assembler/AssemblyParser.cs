@@ -30,9 +30,11 @@ public class AssemblyParser : Parser
         def.Register(Name, new NameParselet());
         def.Register("#register", new EnumParselet<Registers>());
         def.Register("#mnemnonic", new InstructionParselet());
+        def.Register("macro", new MacroParselet());
 
         def.Prefix("&", tag: "address");
         def.Prefix("$", tag: "labelref");
+        def.Prefix("%", tag: "macroarg");
         def.Postfix(":", tag: "label");
     }
 }
