@@ -1,4 +1,12 @@
-﻿load 0x01
-mov accumulator, dx
-mov accumulator, dy
-mov accumulator, dc
+﻿macro setPixel(%x, %y,%c) { 
+	load %x
+	mov accumulator, dx
+	
+	load %y
+	mov accumulator, dy
+	
+	load %c
+	mov accumulator, dc
+}
+
+setPixel 2, 5, 1

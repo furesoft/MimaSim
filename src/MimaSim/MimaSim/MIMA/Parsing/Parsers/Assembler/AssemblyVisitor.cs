@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 using Silverfly;
 using Silverfly.Nodes;
 using Silverfly.Nodes.Operators;
+using Silverfly.Text;
 using LiteralNode = Silverfly.Nodes.LiteralNode;
 
 namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
@@ -12,6 +15,7 @@ namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
 public class AssemblyVisitor : NodeVisitor, IEmitter
 {
     private readonly ByteCodeEmitter _emitter = new();
+    private Dictionary<string, MacroNode> _macros = new();
 
     public AssemblyVisitor()
     {
@@ -22,6 +26,54 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         For<PrefixOperatorNode>(VisitAddress, op => op.Tag == "address");
         For<PrefixOperatorNode>(VisitLabelRef, op => op.Tag == "labelref");
         For<PostfixOperatorNode>(VisitLabel, op => op.Tag == "label");
+        For<MacroNode>(VisitMacroDefinition);
+    }
+
+    private void VisitMacroInvocation(MacroInvocationNode invocation)
+    {
+        if (_macros.TryGetValue(invocation.NameToken.Text.ToString(), out var macro))
+        {
+            if (invocation.Arguments.Count != macro.Parameters.Count)
+            {
+                throw new ArgumentException($"Macro '{macro.NameToken.Text}' expects {macro.Parameters.Count} arguments but received {invocation.Arguments.Count}.");
+            }
+
+            var parameterMap = new Dictionary<string, AstNode>();
+            for (int i = 0; i < macro.Parameters.Count; i++)
+            {
+               /* var paramName = macro.Parameters[i].Text.ToString();
+                var arg = invocation.Arguments[i];
+                parameterMap[paramName] = arg;*/
+            }
+
+            ExpandMacroBody(macro.Body, parameterMap);
+        }
+        else
+        {
+            invocation.AddMessage(MessageSeverity.Error, $"Undefined macro: {invocation.NameToken.Text}");
+        }
+    }
+
+    private void ExpandMacroBody(ImmutableList<AstNode> body, Dictionary<string, AstNode> parameterMap)
+    {
+        foreach (var child in body)
+        {
+            SubstituteParameters(child, parameterMap);
+            child.Accept(this);
+        }
+    }
+
+    private void SubstituteParameters(AstNode node, Dictionary<string, AstNode> parameterMap)
+    {
+        if (node is NameNode nameNode && parameterMap.TryGetValue(nameNode.Token.Text.ToString(), out var replacement))
+        {
+            //node.ReplaceWith(replacement);
+        }
+    }
+
+    private void VisitMacroDefinition(MacroNode macro)
+    {
+        _macros.TryAdd(macro.NameToken.Text.ToString(), macro);
     }
 
     private void VisitLabel(PostfixOperatorNode labelDef)

@@ -27,10 +27,10 @@ public class AssemblyParser : Parser
         def.Block(SOF, EOF);
 
         def.Register(Number, new NumberParselet());
-        def.Register(Name, new NameParselet());
         def.Register("#register", new EnumParselet<Registers>());
         def.Register("#mnemnonic", new InstructionParselet());
         def.Register("macro", new MacroParselet());
+        def.Register(Name, new MacroInvocationParselet());
 
         def.Prefix("&", tag: "address");
         def.Prefix("$", tag: "labelref");
