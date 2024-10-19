@@ -20,6 +20,8 @@ public class AssemblyParser : Parser
         lexer.MatchNumber(true, false);
         lexer.AddMatcher(new EnumMatcher<Registers>("#register"));
         lexer.AddMatcher(new EnumMatcher<Mnemnonics>("#mnemnonic"));
+
+        lexer.AddSymbols("(", ")");
     }
 
     protected override void InitParser(ParserDefinition def)
@@ -34,7 +36,6 @@ public class AssemblyParser : Parser
 
         def.Prefix("&", tag: "address");
         def.Prefix("$", tag: "labelref");
-        def.Prefix("%", tag: "macroarg");
         def.Postfix(":", tag: "label");
     }
 }

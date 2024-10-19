@@ -10,6 +10,7 @@ public class InstructionParselet : IPrefixParselet
 {
     public AstNode Parse(Parser parser, Token token)
     {
+        using var context = parser.Lexer.OpenContext<InstructionContext>();
         var args = parser.ParseSeperated(",");
 
         return new InstructionNode(Enum.Parse<Mnemnonics>(token.Text.Span, true), args)

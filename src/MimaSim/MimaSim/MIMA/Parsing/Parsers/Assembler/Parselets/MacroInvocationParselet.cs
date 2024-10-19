@@ -9,9 +9,14 @@ public class MacroInvocationParselet : IPrefixParselet
 {
     public AstNode Parse(Parser parser, Token token)
     {
-        var args = parser.ParseSeperated(",");
+        if (!parser.Lexer.IsContext<InstructionContext>())
+        {
+            var args = parser.ParseSeperated(",");
 
-        return new MacroInvocationNode(token, args)
-            .WithRange(token, parser.LookAhead(0));
+            return new MacroInvocationNode(token, args)
+                .WithRange(token, parser.LookAhead(0));
+        }
+
+        return new NameNode(token).WithRange(token);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.Emiting;
+using MimaSim.MIMA.Components;
 using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 using Silverfly;
 using Silverfly.Nodes;
@@ -12,10 +14,11 @@ using LiteralNode = Silverfly.Nodes.LiteralNode;
 
 namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
 
-public class AssemblyVisitor : NodeVisitor, IEmitter
+public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
 {
     private readonly ByteCodeEmitter _emitter = new();
     private Dictionary<string, MacroNode> _macros = new();
+
 
     public AssemblyVisitor()
     {
@@ -27,9 +30,16 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         For<PrefixOperatorNode>(VisitLabelRef, op => op.Tag == "labelref");
         For<PostfixOperatorNode>(VisitLabel, op => op.Tag == "label");
         For<MacroNode>(VisitMacroDefinition);
+        For<MacroInvocationNode>(VisitMacroInvocation);
+        For<NameNode>(VisitArg);
+
+        foreach (var register in Enum.GetNames<Registers>())
+        {
+            Scope.Root.Define(register, Enum.Parse<Registers>(register));
+        }
     }
 
-    private void VisitMacroInvocation(MacroInvocationNode invocation)
+    private void VisitMacroInvocation(MacroInvocationNode invocation, Scope scope)
     {
         if (_macros.TryGetValue(invocation.NameToken.Text.ToString(), out var macro))
         {
@@ -38,15 +48,20 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
                 throw new ArgumentException($"Macro '{macro.NameToken.Text}' expects {macro.Parameters.Count} arguments but received {invocation.Arguments.Count}.");
             }
 
-            var parameterMap = new Dictionary<string, AstNode>();
+            var subscope = scope.NewSubScope();
+
             for (int i = 0; i < macro.Parameters.Count; i++)
             {
-               /* var paramName = macro.Parameters[i].Text.ToString();
-                var arg = invocation.Arguments[i];
-                parameterMap[paramName] = arg;*/
+                var paramName = ((NameNode)macro.Parameters[i]).Token.Text.ToString();
+                var arg = ((LiteralNode)invocation.Arguments[i]).Value;
+
+                subscope.Define(paramName, arg);
             }
 
-            ExpandMacroBody(macro.Body, parameterMap);
+            foreach (var node in macro.Body)
+            {
+                Visit(node, subscope);
+            }
         }
         else
         {
@@ -54,29 +69,12 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         }
     }
 
-    private void ExpandMacroBody(ImmutableList<AstNode> body, Dictionary<string, AstNode> parameterMap)
-    {
-        foreach (var child in body)
-        {
-            SubstituteParameters(child, parameterMap);
-            child.Accept(this);
-        }
-    }
-
-    private void SubstituteParameters(AstNode node, Dictionary<string, AstNode> parameterMap)
-    {
-        if (node is NameNode nameNode && parameterMap.TryGetValue(nameNode.Token.Text.ToString(), out var replacement))
-        {
-            //node.ReplaceWith(replacement);
-        }
-    }
-
-    private void VisitMacroDefinition(MacroNode macro)
+    private void VisitMacroDefinition(MacroNode macro, Scope scope)
     {
         _macros.TryAdd(macro.NameToken.Text.ToString(), macro);
     }
 
-    private void VisitLabel(PostfixOperatorNode labelDef)
+    private void VisitLabel(PostfixOperatorNode labelDef, Scope scope)
     {
         if (labelDef.Expr is NameNode nameNode)
         {
@@ -84,7 +82,7 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         }
     }
 
-    private void VisitLabelRef(PrefixOperatorNode labelRef)
+    private void VisitLabelRef(PrefixOperatorNode labelRef, Scope scope)
     {
         if (labelRef.Expr is NameNode nameNode)
         {
@@ -92,7 +90,7 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         }
     }
 
-    private void VisitAddress(PrefixOperatorNode obj)
+    private void VisitAddress(PrefixOperatorNode obj, Scope scope)
     {
         if (obj.Expr is LiteralNode literalNode && literalNode.Value is short addr)
         {
@@ -100,31 +98,46 @@ public class AssemblyVisitor : NodeVisitor, IEmitter
         }
     }
 
-    public override void Visit(BlockNode block)
+    public override void Visit(BlockNode block, Scope scope)
     {
         foreach (var child in block.Children)
         {
-            child.Accept(this);
+            child.Accept(this, scope);
         }
     }
 
-    public void VisitLiteral(LiteralNode lit)
+    public void VisitLiteral(LiteralNode lit, Scope scope)
     {
         _emitter.EmitLiteral(Convert.ToInt16(lit.Value));
     }
 
-    public void VisitRegister(LiteralNode lit)
+    public void VisitRegister(LiteralNode lit, Scope scope)
     {
         _emitter.EmitRegister((Registers)lit.Value);
     }
 
-    public void Visit(InstructionNode instruction)
+    public void VisitArg(NameNode arg, Scope scope)
+    {
+       var value = scope.Get(arg.Token.Text.ToString());
+
+       switch (value)
+       {
+           case Registers r:
+               _emitter.EmitRegister(r);
+               break;
+           case int v:
+               _emitter.EmitLiteral(Convert.ToInt16(v));
+               break;
+       }
+    }
+
+    public void Visit(InstructionNode instruction, Scope scope)
     {
         _emitter.EmitOpcode(SelectOpCode(instruction));
 
         foreach (var arg in instruction.Args)
         {
-            arg.Accept(this);
+            arg.Accept(this, scope);
         }
     }
 
