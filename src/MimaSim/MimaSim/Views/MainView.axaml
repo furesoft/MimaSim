@@ -2,27 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:rc="using:Responsive.Avalonia"
              xmlns:c="clr-namespace:MimaSim.Controls;assembly=MimaSim" x:CompileBindings="False"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Views.MainView">
     <c:ContentDialog c:DialogService.IsHost="True">
-        <rc:BreakpointProvider>
-            <rc:Show Breakpoint="Xs">
-                <StackPanel Orientation="Vertical">
-                    <c:MimaControl Height="460" HorizontalAlignment="Center" Width="600" />
-                    <c:ProgramEditorControl Height="300" Margin="5" />
-                </StackPanel>
-            </rc:Show>
-
-            <rc:Show Breakpoint="SmAndUp">
-                <DockPanel>
-                    <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" VerticalAlignment="Top" />
-                        <c:MimaControl Grid.Column="1" Height="460" HorizontalAlignment="Center" Width="600" VerticalAlignment="Center" />
-                    </Grid>
-                </DockPanel>
-            </rc:Show>
-        </rc:BreakpointProvider>
+        <DockPanel>
+            <Grid ColumnDefinitions="450,*" DockPanel.Dock="Top" VerticalAlignment="Top">
+                <c:ProgramEditorControl Grid.Column="0" Height="450" Margin="5" VerticalAlignment="Top" />
+                <c:MimaControl Grid.Column="1" Height="460" HorizontalAlignment="Center" Width="600"
+                               VerticalAlignment="Center" />
+            </Grid>
+        </DockPanel>
     </c:ContentDialog>
 </UserControl>

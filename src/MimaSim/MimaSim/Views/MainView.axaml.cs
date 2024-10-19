@@ -1,6 +1,4 @@
-using Avalonia.Controls;
 using Avalonia.ReactiveUI;
-using MimaSim.Core;
 using MimaSim.ViewModels;
 using ReactiveUI;
 
@@ -14,9 +12,6 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
 
         InitializeComponent();
 
-        this.WhenActivated(_ =>
-        {
-
-        });
+        this.WhenActivated(_ => { });
     }
 }
