@@ -4,7 +4,7 @@ using Silverfly.Nodes;
 
 namespace MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 
-public record InstructionNode(Token Mnemnonic, ImmutableList<AstNode> Args) : AstNode
+public record MacroNode(Token NameToken, ImmutableList<AstNode> Parameters, ImmutableList<AstNode> Body) : AstNode
 {
-    
+
 }

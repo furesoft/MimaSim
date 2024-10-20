@@ -12,7 +12,7 @@ public class AssemblySourceTextTranslator : ISourceTextTranslator
         var ast = parser.Parse(input);
 
         var visitor = new AssemblyVisitor();
-        ast.Tree.Accept(visitor);
+        ast.Tree.Accept(visitor, Scope.Root);
 
         return visitor.GetRaw();
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
+﻿using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 using Silverfly;
 using Silverfly.Nodes;
 using Silverfly.Parselets;
@@ -10,9 +9,15 @@ public class InstructionParselet : IPrefixParselet
 {
     public AstNode Parse(Parser parser, Token token)
     {
-        var args = parser.ParseSeperated(",");
+        if (!parser.Lexer.IsContext<InstructionContext>())
+        {
+            using var context = parser.Lexer.OpenContext<InstructionContext>();
 
-        return new InstructionNode(Enum.Parse<Mnemnonics>(token.Text.Span, true), args)
-            .WithRange(token, parser.LookAhead(0));
+            var args = parser.ParseSeperated(",");
+            return new InstructionNode(token, args)
+                .WithRange(token, parser.LookAhead(0));
+        }
+
+        return new NameParselet().Parse(parser, token);
     }
 }

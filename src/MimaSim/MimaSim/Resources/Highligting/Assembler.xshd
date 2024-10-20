@@ -43,6 +43,8 @@
 
 			<Word>jmp</Word>
 			<Word>jpmc</Word>
+
+			<Word>macro</Word>
 		</Keywords>
 		
 		<!-- Digits -->

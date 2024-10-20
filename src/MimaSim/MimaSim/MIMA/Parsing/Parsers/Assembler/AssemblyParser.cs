@@ -18,8 +18,8 @@ public class AssemblyParser : Parser
         lexer.Ignore(new SingleLineCommentIgnoreMatcher("#"));
 
         lexer.MatchNumber(true, false);
-        lexer.AddMatcher(new EnumMatcher<Registers>("#register"));
-        lexer.AddMatcher(new EnumMatcher<Mnemnonics>("#mnemnonic"));
+
+        lexer.AddSymbols("(", ")", ",", "{", "}");
     }
 
     protected override void InitParser(ParserDefinition def)
@@ -27,9 +27,9 @@ public class AssemblyParser : Parser
         def.Block(SOF, EOF);
 
         def.Register(Number, new NumberParselet());
-        def.Register(Name, new NameParselet());
         def.Register("#register", new EnumParselet<Registers>());
-        def.Register("#mnemnonic", new InstructionParselet());
+        def.Register(Name, new InstructionParselet());
+        def.Register("macro", new MacroParselet());
 
         def.Prefix("&", tag: "address");
         def.Prefix("$", tag: "labelref");
