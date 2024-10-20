@@ -1,12 +1,12 @@
-﻿macro setPixel(%x, %y,%c) { 
-	load %x
+﻿macro setPixel(x, y, c) {
+	load x
 	mov accumulator, dx
 	
-	load %y
+	load y
 	mov accumulator, dy
 	
-	load %c
+	load c
 	mov accumulator, dc
 }
 
-setPixel 2, 5, 1
+setPixel 2, 5, GREEN

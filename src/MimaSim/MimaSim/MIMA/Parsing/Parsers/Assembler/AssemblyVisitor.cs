@@ -19,7 +19,6 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
     private readonly ByteCodeEmitter _emitter = new();
     private Dictionary<string, MacroNode> _macros = new();
 
-
     public AssemblyVisitor()
     {
         For<BlockNode>(Visit);
@@ -30,22 +29,26 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         For<PrefixOperatorNode>(VisitLabelRef, op => op.Tag == "labelref");
         For<PostfixOperatorNode>(VisitLabel, op => op.Tag == "label");
         For<MacroNode>(VisitMacroDefinition);
-        For<MacroInvocationNode>(VisitMacroInvocation);
         For<NameNode>(VisitArg);
 
         foreach (var register in Enum.GetNames<Registers>())
         {
-            Scope.Root.Define(register, Enum.Parse<Registers>(register));
+            Scope.Root.Define(register.ToLower(), Enum.Parse<Registers>(register));
+        }
+
+        foreach (var color in Enum.GetNames<DisplayColor>())
+        {
+            Scope.Root.Define(color.ToUpper(), (short)Enum.Parse<DisplayColor>(color));
         }
     }
 
-    private void VisitMacroInvocation(MacroInvocationNode invocation, Scope scope)
+    private void VisitMacroInvocation(InstructionNode invocation, Scope scope)
     {
-        if (_macros.TryGetValue(invocation.NameToken.Text.ToString(), out var macro))
+        if (_macros.TryGetValue(invocation.Mnemnonic.Text.ToString(), out var macro))
         {
-            if (invocation.Arguments.Count != macro.Parameters.Count)
+            if (invocation.Args.Count != macro.Parameters.Count)
             {
-                throw new ArgumentException($"Macro '{macro.NameToken.Text}' expects {macro.Parameters.Count} arguments but received {invocation.Arguments.Count}.");
+                throw new ArgumentException($"Macro '{macro.NameToken.Text}' expects {macro.Parameters.Count} arguments but received {invocation.Args.Count}.");
             }
 
             var subscope = scope.NewSubScope();
@@ -53,20 +56,30 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
             for (int i = 0; i < macro.Parameters.Count; i++)
             {
                 var paramName = ((NameNode)macro.Parameters[i]).Token.Text.ToString();
-                var arg = ((LiteralNode)invocation.Arguments[i]).Value;
+                var arg = GetArgumentValue(invocation.Args[i], subscope);
 
                 subscope.Define(paramName, arg);
             }
 
             foreach (var node in macro.Body)
             {
-                Visit(node, subscope);
+                node.Accept(this, subscope);
             }
         }
         else
         {
-            invocation.AddMessage(MessageSeverity.Error, $"Undefined macro: {invocation.NameToken.Text}");
+            invocation.AddMessage(MessageSeverity.Error, $"Undefined macro: {invocation.Mnemnonic.Text}");
         }
+    }
+
+    private static object? GetArgumentValue(AstNode node, Scope scope)
+    {
+        return node switch
+        {
+            LiteralNode n => n.Value,
+            NameNode name => scope.Get(name.Token.Text.ToString()),
+            _ => throw new ArgumentException($"Undefined argument: {node}"),
+        };
     }
 
     private void VisitMacroDefinition(MacroNode macro, Scope scope)
@@ -82,11 +95,24 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         }
     }
 
+    private Dictionary<string, short> _labelAddressMap = new();
+    private List<(int, string)> _unresolvedLabels = new();
+
     private void VisitLabelRef(PrefixOperatorNode labelRef, Scope scope)
     {
         if (labelRef.Expr is NameNode nameNode)
         {
-            //todo: emit 0 address and adjust later in GetRaw()
+            var labelName = nameNode.Token.Text.ToString();
+
+            if (_labelAddressMap.TryGetValue(labelName, out var address))
+            {
+                _emitter.EmitLiteral(address);
+            }
+            else
+            {
+                _unresolvedLabels.Add((_emitter.Position, labelName));
+                _emitter.EmitLiteral(0);
+            }
         }
     }
 
@@ -125,27 +151,37 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
            case Registers r:
                _emitter.EmitRegister(r);
                break;
-           case int v:
+           case ulong v:
                _emitter.EmitLiteral(Convert.ToInt16(v));
+               break;
+           case short s:
+               _emitter.EmitLiteral(s);
                break;
        }
     }
 
     public void Visit(InstructionNode instruction, Scope scope)
     {
-        _emitter.EmitOpcode(SelectOpCode(instruction));
-
-        foreach (var arg in instruction.Args)
+        if (Enum.TryParse<Mnemnonics>(instruction.Mnemnonic.Text.ToString(), true, out var mnemnonic))
         {
-            arg.Accept(this, scope);
+            _emitter.EmitOpcode(SelectOpCode(instruction, scope, mnemnonic));
+
+            foreach (var arg in instruction.Args)
+            {
+                arg.Accept(this, scope);
+            }
+        }
+        else
+        {
+            VisitMacroInvocation(instruction, scope);
         }
     }
 
-    private OpCodes SelectOpCode(InstructionNode instruction)
+    private OpCodes SelectOpCode(InstructionNode instruction, Scope scope, Mnemnonics mnemnonic)
     {
-        return instruction.Mnemnonic switch
+        return mnemnonic switch
         {
-            Mnemnonics.MOV => SelectMovOpCode(instruction),
+            Mnemnonics.MOV => SelectMovOpCode(instruction, scope),
             Mnemnonics.LOAD => OpCodes.LOAD,
             Mnemnonics.JMP => OpCodes.JMP,
             Mnemnonics.JMPC => OpCodes.JMPC,
@@ -161,18 +197,18 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         };
     }
 
-    private OpCodes SelectMovOpCode(InstructionNode instruction)
+    private OpCodes SelectMovOpCode(InstructionNode instruction, Scope scope)
     {
-        if (IsRegisterArg(instruction.Args[0]) && IsRegisterArg(instruction.Args[1]))
+        if (IsRegisterArg(instruction.Args[0], scope) && IsRegisterArg(instruction.Args[1], scope))
         {
             return OpCodes.MOV_REG_REG;
         }
 
-        if (IsRegisterArg(instruction.Args[0]) && IsMemArg(instruction.Args[1]))
+        if (IsRegisterArg(instruction.Args[0], scope) && IsMemArg(instruction.Args[1]))
         {
             return OpCodes.MOV_REG_MEM;
         }
-        if (IsMemArg(instruction.Args[0]) && IsRegisterArg(instruction.Args[1]))
+        if (IsMemArg(instruction.Args[0]) && IsRegisterArg(instruction.Args[1], scope))
         {
             return OpCodes.MOV_REG_MEM;
         }
@@ -184,9 +220,11 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         throw new InvalidOperationException("Unknown opcode");
     }
 
-    private static bool IsRegisterArg(AstNode node)
+    private static bool IsRegisterArg(AstNode node, Scope scope)
     {
-        return node is LiteralNode { Value: Registers };
+        var name = ((NameNode)node).Token.Text.ToString();
+
+        return scope.Get(name.ToLower()) is Registers;
     }
 
     private static bool IsMemArg(AstNode node)
