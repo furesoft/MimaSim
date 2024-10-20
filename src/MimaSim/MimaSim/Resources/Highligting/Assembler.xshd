@@ -11,6 +11,7 @@
 		<Keywords fontWeight="bold" foreground="Blue">
 			<Word>nop</Word>
 			<Word>exit</Word>
+			<Word>clk</Word>
 
 			<Word>mov</Word>
             <Word>load</Word>

@@ -3,6 +3,7 @@ using Avalonia.Markup.Xaml;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.MIMA.Components;
 using System;
+using Avalonia.Threading;
 
 namespace MimaSim.MarkupExtensions;
 
@@ -16,7 +17,10 @@ public class GetClockFrequency : MarkupExtension
         {
             CPU.Instance.Clock.FrequencyChanged += (_) =>
             {
-                ToolTip.SetTip(clock, _);
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    ToolTip.SetTip(clock, _);
+                });
             };
 
             return CPU.Instance.Clock.Frequency;
