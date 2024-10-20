@@ -4,6 +4,7 @@ public enum OpCodes
 {
     NOP = 0x00,
     EXIT = 0x01,
+    CLK = 0x02,
 
     LOAD = 0x04,
 

@@ -191,6 +191,8 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
             Mnemnonics.SUB => OpCodes.SUB,
             Mnemnonics.PUSH => OpCodes.PUSH,
             Mnemnonics.POP => OpCodes.POP,
+            Mnemnonics.EXIT => OpCodes.EXIT,
+            Mnemnonics.CLK => OpCodes.CLK,
             _ => throw new ArgumentOutOfRangeException(nameof(instruction.Mnemnonic), $@"No opcode defined for mnemonic: {instruction.Mnemnonic}")
         };
     }

@@ -13,5 +13,7 @@ public enum Mnemnonics
     ADD,
     SUB,
     PUSH,
-    POP
+    POP,
+    EXIT,
+    CLK
 }

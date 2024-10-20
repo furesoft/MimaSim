@@ -41,7 +41,7 @@ public class Clock
     {
         CPU.Instance.Step();
 
-        System.Threading.Thread.Sleep(750);
+        System.Threading.Thread.Sleep(10);
 
         BusRegistry.DeactivateAll();
     }
