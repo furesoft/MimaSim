@@ -19,7 +19,7 @@ public class AssemblyParser : Parser
 
         lexer.MatchNumber(true, false);
 
-        lexer.AddSymbols("(", ")", ",", "{", "}");
+        lexer.AddSymbols("(", ")", ",", "{", "}", "/*", "*/");
     }
 
     protected override void InitParser(ParserDefinition def)
@@ -27,7 +27,6 @@ public class AssemblyParser : Parser
         def.Block(SOF, EOF);
 
         def.Register(Number, new NumberParselet());
-        def.Register("#register", new EnumParselet<Registers>());
         def.Register(Name, new InstructionParselet());
         def.Register("macro", new MacroParselet());
 
