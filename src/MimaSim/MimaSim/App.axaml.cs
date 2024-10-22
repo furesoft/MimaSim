@@ -3,16 +3,14 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform.Storage;
 using MimaSim.Core;
-using MimaSim.MIMA.Components;
 using MimaSim.Views;
 using ReactiveUI;
 using Splat;
 
 namespace MimaSim;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -37,7 +35,8 @@ public partial class App : Application
 
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainView();
-                Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+                Locator.CurrentMutable.Register(
+                    () => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
                 break;
         }
 

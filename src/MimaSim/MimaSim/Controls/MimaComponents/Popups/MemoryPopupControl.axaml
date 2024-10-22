@@ -7,21 +7,21 @@
              x:CompileBindings="False"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Popups.MemoryPopupControl">
-  <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Speicher">
-    <ScrollViewer>
-      <ItemsControl ItemsSource="{Binding MemoryCells}" ScrollViewer.VerticalScrollBarVisibility="Auto">
-        <ItemsControl.DataTemplates>
-          <DataTemplate DataType="{x:Type models:MemoryCellModel}">
-            <Border BorderBrush="Black" BorderThickness="1">
-              <Grid Margin="2">
-                <TextBlock Text="{Binding Key}" HorizontalAlignment="Left" />
+    <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Speicher">
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding MemoryCells}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="{x:Type models:MemoryCellModel}">
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <Grid Margin="2">
+                                <TextBlock Text="{Binding Key}" HorizontalAlignment="Left" />
 
-                <TextBlock Text="{Binding Value}" HorizontalAlignment="Right" />
-              </Grid>
-            </Border>
-          </DataTemplate>
-        </ItemsControl.DataTemplates>
-      </ItemsControl>
-    </ScrollViewer>
-  </c:DialogControl>
+                                <TextBlock Text="{Binding Value}" HorizontalAlignment="Right" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </ScrollViewer>
+    </c:DialogControl>
 </UserControl>

@@ -1,5 +1,5 @@
-﻿using MimaSim.MIMA.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA;
 
@@ -9,27 +9,18 @@ public static class RegisterMap
 
     public static void AddRegister(string name, Register register)
     {
-        if (!_map.ContainsKey(name))
-        {
-            _map.Add(name, register);
-        }
+        if (!_map.ContainsKey(name)) _map.Add(name, register);
     }
 
     public static Register GetRegister(string name)
     {
-        if (_map.ContainsKey(name))
-        {
-            return _map[name];
-        }
+        if (_map.ContainsKey(name)) return _map[name];
 
         return null;
     }
 
     public static void InitAllRegisters()
     {
-        foreach (var reg in _map)
-        {
-            reg.Value.SetValue(0);
-        }
+        foreach (var reg in _map) reg.Value.SetValue(0);
     }
 }

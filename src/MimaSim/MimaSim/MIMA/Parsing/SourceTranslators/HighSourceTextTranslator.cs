@@ -1,8 +1,6 @@
 ﻿using MimaSim.Controls;
 using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.MIMA.Parsing.Parsers;
-using System;
 using MimaSim.MIMA.Parsing.Parsers.High;
 
 namespace MimaSim.MIMA.Parsing.SourceTranslators;
@@ -22,12 +20,10 @@ public class HighSourceTextTranslator : ISourceTextTranslator
 
             return visitor.GetRaw();
         }
-        else
-        {
-            DialogService.OpenError(string.Join('\n', parser.Diagnostics.GetAll()));
-            diagnostics = parser.Diagnostics;
 
-            return [];
-        }
+        DialogService.OpenError(string.Join('\n', parser.Diagnostics.GetAll()));
+        diagnostics = parser.Diagnostics;
+
+        return [];
     }
 }

@@ -10,9 +10,9 @@ namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class HighParserVisitor : INodeVisitor, IEmitter
 {
+    private readonly Stack<IAstNode> _expressionStack = new();
     private readonly RegisterAllocator _registerAllocator = new();
     private ByteCodeEmitter _emitter = new();
-    private readonly Stack<IAstNode> _expressionStack = new();
 
     public byte[] GetRaw()
     {
@@ -32,7 +32,6 @@ public class HighParserVisitor : INodeVisitor, IEmitter
     public void Visit(CallNode call)
     {
         if (!call.IsEmpty)
-        {
             switch (call.Type)
             {
                 case AstCallNodeType.BinaryExpresson:
@@ -43,13 +42,11 @@ public class HighParserVisitor : INodeVisitor, IEmitter
                         var arg = args.First();
 
                         if (arg is LiteralNode argLit && argLit.Value is short argVal)
-                        {
                             if (argVal == 1 || argVal == 0)
                             {
                                 _emitter.EmitInstruction(OpCodes.LOAD, argVal);
                                 break;
                             }
-                        }
                     }
 
                     TraverseTree(call.Args.First());
@@ -79,15 +76,11 @@ public class HighParserVisitor : INodeVisitor, IEmitter
 
                 case AstCallNodeType.Group:
                 {
-                    foreach (var line in call.Args)
-                    {
-                        Visit((CallNode)line);
-                    }
+                    foreach (var line in call.Args) Visit((CallNode)line);
 
                     break;
                 }
             }
-        }
     }
 
     private byte[] BuildBody(CallNode node)
@@ -97,10 +90,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
 
         _emitter = tmpEmitter;
 
-        foreach (CallNode body in node.Args)
-        {
-            Visit(body);
-        }
+        foreach (CallNode body in node.Args) Visit(body);
 
         var code = _emitter.ToArray();
 
@@ -180,20 +170,16 @@ public class HighParserVisitor : INodeVisitor, IEmitter
             var top = _expressionStack.Pop();
 
             if (top is LiteralNode ln)
-            {
                 EmitLiteral(ln);
-            }
             else
-            {
                 EmitArithmeticOperator(((CallNode)top).Type);
-            }
         }
     }
 
     private void EmitLiteral(LiteralNode lit)
     {
         Visit(lit);
-        Registers register = _registerAllocator.Allocate();
+        var register = _registerAllocator.Allocate();
 
         _emitter.EmitInstruction(OpCodes.MOV_REG_REG, Registers.Accumulator, register);
     }
@@ -217,7 +203,8 @@ public class HighParserVisitor : INodeVisitor, IEmitter
     {
         if (regNode.Type == AstCallNodeType.RegisterExpression)
         {
-            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value, Registers.Accumulator);
+            _emitter.EmitInstruction(OpCodes.MOV_REG_REG, (Registers)((LiteralNode)regNode.Args.First()).Value,
+                Registers.Accumulator);
             _emitter.EmitInstruction(OpCodes.MOV_REG_MEM);
             _emitter.EmitRegister(Registers.Accumulator);
             _emitter.EmitLiteral(adress);
@@ -260,7 +247,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
     private void VisitLoopStatement(CallNode call)
     {
         var label = _emitter.DefineLabel();
-       // _emitter.MarkLabel(label);
+        // _emitter.MarkLabel(label);
 
         Visit((CallNode)call.Args.First());
 
@@ -316,10 +303,7 @@ public class HighParserVisitor : INodeVisitor, IEmitter
         }
         else if (value is CallNode cn)
         {
-            if (cn.Args.First() is LiteralNode ln && ln.Value is string)
-            {
-                return;
-            }
+            if (cn.Args.First() is LiteralNode ln && ln.Value is string) return;
 
             VisitExpression(cn, memoryAddress);
         }

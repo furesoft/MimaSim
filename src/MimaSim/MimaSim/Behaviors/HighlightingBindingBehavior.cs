@@ -8,10 +8,10 @@ namespace MimaSim.Behaviors;
 
 public class HighlightingBindingBehavior : Behavior<TextEditor>
 {
-    private TextEditor _textEditor;
-
     public static readonly StyledProperty<IHighlightingDefinition> HighlightingProperty =
         AvaloniaProperty.Register<HighlightingBindingBehavior, IHighlightingDefinition>(nameof(Highlighting));
+
+    private TextEditor _textEditor;
 
     public IHighlightingDefinition Highlighting
     {
@@ -35,18 +35,12 @@ public class HighlightingBindingBehavior : Behavior<TextEditor>
     {
         base.OnDetaching();
 
-        if (_textEditor != null)
-        {
-            _textEditor.TextChanged -= TextChanged;
-        }
+        if (_textEditor != null) _textEditor.TextChanged -= TextChanged;
     }
 
     private void TextChanged(object sender, EventArgs eventArgs)
     {
-        if (_textEditor != null && _textEditor.Document != null)
-        {
-           Highlighting = _textEditor.SyntaxHighlighting;
-        }
+        if (_textEditor != null && _textEditor.Document != null) Highlighting = _textEditor.SyntaxHighlighting;
     }
 
     private void HighlightingPropertyChanged(IHighlightingDefinition highlighting)

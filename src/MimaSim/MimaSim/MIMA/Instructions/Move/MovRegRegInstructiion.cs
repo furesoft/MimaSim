@@ -6,6 +6,11 @@ namespace MimaSim.MIMA.Instructions.Move;
 
 public class MovRegRegInstructiion : IInstruction, IDisassemblyInstruction
 {
+    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
+    {
+        builder.AppendLine($"mov {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
+    }
+
     public OpCodes OpCode => OpCodes.MOV_REG_REG;
 
     public bool Invoke(CPU cpu)
@@ -17,10 +22,5 @@ public class MovRegRegInstructiion : IInstruction, IDisassemblyInstruction
         cpu.SetRegister(registerTo, value);
 
         return false;
-    }
-
-    public void Dissassemble(StringBuilder builder, Disassembler disassembler)
-    {
-        builder.AppendLine($"mov {disassembler.FetchRegister()}, {disassembler.FetchRegister()}");
     }
 }

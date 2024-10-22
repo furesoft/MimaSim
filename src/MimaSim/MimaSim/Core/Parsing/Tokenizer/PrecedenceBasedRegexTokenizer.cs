@@ -21,7 +21,7 @@ public class PrecedenceBasedRegexTokenizer
             .ToList();
 
         TokenMatch lastMatch = null;
-        for (int i = 0; i < groupedByIndex.Count; i++)
+        for (var i = 0; i < groupedByIndex.Count; i++)
         {
             var bestMatch = groupedByIndex[i].OrderBy(x => x.Precedence).First();
             if (lastMatch != null && bestMatch.StartIndex < lastMatch.EndIndex)

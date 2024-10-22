@@ -7,16 +7,13 @@ namespace MimaSim.Core.Parsing.Tokenizer;
 public sealed class TokenEnumerator(IEnumerable<Token> tokenStream)
 {
     private readonly Token[] _tokens = tokenStream.ToArray();
-    private int _position = 0;
+    private int _position;
 
     public Token Current
     {
         get
         {
-            if (_position < _tokens.Length)
-            {
-                return _tokens[_position];
-            }
+            if (_position < _tokens.Length) return _tokens[_position];
 
             return Token.EndOfFile;
         }
@@ -34,10 +31,7 @@ public sealed class TokenEnumerator(IEnumerable<Token> tokenStream)
 
     public Token Peek(int offset = 0)
     {
-        if ((_position + offset) <= (_tokens.Length - 1))
-        {
-            return _tokens[_position + offset];
-        }
+        if (_position + offset <= _tokens.Length - 1) return _tokens[_position + offset];
 
         return Token.EndOfFile;
     }

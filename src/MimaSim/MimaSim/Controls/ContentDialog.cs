@@ -1,7 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Styling;
-using System;
 
 namespace MimaSim.Controls;
 

@@ -50,4 +50,7 @@ public enum OpCodes
 
     PUSH = 0x44,
     POP = 0x45,
+
+    FLAG = 0x46,
+    HASFLAG = 0x47
 }

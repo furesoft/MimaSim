@@ -1,26 +1,26 @@
 <busactivations>
-  <activator id="cu->x">
-    <setbus id="alu_input_x2" />
-    <mainbus value="42" />
-  </activator>
-  <activator id="cu->y">
-    <setbus id="alu_input_y2" />
-    <mainbus value="55" />
-  </activator>
-  <activator id="cu->accu">
-    <setbus id="base_to_accu" />
-    <mainbus value="42" />
-  </activator>
-  <activator id="cu->mem">
-    <setbus id="memory_data2" />
-    <setbus id="memory_adresss2" />
-    <mainbus value="100" />
-  </activator>
+    <activator id="cu->x">
+        <setbus id="alu_input_x2"/>
+        <mainbus value="42"/>
+    </activator>
+    <activator id="cu->y">
+        <setbus id="alu_input_y2"/>
+        <mainbus value="55"/>
+    </activator>
+    <activator id="cu->accu">
+        <setbus id="base_to_accu"/>
+        <mainbus value="42"/>
+    </activator>
+    <activator id="cu->mem">
+        <setbus id="memory_data2"/>
+        <setbus id="memory_adresss2"/>
+        <mainbus value="100"/>
+    </activator>
 
-  <activator id="alu->cu">
-    <setbus id="alu_command_to_base_part" />
-    <setbus id="alu_command_part_to_base" />
+    <activator id="alu->cu">
+        <setbus id="alu_command_to_base_part"/>
+        <setbus id="alu_command_part_to_base"/>
 
-    <mainbus value="35" />
-  </activator>
+        <mainbus value="35"/>
+    </activator>
 </busactivations>

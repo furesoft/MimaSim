@@ -45,6 +45,9 @@
 			<Word>jmp</Word>
 			<Word>jpmc</Word>
 
+			<Word>flag</Word>
+			<Word>hasflag</Word>
+
 			<Word>macro</Word>
 		</Keywords>
 		

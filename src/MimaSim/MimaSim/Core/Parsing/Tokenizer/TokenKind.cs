@@ -57,5 +57,5 @@ public enum TokenKind
     StringLiteral,
     ArrayKeyword,
     CloseSquare,
-    OpenSquare,
+    OpenSquare
 }

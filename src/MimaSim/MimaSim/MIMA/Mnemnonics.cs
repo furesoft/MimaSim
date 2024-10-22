@@ -15,5 +15,7 @@ public enum Mnemnonics
     PUSH,
     POP,
     EXIT,
-    CLK
+    CLK,
+    FLAG,
+    HASFLAG
 }

@@ -1,6 +1,6 @@
-﻿using MimaSim.MIMA.Parsing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using MimaSim.MIMA.Parsing;
 
 namespace MimaSim.Core.Parsing.AST.Nodes;
 

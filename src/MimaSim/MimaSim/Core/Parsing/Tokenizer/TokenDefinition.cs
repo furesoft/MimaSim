@@ -10,9 +10,8 @@ public class TokenDefinition(TokenKind returnsToken, string regexPattern, int pr
     public IEnumerable<TokenMatch> FindMatches(string inputString)
     {
         var matches = _regex.Matches(inputString);
-        for (int i = 0; i < matches.Count; i++)
-        {
-            yield return new TokenMatch()
+        for (var i = 0; i < matches.Count; i++)
+            yield return new TokenMatch
             {
                 StartIndex = matches[i].Index,
                 EndIndex = matches[i].Index + matches[i].Length,
@@ -20,6 +19,5 @@ public class TokenDefinition(TokenKind returnsToken, string regexPattern, int pr
                 Value = matches[i].Value,
                 Precedence = precedence
             };
-        }
     }
 }

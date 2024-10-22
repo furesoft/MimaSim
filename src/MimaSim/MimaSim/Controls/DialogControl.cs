@@ -1,9 +1,9 @@
-﻿using Avalonia;
+﻿using System;
+using System.Windows.Input;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
 using ReactiveUI;
-using System;
-using System.Windows.Input;
 
 namespace MimaSim.Controls;
 

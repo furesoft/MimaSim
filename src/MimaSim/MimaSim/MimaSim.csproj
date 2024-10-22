@@ -10,21 +10,21 @@
     <ItemGroup>
         <AvaloniaResource Include="Resources\**"/>
         <EmbeddedResource Include="Resources\**"/>
-        <AvaloniaResource Include="favicon.ico" />
-        <EmbeddedResource Include="favicon.ico" />
+        <AvaloniaResource Include="favicon.ico"/>
+        <EmbeddedResource Include="favicon.ico"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.4" />
-        <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.1.0" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.4" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.4" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.4" />
+        <PackageReference Include="Avalonia" Version="11.1.4"/>
+        <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.1.0"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.4"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.4"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.4"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.4" />
-        <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.1.0.4" />
-        <PackageReference Include="ReactiveUI" Version="20.1.63" />
-        <PackageReference Include="Silverfly" Version="1.0.74" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.4"/>
+        <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.1.0.4"/>
+        <PackageReference Include="ReactiveUI" Version="20.1.63"/>
+        <PackageReference Include="Silverfly" Version="1.0.74"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -34,16 +34,16 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
         <Compile Update="Controls\Popups\DisassemblyViewPopup.axaml.cs">
-          <DependentUpon>DisassemblyViewPopupControl.axaml</DependentUpon>
-          <SubType>Code</SubType>
+            <DependentUpon>DisassemblyViewPopupControl.axaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
         <Compile Update="Controls\Popups\ErrorPopup.axaml.cs">
-          <DependentUpon>ErrorPopupControl.axaml</DependentUpon>
-          <SubType>Code</SubType>
+            <DependentUpon>ErrorPopupControl.axaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
         <Compile Update="Controls\Popups\HelpPopup.axaml.cs">
-          <DependentUpon>DocumentationTab.axaml</DependentUpon>
-          <SubType>Code</SubType>
+            <DependentUpon>DocumentationTab.axaml</DependentUpon>
+            <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
     <ItemGroup>
@@ -53,7 +53,7 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="MIMA\Parsing\Parsers\High\AST\" />
-      <Folder Include="MIMA\Parsing\Parsers\High\Parselets\" />
+        <Folder Include="MIMA\Parsing\Parsers\High\AST\"/>
+        <Folder Include="MIMA\Parsing\Parsers\High\Parselets\"/>
     </ItemGroup>
 </Project>

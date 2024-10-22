@@ -6,9 +6,10 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Name="register" Width="35" Height="25"
              x:Class="MimaSim.Controls.MimaComponents.RegisterControl">
 
-  <Border BorderBrush="Black" BorderThickness="1">
-    <Grid>
-      <Button Content="{Binding ElementName=register, Path=Register}" Classes="clickable"  FontSize="15" VerticalAlignment="Center" Command="{me:OpenRegisterPopup}" />
-    </Grid>
-  </Border>
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Button Content="{Binding ElementName=register, Path=Register}" Classes="clickable" FontSize="15"
+                    VerticalAlignment="Center" Command="{me:OpenRegisterPopup}" />
+        </Grid>
+    </Border>
 </UserControl>

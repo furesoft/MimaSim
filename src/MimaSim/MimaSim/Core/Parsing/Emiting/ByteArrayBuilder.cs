@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace MimaSim.Core.Parsing.Emiting;
 
@@ -31,6 +32,12 @@ public class ByteArrayBuilder : IDisposable
 
     public int Length => (int)_store.Length;
 
+    public void Dispose()
+    {
+        _store.Close();
+        _store.Dispose();
+    }
+
     public void Append(bool b)
     {
         _store.WriteByte(b ? streamTrue : streamFalse);
@@ -55,7 +62,7 @@ public class ByteArrayBuilder : IDisposable
     public void Append(char[] c, bool addLength = true)
     {
         if (addLength) Append(c.Length);
-        Append(System.Text.Encoding.Unicode.GetBytes(c));
+        Append(Encoding.Unicode.GetBytes(c));
     }
 
     public void Append(DateTime dt)
@@ -65,7 +72,7 @@ public class ByteArrayBuilder : IDisposable
 
     public void Append(decimal d)
     {
-        int[] bits = decimal.GetBits(d);
+        var bits = decimal.GetBits(d);
         Append(bits[0]);
         Append(bits[1]);
         Append(bits[2]);
@@ -104,7 +111,7 @@ public class ByteArrayBuilder : IDisposable
 
     public void Append(string s, bool addLength = true)
     {
-        byte[] data = System.Text.Encoding.Unicode.GetBytes(s);
+        var data = Encoding.Unicode.GetBytes(s);
         if (addLength) Append(data.Length);
         AddBytes(data);
     }
@@ -129,12 +136,6 @@ public class ByteArrayBuilder : IDisposable
         _store.Close();
         _store.Dispose();
         _store = new MemoryStream();
-    }
-
-    public void Dispose()
-    {
-        _store.Close();
-        _store.Dispose();
     }
 
     public void ReplaceAt(int index, byte value)
@@ -195,7 +196,7 @@ public class ByteArrayBuilder : IDisposable
 
     public byte[] GetByteArray()
     {
-        int length = GetInt();
+        var length = GetInt();
         return GetBytes(length);
     }
 
@@ -206,8 +207,8 @@ public class ByteArrayBuilder : IDisposable
 
     public char[] GetCharArray()
     {
-        int length = GetInt();
-        return System.Text.Encoding.Unicode.GetChars(GetBytes(length));
+        var length = GetInt();
+        return Encoding.Unicode.GetChars(GetBytes(length));
     }
 
     public DateTime GetDateTime()
@@ -253,8 +254,8 @@ public class ByteArrayBuilder : IDisposable
 
     public string GetString()
     {
-        int length = GetInt();
-        return System.Text.Encoding.Unicode.GetString(GetBytes(length));
+        var length = GetInt();
+        return Encoding.Unicode.GetString(GetBytes(length));
     }
 
     public uint GetUint()
@@ -284,7 +285,7 @@ public class ByteArrayBuilder : IDisposable
 
     public byte[] ToArray()
     {
-        byte[] data = new byte[Length];
+        var data = new byte[Length];
         Array.Copy(_store.GetBuffer(), data, Length);
         return data;
     }
@@ -301,15 +302,13 @@ public class ByteArrayBuilder : IDisposable
 
     private byte[] GetBytes(int length)
     {
-        byte[] data = new byte[length];
+        var data = new byte[length];
         if (length > 0)
         {
-            int read = _store.Read(data, 0, length);
-            if (read != length)
-            {
-                throw new ApplicationException("Buffer did not contain " + length + " bytes");
-            }
+            var read = _store.Read(data, 0, length);
+            if (read != length) throw new ApplicationException("Buffer did not contain " + length + " bytes");
         }
+
         return data;
     }
 }

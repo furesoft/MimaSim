@@ -9,13 +9,12 @@ namespace MimaSim.Core;
 
 public class Disassembler(byte[] program)
 {
-    private static Dictionary<OpCodes, IDisassemblyInstruction> Instructions = new();
-    private int Position { get; set; }
-    private byte[] Program { get; } = program;
+    private static readonly Dictionary<OpCodes, IDisassemblyInstruction> Instructions = new();
 
     static Disassembler()
     {
-        var types = Assembly.GetCallingAssembly().GetTypes().Where(_ => _.GetInterfaces().Contains(typeof(IDisassemblyInstruction)));
+        var types = Assembly.GetCallingAssembly().GetTypes()
+            .Where(_ => _.GetInterfaces().Contains(typeof(IDisassemblyInstruction)));
         foreach (var t in types)
         {
             var instance = (IDisassemblyInstruction)Activator.CreateInstance(t)!;
@@ -23,6 +22,9 @@ public class Disassembler(byte[] program)
             Instructions.Add(instance.OpCode, instance);
         }
     }
+
+    private int Position { get; set; }
+    private byte[] Program { get; } = program;
 
     public byte Fetch()
     {

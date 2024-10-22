@@ -6,5 +6,4 @@ namespace MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 
 public record InstructionNode(Token Mnemnonic, ImmutableList<AstNode> Args) : AstNode
 {
-    
 }

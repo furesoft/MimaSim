@@ -15,7 +15,7 @@ public class InstructionParselet : IPrefixParselet
 
             var args = parser.ParseSeperated(",");
             return new InstructionNode(token, args)
-                .WithRange(token, parser.LookAhead(0));
+                .WithRange(token, parser.LookAhead());
         }
 
         return new NameParselet().Parse(parser, token);

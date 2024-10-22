@@ -2,16 +2,15 @@
 using Avalonia;
 using Avalonia.Xaml.Interactivity;
 using AvaloniaEdit;
-using AvaloniaEdit.Highlighting;
 
 namespace MimaSim.Behaviors;
 
 public class DocumentTextBindingBehavior : Behavior<TextEditor>
 {
-    private TextEditor _textEditor;
-
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<DocumentTextBindingBehavior, string>(nameof(Text));
+
+    private TextEditor _textEditor;
 
     public string Text
     {
@@ -35,18 +34,12 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
         base.OnDetaching();
 
-        if (_textEditor != null)
-        {
-            _textEditor.TextChanged -= TextChanged;
-        }
+        if (_textEditor != null) _textEditor.TextChanged -= TextChanged;
     }
 
     private void TextChanged(object sender, EventArgs eventArgs)
     {
-        if (_textEditor != null && _textEditor.Document != null)
-        {
-            Text = _textEditor.Document.Text;
-        }
+        if (_textEditor != null && _textEditor.Document != null) Text = _textEditor.Document.Text;
     }
 
     private void TextPropertyChanged(string text)

@@ -4,7 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.StackControl">
-    <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="Stack">
-
-    </Border>
+    <Border BorderBrush="Black" BorderThickness="1" ToolTip.Tip="Stack" />
 </UserControl>

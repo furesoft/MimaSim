@@ -1,39 +1,153 @@
-﻿using MimaSim.Controls;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows.Input;
+using System.Xml;
+using Avalonia.Platform.Storage;
+using AvaloniaEdit.Highlighting;
+using AvaloniaEdit.Highlighting.Xshd;
+using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
+using MimaSim.Controls.Popups;
 using MimaSim.Core;
 using MimaSim.Core.Parsing;
 using MimaSim.Messages;
 using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
-using ReactiveUI;
-using System;
-using System.IO;
-using System.Linq;
-using System.Windows.Input;
-using System.Collections.ObjectModel;
-using System.Xml;
-using Avalonia.Platform.Storage;
-using MimaSim.ViewModels.Mima;
-using Splat;
-using AvaloniaEdit.Highlighting;
-using AvaloniaEdit.Highlighting.Xshd;
-using MimaSim.Controls.Popups;
 using MimaSim.Tabs;
+using MimaSim.ViewModels.Mima;
+using ReactiveUI;
+using Splat;
 
 namespace MimaSim.ViewModels;
 
 public class MainViewModel : ReactiveObject, IActivatableViewModel
 {
+    private IHighlightingDefinition _highlighting;
+    private bool _isCompiled;
     private bool _runMode;
+    private string[] _sampleNames;
     private LanguageName _selectedLanguage;
     private string? _selectedSample;
     private string? _source;
-    private string[] _sampleNames;
-    private bool _isCompiled;
-    private IHighlightingDefinition _highlighting;
+
+    public MainViewModel()
+    {
+        InitHighlighting();
+
+        OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
+
+        OpenClockSettingsCommand =
+            DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
+
+        HelpCommand = DialogService.CreateOpenCommand(new HelpPopup(), new HelpPopupViewModel());
+
+        StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
+        StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
+
+        LanguageNames =
+            new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>()
+                .Select(lang => Enum.Parse<LanguageName>(lang)));
+
+        ViewRawCommand = ReactiveCommand.Create(() =>
+        {
+            DialogService.Open(new DisassemblyViewPopup(), new DisassemblyPopupViewModel());
+        });
+
+        OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
+
+
+        LoadCommand = ReactiveCommand.Create(async () =>
+        {
+            var storage = Locator.Current.GetService<IStorageProvider>();
+            var filenames = await storage!.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Programm laden"
+            });
+
+            using var reader = new StreamReader(await filenames.First().OpenReadAsync());
+
+            Source = reader.ReadToEnd();
+        });
+
+        SaveCommand = ReactiveCommand.Create(async () =>
+        {
+            var storage = Locator.Current.GetService<IStorageProvider>();
+            var file = await storage!.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Programm speichern" });
+            await using var writer = new StreamWriter(await file!.OpenWriteAsync());
+
+            writer.Write(Source);
+        });
+
+        DiagnosticBag diagnostics = new();
+        CompileCommand = ReactiveCommand.Create(() =>
+        {
+            if (string.IsNullOrEmpty(Source))
+            {
+                RunMode = false;
+                DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
+                return;
+            }
+
+            CPU.Instance.Display.Font.DrawChar('c');
+
+            CPU.Instance.Display.DY.SetValue(7);
+            CPU.Instance.Display.Font.DrawChar('h');
+
+            CPU.Instance.Display.DY.SetValue(13);
+            CPU.Instance.Display.Font.DrawChar('r');
+
+            var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
+
+            diagnostics = new DiagnosticBag();
+            CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
+
+            IsCompiled = true;
+        });
+
+        RunCodeCommand = ReactiveCommand.Create(() =>
+        {
+            if (RunMode)
+            {
+                if (!diagnostics.IsEmpty)
+                {
+                    RunMode = false;
+                    var errors = diagnostics.GetAll();
+
+                    DialogService.OpenError(string.Join('\n', errors));
+                }
+                else
+                {
+                    RegisterMap.GetRegister("IAR").SetValue(0);
+
+                    CPU.Instance.Clock.Start();
+                }
+            }
+            else
+            {
+                CPU.Instance.Clock.Stop();
+
+                BusRegistry.DeactivateAll();
+                BusRegistry.DeactivateBus("controlunit_iar");
+            }
+        });
+
+        var stopObserver = MessageBus.Current.Listen<StopMessage>();
+        stopObserver.Subscribe(_ =>
+        {
+            RunMode = false;
+            CPU.Instance.Clock.Stop();
+        });
+
+        var cache = Locator.Current.GetService<ICache>();
+        _source = cache!.Get<string>("input")!;
+        var language = cache.Get<string>("language")!;
+
+        SelectedLanguage = language == null ? LanguageNames.FirstOrDefault() : Enum.Parse<LanguageName>(language);
+    }
 
     public ObservableCollection<LanguageName> LanguageNames { get; }
-    public ViewModelActivator Activator => new();
     public ICommand CompileCommand { get; set; }
     public ICommand LoadCommand { get; set; }
     public ICommand SaveCommand { get; set; }
@@ -111,121 +225,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
     public ICommand StopCommand { get; set; }
     public ICommand ViewRawCommand { get; set; }
-
-    public MainViewModel()
-    {
-        InitHighlighting();
-
-        OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
-
-        OpenClockSettingsCommand =
-            DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
-
-        HelpCommand = DialogService.CreateOpenCommand(new HelpPopup(), new HelpPopupViewModel());
-
-        StepCommand = ReactiveCommand.Create(() => CPU.Instance.Step());
-        StopCommand = ReactiveCommand.Create(() => CPU.Instance.Clock.Stop());
-
-        LanguageNames =
-            new ObservableCollection<LanguageName>(Enum.GetNames<LanguageName>()
-                .Select(lang => Enum.Parse<LanguageName>(lang)));
-
-        ViewRawCommand = ReactiveCommand.Create(() =>
-        {
-            DialogService.Open(new DisassemblyViewPopup(), new DisassemblyPopupViewModel());
-        });
-
-        OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
-
-
-        LoadCommand = ReactiveCommand.Create(async () =>
-        {
-            var storage = Locator.Current.GetService<IStorageProvider>();
-            var filenames = await storage!.OpenFilePickerAsync(new FilePickerOpenOptions()
-            {
-                Title = "Programm laden"
-            });
-
-            using var reader = new StreamReader(await filenames.First().OpenReadAsync());
-
-            Source = reader.ReadToEnd();
-        });
-
-        SaveCommand = ReactiveCommand.Create(async () =>
-        {
-            var storage = Locator.Current.GetService<IStorageProvider>();
-            var file = await storage!.SaveFilePickerAsync(new() { Title = "Programm speichern" });
-            await using var writer = new StreamWriter(await file!.OpenWriteAsync());
-
-            writer.Write(Source);
-        });
-
-        DiagnosticBag diagnostics = new();
-        CompileCommand = ReactiveCommand.Create(() =>
-        {
-            if (string.IsNullOrEmpty(Source))
-            {
-                RunMode = false;
-                DialogService.OpenError("Bitte einen Programmtext eingeben. Dieser darf nicht leer sein!");
-                return;
-            }
-
-            CPU.Instance.Display.Font.DrawChar('c');
-
-            CPU.Instance.Display.DY.SetValue(7);
-            CPU.Instance.Display.Font.DrawChar('h');
-
-            CPU.Instance.Display.DY.SetValue(13);
-            CPU.Instance.Display.Font.DrawChar('r');
-
-            var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
-
-            diagnostics = new();
-            CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
-
-            IsCompiled = true;
-        });
-
-        RunCodeCommand = ReactiveCommand.Create(() =>
-        {
-            if (RunMode)
-            {
-                if (!diagnostics.IsEmpty)
-                {
-                    RunMode = false;
-                    string[] errors = diagnostics.GetAll();
-
-                    DialogService.OpenError(string.Join('\n', errors));
-                }
-                else
-                {
-                    RegisterMap.GetRegister("IAR").SetValue(0);
-
-                    CPU.Instance.Clock.Start();
-                }
-            }
-            else
-            {
-                CPU.Instance.Clock.Stop();
-
-                BusRegistry.DeactivateAll();
-                BusRegistry.DeactivateBus("controlunit_iar");
-            }
-        });
-
-        var stopObserver = MessageBus.Current.Listen<StopMessage>();
-        stopObserver.Subscribe(_ =>
-        {
-            RunMode = false;
-            CPU.Instance.Clock.Stop();
-        });
-
-        var cache = Locator.Current.GetService<ICache>();
-        _source = cache!.Get<string>("input")!;
-        var language = cache.Get<string>("language")!;
-
-        SelectedLanguage = language == null ? LanguageNames.FirstOrDefault() : Enum.Parse<LanguageName>(language);
-    }
+    public ViewModelActivator Activator => new();
 
     private string GetExtensionForLanguage(LanguageName language)
     {
@@ -248,7 +248,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     private void LoadHighlighting(string name, string extension, string filename)
     {
         IHighlightingDefinition customHighlighting;
-        using (Stream? s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
+        using (var s = GetType().Assembly.GetManifestResourceStream($"MimaSim.Resources.Highligting.{filename}.xshd"))
         {
             using (XmlReader reader = new XmlTextReader(s))
             {
@@ -256,6 +256,6 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             }
         }
 
-        HighlightingManager.Instance.RegisterHighlighting(name, new string[] { extension }, customHighlighting);
+        HighlightingManager.Instance.RegisterHighlighting(name, new[] { extension }, customHighlighting);
     }
 }

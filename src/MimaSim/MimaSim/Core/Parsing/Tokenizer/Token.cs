@@ -20,9 +20,9 @@ public sealed class Token
 
     public static Token EndOfFile => new(TokenKind.EndOfFile, "");
 
-    public string Contents { get; private set; }
+    public string Contents { get; }
     public int End { get; }
-    public TokenKind Kind { get; private set; }
+    public TokenKind Kind { get; }
     public int Length { get; set; }
     public int Start { get; }
 

@@ -9,7 +9,10 @@ public partial class ExecutionBar : ReactiveUserControl<MainViewModel>
 {
     public ExecutionBar()
     {
-        this.WhenActivated(disposables => { /* Handle view activation etc. */ });
+        this.WhenActivated(disposables =>
+        {
+            /* Handle view activation etc. */
+        });
 
         InitializeComponent();
     }

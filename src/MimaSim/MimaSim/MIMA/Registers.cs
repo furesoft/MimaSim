@@ -12,5 +12,6 @@ public enum Registers
     SP,
     DC,
     DX,
-    DY
+    DY,
+    FLAG,
 }

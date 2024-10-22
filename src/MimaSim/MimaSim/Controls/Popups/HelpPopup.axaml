@@ -6,29 +6,39 @@
              Design.Width="700" Design.Height="500" x:CompileBindings="False"
              mc:Ignorable="d" Tag="{DynamicResource help}"
              x:Class="MimaSim.Tabs.HelpPopup">
-  <UserControl.Resources>
-    <DataTemplate x:Key="cellTemplate">
-      <Grid Margin="0,0,5,0" ColumnDefinitions="*,*">
-        <TextBlock Text="{Binding Key}" TextWrapping="Wrap" />
-        <TextBlock Text="{Binding Value}" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Right" HorizontalAlignment="Right" />
-      </Grid>
-    </DataTemplate>
-  </UserControl.Resources>
+    <UserControl.Resources>
+        <DataTemplate x:Key="cellTemplate">
+            <Grid Margin="0,0,5,0" ColumnDefinitions="*,*">
+                <TextBlock Text="{Binding Key}" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding Value}" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Right"
+                           HorizontalAlignment="Right" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
 
-  <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Hilfe">
-    <StackPanel Orientation="Horizontal" Spacing="5">
-      <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}" MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-      <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}" MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
+    <c:DialogControl CommandText="OK" Command="{Binding CloseCommand, Mode=TwoWay}" Header="Hilfe">
+        <StackPanel Orientation="Horizontal" Spacing="5">
+            <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding RegisterTableItems}"
+                               MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400"
+                               VerticalAlignment="Top" />
+            <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}"
+                               MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400"
+                               VerticalAlignment="Top" />
 
-      <StackPanel Orientation="Vertical">
-        <StackPanel>
-          <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding MovTableItems}" />
+            <StackPanel Orientation="Vertical">
+                <StackPanel>
+                    <c:MapTableControl LeftHeader="Mov" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top"
+                                       ItemTemplate="{StaticResource cellTemplate}"
+                                       ItemsSource="{Binding MovTableItems}" />
 
-          <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    <TextBlock Text="* Reg = Register; Mem = Speicher" VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding ColorCodes}"
+                                   MinWidth="200" LeftHeader="Color" RightHeader="Byte" MaxHeight="400"
+                                   VerticalAlignment="Top" />
+            </StackPanel>
         </StackPanel>
-
-        <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding ColorCodes}" MinWidth="200" LeftHeader="Color" RightHeader="Byte" MaxHeight="400" VerticalAlignment="Top" />
-      </StackPanel>
-    </StackPanel>
     </c:DialogControl>
 </UserControl>

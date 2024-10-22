@@ -8,13 +8,14 @@ namespace MimaSim.Core;
 
 public class SampleLoader
 {
-    private Dictionary<(LanguageName lang, string name), string> _samples = new();
+    private const string BaseResourcePath = "MimaSim.Resources.samples.";
+    private readonly Dictionary<(LanguageName lang, string name), string> _samples = new();
+
     public void Register(LanguageName language, string name, string src)
     {
         _samples.TryAdd((language, name), src);
     }
 
-    private const string BaseResourcePath = "MimaSim.Resources.samples.";
     public void FromResources(Assembly assembly)
     {
         foreach (LanguageName language in Enum.GetValues(typeof(LanguageName)))
@@ -23,7 +24,6 @@ public class SampleLoader
             var resourceNames = assembly.GetManifestResourceNames();
 
             foreach (var resourceName in resourceNames)
-            {
                 if (resourceName.StartsWith(languagePath) && resourceName.EndsWith(".sample"))
                 {
                     var sampleName = Path.GetFileNameWithoutExtension(resourceName).Split('.').Last();
@@ -34,7 +34,6 @@ public class SampleLoader
 
                     Register(language, sampleName, sampleContent);
                 }
-            }
         }
     }
 
