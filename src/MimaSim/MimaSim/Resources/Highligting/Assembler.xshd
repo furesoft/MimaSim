@@ -46,6 +46,7 @@
 			<Word>jpmc</Word>
 
 			<Word>flag</Word>
+			<Word>unflag</Word>
 			<Word>hasflag</Word>
 
 			<Word>macro</Word>

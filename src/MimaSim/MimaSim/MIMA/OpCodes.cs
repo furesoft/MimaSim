@@ -52,5 +52,6 @@ public enum OpCodes
     POP = 0x45,
 
     FLAG = 0x46,
-    HASFLAG = 0x47
+    HASFLAG = 0x47,
+    UNFLAG = 0x48
 }

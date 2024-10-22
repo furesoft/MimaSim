@@ -17,5 +17,6 @@ public enum Mnemnonics
     EXIT,
     CLK,
     FLAG,
+    UNFLAG,
     HASFLAG
 }

@@ -45,6 +45,17 @@ public class Display
         Dispatcher.UIThread.InvokeAsync(() => _displayControl.Pixels[(x, y)].Background = GetBrush(color));
     }
 
+    public void Clear(DisplayColor color)
+    {
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            foreach (var pixel in _displayControl.Pixels)
+            {
+                pixel.Value.Background = GetBrush(color);
+            }
+        });
+    }
+
     private IBrush GetBrush(DisplayColor color)
     {
         return color switch

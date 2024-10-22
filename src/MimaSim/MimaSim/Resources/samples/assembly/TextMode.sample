@@ -1,6 +1,16 @@
-﻿flag TEXTMODE
+﻿macro clear(color) {
+	unflag TEXTMODE
+	flag CLEAR
+	load color
+	mov accumulator, dc
+	unflag CLEAR
+}
+
+clear WHITE
 
 macro drawChar(x, y, c) {
+	flag TEXTMODE
+
 	load x
 	mov accumulator, dx
 

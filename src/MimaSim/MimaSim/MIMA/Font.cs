@@ -17,7 +17,7 @@ public class Font
             false, false, false, false, true,   // Zeile 2: ....#
             false, true,  true,  true,  true,   // Zeile 3: .####
             true,  false, false, false, true,   // Zeile 4: #...#
-            false, true,  false, false, true    // Zeile 5: .#..#
+            false, true,  true, true, false      // Zeile 5: .###.
         ]);
 
         _characters.Add('b', [

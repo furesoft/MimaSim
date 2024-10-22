@@ -2,5 +2,6 @@
 
 public enum Flags
 {
-    TextMode = 0x0
+    TextMode = 0x00,
+    CLEAR = 0x01,
 }
