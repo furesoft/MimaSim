@@ -21,5 +21,5 @@ macro drawChar(x, y, c) {
 	mov accumulator, dc
 }
 
-drawChar 0, 0, 97
-drawChar 0, 7, 98
+drawChar 0, 0, 'a'
+drawChar 0, 7, 'b'

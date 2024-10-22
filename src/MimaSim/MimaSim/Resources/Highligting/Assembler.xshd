@@ -7,7 +7,12 @@
 	<RuleSet>
 		<Span color="Comment" begin="#" />
 		<Span color="Comment" multiline="true" begin="/\*" end="\*/" />
-		
+
+		<Span color="String">
+        	<Begin>'</Begin>
+        	<End>'</End>
+        </Span>
+
 		<Keywords fontWeight="bold" foreground="Blue">
 			<Word>nop</Word>
 			<Word>exit</Word>

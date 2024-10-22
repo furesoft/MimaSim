@@ -16,6 +16,7 @@ public class AssemblyParser : Parser
         lexer.Ignore(new SingleLineCommentIgnoreMatcher("#"));
 
         lexer.MatchNumber(true, false);
+        lexer.MatchString("'", "'", allowEscapeChars: false, allowUnicodeChars: false);
 
         lexer.AddSymbols("(", ")", ",", "{", "}", "/*", "*/");
     }
@@ -27,6 +28,7 @@ public class AssemblyParser : Parser
         def.Register(Number, new NumberParselet());
         def.Register(Name, new InstructionParselet());
         def.Register("macro", new MacroParselet());
+        def.Register(String, new StringLiteralParselet());
 
         def.Prefix("&", tag: "address");
         def.Prefix("$", tag: "labelref");

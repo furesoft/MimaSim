@@ -160,6 +160,11 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
            case short s:
                _emitter.EmitLiteral(s);
                break;
+           case string s:
+               _emitter.EmitLiteral(Convert.ToInt16(s[0]));
+               break;
+           default:
+               throw new InvalidOperationException();
        }
     }
 
