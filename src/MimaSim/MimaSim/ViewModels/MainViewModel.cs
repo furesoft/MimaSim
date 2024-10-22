@@ -170,6 +170,14 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
                 return;
             }
 
+            CPU.Instance.Display.Font.DrawChar('c');
+
+            CPU.Instance.Display.DY.SetValue(7);
+            CPU.Instance.Display.Font.DrawChar('h');
+
+            CPU.Instance.Display.DY.SetValue(13);
+            CPU.Instance.Display.Font.DrawChar('r');
+
             var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
 
             diagnostics = new();

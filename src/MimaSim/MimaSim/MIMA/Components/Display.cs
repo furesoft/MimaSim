@@ -13,6 +13,8 @@ public class Display
 
     private DisplayControl _displayControl;
 
+    public Font Font = new();
+
     public void SetDisplay(DisplayControl displayControl)
     {
         _displayControl = displayControl;
@@ -23,6 +25,15 @@ public class Display
         var colorIndex = DC.GetValueWithoutNotification();
         var x = DX.GetValueWithoutNotification();
         var y = DY.GetValueWithoutNotification();
+
+        var color = (DisplayColor)colorIndex;
+
+        Dispatcher.UIThread.InvokeAsync(() => _displayControl.Pixels[(x, y)].Background = GetBrush(color));
+    }
+
+    public void SetPixel(short x, short y)
+    {
+        var colorIndex = DC.GetValueWithoutNotification();
 
         var color = (DisplayColor)colorIndex;
 
