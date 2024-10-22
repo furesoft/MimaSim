@@ -221,24 +221,25 @@ public class Font
         ]);
     }
 
-    public void DrawChar(char ch)
+    public void DrawChar()
     {
-        int xOffset = CPU.Instance.Display.DX.GetValueWithoutNotification();
-        int yOffset = CPU.Instance.Display.DY.GetValueWithoutNotification();
+        var xOffset = CPU.Instance.Display.DX.GetValueWithoutNotification();
+        var yOffset = CPU.Instance.Display.DY.GetValueWithoutNotification();
+        var ch = (char)CPU.Instance.Display.DC.GetValueWithoutNotification();
 
         if (!_characters.TryGetValue(ch, out var pixels))
         {
             throw new NotImplementedException($"unknown character {ch}");
         }
 
-        int width = 5;
-        for (int y = 0; y < 5; y++)
+        var width = 5;
+        for (var y = 0; y < 5; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (var x = 0; x < width; x++)
             {
                 if (pixels[y * width + x])
                 {
-                    CPU.Instance.Display.SetPixel((short)(y + xOffset), (short)(x + yOffset));
+                    CPU.Instance.Display.SetPixel((short)(y + xOffset), (short)(x + yOffset), DisplayColor.Black);
                 }
             }
         }

@@ -37,6 +37,11 @@ public class Display
 
         var color = (DisplayColor)colorIndex;
 
+        SetPixel(x, y, color);
+    }
+
+    public void SetPixel(short x, short y, DisplayColor color)
+    {
         Dispatcher.UIThread.InvokeAsync(() => _displayControl.Pixels[(x, y)].Background = GetBrush(color));
     }
 

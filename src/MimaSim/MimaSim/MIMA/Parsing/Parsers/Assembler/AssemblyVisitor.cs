@@ -38,6 +38,11 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         {
             Scope.Root.Define(color.ToUpper(), (short)Enum.Parse<DisplayColor>(color));
         }
+
+        foreach (var flag in Enum.GetNames<Flags>())
+        {
+            Scope.Root.Define(flag.ToUpper(), (short)Enum.Parse<Flags>(flag));
+        }
     }
 
     private void VisitMacroInvocation(InstructionNode invocation, Scope scope)

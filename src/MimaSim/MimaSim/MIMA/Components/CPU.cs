@@ -59,7 +59,16 @@ public class CPU
 
         Display.DC.Bus.Subscribe(_ =>
         {
-            Display.SetPixel();
+            var isTextMode = CPU.Instance.ControlUnit.HasFlag(Flags.TextMode);
+
+            if (isTextMode)
+            {
+                Instance.Display.Font.DrawChar();
+            }
+            else
+            {
+                Display.SetPixel();
+            }
         });
     }
 

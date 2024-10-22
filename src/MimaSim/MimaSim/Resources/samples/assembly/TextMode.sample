@@ -1,0 +1,15 @@
+﻿flag TEXTMODE
+
+macro drawChar(x, y, c) {
+	load x
+	mov accumulator, dx
+
+	load y
+	mov accumulator, dy
+
+	load c
+	mov accumulator, dc
+}
+
+drawChar 0, 0, 97
+drawChar 0, 7, 98
