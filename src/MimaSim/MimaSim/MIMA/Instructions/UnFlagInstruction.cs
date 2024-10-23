@@ -21,6 +21,6 @@ public class UnFlagInstruction : IInstruction, IDisassemblyInstruction
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"flag 0x{disassembler.Fetch16():X2}");
+        builder.AppendLine($"unflag 0x{disassembler.Fetch16():X2}");
     }
 }
