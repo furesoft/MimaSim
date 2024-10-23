@@ -3,7 +3,4 @@ using ReactiveUI;
 
 namespace MimaSim.ViewModels.Mima;
 
-public class DisplayViewModel : ReactiveObject
-{
-
-}
+public class DisplayViewModel : ReactiveObject;

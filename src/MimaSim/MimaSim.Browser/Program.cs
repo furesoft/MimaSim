@@ -1,10 +1,8 @@
-﻿using System.Runtime.InteropServices.JavaScript;
-using System.Runtime.Versioning;
+﻿using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
 using Avalonia.ReactiveUI;
-using Microsoft.JSInterop;
 using MimaSim;
 using MimaSim.Browser.Core;
 using MimaSim.Core;

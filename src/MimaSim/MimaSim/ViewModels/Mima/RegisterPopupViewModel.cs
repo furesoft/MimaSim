@@ -13,18 +13,12 @@ internal class RegisterPopupViewModel : ReactiveObject, IActivatableViewModel
     {
         Register = register;
         RegisterName = "Register " + register;
-
-        SetRegisterValueCommand = new DialogCommand(_ =>
-        {
-
-        });
     }
 
     public ViewModelActivator Activator => new();
 
     public string Register { get; set; }
     public string RegisterName { get; set; }
-    public ICommand SetRegisterValueCommand { get; set; }
 
     public short Value
     {

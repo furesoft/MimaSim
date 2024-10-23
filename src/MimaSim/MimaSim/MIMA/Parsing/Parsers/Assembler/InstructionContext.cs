@@ -2,7 +2,4 @@
 
 namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
 
-public class InstructionContext : ILexerContext
-{
-    
-}
+public class InstructionContext : ILexerContext;

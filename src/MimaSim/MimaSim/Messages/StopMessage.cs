@@ -1,5 +1,3 @@
 ﻿namespace MimaSim.Messages;
 
-public class StopMessage
-{
-}
+public class StopMessage;

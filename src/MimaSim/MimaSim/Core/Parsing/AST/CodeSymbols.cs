@@ -1,5 +1,3 @@
 namespace MimaSim.Core.Parsing.AST;
 
-public static class CodeSymbols
-{
-}
+public static class CodeSymbols;
