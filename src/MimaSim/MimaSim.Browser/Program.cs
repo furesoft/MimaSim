@@ -17,6 +17,7 @@ internal sealed partial class Program
     private static Task Main(string[] args)
     {
         Locator.CurrentMutable.RegisterLazySingleton<ICache>(() => new BrowserCache());
+        Locator.CurrentMutable.RegisterLazySingleton<IInterop>(() => new Interop());
 
         return BuildAvaloniaApp()
             .WithInterFont()

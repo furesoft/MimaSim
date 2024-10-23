@@ -125,6 +125,11 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
+        OpenGithubCommand = ReactiveCommand.Create(() =>
+        {
+            Locator.Current.GetService<IInterop>()!.OpenLink("https://github.com/furesoft/MimaSim");
+        });
+
         var stopObserver = MessageBus.Current.Listen<StopMessage>();
         stopObserver.Subscribe(_ =>
         {
@@ -148,6 +153,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     public ICommand OpenMemoryPopupCommand { get; set; }
     public ICommand RunCodeCommand { get; set; }
     public ICommand HelpCommand { get; set; }
+    public ICommand OpenGithubCommand { get; set; }
 
     public bool RunMode
     {

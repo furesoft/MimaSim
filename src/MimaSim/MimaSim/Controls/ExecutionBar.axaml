@@ -39,5 +39,9 @@
         <Button Command="{Binding HelpCommand}">
             <PathIcon Data="{StaticResource help}" Margin="2" Width="20" Height="20" ToolTip.Tip="Hilfe" />
         </Button>
+
+        <Button Command="{Binding OpenGithubCommand}">
+            <PathIcon Data="{StaticResource github}" Width="20" Height="20" />
+        </Button>
     </StackPanel>
 </UserControl>

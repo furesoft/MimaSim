@@ -16,6 +16,7 @@ internal sealed class Program
     public static void Main(string[] args)
     {
         Locator.CurrentMutable.RegisterLazySingleton<ICache>(() => new DesktopCache());
+        Locator.CurrentMutable.RegisterLazySingleton<IInterop>(() => new Interop());
 
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
