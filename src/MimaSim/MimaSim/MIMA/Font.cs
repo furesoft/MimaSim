@@ -299,6 +299,95 @@ public class Font
             false, false, false, false, true,   // Zeile 4: ....#
             true,  true,  true,  true,  true    // Zeile 5: #####
         ], 5));
+
+        _characters.Add('!', ([
+            false, false, true, false, false,   // Zeile 1: ..#..
+            false, false, true, false, false,   // Zeile 2: ..#..
+            false, false, true, false, false,   // Zeile 3: ..#..
+            false, false, false, false, false,  // Zeile 4: .....
+            false, false, true, false, false    // Zeile 5: ..#..
+        ], 5));
+        
+        _characters.Add('@', ([
+            true,  true,  true,  true,  false,  // Zeile 1: ####.
+            true,  false, false, true,  true,   // Zeile 2: #..##
+            true,  false, true,  false, true,   // Zeile 3: #.#.#
+            true,  false, true,  true,  false,  // Zeile 4: #.##.
+            true,  true,  false, false, false   // Zeile 5: ##...
+        ], 5));
+        
+        _characters.Add('#', ([
+            false, true,  false, true,  false,  // Zeile 1: .#.#.
+            true,  true,  true,  true,  true,   // Zeile 2: #####
+            false, true,  false, true,  false,  // Zeile 3: .#.#.
+            true,  true,  true,  true,  true,   // Zeile 4: #####
+            false, true,  false, true,  false   // Zeile 5: .#.#.
+        ], 5));
+        
+        _characters.Add('$', ([
+            false, true,  true,  true,  false,  // Zeile 1: .###.
+            true,  false, true,  false, false,  // Zeile 2: #.#..
+            false, true,  true,  true,  false,  // Zeile 3: .###.
+            false, false, true,  false, true,   // Zeile 4: ..#.#
+            true,  true,  true,  true, false    // Zeile 5: ####.
+        ], 5));
+        
+        _characters.Add('%', ([
+            true,  false, false, true,  false,  // Zeile 1: #..#.
+            false, false, true,  false, false,  // Zeile 2: ..#..
+            false, true,  false, false, false,  // Zeile 3: .#...
+            false, false, true,  false, false,  // Zeile 4: ..#..
+            true,  false, false, true,  false   // Zeile 5: #..#.
+        ], 5));
+        
+        _characters.Add('&', ([
+            false, true,  true,  false, false,  // Zeile 1: .##..
+            true,  false, true,  false, false,  // Zeile 2: #.#..
+            false, true,  true,  false, true,   // Zeile 3: .##.#
+            true,  false, true,  true,  false,  // Zeile 4: #.##.
+            false, true,  false, true,  true    // Zeile 5: .#.##
+        ], 5));
+        
+        _characters.Add('*', ([
+            false, true,  false, true,  false,  // Zeile 1: .#.#.
+            false, false, true, false, false,   // Zeile 2: ..#..
+            true,  true,  true,  true,  true,   // Zeile 3: #####
+            false, false, true, false, false,   // Zeile 4: ..#..
+            false, true,  false, true,  false   // Zeile 5: .#.#.
+        ], 5));
+        
+        _characters.Add('+', ([
+            false, false, true, false, false,   // Zeile 1: ..#..
+            false, false, true, false, false,   // Zeile 2: ..#..
+            true,  true,  true,  true,  true,   // Zeile 3: #####
+            false, false, true, false, false,   // Zeile 4: ..#..
+            false, false, true, false, false    // Zeile 5: ..#..
+        ], 5));
+        
+        _characters.Add('-', ([
+            false, false, false, false, false,  // Zeile 1: .....
+            false, false, false, false, false,  // Zeile 2: .....
+            true,  true,  true,  true,  true,   // Zeile 3: #####
+            false, false, false, false, false,  // Zeile 4: .....
+            false, false, false, false, false   // Zeile 5: .....
+        ], 5));
+        
+        _characters.Add('/', ([
+            false, false, false, false, true,   // Zeile 1: ....#
+            false, false, false, true,  false,  // Zeile 2: ...#.
+            false, false, true,  false, false,  // Zeile 3: ..#..
+            false, true,  false, false, false,  // Zeile 4: .#...
+            true,  false, false, false, false   // Zeile 5: #....
+        ], 5));
+        
+        _characters.Add('=', ([
+            false, false, false, false, false,  // Zeile 1: .....
+            true,  true,  true,  true,  true,   // Zeile 2: #####
+            false, false, false, false, false,  // Zeile 3: .....
+            true,  true,  true,  true,  true,   // Zeile 4: #####
+            false, false, false, false, false   // Zeile 5: .....
+        ], 5));
+
     }
 
     public void DrawChar()
