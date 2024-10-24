@@ -34,7 +34,6 @@ public class Display
     public void SetPixel(short x, short y)
     {
         var colorIndex = DC.GetValueWithoutNotification();
-
         var color = (DisplayColor)colorIndex;
 
         SetPixel(x, y, color);
@@ -54,6 +53,14 @@ public class Display
                 pixel.Value.Background = GetBrush(color);
             }
         });
+    }
+
+    public void Clear()
+    {
+        var colorIndex = DC.GetValueWithoutNotification();
+        var color = (DisplayColor)colorIndex;
+
+        Clear(color);
     }
 
     private IBrush GetBrush(DisplayColor color)

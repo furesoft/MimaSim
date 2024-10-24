@@ -60,6 +60,13 @@ public class CPU
         Display.DC.Bus.Subscribe(_ =>
         {
             var isTextMode = CPU.Instance.ControlUnit.HasFlag(Flags.TextMode);
+            var clear = CPU.Instance.ControlUnit.HasFlag(Flags.CLEAR);
+
+            if (clear)
+            {
+                Instance.Display.Clear();
+                return;
+            }
 
             if (isTextMode)
             {
