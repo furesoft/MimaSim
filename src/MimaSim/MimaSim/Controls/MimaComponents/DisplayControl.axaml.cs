@@ -28,7 +28,7 @@ public partial class DisplayControl : UserControl
             Orientation = Orientation.Vertical
         };
 
-        for (int row = 0; row < 6; row++)
+        for (int row = 0; row < 13; row++)
         {
             var rowStack = new StackPanel()
             {
@@ -36,14 +36,14 @@ public partial class DisplayControl : UserControl
                 Orientation = Orientation.Horizontal
             };
 
-            for (int col = 0; col < 28; col++)
+            for (int col = 0; col < 55; col++)
             {
                 var cell = new Border
                 {
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(0),
-                    Width = 20,
-                    Height = 20,
+                    Width = 10,
+                    Height = 10,
                     Background = Brushes.White
                 };
                 Pixels.Add((row, col), cell);

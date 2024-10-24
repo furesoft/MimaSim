@@ -6,6 +6,7 @@
 	unflag CLEAR
 }
 
+clk 10
 clear WHITE
 
 macro drawChar(x, y, c) {
@@ -21,5 +22,17 @@ macro drawChar(x, y, c) {
 	mov accumulator, dc
 }
 
-drawChar 0, 0, 'a'
-drawChar 6, 0, 'b'
+drawChar 0, 0, 'h'
+drawChar 6, 0, 'a'
+
+drawChar 12, 0, 'l'
+drawChar 17, 0, 'l'
+
+
+drawChar 22, 0, 'o'
+
+drawChar 6, 6, 'w'
+drawChar 12, 6, 'e'
+
+drawChar 18, 6, 'l'
+drawChar 22, 6, 't'
