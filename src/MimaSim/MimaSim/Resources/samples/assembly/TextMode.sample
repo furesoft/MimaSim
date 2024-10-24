@@ -22,4 +22,4 @@ macro drawChar(x, y, c) {
 }
 
 drawChar 0, 0, 'a'
-drawChar 0, 7, 'b'
+drawChar 6, 0, 'b'
