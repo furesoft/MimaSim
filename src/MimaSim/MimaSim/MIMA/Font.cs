@@ -387,7 +387,6 @@ public class Font
             true,  true,  true,  true,  true,   // Zeile 4: #####
             false, false, false, false, false   // Zeile 5: .....
         ], 5));
-
     }
 
     public void DrawChar()
