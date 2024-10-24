@@ -398,10 +398,26 @@ public class Font
 
         if (!_characters.TryGetValue(ch, out var character))
         {
-            throw new NotImplementedException($"unknown character {ch}");
+            bool[] boxPixels =
+            [
+                true, true, true, true, true, true, true,
+                true, false, false, false, false, false, true,
+                true, false, true, false, false, false, true,
+                true, false, false, false, false, false, true,
+                true, false, false, false, false, false, true,
+                true, false, false, false, false, false, true,
+                true, true, true, true, true, true, true
+            ];
+
+            DrawChar(7, boxPixels, yOffset, xOffset);
         }
 
         var (pixels, width) = character;
+        DrawChar(width, pixels, yOffset, xOffset);
+    }
+
+    private static void DrawChar(int width, bool[] pixels, short yOffset, short xOffset)
+    {
         for (var y = 0; y < 5; y++)
         {
             for (var x = 0; x < width; x++)
