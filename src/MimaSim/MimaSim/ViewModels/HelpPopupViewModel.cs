@@ -63,6 +63,4 @@ public class HelpPopupViewModel : ReactiveObject
             OpcodesTableItems.Add(new(item, byteRepOp));
         }
     }
-
-
 }

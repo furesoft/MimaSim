@@ -130,7 +130,7 @@ public class CPU
 
     public void SetRegister(Registers reg, short value)
     {
-        RegisterMap.GetRegister(Enum.GetName(reg)).SetValue(value);
+        RegisterMap.GetRegister(Enum.GetName(reg)!).SetValue(value);
     }
 
     public void SetRegister(byte reg, short value)
