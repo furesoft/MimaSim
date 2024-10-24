@@ -12,7 +12,7 @@ public class UnFlagInstruction : IInstruction, IDisassemblyInstruction
     {
         var current = cpu.ControlUnit.FLAG.GetValueWithoutNotification();
 
-        current = (short)(current | 0 << (cpu.Fetch16()));
+        current = (short)(current & ~(1 << cpu.Fetch16()));
 
         cpu.ControlUnit.FLAG.SetValue(current);
 
