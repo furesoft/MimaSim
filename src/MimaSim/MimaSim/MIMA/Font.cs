@@ -21,19 +21,19 @@ public class Font
         ]);
 
         _characters.Add('b', [
-            true,  true,  true,  false, false,  // Zeile 1: ###..
-            true,  false, false, true,  false,  // Zeile 2: #..#.
-            true,  true,  true,  true,  false,  // Zeile 3: ####.
-            true,  false, false, false, true,   // Zeile 4: #...#
-            true,  true,  true,  true,  false   // Zeile 5: ####.
+            true,  false, false,  false, false,   // Zeile 1: #..
+            true,  false, false, false,  false,   // Zeile 2: #....
+            true,  true,  true,  true,  false,    // Zeile 3: ####.
+            true,  false, false, false, true,     // Zeile 4: #...#
+            true,  true,  true,  true,  false     // Zeile 5: ####.
         ]);
 
         _characters.Add('c', [
-            false, true,  true,  true,  false,  // Zeile 1: .###.
-            true,  false, false, false, true,   // Zeile 2: #...#
-            true,  false, false, false, false,  // Zeile 3: #....
-            true,  false, false, false, true,   // Zeile 4: #...#
-            false, true,  true,  true,  false   // Zeile 5: .###.
+            false, true,  true,  true,  false,   // Zeile 1: .###.
+            true,  false, false, false, false,   // Zeile 2: #....
+            true,  false, false, false, false,   // Zeile 3: #....
+            true,  false, false, false, false,   // Zeile 4: #....
+            false, true,  true,  true,  false    // Zeile 5: .###.
         ]);
 
         _characters.Add('d', [
@@ -69,11 +69,11 @@ public class Font
         ]);
 
         _characters.Add('h', [
-            true,  false, false, false, true,   // Zeile 1: #...#
-            true,  false, false, false, true,   // Zeile 2: #...#
-            true,  true,  true,  true,  true,   // Zeile 3: #####
-            true,  false, false, false, true,   // Zeile 4: #...#
-            true,  false, false, false, true    // Zeile 5: #...#
+            true,  false, false, false, false,    // Zeile 1: #....
+            true,  false, false, false, false,    // Zeile 2: #....
+            true,  true,  true,  true,  false,    // Zeile 3: ####.
+            true,  false, false, false, true,     // Zeile 4: #...#
+            true,  false, false, false, true      // Zeile 5: #...#
         ]);
 
         _characters.Add('i', [
@@ -165,11 +165,11 @@ public class Font
         ]);
 
         _characters.Add('t', [
-            true,  true,  true,  true,  true,   // Zeile 1: #####
-            false, false, true,  false, false,  // Zeile 2: ..#..
-            false, false, true,  false, false,  // Zeile 3: ..#..
-            false, false, true,  false, false,  // Zeile 4: ..#..
-            false, false, true,  true,  false   // Zeile 5: ..##.
+            true,  true,  true,  true,  true,    // Zeile 1: #####
+            false, false, true,  false, false,   // Zeile 2: ..#..
+            false, false, true,  false, false,   // Zeile 3: ..#..
+            false, false, true,  false, false,   // Zeile 4: ..#..
+            false, false, true,  false,  false   // Zeile 5: ..#..
         ]);
 
         _characters.Add('u', [
