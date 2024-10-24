@@ -22,7 +22,7 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
     {
         base.OnAttached();
 
-        if (AssociatedObject is TextEditor textEditor)
+        if (AssociatedObject is { } textEditor)
         {
             _textEditor = textEditor;
             _textEditor.TextChanged += TextChanged;
@@ -48,7 +48,7 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
         {
             var caretOffset = _textEditor.CaretOffset;
             _textEditor.Document.Text = text;
-            //_textEditor.CaretOffset = caretOffset;
+            _textEditor.CaretOffset = caretOffset;
         }
     }
 }
