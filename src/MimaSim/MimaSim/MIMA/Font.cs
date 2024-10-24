@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MimaSim.MIMA.Components;
 
@@ -237,7 +237,7 @@ public class Font
         {
             for (var x = 0; x < width; x++)
             {
-                if (pixels[y * width + x])
+                if (pixels[(y * width) + x])
                 {
                     CPU.Instance.Display.SetPixel((short)(y + yOffset), (short)(x + xOffset), DisplayColor.Black);
                 }
