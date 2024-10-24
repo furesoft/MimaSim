@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MimaSim.MIMA.Parsing;
 
@@ -8,7 +8,7 @@ public struct CallNode(AstCallNodeType type, List<IAstNode> args) : IAstNode
 {
     public List<IAstNode> Args { get; set; } = args;
 
-    public bool IsEmpty => !Args.Any();
+    public bool IsEmpty => Args.Count == 0;
 
     public AstCallNodeType Type { get; set; } = type;
 
