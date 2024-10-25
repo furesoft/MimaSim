@@ -408,7 +408,7 @@ public class Font
         return (short)s.Sum(c => Measure(c) + 1);
     }
 
-    public void DrawChar(short xOffset, short yOffset, char c)
+    public void DrawChar(short xOffset, short yOffset, char ch)
     {
         if (!_characters.TryGetValue(ch, out var character))
         {
