@@ -393,9 +393,9 @@ public class Font
     {
         foreach (var kv in _characters)
         {
-            if (kv.Key.Item1 == c)
+            if (kv.Key == c)
             {
-                return kv.Key.Item2;
+                return kv.Value.Item2;
             }
         }
     }
