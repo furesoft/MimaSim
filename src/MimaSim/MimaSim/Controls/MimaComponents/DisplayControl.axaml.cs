@@ -11,6 +11,9 @@ namespace MimaSim.Controls.MimaComponents;
 public partial class DisplayControl : UserControl
 {
     public Dictionary<(int, int), Border> Pixels { get; set; } = [];
+    
+    public int PixelWidth { get; set; } = 55; // width in display pixel
+    public int PixelHeight { get; set; } = 13; // height in display pixel
 
     public DisplayControl()
     {
@@ -28,7 +31,7 @@ public partial class DisplayControl : UserControl
             Orientation = Orientation.Vertical
         };
 
-        for (int row = 0; row < 13; row++)
+        for (int row = 0; row < PixelHeight; row++)
         {
             var rowStack = new StackPanel()
             {
@@ -36,7 +39,7 @@ public partial class DisplayControl : UserControl
                 Orientation = Orientation.Horizontal
             };
 
-            for (int col = 0; col < 55; col++)
+            for (int col = 0; col < PixelWidth; col++)
             {
                 var cell = new Border
                 {

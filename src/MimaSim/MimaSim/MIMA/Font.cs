@@ -389,12 +389,24 @@ public class Font
         ], 5));
     }
 
-    public void DrawChar()
+    public short Measure(char c)
     {
-        var xOffset = CPU.Instance.Display.DX.GetValueWithoutNotification();
-        var yOffset = CPU.Instance.Display.DY.GetValueWithoutNotification();
-        var ch = (char)CPU.Instance.Display.DC.GetValueWithoutNotification();
+        foreach (var kv in _characters)
+        {
+            if (kv.Key.Item1 == c)
+            {
+                return kv.Key.Item2;
+            }
+        }
+    }
 
+    public short Measure(string s)
+    {
+        return (short)s.Sum(c => Measure(c) + 1);
+    }
+
+    public void DrawChar(short xOffset, short yOffset, char c)
+    {
         if (!_characters.TryGetValue(ch, out var character))
         {
             bool[] boxPixels =

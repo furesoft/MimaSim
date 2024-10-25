@@ -70,7 +70,8 @@ public class CPU
 
             if (isTextMode)
             {
-                Instance.Display.Font.DrawChar();
+                var ch = (char)CPU.Instance.Display.DC.GetValueWithoutNotification();
+                Instance.Display.DrawChar(ch);
             }
             else
             {

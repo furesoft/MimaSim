@@ -13,6 +13,9 @@ public class Display
 
     private DisplayControl _displayControl;
 
+    public int Width => _displayControl.PixelWidth; // width in display pixel
+    public int Height => _displayControl.PixelHeight; // height in display pixel
+
     public Font Font = new();
 
     public void SetDisplay(DisplayControl displayControl)
@@ -29,6 +32,14 @@ public class Display
         var color = (DisplayColor)colorIndex;
 
         Dispatcher.UIThread.InvokeAsync(() => _displayControl.Pixels[(x, y)].Background = GetBrush(color));
+    }
+
+    public void DrawChar(char ch)
+    {
+        var xOffset = CPU.Instance.Display.DX.GetValueWithoutNotification();
+        var yOffset = CPU.Instance.Display.DY.GetValueWithoutNotification();
+
+        Font.DrawChar(xOffset, yOffset, ch)
     }
 
     public void SetPixel(short x, short y)
