@@ -38,11 +38,11 @@ public class Font
         ], 5));
 
         _characters.Add('d', ([
-            false, false, true,  true,  false,  // Zeile 1: ..##.
-            false, true,  false, false, true,   // Zeile 2: .#..#
-            false, true,  false, false, true,   // Zeile 3: .#..#
-            false, true,  false, false, true,   // Zeile 4: .#..#
-            false, false, true,  true,  false   // Zeile 5: ..##.
+            false, false, false,  false, true,   // Zeile 1: ....#
+            false, false,  false, false, true,   // Zeile 2: ....#
+            false, true, true, true,    true,    // Zeile 3: .####
+            false, true,  false, false, true,    // Zeile 4: .#..#
+            false, false, true,  true,  false    // Zeile 5: ..##.
         ], 5));
 
         _characters.Add('e', ([
