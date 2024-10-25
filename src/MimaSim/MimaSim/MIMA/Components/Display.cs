@@ -39,7 +39,7 @@ public class Display
         var xOffset = CPU.Instance.Display.DX.GetValueWithoutNotification();
         var yOffset = CPU.Instance.Display.DY.GetValueWithoutNotification();
 
-        Font.DrawChar(xOffset, yOffset, ch)
+        Font.DrawChar(xOffset, yOffset, ch);
     }
 
     public void SetPixel(short x, short y)
