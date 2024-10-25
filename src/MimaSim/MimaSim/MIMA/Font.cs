@@ -414,14 +414,14 @@ public class Font
         {
             bool[] boxPixels =
             [
-                true, true, true, true, true, true, true,
-                true, false, false, false, false, false, true,
-                true, false, true, false, false, false, true,
-                true, false, false, false, false, false, true,
-                true, true, true, true, true, true, true
+                true, true, true, true, true, true,
+                true, false, false, false, false, true,
+                true, false, true, false, false, true,
+                true, false, false, false, false, true,
+                true, true, true, true, true, true
             ];
 
-            DrawChar(7, boxPixels, yOffset, xOffset);
+            DrawChar(6, boxPixels, yOffset, xOffset);
         }
 
         var (pixels, width) = character;
