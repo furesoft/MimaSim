@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using MimaSim.MIMA.Components;
 
@@ -395,9 +396,11 @@ public class Font
         {
             if (kv.Key == c)
             {
-                return kv.Value.Item2;
+                return (short)kv.Value.Item2;
             }
         }
+
+        return 0;
     }
 
     public short Measure(string s)
