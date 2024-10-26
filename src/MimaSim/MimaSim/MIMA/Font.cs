@@ -426,27 +426,32 @@ public class Font
         return (short)s.Sum(c => Measure(c).width + 1);
     }
 
-    public void DrawChar(short xOffset, short yOffset, char ch)
+    public void DrawChar(short xOffset, short yOffset, char ch, DisplayColor color)
     {
         if (!Characters.TryGetValue(ch, out var character))
         {
-            bool[] boxPixels =
-            [
-                true, true, true, true, true, true,
-                true, false, false, false, false, true,
-                true, false, true, false, false, true,
-                true, false, false, false, false, true,
-                true, true, true, true, true, true
-            ];
-
-            DrawChar(6, boxPixels, yOffset, xOffset);
+            DrawInvalidChar(xOffset, yOffset, color);
         }
 
         var (pixels, width) = character;
-        DrawChar(width, pixels, yOffset, xOffset);
+        DrawChar(width, pixels, yOffset, xOffset, color);
     }
 
-    private static void DrawChar(int width, bool[] pixels, short yOffset, short xOffset)
+    private static void DrawInvalidChar(short xOffset, short yOffset, DisplayColor color)
+    {
+        bool[] boxPixels =
+        [
+            true, true, true, true, true, true,
+            true, false, false, false, false, true,
+            true, false, true, false, false, true,
+            true, false, false, false, false, true,
+            true, true, true, true, true, true
+        ];
+
+        DrawChar(6, boxPixels, yOffset, xOffset, color);
+    }
+
+    private static void DrawChar(int width, bool[] pixels, short yOffset, short xOffset, DisplayColor color)
     {
         for (var y = 0; y < 5; y++)
         {
@@ -454,7 +459,7 @@ public class Font
             {
                 if (pixels[(y * width) + x])
                 {
-                    CPU.Instance.Display.SetPixel((short)(y + yOffset), (short)(x + xOffset), DisplayColor.Black);
+                    CPU.Instance.Display.SetPixel((short)(y + yOffset), (short)(x + xOffset), color);
                 }
             }
         }

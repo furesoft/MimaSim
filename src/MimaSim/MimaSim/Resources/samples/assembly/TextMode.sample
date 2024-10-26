@@ -1,12 +1,11 @@
 ﻿macro clear(color) {
-	unflag TEXTMODE
-	flag CLEAR
 	load color
 	mov accumulator, dc
-	unflag CLEAR
+
+	syscall CLEAR
 }
 
-clk 10
+clk 60
 clear WHITE
 
 macro drawChar(x, y, c) {
@@ -20,6 +19,8 @@ macro drawChar(x, y, c) {
 
 	load c
 	mov accumulator, dc
+
+	syscall DRAW
 }
 
 drawChar 0, 0, 'h'

@@ -2,5 +2,6 @@
 
 public enum SysCall
 {
-    
+    CLEAR,
+    DRAW,
 }

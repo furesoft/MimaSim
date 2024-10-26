@@ -57,16 +57,14 @@ public class CPU
             BusRegistry.Activate("cu->y");
         });
 
-        Display.DC.Bus.Subscribe(_ =>
+        ControlUnit.AddSysCall(SysCall.CLEAR, () =>
+        {
+            Display.Clear();
+        });
+
+        ControlUnit.AddSysCall(SysCall.DRAW, () =>
         {
             var isTextMode = CPU.Instance.ControlUnit.HasFlag(Flags.TextMode);
-            var clear = CPU.Instance.ControlUnit.HasFlag(Flags.CLEAR);
-
-            if (clear)
-            {
-                Instance.Display.Clear();
-                return;
-            }
 
             if (isTextMode)
             {
