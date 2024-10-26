@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MimaSim.Controls;
 using MimaSim.MIMA.Components;
+using MimaSim.MIMA.Components.Graphics;
 using MimaSim.Models;
 
 namespace MimaSim.ViewModels;

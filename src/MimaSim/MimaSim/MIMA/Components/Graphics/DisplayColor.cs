@@ -1,4 +1,4 @@
-﻿namespace MimaSim.MIMA.Components;
+﻿namespace MimaSim.MIMA.Components.Graphics;
 
 public enum DisplayColor
 {
