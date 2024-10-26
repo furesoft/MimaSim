@@ -1,7 +1,9 @@
-﻿using MimaSim.Controls;
+﻿using System;
+using MimaSim.Controls;
 using MimaSim.MIMA.Components;
 using ReactiveUI;
 using System.Linq;
+using System.Text;
 using System.Windows.Input;
 using AvaloniaEdit.Highlighting;
 using MimaSim.Core;
@@ -52,16 +54,28 @@ public partial class DisassemblyPopupViewModel : ReactiveObject, IActivatableVie
     private static string GetRawString()
     {
         var raw = CPU.Instance.Program;
+        var stringBuilder = new StringBuilder();
 
-        return string.Join(' ', raw.Select(_ =>
+        foreach (var item in raw)
         {
-            var result = (_).ToString("x");
+            var result = item.ToString("x");
             if (result.Length == 1)
             {
                 result = "0" + result;
             }
 
-            return result;
-        })).ToUpper();
+            stringBuilder.Append(result.ToUpper());
+
+            if ((stringBuilder.Length % 10) == 0)
+            {
+                stringBuilder.Append(Environment.NewLine);
+            }
+            else
+            {
+                stringBuilder.Append(' ');
+            }
+        }
+
+        return stringBuilder.ToString().Trim();
     }
 }
