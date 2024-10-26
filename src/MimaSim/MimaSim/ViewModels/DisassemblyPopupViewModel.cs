@@ -6,31 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using AvaloniaEdit.Highlighting;
+using AvaloniaHex.Document;
 using MimaSim.Core;
 
 namespace MimaSim.ViewModels;
 
-public partial class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
+public class DisassemblyPopupViewModel : ReactiveObject, IActivatableViewModel
 {
     private string? _source;
-
     private bool _showHexDump;
+    private ByteArrayBinaryDocument _hexDocument;
 
     public DisassemblyPopupViewModel()
     {
         CloseCommand = ReactiveCommand.Create(DialogService.Close);
         ShowHexDump = false;
+
+        Source = Disassemble();
+        HexDocument = new ByteArrayBinaryDocument(CPU.Instance.Program, true);
     }
 
     public bool ShowHexDump
     {
         get => _showHexDump;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _showHexDump, value);
-
-            Source = value ? GetRawString() : Disassemble();
-        }
+        set => this.RaiseAndSetIfChanged(ref _showHexDump, value);
     }
 
     public ViewModelActivator Activator => new();
@@ -41,6 +40,12 @@ public partial class DisassemblyPopupViewModel : ReactiveObject, IActivatableVie
     {
         get => _source;
         set => this.RaiseAndSetIfChanged(ref _source, value);
+    }
+
+    public ByteArrayBinaryDocument HexDocument
+    {
+        get => _hexDocument;
+        set => this.RaiseAndSetIfChanged(ref _hexDocument, value);
     }
 
     private static string Disassemble()
