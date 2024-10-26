@@ -6,8 +6,8 @@
              xmlns:mimaComponents="clr-namespace:MimaSim.Controls.MimaComponents"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.NetworkCardWrapper">
-    <Canvas Height="190" Width="100">
-        <mimaComponents:NetworkCardControl Canvas.Left="20" />
-        <mimaComponents:BusControl Canvas.Top="55" Canvas.Left="50" Width="15" Height="127" State="None" core:BusRegistry.Id="base_to_nic" />
+    <Canvas Height="190" Width="75">
+        <mimaComponents:NetworkCardControl Canvas.Left="0" />
+        <mimaComponents:BusControl Canvas.Top="55" Canvas.Left="35" Width="15" Height="127" State="None" core:BusRegistry.Id="base_to_nic" />
     </Canvas>
 </UserControl>
