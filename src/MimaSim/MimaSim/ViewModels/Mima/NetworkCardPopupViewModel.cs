@@ -11,6 +11,7 @@ public class NetworkCardPopupViewModel : ReactiveObject, IActivatableViewModel
 {
     private string _mac;
     private string _ip;
+    private string _subnetMask;
 
     public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
@@ -26,9 +27,16 @@ public class NetworkCardPopupViewModel : ReactiveObject, IActivatableViewModel
         set => this.RaiseAndSetIfChanged(ref _ip, value);
     }
 
+    public string SubnetMask
+    {
+        get => _subnetMask;
+        set => this.RaiseAndSetIfChanged(ref _subnetMask, value);
+    }
+
     public NetworkCardPopupViewModel()
     {
         MAC = CPU.Instance.NIC.MAC.ToString();
         IP = CPU.Instance.NIC.IP.ToString();
+        SubnetMask = CPU.Instance.NIC.SubnetMask.ToString();
     }
 }

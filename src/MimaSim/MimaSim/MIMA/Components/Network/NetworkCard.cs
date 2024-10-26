@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using MimaSim.Core;
 
@@ -7,6 +8,7 @@ namespace MimaSim.MIMA.Components.Network;
 public class NetworkCard
 {
     public IPAddress IP { get; set; }
+    public IPAddress SubnetMask { get; set; }
     public MacAddress MAC { get; set; }
 
     public NetworkCard(ICache cache)
@@ -20,6 +22,16 @@ public class NetworkCard
         else
         {
             MAC = MacAddress.Parse(mac);
+        }
+
+        var subnetMask = cache.Get<string>("config.nic.subnetmask");
+        if (subnetMask == null)
+        {
+            SubnetMask = IPAddress.Parse("255.255.255.255");
+        }
+        else
+        {
+            SubnetMask = IPAddress.Parse(subnetMask);
         }
 
         IP = GenerateRandomPublicIP();
@@ -39,5 +51,39 @@ public class NetworkCard
         var fourthOctet = Random.Shared.Next(0, 256);
 
         return IPAddress.Parse($"{firstOctet}.{secondOctet}.{thirdOctet}.{fourthOctet}");
+    }
+
+    public bool IsInSameSubnet(IPAddress ipAddress)
+    {
+        if (ipAddress == null)
+            throw new ArgumentNullException(nameof(ipAddress));
+
+        // calculate network address
+        var ipBytes = ipAddress.GetAddressBytes();
+        var subnetMaskBytes = SubnetMask.GetAddressBytes();
+        var networkAddressBytes = new byte[ipBytes.Length];
+
+        for (int i = 0; i < ipBytes.Length; i++)
+        {
+            networkAddressBytes[i] = (byte)(ipBytes[i] & subnetMaskBytes[i]);
+        }
+
+        // calculate network address for own ip address
+        var ownNetworkAddressBytes = CaclulateNetworkAddress(IP, subnetMaskBytes);
+
+        return networkAddressBytes.SequenceEqual(ownNetworkAddressBytes);
+    }
+
+    public static byte[] CaclulateNetworkAddress(IPAddress ip, byte[] subnetMaskBytes)
+    {
+        var ownIpBytes = ip.GetAddressBytes();
+        var ownNetworkAddressBytes = new byte[ownIpBytes.Length];
+
+        for (int i = 0; i < ownIpBytes.Length; i++)
+        {
+            ownNetworkAddressBytes[i] = (byte)(ownIpBytes[i] & subnetMaskBytes[i]);
+        }
+
+        return ownNetworkAddressBytes;
     }
 }
