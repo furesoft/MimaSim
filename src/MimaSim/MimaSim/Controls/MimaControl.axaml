@@ -8,6 +8,8 @@
              x:Class="MimaSim.Controls.MimaControl">
   <Border BorderBrush="Black" BorderThickness="1">
     <Canvas>
+      <w:NetworkCardWrapper Canvas.Top="10" Canvas.Left="415" />
+
       <w:AluWrapperControl Canvas.Top="20" Canvas.Left="190" />
       <w:MemoryWrapper Canvas.Top="75" Canvas.Left="350" />
 
