@@ -31,12 +31,13 @@ public class App : Application
             case IClassicDesktopStyleApplicationLifetime desktop:
                 desktop.MainWindow = new MainWindow();
                 Locator.CurrentMutable.Register(() => desktop.MainWindow.StorageProvider);
+                Locator.CurrentMutable.Register(() => desktop.MainWindow.Launcher);
                 break;
 
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainView();
-                Locator.CurrentMutable.Register(
-                    () => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+                Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.StorageProvider);
+                Locator.CurrentMutable.Register(() => TopLevel.GetTopLevel(singleViewPlatform.MainView)!.Launcher);
                 break;
         }
 

@@ -129,9 +129,9 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             }
         });
 
-        OpenGithubCommand = ReactiveCommand.Create(() =>
+        OpenGithubCommand = ReactiveCommand.Create(async () =>
         {
-            Locator.Current.GetService<IInterop>()!.OpenLink("https://github.com/furesoft/MimaSim");
+            await Locator.Current.GetService<ILauncher>()!.LaunchUriAsync(new Uri("https://github.com/furesoft/MimaSim"));
         });
 
         var stopObserver = MessageBus.Current.Listen<StopMessage>();

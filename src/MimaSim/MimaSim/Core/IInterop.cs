@@ -2,5 +2,5 @@
 
 public interface IInterop
 {
-    void OpenLink(string url);
+
 }
