@@ -44,10 +44,13 @@ public class DocumentTextBindingBehavior : Behavior<TextEditor>
 
     private void TextPropertyChanged(string text)
     {
-        if (_textEditor != null && _textEditor.Document != null && text != null)
+        if (_textEditor == null || _textEditor.Document == null || text == null) return;
+
+        var caretOffset = _textEditor.CaretOffset;
+        _textEditor.Document.Text = text;
+
+        if (caretOffset < _textEditor.Document.TextLength)
         {
-            var caretOffset = _textEditor.CaretOffset;
-            _textEditor.Document.Text = text;
             _textEditor.CaretOffset = caretOffset;
         }
     }

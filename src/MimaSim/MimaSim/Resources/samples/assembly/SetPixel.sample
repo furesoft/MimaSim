@@ -7,6 +7,8 @@
 	
 	load c
 	mov accumulator, dc
+
+	syscall DRAW
 }
 
 setPixel 2, 5, GREEN
