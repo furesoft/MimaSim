@@ -3,7 +3,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using MimaSim.Controls.MimaComponents;
 
-namespace MimaSim.MIMA.Components;
+namespace MimaSim.MIMA.Components.Graphics;
 
 public class Display
 {

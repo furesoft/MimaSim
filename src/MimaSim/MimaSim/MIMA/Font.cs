@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using MimaSim.MIMA.Components;
+using MimaSim.MIMA.Components.Graphics;
 
 namespace MimaSim.MIMA;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.Emiting;
 using MimaSim.MIMA.Components;
+using MimaSim.MIMA.Components.Graphics;
 using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 using Silverfly;
 using Silverfly.Nodes;
