@@ -60,6 +60,9 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             DialogService.Open(new DisassemblyViewPopup(), new DisassemblyPopupViewModel());
         });
 
+        OpenNetworkSettingsCommand =
+            DialogService.CreateOpenCommand(new NetworkCardPopupControl(), new NetworkCardPopupViewModel());
+
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
 
         LoadCommand = ReactiveCommand.Create(async () =>
@@ -158,6 +161,8 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     public ICommand RunCodeCommand { get; set; }
     public ICommand HelpCommand { get; set; }
     public ICommand OpenGithubCommand { get; set; }
+
+    public ICommand OpenNetworkSettingsCommand { get; set; }
 
     public bool RunMode
     {

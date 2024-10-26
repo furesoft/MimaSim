@@ -11,7 +11,7 @@
   <Style Selector="Button.clickable">
     <Setter Property="Template">
       <ControlTemplate>
-        <TextBlock Text="{TemplateBinding Content}" TextAlignment="Center" />
+        <ContentPresenter Content="{TemplateBinding Content}" TextAlignment="Center" />
       </ControlTemplate>
     </Setter>
     <Setter Property="HorizontalContentAlignment" Value="Center" />
