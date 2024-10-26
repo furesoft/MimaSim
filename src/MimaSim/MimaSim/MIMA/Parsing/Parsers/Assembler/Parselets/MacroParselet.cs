@@ -18,7 +18,8 @@ public class MacroParselet : IPrefixParselet
         parser.Consume("{");
         var body = parser.ParseList(terminators: "}");
 
-        return new MacroNode(nameToken, parameters, body);
+        return new MacroNode(nameToken, parameters, body)
+            .WithRange(token, parser.LookAhead());
     }
 
     public ImmutableList<AstNode> ParseArgs(Parser parser, Symbol separator, params Symbol[] terminators)

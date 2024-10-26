@@ -13,7 +13,7 @@ public class InstructionParselet : IPrefixParselet
         {
             using var context = parser.Lexer.OpenContext<InstructionContext>();
 
-            var args = parser.ParseSeperated(",");
+            var args = parser.ParseSeperated(",", terminator: "\n");
             return new InstructionNode(token, args)
                 .WithRange(token, parser.LookAhead());
         }
