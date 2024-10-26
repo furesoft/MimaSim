@@ -1,6 +1,5 @@
-﻿namespace MimaSim.Core;
+namespace MimaSim.Core;
 
 public interface IInterop
 {
-
 }
