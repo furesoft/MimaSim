@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MimaSim.MIMA.Components.Network;
+using Splat;
 
 namespace MimaSim.MIMA.Components;
 
@@ -17,6 +19,7 @@ public class CPU
     public readonly Clock Clock = new(250);
     public readonly ControlUnit ControlUnit = new();
     public readonly Bus DataBus = new();
+    public readonly NetworkCard NIC;
 
     public readonly static Dictionary<OpCodes, IInstruction> Instructions = new();
     public readonly Memory Memory = new((int)Math.Pow(2, 8));
@@ -37,6 +40,7 @@ public class CPU
     {
         ALU = new ALU(this);
         Stack = new Stack(this);
+        NIC = new NetworkCard(Locator.Current.GetService<ICache>()!);
 
         ControlUnit.IAR.Bus.Subscribe(_ =>
         {
