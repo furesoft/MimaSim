@@ -14,4 +14,5 @@ public enum Registers
     DX,
     DY,
     FLAG,
+    SCR // Register to store syscall result
 }

@@ -54,6 +54,8 @@
 			<Word>unflag</Word>
 			<Word>hasflag</Word>
 
+			<Word>syscall</Word>
+
 			<Word>macro</Word>
 		</Keywords>
 		

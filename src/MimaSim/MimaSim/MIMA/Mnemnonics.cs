@@ -18,5 +18,6 @@ public enum Mnemnonics
     CLK,
     FLAG,
     UNFLAG,
-    HASFLAG
+    HASFLAG,
+    SYSCALL
 }

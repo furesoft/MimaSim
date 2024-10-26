@@ -10,15 +10,16 @@
              x:Class="MimaSim.Controls.MimaComponents.Wrappers.ControlUnitWrapper">
   <Canvas>
      <c:RegisterControl Register="FLAG" Width="45" Canvas.Left="100" Canvas.Top="15" me:RegisterConnector.IsConnected="True" />
+     <c:RegisterControl Register="SCR" Width="45" Canvas.Left="100" Canvas.Top="45" me:RegisterConnector.IsConnected="True" />
 
-      <c:ControlUnitControl Canvas.Top="0" Canvas.Left="0" Width="100" Height="220" />
+     <c:ControlUnitControl Canvas.Top="0" Canvas.Left="0" Width="100" Height="220" />
 
-    <c:ClockControl Name="clock" Tag="{me:GetClockFrequency}" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" />
+     <c:ClockControl Name="clock" Tag="{me:GetClockFrequency}" Canvas.Top="5" Canvas.Left="5" Width="35" Height="35" ToolTip.Tip="{Binding ElementName=clock, Path=Tag}" />
 
-    <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="15" Canvas.Top="220" Width="15" Height="25" State="None" />
-    <c:RegisterControl Register="IAR" Canvas.Left="5" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
+     <c:BusControl b:BusRegistry.Id="controlunit_iar" Canvas.Left="15" Canvas.Top="220" Width="15" Height="25" State="None" />
+     <c:RegisterControl Register="IAR" Canvas.Left="5" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
 
-    <c:BusControl b:BusRegistry.Id="controlunit_sp" Canvas.Left="65" Canvas.Top="220" Width="15" Height="25" State="None" />
-    <c:RegisterControl Register="SP" Canvas.Left="55" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
+     <c:BusControl b:BusRegistry.Id="controlunit_sp" Canvas.Left="65" Canvas.Top="220" Width="15" Height="25" State="None" />
+     <c:RegisterControl Register="SP" Canvas.Left="55" Canvas.Top="245" me:RegisterConnector.IsConnected="True" />
   </Canvas>
 </UserControl>

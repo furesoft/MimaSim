@@ -20,7 +20,6 @@ public enum OpCodes
 
     //Shifting
     LSHIFT = 0x20,
-
     RSHIFT = 0x21,
 
     // Logical
@@ -53,5 +52,7 @@ public enum OpCodes
 
     FLAG = 0x46,
     HASFLAG = 0x47,
-    UNFLAG = 0x48
+    UNFLAG = 0x48,
+
+    SYSCALL = 0x49,
 }

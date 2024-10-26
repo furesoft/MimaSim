@@ -43,6 +43,11 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         {
             Scope.Root.Define(flag.ToUpper(), (short)Enum.Parse<Flags>(flag));
         }
+
+        foreach (var syscall in Enum.GetNames<SysCall>())
+        {
+            Scope.Root.Define(syscall.ToUpper(), (short)Enum.Parse<SysCall>(syscall));
+        }
     }
 
     private void VisitMacroInvocation(InstructionNode invocation, Scope scope)
@@ -187,27 +192,12 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
 
     private OpCodes SelectOpCode(InstructionNode instruction, Scope scope, Mnemnonics mnemnonic)
     {
-        return mnemnonic switch
+        if (mnemnonic == Mnemnonics.MOV)
         {
-            Mnemnonics.MOV => SelectMovOpCode(instruction, scope),
-            Mnemnonics.LOAD => OpCodes.LOAD,
-            Mnemnonics.JMP => OpCodes.JMP,
-            Mnemnonics.JMPC => OpCodes.JMPC,
-            Mnemnonics.CMPNE => OpCodes.CMPNEQ,
-            Mnemnonics.CMPE => OpCodes.CMPEQ,
-            Mnemnonics.CMPLT => OpCodes.CMPLT,
-            Mnemnonics.CMPGT => OpCodes.CMPGT,
-            Mnemnonics.ADD => OpCodes.ADD,
-            Mnemnonics.SUB => OpCodes.SUB,
-            Mnemnonics.PUSH => OpCodes.PUSH,
-            Mnemnonics.POP => OpCodes.POP,
-            Mnemnonics.EXIT => OpCodes.EXIT,
-            Mnemnonics.CLK => OpCodes.CLK,
-            Mnemnonics.FLAG => OpCodes.FLAG,
-            Mnemnonics.HASFLAG => OpCodes.HASFLAG,
-            Mnemnonics.UNFLAG => OpCodes.UNFLAG,
-            _ => throw new ArgumentOutOfRangeException(nameof(instruction.Mnemnonic), $@"No opcode defined for mnemonic: {instruction.Mnemnonic}")
-        };
+            return SelectMovOpCode(instruction, scope);
+        }
+
+        return Enum.Parse<OpCodes>(mnemnonic.ToString());
     }
 
     private OpCodes SelectMovOpCode(InstructionNode instruction, Scope scope)
