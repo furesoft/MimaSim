@@ -6,12 +6,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:CompileBindings="False"
              x:Class="MimaSim.Controls.MimaComponents.Popups.NetworkCardPopupControl">
     <controls:DialogControl CommandText="OK" IsCancelEnabled="False" Header="Network Card">
-        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="MAC-Addresse" />
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="MAC-Addresse: " />
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MAC}" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="IP-Addresse" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="IP-Addresse: " />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding IP}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Subnetz-Maske: " />
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SubnetMask}" />
         </Grid>
     </controls:DialogControl>
 </UserControl>
