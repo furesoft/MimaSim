@@ -15,10 +15,10 @@ using MimaSim.Core.Parsing;
 using MimaSim.Messages;
 using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
-using MimaSim.Tabs;
 using MimaSim.ViewModels.Mima;
 using ReactiveUI;
 using Splat;
+using HelpPopup = MimaSim.Controls.Popups.HelpPopup;
 
 namespace MimaSim.ViewModels;
 

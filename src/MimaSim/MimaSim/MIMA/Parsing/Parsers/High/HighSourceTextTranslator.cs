@@ -1,9 +1,8 @@
 ﻿using MimaSim.Controls;
 using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.MIMA.Parsing.Parsers.High;
 
-namespace MimaSim.MIMA.Parsing.SourceTranslators;
+namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class HighSourceTextTranslator : ISourceTextTranslator
 {

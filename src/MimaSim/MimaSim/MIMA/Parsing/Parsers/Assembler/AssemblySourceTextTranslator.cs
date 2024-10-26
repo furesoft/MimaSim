@@ -1,8 +1,7 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.MIMA.Parsing.Parsers.Assembler;
 
-namespace MimaSim.MIMA.Parsing.SourceTranslators;
+namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
 
 public class AssemblySourceTextTranslator : ISourceTextTranslator
 {

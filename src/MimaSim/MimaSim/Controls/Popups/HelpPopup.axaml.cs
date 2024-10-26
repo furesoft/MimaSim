@@ -1,9 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MimaSim.Core;
-using MimaSim.ViewModels;
 
-namespace MimaSim.Tabs;
+namespace MimaSim.Controls.Popups;
 
 public partial class HelpPopup : UserControl
 {

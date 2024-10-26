@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MimaSim.Core;
-using MimaSim.MIMA.Parsing.SourceTranslators;
+using MimaSim.MIMA.Parsing.Parsers.High;
 
 namespace MimaTest;
 

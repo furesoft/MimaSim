@@ -1,9 +1,7 @@
 ﻿using MimaSim.Core;
 using MimaSim.Core.Parsing;
-using MimaSim.MIMA.Parsing.Parsers;
-using MimaSim.MIMA.Parsing.Parsers.Raw;
 
-namespace MimaSim.MIMA.Parsing.SourceTranslators;
+namespace MimaSim.MIMA.Parsing.Parsers.Raw;
 
 public class RawSourceTextTranslator : ISourceTextTranslator
 {

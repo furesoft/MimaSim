@@ -1,13 +1,8 @@
-﻿using System;
-using MimaSim.Core.Parsing.AST;
-using MimaSim.Core.Parsing.Tokenizer;
-using System.Linq;
-using Silverfly;
+﻿using Silverfly;
 using Silverfly.Lexing.IgnoreMatcher.Comments;
-using Silverfly.Nodes;
 using Silverfly.Parselets.Literals;
 
-namespace MimaSim.MIMA.Parsing.Parsers;
+namespace MimaSim.MIMA.Parsing.Parsers.Raw;
 
 
 public class RawParser : Parser
