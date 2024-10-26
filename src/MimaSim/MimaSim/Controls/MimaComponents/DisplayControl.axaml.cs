@@ -12,8 +12,8 @@ public partial class DisplayControl : UserControl
 {
     public Dictionary<(int, int), Border> Pixels { get; set; } = [];
     
-    public int PixelWidth { get; set; } = 55; // width in display pixel
-    public int PixelHeight { get; set; } = 13; // height in display pixel
+    public int PixelWidth { get; set; } = 100; // width in display pixel
+    public int PixelHeight { get; set; } = 25; // height in display pixel
 
     public DisplayControl()
     {
@@ -45,8 +45,8 @@ public partial class DisplayControl : UserControl
                 {
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(0),
-                    Width = 10,
-                    Height = 10,
+                    Width = 5,
+                    Height = 5,
                     Background = Brushes.White
                 };
                 Pixels.Add((row, col), cell);
