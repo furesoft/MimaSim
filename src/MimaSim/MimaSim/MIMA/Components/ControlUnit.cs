@@ -20,13 +20,35 @@ public class ControlUnit
 
     public void InvokeSysCall(SysCall syscall)
     {
-        _syscalls.TryGetValue(syscall, out Action? action);
+        if (_syscalls.TryGetValue(syscall, out var action))
+        {
+            action();
+            return;
+        }
 
-        action!();
+        SetError(ErrorCodes.SysCallNotFound);
     }
 
     public bool HasFlag(Flags flag)
     {
         return (FLAG.GetValueWithoutNotification() & (1 << (short)flag)) != 0;
+    }
+
+    public void SetFlag(Flags flag)
+    {
+        var current = FLAG.GetValueWithoutNotification();
+
+        current = (short)((ushort)current | 1 << (short)flag);
+
+        FLAG.SetValue(current);
+    }
+
+    public void SetError(ErrorCodes code)
+    {
+        CPU.Instance.Accumulator.SetValue((short)code);
+
+        SetFlag(Flags.Trap);
+
+        CPU.Instance.Clock.Stop();
     }
 }

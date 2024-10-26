@@ -55,6 +55,7 @@
 			<Word>hasflag</Word>
 
 			<Word>syscall</Word>
+			<Word>trap</Word>
 
 			<Word>macro</Word>
 		</Keywords>

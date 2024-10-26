@@ -17,6 +17,7 @@ public class Clock
     }
 
     public event Action<object> FrequencyChanged;
+    public event Action Stoped;
 
     public short Frequency => _frequency;
 
@@ -35,6 +36,7 @@ public class Clock
     public void Stop()
     {
         _timer.Stop();
+        Stoped?.Invoke();
     }
 
     private void _timer_Elapsed(object sender, ElapsedEventArgs e)

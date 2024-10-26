@@ -160,7 +160,8 @@ public class CPU
         }
         else
         {
-            throw new Exception("unknown opcode");
+            ControlUnit.SetError(ErrorCodes.Unknown); //unknown instruction
+            return false;
         }
     }
 }

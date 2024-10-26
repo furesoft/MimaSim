@@ -19,5 +19,6 @@ public enum Mnemnonics
     FLAG,
     UNFLAG,
     HASFLAG,
-    SYSCALL
+    SYSCALL,
+    TRAP
 }

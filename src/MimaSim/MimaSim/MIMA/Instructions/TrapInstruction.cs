@@ -4,19 +4,20 @@ using MimaSim.MIMA.Components;
 
 namespace MimaSim.MIMA.Instructions;
 
-public class SetFlagInstruction : IInstruction, IDisassemblyInstruction
+public class TrapInstruction : IInstruction, IDisassemblyInstruction
 {
-    public OpCodes OpCode => OpCodes.FLAG;
+    public OpCodes OpCode => OpCodes.TRAP;
 
     public bool Invoke(CPU cpu)
     {
-        cpu.ControlUnit.SetFlag((Flags)cpu.Fetch16());
+        cpu.ControlUnit.SetFlag(Flags.Trap);
+        CPU.Instance.Clock.Stop();
 
         return true;
     }
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"flag 0x{disassembler.Fetch16():X2}");
+        builder.AppendLine($"trap");
     }
 }

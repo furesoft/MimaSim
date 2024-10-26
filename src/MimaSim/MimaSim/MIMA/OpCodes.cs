@@ -55,4 +55,5 @@ public enum OpCodes
     UNFLAG = 0x48,
 
     SYSCALL = 0x49,
+    TRAP = 0x50,
 }

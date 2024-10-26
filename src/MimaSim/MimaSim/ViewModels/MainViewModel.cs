@@ -36,7 +36,12 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     {
         InitHighlighting();
 
-        OpenErrorPopupCommand = ReactiveCommand.Create(() => DialogService.Open());
+        CPU.Instance.Clock.Stoped += () =>
+        {
+            RunMode = false;
+        };
+
+        OpenErrorPopupCommand = ReactiveCommand.Create(DialogService.Open);
 
         OpenClockSettingsCommand =
             DialogService.CreateOpenCommand(new ClockSettingsPopupControl(), new ClockSettingsPopupViewModel());
@@ -56,7 +61,6 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
         });
 
         OpenMemoryPopupCommand = DialogService.CreateOpenCommand(new MemoryPopupControl(), new MemoryPopupViewModel());
-
 
         LoadCommand = ReactiveCommand.Create(async () =>
         {

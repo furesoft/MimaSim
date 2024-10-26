@@ -10,7 +10,7 @@ public class SysCallInstruction : IInstruction, IDisassemblyInstruction
 
     public bool Invoke(CPU cpu)
     {
-       cpu.ControlUnit.InvokeSysCall((SysCall)cpu.Fetch16());
+        cpu.ControlUnit.InvokeSysCall((SysCall)cpu.Fetch16());
 
         return true;
     }
