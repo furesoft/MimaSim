@@ -1,4 +1,6 @@
-﻿namespace MimaSim.MIMA.Components;
+﻿using MimaSim.Core;
+
+namespace MimaSim.MIMA.Components;
 
 public class Stack(CPU cpu)
 {
@@ -9,10 +11,18 @@ public class Stack(CPU cpu)
         var sp = cpu.ControlUnit.SP.GetValue();
         var value = cpu.Accumulator.GetValue();
 
+        if (sp < 0)
+        {
+            cpu.ControlUnit.SetError(ErrorCodes.StackOverflow);
+            return;
+        }
+
         Data[sp] = value;
         sp--;
 
         cpu.ControlUnit.SP.SetValue(sp);
+
+        BusRegistry.Activate("cu->stack");
     }
 
     public void Pop()
@@ -24,5 +34,7 @@ public class Stack(CPU cpu)
 
         sp++;
         cpu.ControlUnit.SP.SetValue(sp);
+
+        BusRegistry.Activate("cu->stack");
     }
 }

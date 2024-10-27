@@ -3,5 +3,6 @@
 public enum ErrorCodes
 {
     Unknown,
-    SysCallNotFound = 0x01,
+    SysCallNotFound,
+    StackOverflow
 }
