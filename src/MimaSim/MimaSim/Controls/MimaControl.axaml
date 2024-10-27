@@ -19,7 +19,7 @@
 
       <w:StackWrapper Canvas.Top="55" Canvas.Left="510" />
 
-      <w:DisplayWrapper Canvas.Top="210" Canvas.Left="12" />
+      <w:DisplayWrapper Canvas.Top="218" Canvas.Left="12" />
     </Canvas>
   </Border>
 </UserControl>

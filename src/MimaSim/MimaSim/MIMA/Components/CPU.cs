@@ -47,6 +47,19 @@ public class CPU
             BusRegistry.ActivateBus("controlunit_sp");
         });
 
+        Display.DX.Bus.Subscribe(_ =>
+        {
+            BusRegistry.Activate("cu->dx");
+        });
+        Display.DY.Bus.Subscribe(_ =>
+        {
+            BusRegistry.Activate("cu->dy");
+        });
+        Display.DC.Bus.Subscribe(_ =>
+        {
+            BusRegistry.Activate("cu->dc");
+        });
+
         X.Bus.Subscribe(_ =>
         {
             BusRegistry.Activate("cu->x");

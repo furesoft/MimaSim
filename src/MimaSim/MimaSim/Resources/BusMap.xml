@@ -1,20 +1,20 @@
 <busactivations>
     <activator id="cu->x">
         <setbus id="alu_input_x2"/>
-        <mainbus value="42"/>
+        <mainbus value="35"/>
     </activator>
     <activator id="cu->y">
         <setbus id="alu_input_y2"/>
-        <mainbus value="55"/>
+        <mainbus value="46"/>
     </activator>
     <activator id="cu->accu">
         <setbus id="base_to_accu"/>
-        <mainbus value="42"/>
+        <mainbus value="35"/>
     </activator>
     <activator id="cu->mem">
         <setbus id="memory_data2"/>
         <setbus id="memory_adresss2"/>
-        <mainbus value="100"/>
+        <mainbus value="83"/>
     </activator>
 
     <activator id="alu->cu">
@@ -23,4 +23,33 @@
 
         <mainbus value="35"/>
     </activator>
+
+    <activator id="cu->stack">
+        <mainbus value="100"/>
+    </activator>
+
+    <activator id="cu->dx">
+        <mainbus value="75"/>
+
+        <setbus id="base_to_display" />
+        <setbus id="display_to_dx" />
+        <setbus id="dx" />
+    </activator>
+
+    <activator id="cu->dy">
+        <mainbus value="75"/>
+
+        <setbus id="base_to_display" />
+        <setbus id="display_to_dy" />
+        <setbus id="dy" />
+    </activator>
+
+    <activator id="cu->dc">
+        <mainbus value="75"/>
+
+        <setbus id="base_to_display" />
+        <setbus id="display_to_dc" />
+        <setbus id="dc" />
+    </activator>
+
 </busactivations>

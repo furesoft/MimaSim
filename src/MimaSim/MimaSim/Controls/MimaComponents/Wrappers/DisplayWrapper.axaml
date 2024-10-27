@@ -10,8 +10,8 @@
    <Canvas Height="320" Width="600">
        <TextBlock Text="Display" TextAlignment="Center" VerticalAlignment="Center" Canvas.Top="75" Canvas.Left="500" />
 
-       <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="base_to_display" />
-       <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="385" Width="15" Height="40" State="None" core:BusRegistry.Id="display_to_dc" />
+       <mimaComponents:BusControl Canvas.Top="0" Canvas.Left="385" Width="15" Height="55" State="None" core:BusRegistry.Id="base_to_display" />
+       <mimaComponents:BusControl Canvas.Top="55" Canvas.Left="385" Width="15" Height="20" State="None" core:BusRegistry.Id="dy" />
 
        <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="336" Width="49" Height="15" State="None" core:BusRegistry.Id="display_to_dx" />
        <mimaComponents:BusControl Canvas.Top="40" Canvas.Left="335" Width="15" Height="40" State="None" core:BusRegistry.Id="dx" />

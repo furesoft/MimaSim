@@ -14,6 +14,8 @@ public class Clock
         _frequency = frequency;
         _timer = new Timer(_frequency);
         _timer.Elapsed += _timer_Elapsed;
+
+        Stoped += BusRegistry.DeactivateAll;
     }
 
     public event Action<object> FrequencyChanged;
@@ -41,10 +43,8 @@ public class Clock
 
     private void _timer_Elapsed(object sender, ElapsedEventArgs e)
     {
-        CPU.Instance.Step();
-
-        System.Threading.Thread.Sleep(10);
-
         BusRegistry.DeactivateAll();
+
+        CPU.Instance.Step();
     }
 }
