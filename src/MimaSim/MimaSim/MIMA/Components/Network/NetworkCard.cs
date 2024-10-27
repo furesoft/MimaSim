@@ -31,7 +31,7 @@ public class NetworkCard
         var subnetMask = cache.Get<string>("config.nic.subnetmask");
         if (subnetMask == null)
         {
-            SubnetMask = IPAddress.Parse("255.255.255.255");
+            SubnetMask = IPAddress.Parse("255.255.255.0");
         }
         else
         {
