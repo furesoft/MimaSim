@@ -22,7 +22,7 @@
                                MinWidth="200" LeftHeader="Register" RightHeader="Byte" MaxHeight="400"
                                VerticalAlignment="Top" />
             <c:MapTableControl ItemTemplate="{StaticResource cellTemplate}" ItemsSource="{Binding OpcodesTableItems}"
-                               MinWidth="200" LeftHeader="Mov" RightHeader="Byte" MaxHeight="400"
+                               MinWidth="200" LeftHeader="Mnemnonic" RightHeader="Byte" MaxHeight="400"
                                VerticalAlignment="Top" />
 
             <StackPanel Orientation="Vertical">

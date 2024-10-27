@@ -21,7 +21,9 @@
         </i:Interaction.Behaviors>
     </avaloniaEdit:TextEditor>
 
-    <ComboBox Grid.Row="2" Grid.Column="0" MinWidth="110" HorizontalAlignment="Right" VerticalAlignment="Bottom" ItemsSource="{Binding LanguageNames}"  SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" />
-    <ComboBox Grid.Row="2" Grid.Column="1" MinWidth="110" HorizontalAlignment="Right" VerticalAlignment="Bottom" ItemsSource="{Binding SampleNames, Mode=TwoWay}"  SelectedItem="{Binding SelectedSample, Mode=TwoWay}" />
-  </Grid>
+    <StackPanel Spacing="10" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+        <ComboBox MinWidth="110" ItemsSource="{Binding LanguageNames}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" />
+        <ComboBox  MinWidth="110" ItemsSource="{Binding SampleNames, Mode=TwoWay}" SelectedItem="{Binding SelectedSample, Mode=TwoWay}" />
+    </StackPanel>
+   </Grid>
 </UserControl>
