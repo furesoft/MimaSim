@@ -10,6 +10,7 @@ public class NetworkCard
 {
     public IPAddress IP { get; set; }
     public IPAddress SubnetMask { get; set; }
+    public IPAddress NetworkAddress { get; set; }
     public MacAddress MAC { get; set; }
 
     private INetworkService _networkService;
@@ -38,6 +39,7 @@ public class NetworkCard
         }
 
         IP = GenerateRandomPublicIP();
+        NetworkAddress = new IPAddress(CaclulateNetworkAddress(IP, SubnetMask.GetAddressBytes()));
 
         _networkService = Locator.Current.GetService<INetworkService>()!;
     }
@@ -104,6 +106,12 @@ public class NetworkCard
     public void Send(MacAddress macAddress, byte[] data)
     {
         var frame = new Frame(IP, MAC, default, macAddress, data);
+        _networkService.Send(frame);
+    }
+
+    public void Loopback(byte[] data)
+    {
+        var frame = new Frame(IP, MAC, IP, MAC, data);
         _networkService.Send(frame);
     }
 }
