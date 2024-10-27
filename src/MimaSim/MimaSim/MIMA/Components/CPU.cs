@@ -164,6 +164,8 @@ public class CPU
 
     public bool Step()
     {
+        ControlUnit.InvokeInterrupt();
+
         var instr = Fetch();
         var result = Step((OpCodes)instr);
 
