@@ -45,7 +45,7 @@
     </activator>
 
     <activator id="cu->nic">
-        <mainbus value="95"/>
+        <mainbus value="94"/>
 
         <setbus id="base_to_nic" />
     </activator>
