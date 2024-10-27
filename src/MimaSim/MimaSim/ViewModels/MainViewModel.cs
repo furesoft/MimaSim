@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Input;
 using System.Xml;
 using Avalonia.Platform.Storage;
@@ -41,6 +42,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             RunMode = false;
         };
 
+        Locator.Current.GetService<INetworkService>()!.Init();
         OpenErrorPopupCommand = ReactiveCommand.Create(DialogService.Open);
 
         OpenClockSettingsCommand =
@@ -103,6 +105,8 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
 
             IsCompiled = true;
+
+            CPU.Instance.NIC.Loopback(Encoding.Default.GetBytes("Hello World"));
         });
 
         RunCodeCommand = ReactiveCommand.Create(() =>
