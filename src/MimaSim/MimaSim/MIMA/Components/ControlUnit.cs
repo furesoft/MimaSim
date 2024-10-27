@@ -10,8 +10,20 @@ public class ControlUnit
     public Register IAR = new("IAR");
     public Register SP = new("SP", 49);
     public Register SCR = new("SCR");
+    public Action? _interrupt;
 
     private Dictionary<SysCall, Action> _syscalls = new();
+
+    public void Interrupt(Action? action)
+    {
+        _interrupt += action;
+    }
+
+    public void InvokeInterrupt()
+    {
+        _interrupt?.Invoke();
+        _interrupt = null;
+    }
 
     public void AddSysCall(SysCall syscall, Action action)
     {
