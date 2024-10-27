@@ -16,6 +16,7 @@ internal sealed partial class Program
     {
         Locator.CurrentMutable.RegisterLazySingleton<ICache>(() => new BrowserCache());
         Locator.CurrentMutable.RegisterLazySingleton<IInterop>(() => new Interop());
+        Locator.CurrentMutable.RegisterLazySingleton<INetworkService>(() => new NetworkService());
 
         return BuildAvaloniaApp()
             .WithInterFont()
