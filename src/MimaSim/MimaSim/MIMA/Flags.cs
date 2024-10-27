@@ -2,6 +2,8 @@
 
 public enum Flags
 {
-    TextMode = 0x00,
-    Trap = 0x01, //used to determine if error has occured
+    TextMode,
+    Trap, //used to determine if error has occured
+    Negative,
+    Zero
 }

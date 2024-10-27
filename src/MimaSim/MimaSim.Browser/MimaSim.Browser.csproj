@@ -10,6 +10,10 @@
 
     <ItemGroup>
         <WasmExtraFilesToDeploy Include="wwwroot\**"/>
+
+        <TrimmerRootAssembly Include="Silverfly" />
+        <TrimmerRootAssembly Include="MimaSim" />
+        <TrimmerRootAssembly Include="ReactiveUI" />
     </ItemGroup>
 
     <ItemGroup>
