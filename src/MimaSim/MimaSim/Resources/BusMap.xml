@@ -44,12 +44,10 @@
         <setbus id="dy" />
     </activator>
 
-    <activator id="cu->dc">
-        <mainbus value="75"/>
+    <activator id="cu->nic">
+        <mainbus value="95"/>
 
-        <setbus id="base_to_display" />
-        <setbus id="display_to_dc" />
-        <setbus id="dc" />
+        <setbus id="base_to_nic" />
     </activator>
 
 </busactivations>
