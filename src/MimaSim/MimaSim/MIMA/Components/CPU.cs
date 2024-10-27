@@ -69,11 +69,11 @@ public class CPU
 
         ControlUnit.AddSysCall(SysCall.DRAW, () =>
         {
-            var isTextMode = CPU.Instance.ControlUnit.HasFlag(Flags.TextMode);
+            var isTextMode = ControlUnit.HasFlag(Flags.TextMode);
 
             if (isTextMode)
             {
-                var ch = (char)CPU.Instance.Display.DC.GetValueWithoutNotification();
+                var ch = (char)Display.DC.GetValueWithoutNotification();
                 Instance.Display.DrawChar(ch);
             }
             else

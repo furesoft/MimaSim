@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using MimaSim.Core;
+using Splat;
 
 namespace MimaSim.MIMA.Components.Network;
 
@@ -10,6 +11,8 @@ public class NetworkCard
     public IPAddress IP { get; set; }
     public IPAddress SubnetMask { get; set; }
     public MacAddress MAC { get; set; }
+
+    private INetworkService _networkService;
 
     public NetworkCard(ICache cache)
     {
@@ -35,6 +38,8 @@ public class NetworkCard
         }
 
         IP = GenerateRandomPublicIP();
+
+        _networkService = Locator.Current.GetService<INetworkService>()!;
     }
 
     public static IPAddress GenerateRandomPublicIP()
@@ -53,7 +58,7 @@ public class NetworkCard
         return IPAddress.Parse($"{firstOctet}.{secondOctet}.{thirdOctet}.{fourthOctet}");
     }
 
-    public bool IsInSameSubnet(IPAddress ipAddress)
+    public bool IsInSameSubnet(IPAddress? ipAddress)
     {
         if (ipAddress == null)
             throw new ArgumentNullException(nameof(ipAddress));
@@ -85,5 +90,20 @@ public class NetworkCard
         }
 
         return ownNetworkAddressBytes;
+    }
+
+    public void Send(IPAddress? ipAddress, byte[] data)
+    {
+        if (IsInSameSubnet(ipAddress))
+        {
+            var frame = new Frame(IP, MAC, ipAddress, default, data);
+            _networkService.Send(frame);
+        }
+    }
+
+    public void Send(MacAddress macAddress, byte[] data)
+    {
+        var frame = new Frame(IP, MAC, default, macAddress, data);
+        _networkService.Send(frame);
     }
 }
