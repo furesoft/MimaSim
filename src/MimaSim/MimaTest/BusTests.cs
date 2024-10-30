@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MimaSim.MIMA.Components;
-using System.Diagnostics;
 
 namespace MimaTest;
 

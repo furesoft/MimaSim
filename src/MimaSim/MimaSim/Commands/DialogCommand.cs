@@ -1,6 +1,6 @@
-﻿using MimaSim.Controls;
-using System;
+﻿using System;
 using System.Windows.Input;
+using MimaSim.Controls;
 
 namespace MimaSim.Commands;
 

@@ -1,12 +1,12 @@
-﻿using Avalonia.Markup.Xaml;
+﻿using System;
+using Avalonia.Markup.Xaml;
 using MimaSim.Controls;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.Controls.MimaComponents.Popups;
 using MimaSim.MIMA;
 using MimaSim.ViewModels;
-using ReactiveUI;
-using System;
 using MimaSim.ViewModels.Mima;
+using ReactiveUI;
 
 namespace MimaSim.MarkupExtensions;
 

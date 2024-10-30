@@ -1,13 +1,13 @@
 ﻿using System;
-using MimaSim.Controls;
-using MimaSim.MIMA.Components;
-using ReactiveUI;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using AvaloniaEdit.Highlighting;
 using AvaloniaHex.Document;
+using MimaSim.Controls;
 using MimaSim.Core;
+using MimaSim.MIMA.Components;
+using ReactiveUI;
 
 namespace MimaSim.ViewModels;
 

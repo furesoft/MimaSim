@@ -1,9 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using System.Windows.Input;
+using Avalonia.Controls;
 using MimaSim.Controls.MimaComponents.Popups;
+using MimaSim.Controls.Popups;
 using MimaSim.ViewModels;
 using ReactiveUI;
-using System.Windows.Input;
-using MimaSim.Controls.Popups;
 
 namespace MimaSim.Controls;
 

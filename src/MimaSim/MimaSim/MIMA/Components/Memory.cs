@@ -1,6 +1,6 @@
-﻿using MimaSim.Messages;
+﻿using System;
+using MimaSim.Messages;
 using ReactiveUI;
-using System;
 
 namespace MimaSim.MIMA.Components;
 

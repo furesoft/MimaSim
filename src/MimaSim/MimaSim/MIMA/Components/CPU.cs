@@ -1,12 +1,12 @@
-﻿using MimaSim.Core;
-using MimaSim.Messages;
-using ReactiveUI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MimaSim.Core;
+using MimaSim.Messages;
 using MimaSim.MIMA.Components.Graphics;
 using MimaSim.MIMA.Components.Network;
+using ReactiveUI;
 using Splat;
 
 namespace MimaSim.MIMA.Components;

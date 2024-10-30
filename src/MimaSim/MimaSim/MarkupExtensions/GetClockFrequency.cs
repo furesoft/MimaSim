@@ -1,9 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using MimaSim.Controls.MimaComponents;
 using MimaSim.MIMA.Components;
-using System;
-using Avalonia.Threading;
 
 namespace MimaSim.MarkupExtensions;
 

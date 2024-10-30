@@ -1,6 +1,6 @@
-﻿using MimaSim.Controls;
+﻿using System.Windows.Input;
+using MimaSim.Controls;
 using ReactiveUI;
-using System.Windows.Input;
 
 namespace MimaSim.ViewModels;
 

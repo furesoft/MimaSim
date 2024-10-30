@@ -1,6 +1,6 @@
-﻿using MimaSim.Core;
-using System;
+﻿using System;
 using System.Timers;
+using MimaSim.Core;
 
 namespace MimaSim.MIMA.Components;
 

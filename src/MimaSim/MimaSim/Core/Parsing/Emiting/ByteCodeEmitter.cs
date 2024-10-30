@@ -1,5 +1,5 @@
-﻿using MimaSim.MIMA;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MimaSim.MIMA;
 
 namespace MimaSim.Core.Parsing.Emiting;
 
