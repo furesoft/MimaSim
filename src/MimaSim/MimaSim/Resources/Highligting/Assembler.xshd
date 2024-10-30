@@ -57,6 +57,9 @@
 			<Word>syscall</Word>
 			<Word>trap</Word>
 
+			<Word>call</Word>
+			<Word>ret</Word>
+
 			<Word>macro</Word>
 		</Keywords>
 		

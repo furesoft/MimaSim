@@ -56,4 +56,7 @@ public enum OpCodes
 
     SYSCALL = 0x49,
     TRAP = 0x50,
+
+    CALL = 0x51,
+    RET = 0x52,
 }
