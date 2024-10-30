@@ -11,7 +11,8 @@ public class CallInstruction : IInstruction, IDisassemblyInstruction
     public bool Invoke(CPU cpu)
     {
         var currentAddress = cpu.ControlUnit.IAR.GetValueWithoutNotification();
-        cpu.Stack.Push(currentAddress);
+        cpu.Accumulator.SetValue(currentAddress);
+        cpu.Stack.Push();
 
         var address = cpu.Fetch16();
         cpu.ControlUnit.IAR.SetValue(address);
