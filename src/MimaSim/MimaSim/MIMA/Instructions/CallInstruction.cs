@@ -10,11 +10,11 @@ public class CallInstruction : IInstruction, IDisassemblyInstruction
 
     public bool Invoke(CPU cpu)
     {
-        var currentAddress = cpu.ControlUnit.IAR.GetValueWithoutNotification();
+        var currentAddress = cpu.IAR.GetValueWithoutNotification();
         cpu.Stack.Push(currentAddress);
 
         var address = cpu.Fetch16();
-        cpu.ControlUnit.IAR.SetValue(address);
+        cpu.IAR.SetValue(address);
 
         return true;
     }
