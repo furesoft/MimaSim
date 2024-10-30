@@ -53,8 +53,4 @@
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
-    <ItemGroup>
-        <Folder Include="MIMA\Parsing\Parsers\High\AST\"/>
-        <Folder Include="MIMA\Parsing\Parsers\High\Parselets\"/>
-    </ItemGroup>
 </Project>

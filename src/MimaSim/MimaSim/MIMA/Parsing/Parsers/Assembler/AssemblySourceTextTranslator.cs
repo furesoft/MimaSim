@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Parsing.Parsers.Assembler;
 
 public class AssemblySourceTextTranslator : ISourceTextTranslator
 {
-    public byte[] ToRaw(string input, ref DiagnosticBag diagnostics)
+    public byte[] ToRaw(string input, out Silverfly.Text.SourceDocument document)
     {
         var parser = new AssemblyParser();
 
@@ -27,6 +27,7 @@ public class AssemblySourceTextTranslator : ISourceTextTranslator
         var visitor = new AssemblyVisitor();
         ast.Tree.Accept(visitor, Scope.Root);
 
+        document = parser.Document;
         return visitor.GetRaw();
     }
 }

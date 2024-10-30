@@ -2,5 +2,5 @@
 
 public interface ISourceTextTranslator
 {
-    byte[] ToRaw(string input, ref DiagnosticBag diagnostics);
+    byte[] ToRaw(string input, out Silverfly.Text.SourceDocument document);
 }

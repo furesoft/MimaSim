@@ -21,6 +21,7 @@
 			<Word>if</Word>
 			<Word>else</Word>
 			<Word>var</Word>
+			<Word>asm</Word>
 		</Keywords>
 		
 		<!-- Digits -->

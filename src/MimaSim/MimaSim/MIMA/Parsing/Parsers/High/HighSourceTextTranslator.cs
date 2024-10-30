@@ -1,28 +1,21 @@
 ﻿using MimaSim.Controls;
 using MimaSim.Core;
 using MimaSim.Core.Parsing;
+using Silverfly.Text;
 
 namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class HighSourceTextTranslator : ISourceTextTranslator
 {
-    public byte[] ToRaw(string input, ref DiagnosticBag diagnostics)
+    public byte[] ToRaw(string input, out SourceDocument document)
     {
         var parser = new HighParser();
         var ast = parser.Parse(input);
+        var visitor = new HighParserVisitor();
 
-        if (parser.Diagnostics.IsEmpty)
-        {
-            var visitor = new HighParserVisitor();
+        ast.Tree.Accept(visitor);
 
-            ast.Visit(visitor);
-
-            return visitor.GetRaw();
-        }
-
-        DialogService.OpenError(string.Join('\n', parser.Diagnostics.GetAll()));
-        diagnostics = parser.Diagnostics;
-
-        return [];
+        document = parser.Document;
+        return visitor.GetRaw();
     }
 }

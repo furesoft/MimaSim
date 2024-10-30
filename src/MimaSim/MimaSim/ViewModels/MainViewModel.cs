@@ -18,6 +18,7 @@ using MimaSim.MIMA;
 using MimaSim.MIMA.Components;
 using MimaSim.ViewModels.Mima;
 using ReactiveUI;
+using Silverfly.Text;
 using Splat;
 using HelpPopup = MimaSim.Controls.Popups.HelpPopup;
 
@@ -89,7 +90,6 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
             writer.Write(Source);
         });
 
-        DiagnosticBag diagnostics = new();
         CompileCommand = ReactiveCommand.Create(() =>
         {
             if (string.IsNullOrEmpty(Source))
@@ -101,31 +101,27 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
             var translator = SourceTextTranslatorSelector.Select(SelectedLanguage);
 
-            diagnostics = new DiagnosticBag();
-            CPU.Instance.Program = translator.ToRaw(Source, ref diagnostics);
+            CPU.Instance.Program = translator.ToRaw(Source, out var document);
+
+            if (document.Messages.Any())
+            {
+                DialogService.OpenError(string.Join('\n', document.Messages));
+
+                return;
+            }
 
             IsCompiled = true;
 
-            CPU.Instance.NIC.Loopback(Encoding.Default.GetBytes("Hello World"));
+            //CPU.Instance.NIC.Loopback(Encoding.Default.GetBytes("Hello World"));
         });
 
         RunCodeCommand = ReactiveCommand.Create(() =>
         {
             if (RunMode)
             {
-                if (!diagnostics.IsEmpty)
-                {
-                    RunMode = false;
-                    var errors = diagnostics.GetAll();
+                RegisterMap.GetRegister("IAR").SetValue(0);
 
-                    DialogService.OpenError(string.Join('\n', errors));
-                }
-                else
-                {
-                    RegisterMap.GetRegister("IAR").SetValue(0);
-
-                    CPU.Instance.Clock.Start();
-                }
+                CPU.Instance.Clock.Start();
             }
             else
             {
