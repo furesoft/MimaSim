@@ -13,7 +13,7 @@ public class RetInstruction : IInstruction, IDisassemblyInstruction
         cpu.Stack.Pop();
 
         var returnAddress = cpu.Accumulator.GetValueWithoutNotification();
-        cpu.IAR.SetValue(returnAddress);
+        cpu.ControlUnit.IAR.SetValue(returnAddress);
 
         return true;
     }
