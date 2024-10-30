@@ -10,7 +10,9 @@ public class RetInstruction : IInstruction, IDisassemblyInstruction
 
     public bool Invoke(CPU cpu)
     {      
-        var returnAddress = cpu.Stack.Pop();
+        cpu.Stack.Pop();
+
+        var returnAddress = cpu.controlUnit.Accumulator.GetValueWithoutNotification();
         cpu.ControlUnit.IAR.SetValue(returnAddress);
 
         return true;
