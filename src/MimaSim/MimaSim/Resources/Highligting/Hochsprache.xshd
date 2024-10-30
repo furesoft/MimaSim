@@ -22,6 +22,8 @@
 			<Word>else</Word>
 			<Word>var</Word>
 			<Word>asm</Word>
+			<Word>func</Word>
+			<Word>while</Word>
 		</Keywords>
 		
 		<!-- Digits -->
