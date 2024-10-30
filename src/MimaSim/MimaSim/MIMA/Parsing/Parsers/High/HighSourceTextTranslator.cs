@@ -1,6 +1,4 @@
-﻿using MimaSim.Controls;
-using MimaSim.Core;
-using MimaSim.Core.Parsing;
+﻿using MimaSim.Core.Parsing;
 using Silverfly.Text;
 
 namespace MimaSim.MIMA.Parsing.Parsers.High;
@@ -11,8 +9,11 @@ public class HighSourceTextTranslator : ISourceTextTranslator
     {
         var parser = new HighParser();
         var ast = parser.Parse(input);
-        var visitor = new HighParserVisitor();
 
+        var preparationVisitor = new PreparationVisitor();
+        ast.Tree.Accept(preparationVisitor);
+
+        var visitor = new HighParserVisitor(preparationVisitor.SymbolMap);
         ast.Tree.Accept(visitor);
 
         document = parser.Document;
