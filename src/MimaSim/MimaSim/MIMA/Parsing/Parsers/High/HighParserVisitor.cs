@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using MimaSim.Core.Parsing;
 using MimaSim.MIMA.Parsing.Parsers.High.AST;
 using MimaSim.MIMA.Parsing.Parsers.High.Symbols;
@@ -91,6 +93,10 @@ public class HighParserVisitor : NodeVisitor, IEmitter
     {
         var assembler = new Assembler.AssemblySourceTextTranslator();
 
-        return assembler.ToRaw(_stringWriter.ToString(), out var document);
+        var asm = _stringWriter.ToString();
+        Console.WriteLine(asm);
+        Debug.WriteLine(asm);
+
+        return assembler.ToRaw(asm, out var document);
     }
 }
