@@ -3,6 +3,7 @@ using MimaSim.Core.Parsing;
 using MimaSim.MIMA.Parsing.Parsers.High.AST;
 using MimaSim.MIMA.Parsing.Parsers.High.Symbols;
 using Silverfly;
+using Silverfly.Nodes;
 
 namespace MimaSim.MIMA.Parsing.Parsers.High;
 
@@ -21,13 +22,52 @@ public class HighParserVisitor : NodeVisitor, IEmitter
 
         For<AsmNode>(VisitAsm);
         For<FuncDefNode>(VisitFuncDef);
+        For<LiteralNode>(VisitLiteral);
+        For<ReturnStatement>(VisitReturn);
+        For<BlockNode>(VisitBlock);
+
+        _writer.WriteLine("jmp __main__");
+    }
+
+    private void VisitBlock(BlockNode obj)
+    {
+        foreach (var node in obj.Children)
+        {
+            node.Accept(this);
+        }
+    }
+
+    private void VisitReturn(ReturnStatement obj)
+    {
+        if (obj.Value is null)
+        {
+            return;
+        }
+
+        obj.Value.Accept(this);
+        _writer.WriteLine("push");
+        _writer.WriteLine("ret");
+    }
+
+    private void VisitLiteral(LiteralNode obj)
+    {
+        switch (obj.Value)
+        {
+            case bool b:
+                _writer.WriteLine("load " + (b ? "1" : "0"));
+                break;
+            case ulong b:
+                _writer.WriteLine($"load {b}");
+                break;
+        }
+
     }
 
     private void VisitFuncDef(FuncDefNode def)
     {
         _writer.IndentLevel++;
 
-        _writer.Write($"__{def.Name}__:");
+        _writer.WriteLine($"__{def.Name}__:");
 
         foreach (var node in def.Body)
         {
@@ -35,6 +75,11 @@ public class HighParserVisitor : NodeVisitor, IEmitter
         }
 
         _writer.IndentLevel--;
+
+        if (def.Name == "main")
+        {
+            _writer.WriteLine("exit");
+        }
     }
 
     private void VisitAsm(AsmNode asm)

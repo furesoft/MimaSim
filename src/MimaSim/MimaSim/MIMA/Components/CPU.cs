@@ -13,7 +13,7 @@ namespace MimaSim.MIMA.Components;
 
 public class CPU
 {
-    public readonly static CPU Instance = new();
+    public static readonly CPU Instance = new();
 
     public readonly Register Accumulator = new("Accumulator");
     public readonly ALU ALU;
@@ -22,7 +22,7 @@ public class CPU
     public readonly Bus DataBus = new();
     public readonly NetworkCard NIC;
 
-    public readonly static Dictionary<OpCodes, IInstruction> Instructions = new();
+    public static readonly Dictionary<OpCodes, IInstruction> Instructions = new();
     public readonly Memory Memory = new((int)Math.Pow(2, 8));
     public readonly Stack Stack;
 

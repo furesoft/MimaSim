@@ -24,6 +24,7 @@
 			<Word>asm</Word>
 			<Word>func</Word>
 			<Word>while</Word>
+			<Word>return</Word>
 		</Keywords>
 		
 		<!-- Digits -->

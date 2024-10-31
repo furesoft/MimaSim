@@ -16,10 +16,9 @@ public class HighParser : Parser
         lexer.MatchBoolean();
         lexer.MatchString("\"", "\"");
         lexer.MatchNumber(true, true);
-        lexer.AddKeywords("asm", "func"); // asm "mov x, y"
+        lexer.AddKeywords("asm", "func", "return"); // asm "mov x, y"
 
-        lexer.AddSymbols(")", "{", "}");
-
+        lexer.AddSymbols(")", "{", "}", ";");
     }
 
     protected override void InitParser(ParserDefinition def)
@@ -30,5 +29,8 @@ public class HighParser : Parser
         def.Register("asm", new InlineAsmParselet());
         def.Register("func", new FuncDefParselet());
         def.Register("(", new CallParselet(0));
+        def.Register("return", new ReturnParselet());
+
+        def.Block(SOF, EOF);
     }
 }
