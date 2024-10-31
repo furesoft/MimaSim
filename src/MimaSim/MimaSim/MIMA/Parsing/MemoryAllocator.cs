@@ -1,17 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MimaSim.MIMA.Parsing;
 
 public class MemoryAllocator
 {
-    private readonly Dictionary<string, (int Address, Type DataType)> _variables;
-    private int _nextAddress;
-
-    public StaticMemoryAllocator()
-    {
-        _variables = new Dictionary<string, (int, Type)>();
-        _nextAddress = 0;
-    }
+    private readonly Dictionary<string, (int Address, Type DataType)> _variables = new();
+    private int _nextAddress = 0;
 
     public void AllocateVariable(string name, Type dataType)
     {

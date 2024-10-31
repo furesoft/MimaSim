@@ -11,6 +11,7 @@ public class HighParserVisitor : NodeVisitor, IEmitter
     private readonly SymbolMap _symbolMap;
     private readonly IndentedTextWriter _writer;
     private readonly StringWriter _stringWriter;
+    private readonly MemoryAllocator Allocator = new();
 
     public HighParserVisitor(SymbolMap symbolMap)
     {
