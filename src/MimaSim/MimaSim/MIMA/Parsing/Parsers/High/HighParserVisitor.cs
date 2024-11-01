@@ -1,59 +1,84 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using MimaSim.Core.Parsing;
 using MimaSim.MIMA.Parsing.Parsers.High.AST;
 using MimaSim.MIMA.Parsing.Parsers.High.Symbols;
 using Silverfly;
 using Silverfly.Nodes;
+using Silverfly.Text;
 
 namespace MimaSim.MIMA.Parsing.Parsers.High;
 
-public class HighParserVisitor : NodeVisitor, IEmitter
+public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
 {
-    private readonly SymbolMap _symbolMap;
     private readonly IndentedTextWriter _writer;
     private readonly StringWriter _stringWriter;
     private readonly MemoryAllocator Allocator = new();
 
-    public HighParserVisitor(SymbolMap symbolMap)
+    public HighParserVisitor()
     {
-        _symbolMap = symbolMap;
         _stringWriter = new StringWriter();
         _writer = new IndentedTextWriter(_stringWriter);
 
+        For<BlockNode>(VisitBlock);
         For<AsmNode>(VisitAsm);
         For<FuncDefNode>(VisitFuncDef);
         For<LiteralNode>(VisitLiteral);
         For<ReturnStatement>(VisitReturn);
-        For<BlockNode>(VisitBlock);
+        For<CallNode>(VisitCall);
 
         _writer.WriteLine("jmp __main__");
     }
 
-    private void VisitBlock(BlockNode obj)
+    private void VisitCall(CallNode call, Scope scope)
+    {
+        var token = ((NameNode)call.FunctionExpr).Token;
+        var symbol = scope.Get(token.ToString());
+
+        if (symbol == null)
+        {
+            call.AddMessage(MessageSeverity.Error, "Symbol not found");
+            return;
+        }
+
+        if (symbol.Type != SymbolType.Function)
+        {
+            call.AddMessage(MessageSeverity.Error, "Symbol is not a function");
+        }
+
+        foreach (var argument in call.Arguments)
+        {
+            argument.Accept(this, scope);
+        }
+
+        _writer.WriteLine("call " + token);
+    }
+
+    private void VisitBlock(BlockNode obj, Scope scope)
     {
         foreach (var node in obj.Children)
         {
-            node.Accept(this);
+            node.Accept(this, scope);
         }
     }
 
-    private void VisitReturn(ReturnStatement obj)
+    private void VisitReturn(ReturnStatement obj, Scope scope)
     {
         if (obj.Value is null)
         {
             return;
         }
 
-        obj.Value.Accept(this);
+        obj.Value.Accept(this, scope);
         _writer.WriteLine("push");
         _writer.WriteLine("ret");
     }
 
-    private void VisitLiteral(LiteralNode obj)
+    private void VisitLiteral(LiteralNode literal, Scope scope)
     {
-        switch (obj.Value)
+        switch (literal.Value)
         {
             case bool b:
                 _writer.WriteLine("load " + (b ? "1" : "0"));
@@ -65,28 +90,33 @@ public class HighParserVisitor : NodeVisitor, IEmitter
 
     }
 
-    private void VisitFuncDef(FuncDefNode def)
+    private void VisitFuncDef(FuncDefNode def, Scope scope)
     {
-        _writer.IndentLevel++;
+        var funcScope = scope.NewSubScope();
 
-        _writer.WriteLine($"__{def.Name}__:");
-
-        foreach (var node in def.Body)
+        foreach (var parameter in def.Parameters.OfType<NameNode>())
         {
-            node.Accept(this);
+            funcScope.Define(parameter.Token, SymbolType.Parameter);
         }
 
-        _writer.IndentLevel--;
+        _writer.WriteLine($"__{def.Name}__:");
+        _writer.IndentLevel++;
+        foreach (var node in def.Body)
+        {
+            node.Accept(this, scope);
+        }
 
-        if (def.Name == "main")
+        if (def.Name.ToString() == "main")
         {
             _writer.WriteLine("exit");
         }
+
+        _writer.IndentLevel--;
     }
 
-    private void VisitAsm(AsmNode asm)
+    private void VisitAsm(AsmNode asm, Scope scope)
     {
-        _writer.WriteLine(asm.Source);
+        _writer.WriteLine(asm.Source.Replace("\t", ""));
     }
 
     public byte[] GetRaw()

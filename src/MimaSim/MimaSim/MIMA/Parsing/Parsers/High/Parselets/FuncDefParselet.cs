@@ -30,9 +30,13 @@ public class FuncDefParselet : IPrefixParselet
 
         do
         {
-            var node = parser.Consume();
+            var token = parser.Consume();
 
-            args.Add(new NameNode(node));
+            if (token.Type == ")")
+            {
+                break;
+            }
+            args.Add(new NameNode(token));
         } while (parser.Match(separator) && parser.Lexer.IsNotAtEnd());
 
         parser.Match(terminators);

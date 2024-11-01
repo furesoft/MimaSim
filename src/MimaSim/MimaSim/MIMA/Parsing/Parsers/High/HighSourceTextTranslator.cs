@@ -13,8 +13,8 @@ public class HighSourceTextTranslator : ISourceTextTranslator
         var preparationVisitor = new PreparationVisitor();
         ast.Tree.Accept(preparationVisitor);
 
-        var visitor = new HighParserVisitor(preparationVisitor.SymbolMap);
-        ast.Tree.Accept(visitor);
+        var visitor = new HighParserVisitor();
+        ast.Tree.Accept(visitor, preparationVisitor.SymbolMap);
 
         document = parser.Document;
         return visitor.GetRaw();

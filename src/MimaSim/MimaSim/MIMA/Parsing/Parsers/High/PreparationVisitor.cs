@@ -6,7 +6,7 @@ namespace MimaSim.MIMA.Parsing.Parsers.High;
 
 public class PreparationVisitor : NodeVisitor
 {
-    public readonly SymbolMap SymbolMap =  new();
+    public readonly Scope SymbolMap =  new(true);
     public PreparationVisitor()
     {
         For<FuncDefNode>(VisitFuncDef);
@@ -14,6 +14,6 @@ public class PreparationVisitor : NodeVisitor
 
     private void VisitFuncDef(FuncDefNode def)
     {
-        SymbolMap.AddSymbol(def.Name, SymbolType.Function);
+        SymbolMap.Define(def.Name, SymbolType.Function);
     }
 }
