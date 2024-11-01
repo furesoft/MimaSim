@@ -35,7 +35,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
     private void VisitCall(CallNode call, Scope scope)
     {
         var token = ((NameNode)call.FunctionExpr).Token;
-        var symbol = scope.Get(token.ToString());
+        var symbol = scope.Get(token);
 
         if (symbol == null)
         {
@@ -46,6 +46,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
         if (symbol.Type != SymbolType.Function)
         {
             call.AddMessage(MessageSeverity.Error, "Symbol is not a function");
+            return;
         }
 
         foreach (var argument in call.Arguments)
@@ -53,7 +54,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
             argument.Accept(this, scope);
         }
 
-        _writer.WriteLine("call " + token);
+        _writer.WriteLine("call " + NameMangler.Mangle(symbol));
     }
 
     private void VisitBlock(BlockNode obj, Scope scope)
@@ -99,7 +100,9 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
             funcScope.Define(parameter.Token, SymbolType.Parameter);
         }
 
-        _writer.WriteLine($"__{def.Name}__:");
+        var funcSymbol = scope.Get(def.Name);
+
+        _writer.WriteLine(NameMangler.Mangle(funcSymbol!));
         _writer.IndentLevel++;
         foreach (var node in def.Body)
         {

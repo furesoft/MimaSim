@@ -43,9 +43,9 @@ public class Scope(bool isRoot = false)
         Bindings[name.ToString()] = new Symbol(name, kind);
     }
 
-    public Symbol? Get(string name)
+    public Symbol? Get(Token name)
     {
-        if (Bindings.TryGetValue(name, out var value))
+        if (Bindings.TryGetValue(name.ToString(), out var value))
         {
             return value;
         }
