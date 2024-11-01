@@ -22,8 +22,6 @@ public class ReturnParselet : IPrefixParselet
             value = parser.ParseExpression();
         }
 
-        parser.Consume(";");
-
         return new ReturnStatement(value);
     }
 }

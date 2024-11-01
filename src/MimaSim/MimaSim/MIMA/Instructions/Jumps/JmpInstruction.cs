@@ -19,6 +19,6 @@ public class JmpInstruction : IInstruction, IDisassemblyInstruction
 
     public void Dissassemble(StringBuilder builder, Disassembler disassembler)
     {
-        builder.AppendLine($"jmp {disassembler.Fetch16()}");
+        builder.AppendLine($"jmp 0x{disassembler.Fetch16():X2}");
     }
 }

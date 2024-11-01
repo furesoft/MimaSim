@@ -11,17 +11,7 @@ public class AssemblySourceTextTranslator : ISourceTextTranslator
         var parser = new AssemblyParser();
 
         parser.Lexer.SetSource(input);
-        while (parser.Lexer.IsNotAtEnd())
-        {
-            var token = parser.Lexer.Next().ToString();
 
-            if (token == "\n")
-            {
-                token = "\\n";
-            }
-
-            Debug.WriteLine(token);
-        }
         var ast = parser.Parse(input);
 
         var visitor = new AssemblyVisitor();

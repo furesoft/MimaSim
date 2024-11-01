@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MimaSim.Core.Parsing;
 using MimaSim.Core.Parsing.Emiting;
-using MimaSim.MIMA.Components;
 using MimaSim.MIMA.Components.Graphics;
 using MimaSim.MIMA.Parsing.Parsers.Assembler.AST;
 using Silverfly;
@@ -100,12 +99,10 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
     {
         if (labelDef.Expr is NameNode nameNode)
         {
-            _emitter.CreateLabel(nameNode.Token.Text.ToString());
+            var labelName = nameNode.Token.Text.ToString();
+            _emitter.CreateLabel(labelName); // Define the label in the emitter
         }
     }
-
-    private Dictionary<string, short> _labelAddressMap = new();
-    private List<(int, string)> _unresolvedLabels = new();
 
     private void VisitLabelRef(PrefixOperatorNode labelRef, Scope scope)
     {
@@ -113,15 +110,8 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         {
             var labelName = nameNode.Token.Text.ToString();
 
-            if (_labelAddressMap.TryGetValue(labelName, out var address))
-            {
-                _emitter.EmitLiteral(address);
-            }
-            else
-            {
-                _unresolvedLabels.Add((_emitter.Position, labelName));
-                _emitter.EmitLiteral(0);
-            }
+            // Add a reference to the emitter; it will handle unresolved labels
+            _emitter.AddLabelReference(labelName);
         }
     }
 
@@ -141,17 +131,17 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         }
     }
 
-    public void VisitLiteral(LiteralNode lit, Scope scope)
+    private void VisitLiteral(LiteralNode lit, Scope scope)
     {
         _emitter.EmitLiteral(Convert.ToInt16(lit.Value));
     }
 
-    public void VisitRegister(LiteralNode lit, Scope scope)
+    private void VisitRegister(LiteralNode lit, Scope scope)
     {
         _emitter.EmitRegister((Registers)lit.Value);
     }
 
-    public void VisitArg(NameNode arg, Scope scope)
+    private void VisitArg(NameNode arg, Scope scope)
     {
        var value = scope.Get(arg.Token.Text.ToString());
 
@@ -236,8 +226,5 @@ public class AssemblyVisitor : TaggedNodeVisitor<Scope>, IEmitter
         return node is PrefixOperatorNode p && p.Operator == "&";
     }
 
-    public byte[] GetRaw()
-    {
-        return _emitter.ToArray();
-    }
+    public byte[] GetRaw() => _emitter.ToArray();
 }

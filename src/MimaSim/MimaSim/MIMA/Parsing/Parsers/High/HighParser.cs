@@ -1,5 +1,4 @@
-﻿using System;
-using MimaSim.MIMA.Parsing.Parsers.High.Parselets;
+﻿using MimaSim.MIMA.Parsing.Parsers.High.Parselets;
 using Silverfly;
 using Silverfly.Parselets;
 using Silverfly.Parselets.Literals;
@@ -18,17 +17,17 @@ public class HighParser : Parser
         lexer.MatchNumber(true, true);
         lexer.AddKeywords("asm", "func", "return"); // asm "mov x, y"
 
-        lexer.AddSymbols(")", "{", "}", ";", ":", ",");
+        lexer.AddSymbols(")", "{", "}", ";", ":", ",", "(", ")");
     }
 
     protected override void InitParser(ParserDefinition def)
     {
         def.Register(Number, new NumberParselet());
-        def.Register(PredefinedSymbols.Boolean, new BooleanLiteralParselet());
+        def.Register(Boolean, new BooleanLiteralParselet());
         def.Register(Name, new NameParselet());
         def.Register("asm", new InlineAsmParselet());
         def.Register("func", new FuncDefParselet());
-        def.Register("(", new CallParselet(0));
+        def.Register("(", new CallParselet(this.ParserDefinition.PrecedenceLevels.GetPrecedence("Call")));
         def.Register("return", new ReturnParselet());
 
         def.Block(SOF, EOF);

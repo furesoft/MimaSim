@@ -1,6 +1,8 @@
 ﻿using MimaSim.MIMA.Parsing.Parsers.Assembler.Parselets;
+using MimaSim.MIMA.Parsing.Parsers.High.Parselets;
 using Silverfly;
 using Silverfly.Lexing.IgnoreMatcher.Comments;
+using Silverfly.Lexing.NameAdvancers;
 using Silverfly.Parselets.Literals;
 using static Silverfly.PredefinedSymbols;
 
@@ -10,6 +12,7 @@ public class AssemblyParser : Parser
 {
     protected override void InitLexer(LexerConfig lexer)
     {
+        lexer.UseNameAdvancer(new CStyleNameAdvancer());
         lexer.Ignore(" ", "\t", "\r");
 
         lexer.Ignore(new MultiLineCommentIgnoreMatcher("/*", "*/"));
@@ -18,7 +21,7 @@ public class AssemblyParser : Parser
         lexer.MatchNumber(true, false);
         lexer.MatchString("'", "'", allowEscapeChars: false, allowUnicodeChars: false);
 
-        lexer.AddSymbols("(", ")", ",", "{", "}", "/*", "*/");
+        lexer.AddSymbols("(", ")", ",", "{", "}", "/*", "*/", ":");
         lexer.AddMatcher(new NewLineMatcher());
     }
 
@@ -29,10 +32,10 @@ public class AssemblyParser : Parser
         def.Register(Number, new NumberParselet());
         def.Register(Name, new InstructionParselet());
         def.Register("macro", new MacroParselet());
-        def.Register(PredefinedSymbols.String, new StringLiteralParselet());
+        def.Register(String, new StringLiteralParselet());
 
         def.Prefix("&", tag: "address");
-        def.Prefix("$", tag: "labelref");
+        def.Register("$", new LabelRefParselet());
         def.Postfix(":", tag: "label");
     }
 }

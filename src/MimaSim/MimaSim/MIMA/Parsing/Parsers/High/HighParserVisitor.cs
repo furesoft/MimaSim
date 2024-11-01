@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
         For<ReturnStatement>(VisitReturn);
         For<CallNode>(VisitCall);
 
-        _writer.WriteLine("jmp __main__");
+        _writer.WriteLine("jmp $__main__");
     }
 
     private void VisitCall(CallNode call, Scope scope)
@@ -54,7 +55,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
             argument.Accept(this, scope);
         }
 
-        _writer.WriteLine("call " + NameMangler.Mangle(symbol));
+        _writer.WriteLine("call $" + NameMangler.Mangle(symbol));
     }
 
     private void VisitBlock(BlockNode obj, Scope scope)
@@ -106,12 +107,13 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
         _writer.IndentLevel++;
         foreach (var node in def.Body)
         {
-            node.Accept(this, scope);
-        }
+            if (def.Name.ToString() == "main" && node is ReturnStatement)
+            {
+                _writer.WriteLine("exit");
+                continue;
+            }
 
-        if (def.Name.ToString() == "main")
-        {
-            _writer.WriteLine("exit");
+            node.Accept(this, scope);
         }
 
         _writer.IndentLevel--;

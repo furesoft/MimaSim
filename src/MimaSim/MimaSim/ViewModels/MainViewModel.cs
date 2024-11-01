@@ -105,6 +105,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
 
             if (document.Messages.Any())
             {
+                CPU.Instance.Program = [];
                 DialogService.OpenError(string.Join('\n', document.Messages));
 
                 return;

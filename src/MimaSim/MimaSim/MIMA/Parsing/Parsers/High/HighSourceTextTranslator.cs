@@ -17,6 +17,7 @@ public class HighSourceTextTranslator : ISourceTextTranslator
         ast.Tree.Accept(visitor, preparationVisitor.SymbolMap);
 
         document = parser.Document;
+
         return visitor.GetRaw();
     }
 }
