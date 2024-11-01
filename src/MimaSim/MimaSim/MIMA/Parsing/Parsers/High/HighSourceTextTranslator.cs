@@ -1,5 +1,6 @@
 ﻿using System;
 using MimaSim.Core.Parsing;
+using MimaSim.MIMA.Parsing.Parsers.High.Passes;
 using MimaSim.MIMA.Parsing.Parsers.High.Symbols;
 using Silverfly.Text;
 
@@ -9,26 +10,18 @@ public class HighSourceTextTranslator : ISourceTextTranslator
 {
     public byte[] ToRaw(string input, out SourceDocument document)
     {
-        var parser = new HighParser();
-        var ast = parser.Parse(input);
+        var passManager = new PassManager();
 
-        var preparationVisitor = new PreparationVisitor();
+        passManager.AddPass<ParsingPass>();
+        passManager.AddPass<PreparationPass>();
+        passManager.AddPass<ValidationPass>();
+        passManager.AddPass<EmitPass>();
 
-        if (preparationVisitor.SymbolMap.Get("main") is not FunctionSymbol)
-        {
-            parser.Document.AddMessage(MessageSeverity.Error, "Main function not found", SourceRange.Empty);
+        var context = new PassContext();
+        passManager.Run(context);
 
-            document = parser.Document;
-            return [];
-        }
+        document = context.Document;
 
-        ast.Tree.Accept(preparationVisitor);
-
-        var visitor = new HighParserVisitor();
-        ast.Tree.Accept(visitor, preparationVisitor.SymbolMap);
-
-        document = parser.Document;
-
-        return visitor.GetRaw();
+        return context.Program;
     }
 }
