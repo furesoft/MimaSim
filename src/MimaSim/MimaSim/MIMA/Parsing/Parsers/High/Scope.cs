@@ -38,13 +38,13 @@ public class Scope(bool isRoot = false)
         Bindings[symbol.Name.ToString()] = symbol;
     }
 
+    public Symbol? Get(string name)
+    {
+        return Bindings.TryGetValue(name, out var value) ? value : Parent?.Get(name)!;
+    }
+
     public Symbol? Get(Token name)
     {
-        if (Bindings.TryGetValue(name.ToString(), out var value))
-        {
-            return value;
-        }
-
-        return Parent?.Get(name)!;
+        return Get(name.ToString());
     }
 }
