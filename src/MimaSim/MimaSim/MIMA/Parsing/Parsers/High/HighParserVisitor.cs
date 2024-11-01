@@ -43,7 +43,7 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
             return;
         }
 
-        if (symbol.Type != SymbolType.Function)
+        if (symbol is not FunctionSymbol)
         {
             call.AddMessage(MessageSeverity.Error, "Symbol is not a function");
             return;
@@ -95,9 +95,9 @@ public class HighParserVisitor : TaggedNodeVisitor<Scope>, IEmitter
     {
         var funcScope = scope.NewSubScope();
 
-        foreach (var parameter in def.Parameters.OfType<NameNode>())
+        foreach (var parameter in def.Parameters.OfType<ParameterNode>())
         {
-            funcScope.Define(parameter.Token, SymbolType.Parameter);
+            funcScope.Define(new ParameterSymbol(parameter.Name, parameter.Type));
         }
 
         var funcSymbol = scope.Get(def.Name);

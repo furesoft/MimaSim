@@ -16,7 +16,7 @@ public class PreparationVisitor : NodeVisitor
 
     private void VisitFuncDef(FuncDefNode def)
     {
-        SymbolMap.Define(def.Name, SymbolType.Function);
+        SymbolMap.Define(new FunctionSymbol(def.Name, def.Type));
     }
 
     private void VisitBlock(BlockNode obj)

@@ -18,7 +18,7 @@ public class HighParser : Parser
         lexer.MatchNumber(true, true);
         lexer.AddKeywords("asm", "func", "return"); // asm "mov x, y"
 
-        lexer.AddSymbols(")", "{", "}", ";");
+        lexer.AddSymbols(")", "{", "}", ";", ":", ",");
     }
 
     protected override void InitParser(ParserDefinition def)

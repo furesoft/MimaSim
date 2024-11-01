@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Browser" Version="11.1.4"/>
+        <PackageReference Include="Avalonia.Browser" Version="11.2.0" />
         <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="8.0.10"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
     </ItemGroup>

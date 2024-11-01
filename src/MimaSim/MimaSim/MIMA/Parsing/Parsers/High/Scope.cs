@@ -33,14 +33,9 @@ public class Scope(bool isRoot = false)
         return result;
     }
 
-    public void Define(Token name, Symbol value)
+    public void Define(Symbol symbol)
     {
-        Bindings[name.ToString()] = value;
-    }
-
-    public void Define(Token name, SymbolType kind)
-    {
-        Bindings[name.ToString()] = new Symbol(name, kind);
+        Bindings[symbol.Name.ToString()] = symbol;
     }
 
     public Symbol? Get(Token name)
