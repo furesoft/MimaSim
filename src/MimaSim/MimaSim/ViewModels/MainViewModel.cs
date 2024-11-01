@@ -32,6 +32,7 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     private LanguageName _selectedLanguage;
     private string? _selectedSample;
     private string? _source;
+    private ObservableCollection<short> _stackItems = [];
 
     public MainViewModel()
     {
@@ -153,6 +154,20 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
         var language = cache.Get<string>("language")!;
 
         SelectedLanguage = language == null ? LanguageNames.FirstOrDefault() : Enum.Parse<LanguageName>(language);
+
+        CPU.Instance.Stack.Bus.Subscribe(_ =>
+        {
+            var data = ((StackAction action, short value))_;
+
+            if (data.action == StackAction.Push)
+            {
+                StackItems.Insert(0, data.value);
+            }
+            else
+            {
+                StackItems.RemoveAt(0);
+            }
+        });
     }
 
     public ObservableCollection<LanguageName> LanguageNames { get; }
@@ -172,6 +187,12 @@ public class MainViewModel : ReactiveObject, IActivatableViewModel
     {
         get => _runMode;
         set => this.RaiseAndSetIfChanged(ref _runMode, value);
+    }
+
+    public ObservableCollection<short> StackItems
+    {
+        get => _stackItems;
+        set => this.RaiseAndSetIfChanged(ref _stackItems, value);
     }
 
     public bool IsCompiled

@@ -5,6 +5,7 @@ namespace MimaSim.MIMA.Components;
 public class Stack(CPU cpu)
 {
     public short[] Data = new short[50];
+    public Bus Bus = new Bus();
 
     public void Push()
     {
@@ -21,6 +22,7 @@ public class Stack(CPU cpu)
         sp--;
 
         cpu.ControlUnit.SP.SetValue(sp);
+        Bus.Send((StackAction.Push, value));
 
         BusRegistry.Activate("cu->stack");
     }
@@ -30,11 +32,18 @@ public class Stack(CPU cpu)
         var sp = cpu.ControlUnit.SP.GetValue();
         var value = Data[sp];
 
+        if (sp >= 50)
+        {
+            cpu.ControlUnit.SetError(ErrorCodes.StackOverflow);
+            return;
+        }
+
         cpu.Accumulator.SetValue(value);
 
         sp++;
         cpu.ControlUnit.SP.SetValue(sp);
 
         BusRegistry.Activate("cu->stack");
+        Bus.Send((StackAction.Pop, value));
     }
 }

@@ -14,18 +14,18 @@ public class NetworkService : INetworkService
 
     public async void Init()
     {
-        _client = new NatsClient("demo.nats.io");
+        //_client = new NatsClient("demo.nats.io");
 
         _subject = $"mimasim.networks.{CPU.Instance.NIC.NetworkAddress}.>";
-        await foreach (var msg in _client.SubscribeAsync<byte[]>(subject: _subject))
+       /* await foreach (var msg in _client.SubscribeAsync<byte[]>(subject: _subject))
         {
             Debug.WriteLine($"Received: {msg.Subject}: {Frame.Unpack(msg.Data!)}");
-        }
+        }*/
     }
 
     public async void Send(Frame frame)
     {
-        await _client.PublishAsync(subject: _subject, data: frame.Pack());
+        //await _client.PublishAsync(subject: _subject, data: frame.Pack());
     }
 
     public void Receive(Action<Frame> action)
